@@ -1,4 +1,8 @@
 #define PUFFER_1_PIN 5
+#define PUFFER_2_PIN 1
+#define PUFFER_3_PIN 2
+#define PUFFER_4_PIN 3
+#define PUFFER_5_PIN 4
 
 void setup() {                
   pinMode(0, OUTPUT); 
@@ -16,47 +20,47 @@ void P1On()
 
 void P1Off()
 {
-  digitalWrite(5, LOW);
+  digitalWrite(PUFFER_1_PIN, LOW);
 }
 
 void P2On()
 {
-  digitalWrite(1, HIGH);
+  digitalWrite(PUFFER_2_PIN, HIGH);
 }
 
 void P2Off()
 {
-  digitalWrite(1, LOW);
+  digitalWrite(PUFFER_2_PIN, LOW);
 }
 
 void P3On()
 {
-  digitalWrite(2, HIGH);
+  digitalWrite(PUFFER_3_PIN, HIGH);
 }
 
 void P3Off()
 {
-  digitalWrite(2, LOW);
+  digitalWrite(PUFFER_3_PIN, LOW);
 }
 
 void P4On()
 {
-  digitalWrite(2, HIGH);
+  digitalWrite(PUFFER_4_PIN, HIGH);
 }
 
 void P4Off()
 {
-  digitalWrite(2, LOW);
+  digitalWrite(PUFFER_4_PIN, LOW);
 }
 
 void P5On()
 {
-  digitalWrite(2, HIGH);
+  digitalWrite(PUFFER_5_PIN, HIGH);
 }
 
 void P5Off()
 {
-  digitalWrite(2, LOW);
+  digitalWrite(PUFFER_5_PIN, LOW);
 }
 
 void puffP1(int d)
@@ -83,29 +87,20 @@ void puffP3(int d)
   P3Off();
 }
 
-void addrToggle(int addr, int on)
+void puffP4(int d)
 {
-  if(addr == 0)
-  { //red
-    if(on)
-      P1On();
-     else
-       P1Off();
-  }
-  else if(addr == 1)
-  {
-    if(on)
-      P2On();
-    else 
-      P2Off();
-  }
-  else if(addr == 2)
-  {
-    if(on)
-      P3On();
-    else
-      P3Off();
-  }
+  P4Off();
+  P4On();
+  delay(d);
+  P4Off();
+}
+
+void puffP5(int d)
+{
+  P5Off();
+  P5On();
+  delay(d);
+  P5Off();
 }
 
 void allOff()
@@ -113,9 +108,11 @@ void allOff()
   P1Off();
   P2Off();
   P3Off();
+  P4Off();
+  P5Off();
 }
 
-void puffMulti(boolean p1, boolean p2, boolean p3, int d)
+void puffMulti(boolean p1, boolean p2, boolean p3, boolean p4, boolean p5, int d)
 {
   allOff();
   if(p1)
@@ -124,74 +121,76 @@ void puffMulti(boolean p1, boolean p2, boolean p3, int d)
     P2On();
   if(p3)
     P3On();
+  if(p4)
+    P4On();
+  if(p5)
+    P5On();
     
   delay(d);
   allOff();
 }
 
-void oneTwoThree(int d)
+void roundAndBack(int d, int iterations)
 {
-  puffMulti(1, 0, 0, 250);
-  puffMulti(0, 1, 0, 250);
-  puffMulti(0, 0, 1, 250);
-  puffMulti(0, 1, 0, 250);
-  puffMulti(1, 0, 0, 250);
-  puffMulti(0, 0, 0, 250);
-  puffMulti(1, 1, 1, 500);
+  for(int i=0; i<iterations; i++)
+  {
+    puffMulti(1, 0, 0, 0, 0, d);
+    puffMulti(0, 1, 0, 0, 0, d);
+    puffMulti(0, 0, 1, 0, 0, d);
+    puffMulti(0, 0, 0, 1, 0, d);
+    puffMulti(0, 0, 0, 0, 1, d);
+    puffMulti(0, 0, 0, 1, 0, d);
+    puffMulti(0, 0, 1, 0, 0, d);
+    puffMulti(0, 1, 0, 0, 0, d);
+  }
+  puffMulti(1, 0, 0, 0, 0, d);
 }
 
-void middleOutter(int d)
+void roundAndRound(int d, int iterations)
 {
-  puffMulti(0, 1, 0, 250);
-  puffMulti(1, 0, 1, 250); 
+  for(int i=0; i<iterations; i++)
+  {
+    puffMulti(1, 0, 0, 0, 0, d);
+    puffMulti(0, 1, 0, 0, 0, d);
+    puffMulti(0, 0, 1, 0, 0, d);
+    puffMulti(0, 0, 0, 1, 0, d);
+    puffMulti(0, 0, 0, 0, 1, d);
+  }
 }
 
-void outterMiddle(int d)
+void bigBlast(int d)
 {
-  puffMulti(1, 0, 1, 250);
-  puffMulti(0, 1, 0, 250);
+  puffMulti(1, 1, 1, 1, 1, d);
 }
 
-void jomamma()
+void bounce(int d, int iterations)
 {
-  puffMulti(1, 1, 1, 500);
-  puffMulti(0, 0, 0, 500);
-  puffMulti(1, 0, 1, 500);
-  puffMulti(0, 1, 0, 500);
-  puffMulti(0, 0, 0, 500);
-  puffMulti(1, 1, 1, 500);
-  puffMulti(1, 1, 0, 500);
-  puffMulti(1, 0, 0, 500);
-  puffMulti(0, 0, 0, 1000);
-  
+  for(int i=0; i<iterations; i++)
+  {
+    puffMulti(0, 0, 1, 0, 0, d);
+    puffMulti(0, 1, 0, 1, 0, d);
+    puffMulti(1, 0, 0, 0, 1, d);
+    puffMulti(0, 1, 0, 1, 0, d);
+  }
+  puffMulti(0, 0, 1, 0, 0, d);
 }
 
-void sos()
+void marquee(int d, int iterations)
 {
-  puffMulti(1, 0, 0, 250);
-  puffMulti(0, 0, 0, 250);
-  puffMulti(1, 0, 0, 250);
-  puffMulti(0, 0, 0, 250);
-  puffMulti(1, 0, 0, 250);
-  puffMulti(0, 0, 0, 250);
-  
-  puffMulti(1, 0, 0, 750);
-  puffMulti(0, 0, 0, 750);
-  puffMulti(1, 0, 0, 750);
-  puffMulti(0, 0, 0, 750);
-  puffMulti(1, 0, 0, 750);
-  puffMulti(0, 0, 0, 750);
+  for(int i=0; i<iterations; i++)
+  {
+    puffMulti(1, 0, 0, 0, 0, d);
+    puffMulti(0, 1, 0, 0, 0, d);
+    puffMulti(1, 0, 1, 0, 0, d);
+    puffMulti(0, 1, 0, 1, 0, d);
+    puffMulti(1, 0, 1, 0, 1, d);
+    puffMulti(0, 1, 0, 1, 0, d);
+    puffMulti(1, 0, 0, 0, 1, d);
+    puffMulti(0, 0, 0, 1, 0, d);
+    puffMulti(0, 0, 0, 0, 1, d);
+  }
 }
 
-void rapidFire(int d)
-{
-  puffMulti(1, 0, 0, d);
-  puffMulti(0, 0, 0, d);
-  puffMulti(0, 1, 0, d);
-  puffMulti(0, 0, 0, d);
-  puffMulti(0, 0, 1, d);
-  puffMulti(0, 0, 0, d);
-}
 
 
 // the loop routine runs over and over again forever:
