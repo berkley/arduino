@@ -112,6 +112,7 @@ void allOff()
   P5Off();
 }
 
+//puff individual puffers or multiple at a time
 void puffMulti(boolean p1, boolean p2, boolean p3, boolean p4, boolean p5, int d)
 {
   allOff();
@@ -128,6 +129,24 @@ void puffMulti(boolean p1, boolean p2, boolean p3, boolean p4, boolean p5, int d
     
   delay(d);
   allOff();
+}
+
+//puff the puffer at index addr.  0 <= addr <= 4
+void puffAddr(int d, int addr)
+{
+  switch(addr)
+  {
+    case 0:
+      puffMulti(1, 0, 0, 0, 0, d);
+    case 1:
+      puffMulti(0, 1, 0, 0, 0, d);
+    case 2:
+      puffMulti(0, 0, 1, 0, 0, d);
+    case 3:
+      puffMulti(0, 0, 0, 1, 0, d);
+    case 4:
+      puffMulti(0, 0, 0, 0, 1, d);
+  }
 }
 
 void roundAndBack(int d, int iterations)
@@ -191,10 +210,42 @@ void marquee(int d, int iterations)
   }
 }
 
+void random(int d, int iterations)
+{
+  for(int i=0; i<iterations; i++)
+  {
+    long rand = random(5);
+    puffAddr(d, rand);
+    puffMulti(0, 0, 0, 0, 0, d * rand);
+  }
+}
 
+void playRandomProgramAndWait(int wait)
+{
+  long rand = random(4);
+  switch(rand)
+  {
+    case 0:
+      roundAndBack(50, 10);
+      bigBlast(5000);
+    case 1:
+      roundAndRound(50, 10);
+      bigBlast(5000);
+    case 2:
+      bounce(50, 10);
+      bigBlast(5000);
+    case 3:
+      marquee(50, 10);
+      bigBlast(5000);
+    case 4:
+      random(50, 50);
+  }
+  delay(wait);
+}
 
 // the loop routine runs over and over again forever:
 void loop() 
 {
- 
+  int wait = 300000; //5 minutes
+  playRandomProgramAndWait(wait);
 } 
