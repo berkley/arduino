@@ -1,8 +1,8 @@
-// the setup routine runs once when you press reset:
+#define PUFFER_1_PIN 5
+
 void setup() {                
-  // initialize the digital pin as an output.
-  pinMode(0, OUTPUT); //LED on Model B
-  pinMode(1, OUTPUT); //LED on Model A   
+  pinMode(0, OUTPUT); 
+  pinMode(1, OUTPUT);   
   pinMode(2, OUTPUT);
   pinMode(3, OUTPUT);
   pinMode(4, OUTPUT);
@@ -11,7 +11,7 @@ void setup() {
 
 void P1On()
 {
-  digitalWrite(5, HIGH);
+  digitalWrite(PUFFER_1_PIN, HIGH);
 }
 
 void P1Off()
@@ -35,6 +35,26 @@ void P3On()
 }
 
 void P3Off()
+{
+  digitalWrite(2, LOW);
+}
+
+void P4On()
+{
+  digitalWrite(2, HIGH);
+}
+
+void P4Off()
+{
+  digitalWrite(2, LOW);
+}
+
+void P5On()
+{
+  digitalWrite(2, HIGH);
+}
+
+void P5Off()
 {
   digitalWrite(2, LOW);
 }
@@ -173,60 +193,9 @@ void rapidFire(int d)
   puffMulti(0, 0, 0, d);
 }
 
-#ifndef M_PI
-#define M_PI 3.14159265358979323846
-#endif
-
-void circular(float d)
-{
-  float radians = 0.0;
-  float inc = M_PI / 24; 
-  
-  while (radians < 2 * M_PI)
-  {
-    puffMulti(1, 0, 0, fabs(d * sin(radians)) + 50 );
-    radians += inc;
-  }
-}
-
 
 // the loop routine runs over and over again forever:
 void loop() 
 {
-  int to = 10000;
-  
-//  for(int i=0; i<5; i++)
-//  {
-//    oneTwoThree(50);  
-//  }
-  
-//  delay(to);
-//  for(int i=0; i<10; i++)
-//  {
-//    middleOutter(50);
-//  }
-//  
-//  delay(to);
-//  for(int i=0; i<10; i++)
-//  {
-//    outterMiddle(50);
-//  }
-
-//  delay(to);
-//  jomamma();
-  
-//  delay(to);
-  for(int i=0; i<10; i++)
-  {
-    rapidFire(50);
-  }
-  
-  delay(to);
-
-//  puffMulti(1, 0, 0, 500);
-//  puffMulti(0, 0, 0, 500);
-//  puffMulti(0, 1, 0, 500);
-//  puffMulti(0, 0, 0, 500);
-//  puffMulti(0, 0, 1, 500);
-//  puffMulti(0, 0, 0, 500);
+ 
 } 
