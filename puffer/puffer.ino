@@ -210,6 +210,7 @@ void marquee(int d, int iterations)
   }
 }
 
+//puff a random puffer, then wait a semi-random amount of time
 void random(int d, int iterations)
 {
   for(int i=0; i<iterations; i++)
@@ -220,9 +221,11 @@ void random(int d, int iterations)
   }
 }
 
+//play a random routine, then wait with all puffers closed
 void playRandomProgramAndWait(int wait)
 {
-  long rand = random(4);
+  int NUM_PROGRAMS = 5; //this should be the number of case statements
+  long rand = random(NUM_PROGRAMS);
   switch(rand)
   {
     case 0:
