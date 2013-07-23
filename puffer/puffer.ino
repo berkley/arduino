@@ -237,17 +237,22 @@ void playRandomProgramAndWait(int wait)
     case 0:
       roundAndBack(50, 10);
       bigBlast(5000);
+      break;
     case 1:
       roundAndRound(50, 10);
       bigBlast(5000);
+      break;
     case 2:
       bounce(150, 10);
       bigBlast(5000);
+      break;
     case 3:
       marquee(50, 10);
       bigBlast(5000);
+      break;
     case 4:
       randomPuffs(100, 100);
+      break;
   }
   delay(wait);
 }
