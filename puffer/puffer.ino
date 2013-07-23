@@ -209,7 +209,7 @@ void marquee(int d, int iterations)
     puffMulti(0, 1, 0, 1, 0, d);
     puffMulti(1, 0, 1, 0, 1, d);
     puffMulti(0, 1, 0, 1, 0, d);
-    puffMulti(1, 0, 0, 0, 1, d);
+    puffMulti(0, 0, 1, 0, 1, d);
     puffMulti(0, 0, 0, 1, 0, d);
     puffMulti(0, 0, 0, 0, 1, d);
   }
