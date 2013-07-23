@@ -138,14 +138,19 @@ void puffAddr(int d, int addr)
   {
     case 0:
       puffMulti(1, 0, 0, 0, 0, d);
+      break;
     case 1:
       puffMulti(0, 1, 0, 0, 0, d);
+      break;
     case 2:
       puffMulti(0, 0, 1, 0, 0, d);
+      break;
     case 3:
       puffMulti(0, 0, 0, 1, 0, d);
+      break;
     case 4:
       puffMulti(0, 0, 0, 0, 1, d);
+      break;
   }
 }
 
@@ -211,11 +216,12 @@ void marquee(int d, int iterations)
 }
 
 //puff a random puffer, then wait a semi-random amount of time
-void random(int d, int iterations)
+void randomPuffs(int d, int iterations)
 {
+  randomSeed(analogRead(0));
   for(int i=0; i<iterations; i++)
   {
-    long rand = random(5);
+    long rand = random(3);
     puffAddr(d, rand);
     puffMulti(0, 0, 0, 0, 0, d * rand);
   }
@@ -235,13 +241,13 @@ void playRandomProgramAndWait(int wait)
       roundAndRound(50, 10);
       bigBlast(5000);
     case 2:
-      bounce(50, 10);
+      bounce(150, 10);
       bigBlast(5000);
     case 3:
       marquee(50, 10);
       bigBlast(5000);
     case 4:
-      random(50, 50);
+      randomPuffs(100, 100);
   }
   delay(wait);
 }
@@ -249,6 +255,13 @@ void playRandomProgramAndWait(int wait)
 // the loop routine runs over and over again forever:
 void loop() 
 {
-  int wait = 300000; //5 minutes
-  playRandomProgramAndWait(wait);
+  // int wait = 60000; //1 minutes
+  // playRandomProgramAndWait(wait);
+  // roundAndBack(50, 10);
+  // roundAndRound(50,10);
+  // bounce(150, 10);
+  // marquee(100, 10);
+ randomPuffs(100, 100);
+
+  delay(3000);
 } 
