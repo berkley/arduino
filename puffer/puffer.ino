@@ -1,16 +1,15 @@
-#define PUFFER_1_PIN 5
-#define PUFFER_2_PIN 1
-#define PUFFER_3_PIN 2
-#define PUFFER_4_PIN 3
-#define PUFFER_5_PIN 4
+#define PUFFER_1_PIN 8
+#define PUFFER_2_PIN 9
+#define PUFFER_3_PIN 10
+#define PUFFER_4_PIN 11
+#define PUFFER_5_PIN 12
 
 void setup() {                
-  pinMode(0, OUTPUT); 
-  pinMode(1, OUTPUT);   
-  pinMode(2, OUTPUT);
-  pinMode(3, OUTPUT);
-  pinMode(4, OUTPUT);
-  pinMode(5, OUTPUT);
+  pinMode(PUFFER_1_PIN, OUTPUT); 
+  pinMode(PUFFER_2_PIN, OUTPUT);   
+  pinMode(PUFFER_3_PIN, OUTPUT);
+  pinMode(PUFFER_4_PIN, OUTPUT);
+  pinMode(PUFFER_5_PIN, OUTPUT);
 }
 
 void P1On()
@@ -113,7 +112,7 @@ void allOff()
 }
 
 //puff individual puffers or multiple at a time
-void puffMulti(boolean p1, boolean p2, boolean p3, boolean p4, boolean p5, int d)
+void puffMulti(boolean p1, boolean p2, boolean p3, boolean p4, boolean p5, unsigned long d)
 {
   allOff();
   if(p1)
@@ -154,7 +153,7 @@ void puffAddr(int d, int addr)
   }
 }
 
-void roundAndBack(int d, int iterations)
+void roundAndBack(unsigned long d, int iterations)
 {
   for(int i=0; i<iterations; i++)
   {
@@ -170,7 +169,7 @@ void roundAndBack(int d, int iterations)
   puffMulti(1, 0, 0, 0, 0, d);
 }
 
-void roundAndRound(int d, int iterations)
+void roundAndRound(unsigned long d, int iterations)
 {
   for(int i=0; i<iterations; i++)
   {
@@ -187,7 +186,7 @@ void bigBlast(int d)
   puffMulti(1, 1, 1, 1, 1, d);
 }
 
-void bounce(int d, int iterations)
+void bounce(unsigned long d, int iterations)
 {
   for(int i=0; i<iterations; i++)
   {
@@ -199,7 +198,7 @@ void bounce(int d, int iterations)
   puffMulti(0, 0, 1, 0, 0, d);
 }
 
-void marquee(int d, int iterations)
+void marquee(unsigned long d, int iterations)
 {
   for(int i=0; i<iterations; i++)
   {
@@ -216,12 +215,12 @@ void marquee(int d, int iterations)
 }
 
 //puff a random puffer, then wait a semi-random amount of time
-void randomPuffs(int d, int iterations)
+void randomPuffs(unsigned long d, int iterations)
 {
   randomSeed(analogRead(0));
   for(int i=0; i<iterations; i++)
   {
-    long rand = random(3);
+    long rand = random(5);
     puffAddr(d, rand);
     puffMulti(0, 0, 0, 0, 0, d * rand);
   }
@@ -231,37 +230,61 @@ void randomPuffs(int d, int iterations)
 void playRandomProgramAndWait(int wait)
 {
   int NUM_PROGRAMS = 5; //this should be the number of case statements
+  randomSeed(analogRead(0));
   long rand = random(NUM_PROGRAMS);
   switch(rand)
   {
     case 0:
       roundAndBack(50, 10);
       bigBlast(5000);
+      break;
     case 1:
       roundAndRound(50, 10);
       bigBlast(5000);
+      break;
     case 2:
       bounce(150, 10);
       bigBlast(5000);
+      break;
     case 3:
       marquee(50, 10);
       bigBlast(5000);
+      break;
     case 4:
-      randomPuffs(100, 100);
+      randomPuffs(1000, 10);
+      break;
   }
   delay(wait);
 }
 
-// the loop routine runs over and over again forever:
+void playAllProgramsInOrder(unsigned long wait)
+{
+  roundAndBack(100, 10);
+  delay(wait);
+  roundAndRound(100, 10);
+  delay(wait);
+  bounce(150, 10);
+  delay(wait);
+  marquee(100, 10);
+  delay(wait);
+  randomPuffs(500, 15);
+  delay(wait);
+}
+
 void loop() 
 {
-  // int wait = 60000; //1 minutes
+  Serial.print("p1on");
+  // puffMulti(1,0,0,0,0,2000);
+  // delay(2000);
+  unsigned long wait = 5
+  000; //1 minute
   // playRandomProgramAndWait(wait);
+  playAllProgramsInOrder(wait);
   // roundAndBack(50, 10);
-  // roundAndRound(50,10);
+  // roundAndRound(1000,10);
   // bounce(150, 10);
   // marquee(100, 10);
- randomPuffs(100, 100);
+ // randomPuffs(100, 100);
 
-  delay(3000);
+  // delay(3000);
 } 
