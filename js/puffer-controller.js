@@ -1,7 +1,7 @@
 var five = require("johnny-five");
 var webSocket = require('ws');
+
 var ws = new webSocket('ws://127.0.0.1:6437');
-var sleep = require('sleep');
 
 var PORT_P1 = 8;
 var PORT_P2 = 9;
@@ -17,198 +17,222 @@ var SEQ_321 = 0;
 var SEQ_ALL = 0;
 var SEQ_CIRCLE = 0;
 
-five.Board().on("ready", function() {
-	var that = this;
-	this.pinMode(PORT_P1, 1);
-	this.pinMode(PORT_P2, 1);
-	this.pinMode(PORT_P3, 1);
-	this.pinMode(PORT_P4, 1);
-	this.pinMode(PORT_P5, 1);
+exports.puffMulti = function(p1, p2, p3, p4, p5) {
+	P1_ON = 0;
+	P2_ON = 0;
+	P3_ON = 0;
+	P4_ON = 0;
+	P5_ON = 0;
 
-	function P1Set(onOrOff) {
-		if(onOrOff) {
-			that.digitalWrite(PORT_P1, 1);
-			console.log("PUFF1:ON");
-		} else {
-			console.log("PUFF1:OFF");
-			that.digitalWrite(PORT_P1, 0);
-		}
-	}	
+	if(p1)
+		P1_ON = 1;
+	if(p2)
+		P2_ON = 1;
+	if(p3)
+		P3_ON = 1;
+	if(p4)
+		P4_ON = 1;
+	if(p5)
+		P5_ON = 1;
 
-	function P2Set(onOrOff) {
-		if(onOrOff) {
-			console.log("PUFF2:ON");
-			that.digitalWrite(PORT_P2, 1);
-		} else {
-			console.log("PUFF2:OFF");
-			that.digitalWrite(PORT_P2, 0);
-		}
-	}
+	console.log("p1:", p1, "p2:", p2, "p3:", p3, "p4:", p4, "p5:", p5);
+};
 
-	function P3Set(onOrOff) {
-		if(onOrOff) {
-			console.log("PUFF3:ON");
-			that.digitalWrite(PORT_P4, 1);
-		} else {
-			console.log("PUFF3:OFF");
-			that.digitalWrite(PORT_P4, 0);
-		}
-	}
+// five.Board().on("ready", function() {
+// 	var that = this;
+// 	this.pinMode(PORT_P1, 1);
+// 	this.pinMode(PORT_P2, 1);
+// 	this.pinMode(PORT_P3, 1);
+// 	this.pinMode(PORT_P4, 1);
+// 	this.pinMode(PORT_P5, 1);
 
-	function P4Set(onOrOff) {
-		if(onOrOff) {
-			that.digitalWrite(PORT_P4, 1);
-		} else {
-			that.digitalWrite(PORT_P4, 0);
-		}
-	}
+// 	function P1Set(onOrOff) {
+// 		if(onOrOff) {
+// 			that.digitalWrite(PORT_P1, 1);
+// 			console.log("PUFF1:ON");
+// 		} else {
+// 			console.log("PUFF1:OFF");
+// 			that.digitalWrite(PORT_P1, 0);
+// 		}
+// 	}	
 
-	function P5Set(onOrOff) {
-		if(onOrOff) {
-			that.digitalWrite(PORT_P5, 1);
-		} else {
-			that.digitalWrite(PORT_P5, 0);
-		}
-	}	
+// 	function P2Set(onOrOff) {
+// 		if(onOrOff) {
+// 			console.log("PUFF2:ON");
+// 			that.digitalWrite(PORT_P2, 1);
+// 		} else {
+// 			console.log("PUFF2:OFF");
+// 			that.digitalWrite(PORT_P2, 0);
+// 		}
+// 	}
 
-	function allOff()
-	{
-		P1Set(0);
-		P2Set(0);
-		P3Set(0);
-		P4Set(0);
-		P5Set(0);
-	}
+// 	function P3Set(onOrOff) {
+// 		if(onOrOff) {
+// 			console.log("PUFF3:ON");
+// 			that.digitalWrite(PORT_P4, 1);
+// 		} else {
+// 			console.log("PUFF3:OFF");
+// 			that.digitalWrite(PORT_P4, 0);
+// 		}
+// 	}
 
-	function PMulti(P1, P2, P3, P4, P5) {
-		allOff();
-		if(P1)
-			P1Set(1);
-		if(P2)
-			P2Set(1);
-		if(P3)
-			P3Set(1);
-		if(P4)
-			P4Set(1);
-		if(P5)
-			P5Set(1);
-		// setTimeout(function(){allOff()},delay);
-	}
+// 	function P4Set(onOrOff) {
+// 		if(onOrOff) {
+// 			console.log("PUFF4:ON");
+// 			that.digitalWrite(PORT_P4, 1);
+// 		} else {
+// 			console.log("PUFF4:OFF");
+// 			that.digitalWrite(PORT_P4, 0);
+// 		}
+// 	}
+
+// 	function P5Set(onOrOff) {
+// 		if(onOrOff) {
+// 			console.log("PUFF5:ON");
+// 			that.digitalWrite(PORT_P5, 1);
+// 		} else {
+// 			console.log("PUFF5:OFF");
+// 			that.digitalWrite(PORT_P5, 0);
+// 		}
+// 	}	
+
+// 	function allOff()
+// 	{
+// 		P1Set(0);
+// 		P2Set(0);
+// 		P3Set(0);
+// 		P4Set(0);
+// 		P5Set(0);
+// 	}
+
+// 	function PMulti(P1, P2, P3, P4, P5) {
+// 		allOff();
+// 		if(P1)
+// 			P1Set(1);
+// 		if(P2)
+// 			P2Set(1);
+// 		if(P3)
+// 			P3Set(1);
+// 		if(P4)
+// 			P4Set(1);
+// 		if(P5)
+// 			P5Set(1);
+// 	}
 
 	
-	var val = 0;
-	var delay = 250;
-	this.loop( 100, function() {
-	  	if(P1_ON) 
-	  	{
-	  		PMulti(1,0,0,0,0);
-	  		setTimeout(function(){
-	  			PMulti(0,0,0,0,0);
-	  		}, delay);
-	  		P1_ON = 0;
-	  	} 
-	  	else if(P2_ON)
-	  	{
-	  		PMulti(0,1,0,0,0);
-	  		setTimeout(function(){
-	  			PMulti(0,0,0,0,0);
-	  		}, delay);
-	  		P2_ON = 0;
-	  	}
-	  	else if(P3_ON)
-	  	{
-	  		PMulti(0,0,1,0,0);
-	  		setTimeout(function(){
-	  			PMulti(0,0,0,0,0);
-	  		}, delay);
-	  		P3_ON = 0;
-	  	}
-	  	else if(SEQ_123)
-	  	{
-	  		console.log("seq 123");
-	  		SEQ_123 = 0;
-	  		P1Set(1);
-	  		setTimeout(function(){
-	  			P1Set(0);
-	  			P2Set(1);
-	  			setTimeout(function(){
-		  			P2Set(0);
-		  			P3Set(1);
-		  			setTimeout(function(){
-		  				P3Set(0);
-		  			}, delay);
-	  			},delay);	
-	  		},delay);
-	  	}
-	  	else if(SEQ_321)
-	  	{
-	  		console.log("seq 321");
-	  		SEQ_321 = 0;
-	  		P3Set(1);
-	  		setTimeout(function(){
-	  			P3Set(0);
-	  			P2Set(1);
-	  			setTimeout(function(){
-		  			P2Set(0);
-		  			P1Set(1);
-		  			setTimeout(function(){
-		  				P1Set(0);
-		  			}, delay);
-	  			},delay);	
-	  		},delay);
-	  	}
-	  	else if(SEQ_ALL)
-	  	{
-	  		console.log("PUFF ALL");
-	  		SEQ_ALL = 0;
-	  		P1Set(1);
-	  		P2Set(1);
-	  		P3Set(1);
-	  		setTimeout(function() {
-	  			P1Set(0);
-		  		P2Set(0);
-		  		P3Set(0);
-	  		}, delay);
-	  	}
-	  	else if(SEQ_CIRCLE)
-	  	{
-	  		console.log("SEQ_CIRCLE");
-		  	SEQ_CIRCLE = 0;
-	  		P1Set(1);
-	  		setTimeout(function(){
-	  			P1Set(0);
-	  			P2Set(1);
-	  			setTimeout(function(){
-		  			P2Set(0);
-		  			P3Set(1);
-		  			setTimeout(function(){
-		  				P3Set(0);
-				  		setTimeout(function(){
-				  			P2Set(1);
-				  			setTimeout(function(){
-					  			P2Set(0);
-					  			P1Set(1);
-					  			setTimeout(function(){
-					  				P1Set(0);
-					  				setTimeout(function () {
-								  		P1Set(1);
-								  		P2Set(1);
-								  		P3Set(1);
-								  		setTimeout(function() {
-								  			P1Set(0);
-									  		P2Set(0);
-									  		P3Set(0);
-								  		}, delay);	
-								  	}, delay);
-					  			}, delay);
-				  			},delay);	
-				  		},delay);
-		  			}, delay);
-	  			},delay);	
-	  		},delay);
-	  	}
-	});
-});
+// 	var val = 0;
+// 	var delay = 250;
+// 	this.loop( 100, function() {
+// 	  	if(P1_ON) 
+// 	  	{
+// 	  		PMulti(1,0,0,0,0);
+// 	  		setTimeout(function(){
+// 	  			PMulti(0,0,0,0,0);
+// 	  		}, delay);
+// 	  		P1_ON = 0;
+// 	  	} 
+// 	  	else if(P2_ON)
+// 	  	{
+// 	  		PMulti(0,1,0,0,0);
+// 	  		setTimeout(function(){
+// 	  			PMulti(0,0,0,0,0);
+// 	  		}, delay);
+// 	  		P2_ON = 0;
+// 	  	}
+// 	  	else if(P3_ON)
+// 	  	{
+// 	  		PMulti(0,0,1,0,0);
+// 	  		setTimeout(function(){
+// 	  			PMulti(0,0,0,0,0);
+// 	  		}, delay);
+// 	  		P3_ON = 0;
+// 	  	}
+// 	  	else if(SEQ_123)
+// 	  	{
+// 	  		console.log("seq 123");
+// 	  		SEQ_123 = 0;
+// 	  		P1Set(1);
+// 	  		setTimeout(function(){
+// 	  			P1Set(0);
+// 	  			P2Set(1);
+// 	  			setTimeout(function(){
+// 		  			P2Set(0);
+// 		  			P3Set(1);
+// 		  			setTimeout(function(){
+// 		  				P3Set(0);
+// 		  			}, delay);
+// 	  			},delay);	
+// 	  		},delay);
+// 	  	}
+// 	  	else if(SEQ_321)
+// 	  	{
+// 	  		console.log("seq 321");
+// 	  		SEQ_321 = 0;
+// 	  		P3Set(1);
+// 	  		setTimeout(function(){
+// 	  			P3Set(0);
+// 	  			P2Set(1);
+// 	  			setTimeout(function(){
+// 		  			P2Set(0);
+// 		  			P1Set(1);
+// 		  			setTimeout(function(){
+// 		  				P1Set(0);
+// 		  			}, delay);
+// 	  			},delay);	
+// 	  		},delay);
+// 	  	}
+// 	  	else if(SEQ_ALL)
+// 	  	{
+// 	  		console.log("PUFF ALL");
+// 	  		SEQ_ALL = 0;
+// 	  		P1Set(1);
+// 	  		P2Set(1);
+// 	  		P3Set(1);
+// 	  		setTimeout(function() {
+// 	  			P1Set(0);
+// 		  		P2Set(0);
+// 		  		P3Set(0);
+// 	  		}, delay);
+// 	  	}
+// 	  	else if(SEQ_CIRCLE)
+// 	  	{
+// 	  		console.log("SEQ_CIRCLE");
+// 		  	SEQ_CIRCLE = 0;
+// 	  		P1Set(1);
+// 	  		setTimeout(function(){
+// 	  			P1Set(0);
+// 	  			P2Set(1);
+// 	  			setTimeout(function(){
+// 		  			P2Set(0);
+// 		  			P3Set(1);
+// 		  			setTimeout(function(){
+// 		  				P3Set(0);
+// 				  		setTimeout(function(){
+// 				  			P2Set(1);
+// 				  			setTimeout(function(){
+// 					  			P2Set(0);
+// 					  			P1Set(1);
+// 					  			setTimeout(function(){
+// 					  				P1Set(0);
+// 					  				setTimeout(function () {
+// 								  		P1Set(1);
+// 								  		P2Set(1);
+// 								  		P3Set(1);
+// 								  		setTimeout(function() {
+// 								  			P1Set(0);
+// 									  		P2Set(0);
+// 									  		P3Set(0);
+// 								  		}, delay);	
+// 								  	}, delay);
+// 					  			}, delay);
+// 				  			},delay);	
+// 				  		},delay);
+// 		  			}, delay);
+// 	  			},delay);	
+// 	  		},delay);
+// 	  	}
+// 	});
+// });
 
 var numFingers;
 
