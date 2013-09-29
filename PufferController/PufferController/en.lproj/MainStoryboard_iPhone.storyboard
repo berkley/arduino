@@ -25,7 +25,8 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="p1FireButtonTouched:" destination="2" eventType="touchUpInside" id="btQ-J5-BlE"/>
+                                    <action selector="p1FireButtonReleased:" destination="2" eventType="touchUpInside" id="NO0-hH-P0I"/>
+                                    <action selector="p1FireButtonTouched:" destination="2" eventType="touchDown" id="ngr-TQ-QHP"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kdi-8F-J7N">
@@ -38,7 +39,8 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="p2FireButtonTouched:" destination="2" eventType="touchUpInside" id="kFm-Xv-mZh"/>
+                                    <action selector="p2FireButtonReleased:" destination="2" eventType="touchUpInside" id="RgU-Ci-rBq"/>
+                                    <action selector="p2FireButtonTouched:" destination="2" eventType="touchDown" id="uRw-I9-UfB"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BoA-Bf-Kec">
@@ -51,7 +53,8 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="p3FireButtonTouched:" destination="2" eventType="touchUpInside" id="REa-gx-cko"/>
+                                    <action selector="p3FireButtonReleased:" destination="2" eventType="touchUpInside" id="S1B-EM-vZs"/>
+                                    <action selector="p3FireButtonTouched:" destination="2" eventType="touchDown" id="3ch-JO-7Pj"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kZs-0b-hID">
@@ -64,7 +67,8 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="p4FireButtonTouched:" destination="2" eventType="touchUpInside" id="GuD-eg-YsU"/>
+                                    <action selector="p4FireButtonReleased:" destination="2" eventType="touchUpInside" id="bAe-l3-ASy"/>
+                                    <action selector="p4FireButtonTouched:" destination="2" eventType="touchDown" id="WJH-jF-fMY"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VkN-LH-mPR">
@@ -77,7 +81,8 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="p5FireButtonTouched:" destination="2" eventType="touchUpInside" id="CH0-as-Yni"/>
+                                    <action selector="p5FireButtonReleased:" destination="2" eventType="touchUpInside" id="dpV-QB-f6A"/>
+                                    <action selector="p5FireButtonTouched:" destination="2" eventType="touchDown" id="tsZ-2i-9oW"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="FIRE!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jeM-oZ-ZJb">
@@ -99,7 +104,8 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="allFireButtonTouched:" destination="2" eventType="touchUpInside" id="736-xA-kwc"/>
+                                    <action selector="allFireButtonTouched:" destination="2" eventType="touchDown" id="uqa-g0-3tH"/>
+                                    <action selector="fireAllButtonReleased:" destination="2" eventType="touchUpInside" id="LoK-8o-Wct"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -140,10 +146,16 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SWViewController.h"/>
             <relationships>
                 <relationship kind="action" name="allFireButtonTouched:"/>
+                <relationship kind="action" name="fireAllButtonReleased:"/>
+                <relationship kind="action" name="p1FireButtonReleased:"/>
                 <relationship kind="action" name="p1FireButtonTouched:"/>
+                <relationship kind="action" name="p2FireButtonReleased:"/>
                 <relationship kind="action" name="p2FireButtonTouched:"/>
+                <relationship kind="action" name="p3FireButtonReleased:"/>
                 <relationship kind="action" name="p3FireButtonTouched:"/>
+                <relationship kind="action" name="p4FireButtonReleased:"/>
                 <relationship kind="action" name="p4FireButtonTouched:"/>
+                <relationship kind="action" name="p5FireButtonReleased:"/>
                 <relationship kind="action" name="p5FireButtonTouched:"/>
             </relationships>
         </class>

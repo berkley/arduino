@@ -14,41 +14,92 @@
 
 @implementation SWViewController
 
+int p1, p2, p3, p4, p5;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    p1 = 0;
+    p2 = 0;
+    p3 = 0;
+    p4 = 0;
+    p5 = 0;
 }
 
 - (IBAction)p1FireButtonTouched:(id)sender {
-    [self makeRequestFireP1:1 fireP2:0 fireP3:0 fireP4:0 fireP5:0];
+    p1 = 1;
+    [self updateAll];
+}
+
+- (IBAction)p1FireButtonReleased:(id)sender {
+    p1 = 0;
+    [self updateAll];
 }
 
 - (IBAction)p2FireButtonTouched:(id)sender {
-    [self makeRequestFireP1:0 fireP2:1 fireP3:0 fireP4:0 fireP5:0];
+    p2 = 1;
+    [self updateAll];
+}
+
+- (IBAction)p2FireButtonReleased:(id)sender {
+    p2 = 0;
+    [self updateAll];
 }
 
 - (IBAction)p3FireButtonTouched:(id)sender {
-    [self makeRequestFireP1:0 fireP2:0 fireP3:1 fireP4:0 fireP5:0];
+    p3 = 1;
+    [self updateAll];
+}
+
+- (IBAction)p3FireButtonReleased:(id)sender {
+    p3 = 0;
+    [self updateAll];
+
 }
 
 - (IBAction)p4FireButtonTouched:(id)sender {
-    [self makeRequestFireP1:0 fireP2:0 fireP3:0 fireP4:1 fireP5:0];
+    p4 = 1;
+    [self updateAll];
+}
+
+- (IBAction)p4FireButtonReleased:(id)sender {
+    p4 = 0;
+    [self updateAll];
 }
 
 - (IBAction)p5FireButtonTouched:(id)sender {
-    [self makeRequestFireP1:0 fireP2:0 fireP3:0 fireP4:0 fireP5:1];
+    p5 = 1;
+    [self updateAll];
+}
+
+- (IBAction)p5FireButtonReleased:(id)sender {
+    p5 = 0;
+    [self updateAll];
 }
 
 - (IBAction)allFireButtonTouched:(id)sender {
-    [self makeRequestFireP1:1 fireP2:1 fireP3:1 fireP4:1 fireP5:1];
+    p1 = 1;
+    p2 = 1;
+    p3 = 1;
+    p4 = 1;
+    p5 = 1;
+    [self updateAll];
 }
+
+- (IBAction)fireAllButtonReleased:(id)sender {
+    p1 = 0;
+    p2 = 0;
+    p3 = 0;
+    p4 = 0;
+    p5 = 0;
+    [self updateAll];
+}
+
+- (void)updateAll
+{
+    [self makeRequestFireP1:p1 fireP2:p2 fireP3:p3 fireP4:p4 fireP5:p5];
+}
+
 
 - (void)makeRequestFireP1:(BOOL)p1
                    fireP2:(BOOL)p2
