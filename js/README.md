@@ -2,7 +2,7 @@
 
 Backend Express Routes
 ==============
-* **POST http://localhost:5000/puff - puff 1 or more puffers.
+* POST http://localhost:5000/puff - puff 1 or more puffers.
   JSON body looks like: 
 	{
 		"puffer1": 0,
@@ -22,6 +22,8 @@ This app listens on port 6437 for websocket output from a LeapMotion sensor.  Cu
 * swipe right: fire p1, p2, p3 in sequence
 * swipe left: fire p3, p2, p1 in sequence
 * 1 finger circle: fire p1, p2, p3, p2, p1, all
+
+curl.cmd contains a curl command to debug the websocket connection.
 
 Arduino Control
 ==============
