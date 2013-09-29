@@ -14,6 +14,8 @@ var P2_ON = 0;
 var P3_ON = 0;
 var SEQ_123 = 0;
 var SEQ_321 = 0;
+var SEQ_ALL = 0;
+var SEQ_CIRCLE = 0;
 
 five.Board().on("ready", function() {
 	var that = this;
@@ -25,10 +27,10 @@ five.Board().on("ready", function() {
 
 	function P1Set(onOrOff) {
 		if(onOrOff) {
-			console.log("PUFF1:ON");
 			that.digitalWrite(PORT_P1, 1);
+			console.log("PUFF1:ON");
 		} else {
-			// console.log("PUFF1:OFF");
+			console.log("PUFF1:OFF");
 			that.digitalWrite(PORT_P1, 0);
 		}
 	}	
@@ -38,7 +40,7 @@ five.Board().on("ready", function() {
 			console.log("PUFF2:ON");
 			that.digitalWrite(PORT_P2, 1);
 		} else {
-			// console.log("PUFF2:OFF");
+			console.log("PUFF2:OFF");
 			that.digitalWrite(PORT_P2, 0);
 		}
 	}
@@ -46,10 +48,10 @@ five.Board().on("ready", function() {
 	function P3Set(onOrOff) {
 		if(onOrOff) {
 			console.log("PUFF3:ON");
-			that.digitalWrite(PORT_P3, 1);
+			that.digitalWrite(PORT_P4, 1);
 		} else {
-			// console.log("PUFF3:OFF");
-			that.digitalWrite(PORT_P3, 0);
+			console.log("PUFF3:OFF");
+			that.digitalWrite(PORT_P4, 0);
 		}
 	}
 
@@ -95,46 +97,115 @@ five.Board().on("ready", function() {
 
 	
 	var val = 0;
-	var delay = 250000;
+	var delay = 250;
 	this.loop( 100, function() {
 	  	if(P1_ON) 
 	  	{
 	  		PMulti(1,0,0,0,0);
+	  		setTimeout(function(){
+	  			PMulti(0,0,0,0,0);
+	  		}, delay);
 	  		P1_ON = 0;
 	  	} 
 	  	else if(P2_ON)
 	  	{
 	  		PMulti(0,1,0,0,0);
+	  		setTimeout(function(){
+	  			PMulti(0,0,0,0,0);
+	  		}, delay);
 	  		P2_ON = 0;
 	  	}
 	  	else if(P3_ON)
 	  	{
 	  		PMulti(0,0,1,0,0);
+	  		setTimeout(function(){
+	  			PMulti(0,0,0,0,0);
+	  		}, delay);
 	  		P3_ON = 0;
 	  	}
 	  	else if(SEQ_123)
 	  	{
-	  		PMulti(1,0,0,0,0);
-	  		sleep.usleep(delay);
-	  		PMulti(0,1,0,0,0);
-	  		sleep.usleep(delay);
-	  		PMulti(0,0,1,0,0);
-	  		sleep.usleep(delay);
+	  		console.log("seq 123");
 	  		SEQ_123 = 0;
+	  		P1Set(1);
+	  		setTimeout(function(){
+	  			P1Set(0);
+	  			P2Set(1);
+	  			setTimeout(function(){
+		  			P2Set(0);
+		  			P3Set(1);
+		  			setTimeout(function(){
+		  				P3Set(0);
+		  			}, delay);
+	  			},delay);	
+	  		},delay);
 	  	}
 	  	else if(SEQ_321)
 	  	{
-	  		PMulti(0,0,1,0,0);
-	  		sleep.usleep(delay);
-	  		PMulti(0,1,0,0,0);
-	  		sleep.usleep(delay);
-	  		PMulti(1,0,0,0,0);
-	  		sleep.usleep(delay);
+	  		console.log("seq 321");
 	  		SEQ_321 = 0;
+	  		P3Set(1);
+	  		setTimeout(function(){
+	  			P3Set(0);
+	  			P2Set(1);
+	  			setTimeout(function(){
+		  			P2Set(0);
+		  			P1Set(1);
+		  			setTimeout(function(){
+		  				P1Set(0);
+		  			}, delay);
+	  			},delay);	
+	  		},delay);
 	  	}
-	  	else 
+	  	else if(SEQ_ALL)
 	  	{
-	  		PMulti(0,0,0,0,0);
+	  		console.log("PUFF ALL");
+	  		SEQ_ALL = 0;
+	  		P1Set(1);
+	  		P2Set(1);
+	  		P3Set(1);
+	  		setTimeout(function() {
+	  			P1Set(0);
+		  		P2Set(0);
+		  		P3Set(0);
+	  		}, delay);
+	  	}
+	  	else if(SEQ_CIRCLE)
+	  	{
+	  		console.log("SEQ_CIRCLE");
+		  	SEQ_CIRCLE = 0;
+	  		P1Set(1);
+	  		setTimeout(function(){
+	  			P1Set(0);
+	  			P2Set(1);
+	  			setTimeout(function(){
+		  			P2Set(0);
+		  			P3Set(1);
+		  			setTimeout(function(){
+		  				P3Set(0);
+				  		setTimeout(function(){
+				  			P2Set(1);
+				  			setTimeout(function(){
+					  			P2Set(0);
+					  			P1Set(1);
+					  			setTimeout(function(){
+					  				P1Set(0);
+					  				setTimeout(function () {
+								  		P1Set(1);
+								  		P2Set(1);
+								  		P3Set(1);
+								  		setTimeout(function() {
+								  			P1Set(0);
+									  		P2Set(0);
+									  		P3Set(0);
+								  		}, delay);	
+								  	}, delay);
+					  			}, delay);
+				  			},delay);	
+				  		},delay);
+		  			}, delay);
+	  			},delay);	
+	  		},delay);
 	  	}
 	});
 });
@@ -165,6 +236,12 @@ ws.on('message', function(data, flags) {
 		{ //start with 0 fingers
 			numFingers = 0;
 		}
+
+		// if(g.type == 'circle' && 
+		//    g.state == 'stop')
+		// {
+		// 	SEQ_CIRCLE = 1; 
+		// }
 
 		if(g.type == 'swipe' && 
 		   g.state == 'update')
@@ -218,16 +295,12 @@ ws.on('message', function(data, flags) {
 					{
 						P3_ON = 1;
 					}
+					else if(numFingers == 4)
+					{
+						SEQ_ALL = 1;
+					}
 				}
 			}
 		}
 	}
-
-    // if(json.pointables && json.pointables.length == 1) {
-    // 	console.log("p1 on");
-    // 	P1_ON = 1;
-    // } else {
-    // 	console.log("p1 off");
-    // 	P1_ON = 0;
-    // }
 });
