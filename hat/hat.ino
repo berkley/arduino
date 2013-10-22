@@ -5,6 +5,8 @@
 #define VERT 8
 #define HORI 18
 #define NUM_PIXELS 144
+#define CHAR_WIDTH 6
+#define CHAR_HEIGHT 8
 
 #define ORANGE strip.Color(255, 69, 0)
 #define YELLOW strip.Color(255, 255, 0)
@@ -35,47 +37,409 @@
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_PIXELS, PIN, NEO_GRB + NEO_KHZ800);
 ParticleEmitter emitter = ParticleEmitter(NUM_PIXELS);
 
-bool H[][6] = {{1, 1, 0, 0, 1, 1},
-                      {1, 1, 0, 0, 1, 1},
-                      {1, 1, 0, 0, 1, 1},
-                      {1, 1, 1, 1, 1, 1},
-                      {1, 1, 1, 1, 1, 1},
-                      {1, 1, 0, 0, 1, 1},
-                      {1, 1, 0, 0, 1, 1},
-                      {1, 1, 0, 0, 1, 1}};
+bool A[][CHAR_WIDTH] = {{0, 0, 1, 1, 0, 0},
+                        {0, 1, 1, 1, 1, 0},
+                        {0, 1, 0, 0, 1, 0},
+                        {0, 1, 0, 0, 1, 0},
+                        {0, 1, 1, 1, 1, 0},
+                        {0, 1, 0, 0, 1, 0},
+                        {0, 1, 0, 0, 1, 0},
+                        {0, 1, 0, 0, 1, 0}};
+
+bool B[][CHAR_WIDTH] = {{0, 1, 1, 1, 1, 0},
+                        {0, 1, 1, 1, 1, 0},
+                        {0, 1, 0, 0, 1, 0},
+                        {0, 1, 1, 1, 0, 0},
+                        {0, 1, 1, 1, 0, 0},
+                        {0, 1, 0, 0, 1, 0},
+                        {0, 1, 1, 1, 1, 0},
+                        {0, 1, 1, 1, 1, 0}};
+
+bool C[][CHAR_WIDTH] = {{1, 1, 1, 1, 1, 0},
+                        {1, 1, 1, 1, 1, 0},
+                        {1, 1, 0, 0, 0, 0},
+                        {1, 1, 0, 0, 0, 0},
+                        {1, 1, 0, 0, 0, 0},
+                        {1, 1, 0, 0, 0, 0},
+                        {1, 1, 1, 1, 1, 0},
+                        {1, 1, 1, 1, 1, 0}};
+
+bool D[][CHAR_WIDTH] = {{1, 1, 1, 1, 0, 0},
+                        {1, 1, 1, 1, 1, 0},
+                        {1, 1, 0, 0, 1, 1},
+                        {1, 1, 0, 0, 1, 1},
+                        {1, 1, 0, 0, 1, 1},
+                        {1, 1, 0, 0, 1, 1},
+                        {1, 1, 1, 1, 1, 0},
+                        {1, 1, 1, 1, 0, 0}};
+
+bool E[][CHAR_WIDTH] = {{0, 1, 1, 1, 1, 0},
+                        {0, 1, 1, 1, 1, 0},
+                        {0, 1, 0, 0, 0, 0},
+                        {0, 1, 1, 1, 0, 0},
+                        {0, 1, 1, 1, 0, 0},
+                        {0, 1, 0, 0, 0, 0},
+                        {0, 1, 1, 1, 1, 0},
+                        {0, 1, 1, 1, 1, 0}};
+
+bool G[][CHAR_WIDTH] = {{1, 1, 1, 1, 1, 0},
+                        {1, 1, 1, 1, 1, 0},
+                        {1, 1, 0, 0, 0, 0},
+                        {1, 1, 0, 0, 0, 0},
+                        {1, 1, 0, 1, 1, 0},
+                        {1, 1, 0, 0, 1, 1},
+                        {1, 1, 1, 1, 1, 1},
+                        {1, 1, 1, 1, 1, 0}};
+
+bool I[][CHAR_WIDTH] = {{0, 1, 1, 1, 1, 0},
+                        {0, 1, 1, 1, 1, 0},
+                        {0, 0, 1, 1, 0, 0},
+                        {0, 0, 1, 1, 0, 0},
+                        {0, 0, 1, 1, 0, 0},
+                        {0, 0, 1, 1, 0, 0},
+                        {0, 1, 1, 1, 1, 0},
+                        {0, 1, 1, 1, 1, 0}};
+
+bool H[][CHAR_WIDTH] = {{1, 1, 0, 0, 1, 1},
+                        {1, 1, 0, 0, 1, 1},
+                        {1, 1, 0, 0, 1, 1},
+                        {1, 1, 1, 1, 1, 1},
+                        {1, 1, 1, 1, 1, 1},
+                        {1, 1, 0, 0, 1, 1},
+                        {1, 1, 0, 0, 1, 1},
+                        {1, 1, 0, 0, 1, 1}};
+
+bool L[][CHAR_WIDTH] = {{1, 1, 0, 0, 0, 0},
+                        {1, 1, 0, 0, 0, 0},
+                        {1, 1, 0, 0, 0, 0},
+                        {1, 1, 0, 0, 0, 0},
+                        {1, 1, 0, 0, 0, 0},
+                        {1, 1, 0, 0, 0, 0},
+                        {1, 1, 1, 1, 1, 0},
+                        {1, 1, 1, 1, 1, 0}};
+
+bool M[][CHAR_WIDTH] = {{1, 0, 0, 0, 0, 1},
+                        {1, 1, 0, 0, 1, 1},
+                        {1, 1, 1, 1, 1, 1},
+                        {1, 0, 1, 1, 0, 1},
+                        {1, 0, 1, 1, 0, 1},
+                        {1, 0, 0, 0, 0, 1},
+                        {1, 0, 0, 0, 0, 1},
+                        {1, 0, 0, 0, 0, 1}};
+
+bool N[][CHAR_WIDTH] = {{0, 1, 0, 0, 1, 0},
+                        {0, 1, 0, 0, 1, 0},
+                        {0, 1, 1, 0, 1, 0},
+                        {0, 1, 1, 1, 1, 0},
+                        {0, 1, 1, 1, 1, 0},
+                        {0, 1, 0, 1, 1, 0},
+                        {0, 1, 0, 0, 1, 0},
+                        {0, 1, 0, 0, 1, 0}};
+
+bool O[][CHAR_WIDTH] = {{0, 1, 1, 1, 1, 0},
+                        {0, 1, 1, 1, 1, 0},
+                        {0, 1, 0, 0, 1, 0},
+                        {0, 1, 0, 0, 1, 0},
+                        {0, 1, 0, 0, 1, 0},
+                        {0, 1, 0, 0, 1, 0},
+                        {0, 1, 1, 1, 1, 0},
+                        {0, 1, 1, 1, 1, 0}};
+
+bool P[][CHAR_WIDTH] = {{1, 1, 1, 1, 1, 0},
+                        {1, 1, 1, 1, 1, 0},
+                        {1, 1, 0, 0, 1, 0},
+                        {1, 1, 0, 0, 1, 0},
+                        {1, 1, 1, 1, 1, 0},
+                        {1, 1, 1, 1, 1, 0},
+                        {1, 1, 0, 0, 0, 0},
+                        {1, 1, 0, 0, 0, 0}};
+
+bool R[][CHAR_WIDTH] = {{1, 1, 1, 1, 1, 0},
+                        {1, 1, 1, 1, 1, 0},
+                        {1, 1, 0, 0, 1, 0},
+                        {1, 1, 1, 1, 0, 0},
+                        {1, 1, 1, 1, 0, 0},
+                        {1, 1, 0, 0, 1, 0},
+                        {1, 1, 0, 0, 1, 0},
+                        {1, 1, 0, 0, 1, 0}};
+
+bool S[][CHAR_WIDTH] = {{1, 1, 1, 1, 1, 0},
+                        {1, 1, 1, 1, 1, 0},
+                        {1, 1, 0, 0, 0, 0},
+                        {1, 1, 1, 1, 0, 0},
+                        {1, 1, 1, 1, 1, 0},
+                        {0, 0, 0, 0, 1, 0},
+                        {1, 1, 1, 1, 1, 0},
+                        {1, 1, 1, 1, 0, 0}};
+
+bool T[][CHAR_WIDTH] = {{1, 1, 1, 1, 1, 1},
+                        {1, 1, 1, 1, 1, 1},
+                        {0, 0, 1, 1, 0, 0},
+                        {0, 0, 1, 1, 0, 0},
+                        {0, 0, 1, 1, 0, 0},
+                        {0, 0, 1, 1, 0, 0},
+                        {0, 0, 1, 1, 0, 0},
+                        {0, 0, 1, 1, 0, 0}};
+
+bool W[][CHAR_WIDTH] = {{1, 0, 0, 0, 0, 1},
+                        {1, 0, 0, 0, 0, 1},
+                        {1, 0, 0, 0, 0, 1},
+                        {1, 0, 0, 0, 0, 1},
+                        {1, 0, 1, 1, 0, 1},
+                        {1, 0, 1, 1, 0, 1},
+                        {1, 1, 0, 0, 1, 1},
+                        {1, 1, 0, 0, 1, 1}};
+
+bool Y[][CHAR_WIDTH] = {{1, 1, 0, 0, 1, 1},
+                        {1, 1, 0, 0, 1, 1},
+                        {1, 1, 1, 0, 1, 1},
+                        {1, 1, 1, 1, 1, 1},
+                        {1, 1, 1, 1, 1, 1},
+                        {0, 0, 1, 1, 0, 0},
+                        {0, 0, 1, 1, 0, 0},
+                        {0, 0, 1, 1, 0, 0}};
+
+bool SPACE[][CHAR_WIDTH] = {{0, 0, 0, 0, 0, 0},
+                        {0, 0, 0, 0, 0, 0},
+                        {0, 0, 0, 0, 0, 0},
+                        {0, 0, 0, 0, 0, 0},
+                        {0, 0, 0, 0, 0, 0},
+                        {0, 0, 0, 0, 0, 0},
+                        {0, 0, 0, 0, 0, 0},
+                        {0, 0, 0, 0, 0, 0}};
+
+bool AXE[][18] = {{0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+                  {0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0},
+                  {0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0},
+                  {0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0},
+                  {0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0},
+                  {0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0},
+                  {0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0},
+                  {0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0}};
+
+bool AXE2[][CHAR_WIDTH] = {{1, 1, 0, 0, 1, 1},
+                        {1, 1, 0, 0, 1, 1},
+                        {1, 1, 1, 0, 1, 1},
+                        {1, 1, 1, 1, 1, 1},
+                        {1, 1, 1, 1, 1, 1},
+                        {0, 0, 1, 1, 0, 0},
+                        {0, 0, 1, 1, 0, 0},
+                        {0, 0, 1, 1, 0, 0}};
+
+// bool HALLOWEEN[9][CHAR_HEIGHT][CHAR_WIDTH] = {H,A,L,L,O,W,E,E,N};
+// bool HAPPY[5][CHAR_HEIGHT][CHAR_WIDTH] = {H,A,P,P,Y};
+int SIZE_HAPPY = 5;
+int SIZE_HALLOWEEN = 9;
+int AXE_WIDTH = 2;
 
 void setup() {
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
+
+  Serial.begin(9600);
+}
+
+void happyHalloween(uint32_t c, uint32_t c2)
+{
+  int array_size = SIZE_HALLOWEEN + SIZE_HAPPY + 2;
+  bool invert = false;
+  for(int i=(CHAR_WIDTH * array_size) + SIZE_HALLOWEEN; i>=0; i--)
+  {
+    allOff();
+    for(int j=array_size; j>=0; j--)
+    {
+      if(i >= (CHAR_WIDTH * j))
+      {
+        if(j == 15)
+          createChar(c, c2, H, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 14)
+          createChar(c, c2, A, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 13)
+          createChar(c, c2, P, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 12)
+          createChar(c, c2, P, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 11)
+          createChar(c, c2, Y, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+
+        else if(j == 10)
+          createChar(c, c2, SPACE, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+
+        else if(j == 9)
+          createChar(c, c2, H, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 8)
+          createChar(c, c2, A, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 7)
+          createChar(c, c2, L, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 6)
+          createChar(c, c2, L, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 5)
+          createChar(c, c2, O, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 4)
+          createChar(c, c2, W, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 3)
+          createChar(c, c2, E, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 2)
+          createChar(c, c2, E, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 1)
+          createChar(c, c2, N, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+
+        else if(j == 0)
+          createChar(c, c2, SPACE, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+      }
+    }
+    strip.show();
+    delay(100);
+  }
+}
+
+void goTimbers(uint32_t c, uint32_t c2)
+{
+  int array_size = 17;
+  bool invert = false;
+  // for(int i=0; i<(CHAR_WIDTH * array_size) + array_size; i++)
+  for(int i=(CHAR_WIDTH * array_size) + array_size; i>=0; i--)
+  {
+    allOff();
+    for(int j=array_size - 1; j>=0; j--)
+    // for(int j=0; j<array_size; j++)
+    {
+      if(i >= (CHAR_WIDTH * j))
+      {
+        if(j == 16)
+          createChar(c, c2, G, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 15)
+          createChar(c, c2, O, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 14)
+          createChar(c, c2, SPACE, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 13)
+          createChar(c, c2, T, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 12)
+          createChar(c, c2, I, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 11)
+          createChar(c, c2, M, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 10)
+          createChar(c, c2, B, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 9)
+          createChar(c, c2, E, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 8)
+          createChar(c, c2, R, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 7)
+          createChar(c, c2, S, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 6)
+          createChar(c, c2, SPACE, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 5)
+          createChar(c, c2, R, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 4)
+          createChar(c, c2, C, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 3)
+          createChar(c, c2, T, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 2)
+          createChar(c, c2, I, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 1)
+          createChar(c, c2, D, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 0)
+          createChar(c, c2, SPACE, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+      }
+    }
+    strip.show();
+    delay(100);
+  }
+}
+
+// void createWord(uint32_t c, uint32_t c2, bool (*word)[CHAR_HEIGHT][CHAR_WIDTH])
+// {
+//   int array_size = 17;
+//   bool invert = false;
+//   int i = 0;
+//   int j = 0;
+//   // for(int i=0; i<(CHAR_WIDTH * array_size) + array_size; i++)
+//   // for(int i=(CHAR_WIDTH * array_size) + array_size; i>=0; i--)
+//   // {
+//   //   allOff();
+//   //   for(int j=array_size - 1; j>=0; j--)
+//   //   // for(int j=0; j<array_size; j++)
+//   //   {
+//   //     if(i >= (CHAR_WIDTH * j))
+//   //     {
+//   //       if(j == 16)
+//           createChar(c, c2, word[0], CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+//     //   }
+//     // }
+//     strip.show();
+//     delay(100);
+//   // }
+// }
+
+void createAxe(uint32_t c, uint32_t c2)
+{
+  for(int i=0; i<8; i++)
+  { //rows
+      setPixels(c, c2, AXE2[i], AXE_WIDTH, i, 0, false);
+  }
+  createChar(c, c2, AXE2, CHAR_HEIGHT, CHAR_WIDTH, 0, false);
 }
 
 void loop() {
-  // createChar(RED, H, 6, 8, 0);
-  // strip.show();
+  // createWord(GREEN, YELLOW, HAPPY);
 
-  // delay(10000);
-  particles();
-  rowSwipe(ORANGE, false);
-  particles();
-  colSwipe(BLUE, false);
+  // happyHalloween(ORANGE, BLACK);
+  // delay(100);
+
+  // createAxe(GREEN, YELLOW);
+  // strip.show();
+  // delay(2000);
+
+  // goTimbers(GREEN, BLACK);
+  // delay(100);
+  // goTimbers(YELLOW, BLUE);
+  // delay(100);
+
+  
+
+  // allOff();
+  // strip.show();
+  // delay(2000);
+
+  // createAxe(GREEN, YELLOW);
+  // strip.show();
+  // delay(75);
+  // createAxe(YELLOW, GREEN);
+  // strip.show();
+  // delay(75);
+  // createAxe(GREEN, YELLOW);
+  // strip.show();
+  // delay(75);
+  // createAxe(YELLOW, GREEN);
+  // strip.show();
+  // delay(75);
+  // createAxe(GREEN, YELLOW);
+  // strip.show();
+  // delay(5000);
+  // rowSwipe(GREEN, false);
+  // colSwipe(YELLOW, false);
+
+  // rowSwipe(Wheel(random(255)), false);
+  // happyHalloween(Wheel(random(255)));
+  // happyHalloween(BLUE, ORANGE);
+  // rowSwipe(Wheel(random(255)), false);
+
+  // particles();
+  // rowSwipe(strip.Color(random(180), random(100), random(50)), false);
+
+  // happyHalloween(YELLOW, GREEN);
+
+  // particles();
+  // colSwipe(strip.Color(random(180), random(100), random(50)), false);
+
+  // particles();
+  // colSwipe(BLUE, false);
 
   // Some example procedures showing how to display to the pixels:
   // colorWipe(strip.Color(255, 0, 0), 50); // Red
   // colorWipe(strip.Color(0, 255, 0), 50); // Green
   // colorWipe(strip.Color(0, 0, 255), 50); // Blue
   // rainbow(20);
-  // rainbowCycle(20);
-}
-
-void createChar(uint32_t c, bool character[][6], int size_t, int size_u, int start)
-{
-  for(int i=0; i<size_t; i++)
-  { //rows
-    for(int j=0; j<size_u; j++)
-    { //cols
-      setCol(c, j, character[i], size_u);
-    }
-  }
+  rainbowCycle(20);
 }
 
 void rowSwipe(uint32_t c, bool reset)
@@ -133,7 +497,7 @@ void setRow(uint32_t c, uint8_t row)
   }
 }
 
-int getColAddr(int row, int col)
+int getPixelAddress(int row, int col)
 {
   int addr;
   if(row % 2 == 0)
@@ -142,40 +506,53 @@ int getColAddr(int row, int col)
   }
   else
   {
-    // int offset = ((i * HORI) + col) + (HORI - col);
-    int offset = 0;
-    offset = HORI - ((col * 2) + 1) ;
+    int offset = HORI - ((col * 2) + 1) ;
     addr = ((row * HORI) + col) + offset;
   }
 
   return addr;
 }
 
+void setPixels(uint32_t c, uint32_t c2, bool *pixels, int size_t, int row, int start_col, bool invert)
+{
+  for(int i=0; i<size_t; i++)
+  {
+    int col = i + start_col;
+    if(col > HORI)
+      continue;
+
+    int addr = getPixelAddress(row, col);
+    if(pixels[i])
+    {
+      if(invert)
+        strip.setPixelColor(addr, c2);
+      else
+        strip.setPixelColor(addr, c);
+    }
+    else
+    {
+      if(invert)
+        strip.setPixelColor(addr, c);
+      else
+        strip.setPixelColor(addr, c2); //set the pixel off
+    }
+  }
+}
+
+void createChar(uint32_t c, uint32_t c2, bool character[][CHAR_WIDTH], int size_t, int size_u, int start, bool invert)
+{
+  for(int i=0; i<size_t; i++)
+  { //rows
+      setPixels(c, c2, character[i], size_u, i, start, invert);
+  }
+}
+
 void setCol(uint32_t c, uint8_t col)
 {
   for(int i=0; i<VERT; i++)
   { 
-    int addr = getColAddr(i, col);  
+    int addr = getPixelAddress(i, col);  
     strip.setPixelColor(addr, c);
-  }
-}
-
-void setCol(uint32_t c, uint8_t col, bool* pixels, int size_t)
-{
-  if(size_t != VERT) //size of the array must be the same as the vertical resolution
-    setCol(strip.Color(255,0,0), 0); //set the first row to red if there's an error
-
-  for(int i=0; i<size_t; i++)
-  {
-    int addr = getColAddr(i, col);
-    if(pixels[i])
-    {
-      strip.setPixelColor(addr, c);
-    }
-    else
-    {
-      strip.setPixelColor(addr, strip.Color(0,0,0)); //set the pixel off
-    }
   }
 }
 
