@@ -89,6 +89,7 @@ void loop() {
   {
     intOccured = false; 
     timbers();
+    // letterTest();
   }
   else if(progNum == 1)
   {
@@ -113,7 +114,7 @@ void goal()
   uint32_t c = GREEN;
   uint32_t c2 = BLACK;
   bool invert = false;
-  int pos = 6;
+  int pos = 5;
 
   CHECKINT
   rowSwipe(GREEN, false);
@@ -823,5 +824,88 @@ void particles() {
     strip.show();
     delay(1);
   }
+}
+
+void letterTest()
+{
+  int wait = 1000;
+  createChar(GREEN, BLACK, A, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  strip.show();
+  delay(wait);
+  createChar(GREEN, BLACK, B, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  strip.show();
+  delay(wait);
+  createChar(GREEN, BLACK, C, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  strip.show();
+  delay(wait);
+  createChar(GREEN, BLACK, D, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  strip.show();
+  delay(wait);
+  createChar(GREEN, BLACK, E, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  strip.show();
+  delay(wait);
+  createChar(GREEN, BLACK, F, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  strip.show();
+  delay(wait);
+  createChar(GREEN, BLACK, G, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  strip.show();
+  delay(wait);
+  createChar(GREEN, BLACK, H, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  strip.show();
+  delay(wait);
+  createChar(GREEN, BLACK, I, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  strip.show();
+  delay(wait);
+  createChar(GREEN, BLACK, J, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  strip.show();
+  delay(wait);
+  createChar(GREEN, BLACK, K, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  strip.show();
+  delay(wait);
+  createChar(GREEN, BLACK, L, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  strip.show();
+  delay(wait);
+  createChar(GREEN, BLACK, M, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  strip.show();
+  delay(wait);
+  createChar(GREEN, BLACK, N, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  strip.show();
+  delay(wait);
+  createChar(GREEN, BLACK, O, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  strip.show();
+  delay(wait);
+  createChar(GREEN, BLACK, P, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  strip.show();
+  delay(wait);
+  // createChar(GREEN, BLACK, Q, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  // strip.show();
+  // delay(wait);
+  createChar(GREEN, BLACK, R, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  strip.show();
+  delay(wait);
+  createChar(GREEN, BLACK, S, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  strip.show();
+  delay(wait);
+  createChar(GREEN, BLACK, T, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  strip.show();
+  delay(wait);
+  createChar(GREEN, BLACK, U, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  strip.show();
+  delay(wait);
+  // createChar(GREEN, BLACK, V, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  // strip.show();
+  // delay(wait);
+  createChar(GREEN, BLACK, W, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  strip.show();
+  delay(wait);
+  // createChar(GREEN, BLACK, X, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  // strip.show();
+  // delay(wait);
+  createChar(GREEN, BLACK, Y, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  strip.show();
+  delay(wait);
+  // createChar(GREEN, BLACK, Z, CHAR_HEIGHT, CHAR_WIDTH, 6, false);
+  // strip.show();
+  // delay(wait);
 }
 
