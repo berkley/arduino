@@ -440,7 +440,7 @@ void lighting(int cycles)
 }
 
 void loop() {
-  uint32_t greyish = strip.Color(20,20,20);
+  // uint32_t greyish = strip.Color(20,20,20);
 
   rainOnMe(5);
   lighting(3);

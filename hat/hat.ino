@@ -17,9 +17,7 @@
 #define WHITE strip.Color(255, 255, 255)
 #define BLACK strip.Color(0, 0, 0)
 
-#define PROG_MAX 3
-
-#define CHECKINT if(intOccured) {return;}
+#define PROG_MAX 5
 
 /*
 0 00 .. 17
@@ -49,15 +47,20 @@ int SIZE_HAPPY = 5;
 int SIZE_HALLOWEEN = 9;
 int AXE_WIDTH = 18;
 volatile int millisLastInterrupt = 0;
-volatile int progNum = 0;
+volatile int progNum = -1;
 volatile bool intOccured = false;
+bool startupDone = false;
 
 void progChangeHandler()
 {
   Serial.println("int0");
   intOccured = true;
   int m = millis();
-  if(m - millisLastInterrupt < 1000) {
+  Serial.print("millis since last: ");
+  uint32_t sinceLast = m - millisLastInterrupt;
+  Serial.println(sinceLast);
+
+  if(sinceLast > 0 && sinceLast < 250) {
     return;
   }
   millisLastInterrupt = m;
@@ -68,6 +71,58 @@ void progChangeHandler()
     progNum = 0;
   else
     progNum++;
+
+  if(progNum == 0)
+  {
+    while(true)
+    {
+      intOccured = false; 
+      timbers();
+    }
+    // letterTest();
+  }
+  else if(progNum == 1)
+  {
+    while(true)
+    {
+      intOccured = false; 
+      goal();
+    }
+  }
+  else if(progNum == 2)
+  {
+    while(true)
+    {
+      intOccured = false; 
+      ptfc();
+    }
+  }
+  else if(progNum == 3)
+  {
+    while(true)
+    {
+      intOccured = false;
+      mental(GREEN, BLACK);
+      rowSwipe(GREEN, false);
+      delay(2000);
+    }
+  }
+  else if(progNum == 4)
+  {
+    while(true)
+    {
+      intOccured = false;
+      bounce(20);
+    }
+  }
+  else if(progNum == 5)
+  {
+    while(true)
+    {
+      intOccured = false;
+      particles();
+    }
+  }
 }
 
 void setup() {
@@ -84,28 +139,60 @@ void setup() {
 }
 
 void loop() {
+  if(!startupDone)
+    progChangeHandler();
   
-  if(progNum == 0)
-  {
-    intOccured = false; 
-    timbers();
-    // letterTest();
-  }
-  else if(progNum == 1)
-  {
-    intOccured = false; 
-    goal();
-  }
-  else if(progNum == 2)
-  {
-    intOccured = false;
-    bounce(20);
-  }
-  else if(progNum == 3)
-  {
-    intOccured = false;
-    particles();
-  }
+}
+
+void ptfc()
+{
+  bool invert = false;
+  int pos = 5;
+
+  createChar(GREEN, BLACK, P, CHAR_HEIGHT, CHAR_WIDTH, pos, invert);
+  strip.show();
+  
+  delay(400);
+
+  createChar(RED, BLACK, T, CHAR_HEIGHT, CHAR_WIDTH, pos, invert);
+  strip.show();
+  
+  delay(400);
+
+  createAxe(GREEN, YELLOW);
+  delay(200);
+  allOff();
+  strip.show();
+  delay(200);
+
+  createAxe(YELLOW, GREEN);
+  delay(200);
+  allOff();
+  strip.show();
+  delay(200);
+
+  createChar(RED, BLACK, F, CHAR_HEIGHT, CHAR_WIDTH, pos, invert);
+  strip.show();
+  
+  delay(400);
+
+  createChar(GREEN, BLACK, C, CHAR_HEIGHT, CHAR_WIDTH, pos, invert);
+  strip.show();
+  
+  delay(400);
+
+  createAxe(GREEN, YELLOW);
+  delay(200);
+  allOff();
+  strip.show();
+  delay(200);
+
+  createAxe(YELLOW, GREEN);
+  delay(200);
+  allOff();
+  strip.show();
+  delay(200);
+
 }
 
 void goal()
@@ -116,71 +203,82 @@ void goal()
   bool invert = false;
   int pos = 5;
 
-  CHECKINT
+  
   rowSwipe(GREEN, false);
   rowSwipe(YELLOW, false);
   rowSwipe(BLACK, false);
   
   createChar(c, c2, G, CHAR_HEIGHT, CHAR_WIDTH, pos, invert);
   strip.show();
-  CHECKINT
+  
   delay(500);
   
-  CHECKINT
+  
   rowSwipe(GREEN, false);
   rowSwipe(YELLOW, false);
   rowSwipe(BLACK, false);
 
-  CHECKINT
+  
   createChar(c, c2, O, CHAR_HEIGHT, CHAR_WIDTH, pos, invert);
   strip.show();
-  CHECKINT
+  
   delay(500);
 
   rowSwipe(GREEN, false);
   rowSwipe(YELLOW, false);
   rowSwipe(BLACK, false);
 
-  CHECKINT
+  
   createChar(c, c2, A, CHAR_HEIGHT, CHAR_WIDTH, pos, invert);
   strip.show();
-  CHECKINT
+  
   delay(500);
 
   rowSwipe(GREEN, false);
   rowSwipe(YELLOW, false);
   rowSwipe(BLACK, false);
 
-  CHECKINT
+  
   createChar(c, c2, L, CHAR_HEIGHT, CHAR_WIDTH, pos, invert);
   strip.show();
-  CHECKINT
+  
   delay(500);
+
+  rowSwipe(GREEN, false);
+  rowSwipe(YELLOW, false);
+  rowSwipe(BLACK, false);
+  createAxe(YELLOW, GREEN);
+  delay(1000);
 }
 
 void timbers()
 {
   goTimbers(GREEN, BLACK);
-  CHECKINT
+  
   rowSwipe(GREEN, false);
   colSwipe(YELLOW, false);
-  CHECKINT
+  
   createAxe(GREEN, YELLOW);
-  CHECKINT
+  
   delay(2000);
-  mental(YELLOW, BLACK);
-  CHECKINT
+  mental(RED, BLACK);
   rowSwipe(GREEN, false);
-  CHECKINT
+  
   delay(3000);
   rowSwipe(YELLOW, false);
   createAxe(GREEN, YELLOW);
-  CHECKINT
+  
   delay(3000);
-  // gutTheFish(GREEN, BLACK);
-  // rowSwipe(YELLOW, false);
-  // createAxe(GREEN, YELLOW);
-  // delay(3000);
+
+  beatRSL(RED, BLACK);
+  rowSwipe(YELLOW, false);
+  createAxe(GREEN, YELLOW);
+  delay(3000);
+
+  allOff();
+  strip.show();
+  for(int i=0; i<10; i++)
+    ptfc();
 
 }
 
@@ -240,11 +338,11 @@ void spellGoal(uint32_t c, uint32_t c2)
   bool invert = false;
   for(int i=(CHAR_WIDTH * array_size) + SIZE_HALLOWEEN; i>=0; i--)
   {
-    CHECKINT
+    
     allOff();
     for(int j=array_size; j>=0; j--)
     {
-      CHECKINT
+      
       if(i >= (CHAR_WIDTH * j))
       {
         if(j == 6)
@@ -268,43 +366,43 @@ void spellGoal(uint32_t c, uint32_t c2)
   }
 }
 
-void gutTheFish(uint32_t c, uint32_t c2)
+void beatRSL(uint32_t c, uint32_t c2)
 {
   int array_size = 12;
   bool invert = false;
   for(int i=(CHAR_WIDTH * array_size) + SIZE_HALLOWEEN; i>=0; i--)
   {
-    CHECKINT
+    
     allOff();
     for(int j=array_size; j>=0; j--)
     {
-      CHECKINT
+      
       if(i >= (CHAR_WIDTH * j))
       {
         if(j == 11)
-          createChar(c, c2, G, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+          createChar(c, c2, B, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
         else if(j == 10)
-          createChar(c, c2, U, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
-        else if(j == 9)
-          createChar(c, c2, T, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
-        else if(j == 8)
-          createChar(c, c2, SPACE, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
-        else if(j == 7)
-          createChar(c, c2, T, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
-        else if(j == 6)
-          createChar(c, c2, H, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
-        else if(j == 5)
           createChar(c, c2, E, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
-        else if(j == 4)
+        else if(j == 9)
+          createChar(c, c2, A, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 8)
+          createChar(c, c2, T, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 7)
           createChar(c, c2, SPACE, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
-        else if(j == 3)
-          createChar(c, c2, F, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
-        else if(j == 2)
-          createChar(c, c2, I, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
-        else if(j == 1)
+        else if(j == 6)
+          createChar(c, c2, R, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 5)
           createChar(c, c2, S, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 4)
+          createChar(c, c2, L, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 3)
+          createChar(c, c2, EXC, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 2)
+          createChar(c, c2, EXC, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 1)
+          createChar(c, c2, EXC, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
         else if(j == 0)
-          createChar(c, c2, H, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+          createChar(c, c2, EXC, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
       }
     }
     strip.show();
@@ -318,33 +416,33 @@ void mental(uint32_t c, uint32_t c2)
   bool invert = false;
   for(int i=(CHAR_WIDTH * array_size) + SIZE_HALLOWEEN; i>=0; i--)
   {
-    CHECKINT
+    
     allOff();
     for(int j=array_size; j>=0; j--)
     {
-      CHECKINT
+      
       if(i >= (CHAR_WIDTH * j))
       {
-        if(j == 9)
-          createChar(c, c2, M, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        if(j == 9) 
+          createChar(RED, c2, M, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
         else if(j == 8)
-          createChar(c, c2, E, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+          createChar(BLUE, c2, E, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
         else if(j == 7)
-          createChar(c, c2, N, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+          createChar(GREEN, c2, N, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
         else if(j == 6)
-          createChar(c, c2, T, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+          createChar(YELLOW, c2, T, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
         else if(j == 5)
-          createChar(c, c2, A, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+          createChar(GREEN, c2, A, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
         else if(j == 4)
-          createChar(c, c2, L, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+          createChar(BLUE, c2, L, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
         else if(j == 3)
           createChar(c, c2, SPACE, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
         else if(j == 2)
-          createChar(c, c2, A, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+          createChar(RED, c2, A, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
         else if(j == 1)
-          createChar(c, c2, N, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+          createChar(BLUE, c2, N, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
         else if(j == 0)
-          createChar(c, c2, D, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+          createChar(GREEN, c2, D, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
       }
     }
     strip.show();
@@ -358,11 +456,11 @@ void happyHalloween(uint32_t c, uint32_t c2)
   bool invert = false;
   for(int i=(CHAR_WIDTH * array_size) + SIZE_HALLOWEEN; i>=0; i--)
   {
-    CHECKINT
+    
     allOff();
     for(int j=array_size; j>=0; j--)
     {
-      CHECKINT
+      
       if(i >= (CHAR_WIDTH * j))
       {
         if(j == 15)
@@ -413,11 +511,11 @@ void monsterMarch(uint32_t c, uint32_t c2)
   bool invert = false;
   for(int i=(CHAR_WIDTH * array_size) + 5; i>=0; i--)
   {
-    CHECKINT
+    
     allOff();
     for(int j=array_size; j>=0; j--)
     {
-      CHECKINT
+      
       if(i >= (CHAR_WIDTH * j))
       {
         if(j == 16)
@@ -467,11 +565,11 @@ void howl(uint32_t c, uint32_t c2)
   bool invert = false;
   for(int i=(CHAR_WIDTH * array_size) + SIZE_HALLOWEEN; i>=0; i--)
   {
-    CHECKINT
+    
     allOff();
     for(int j=array_size; j>=0; j--)
     {
-      CHECKINT
+      
       if(i >= (CHAR_WIDTH * j))
       {
         if(j == 4)
@@ -493,53 +591,59 @@ void howl(uint32_t c, uint32_t c2)
 
 void goTimbers(uint32_t c, uint32_t c2)
 {
-  int array_size = 17;
+  int array_size = 20;
   bool invert = false;
   // for(int i=0; i<(CHAR_WIDTH * array_size) + array_size; i++)
   for(int i=(CHAR_WIDTH * array_size) + array_size; i>=0; i--)
   {
-    CHECKINT
+    
     allOff();
     for(int j=array_size - 1; j>=0; j--)
     // for(int j=0; j<array_size; j++)
     {
-      CHECKINT
+      
       if(i >= (CHAR_WIDTH * j))
       {
-        if(j == 16)
+        if(j == 19)
           createChar(c, c2, G, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
-        else if(j == 15)
+        else if(j == 18)
           createChar(c, c2, O, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
-        else if(j == 14)
+        else if(j == 17)
           createChar(c, c2, SPACE, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
-        else if(j == 13)
+        else if(j == 16)
           createChar(c, c2, T, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
-        else if(j == 12)
+        else if(j == 15)
           createChar(c, c2, I, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
-        else if(j == 11)
+        else if(j == 14)
           createChar(c, c2, M, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
-        else if(j == 10)
+        else if(j == 13)
           createChar(c, c2, B, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
-        else if(j == 9)
+        else if(j == 12)
           createChar(c, c2, E, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
-        else if(j == 8)
+        else if(j == 11)
           createChar(c, c2, R, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
-        else if(j == 7)
+        else if(j == 10)
           createChar(c, c2, S, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 9)
+          createChar(c, c2, EXC, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 8)
+          createChar(c, c2, EXC, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+        else if(j == 7)
+          createChar(c, c2, EXC, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
         else if(j == 6)
           createChar(c, c2, SPACE, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
         else if(j == 5)
-          createChar(c, c2, R, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+          createChar(RED, c2, R, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
         else if(j == 4)
-          createChar(c, c2, C, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+          createChar(RED, c2, C, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
         else if(j == 3)
-          createChar(c, c2, T, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+          createChar(RED, c2, T, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
         else if(j == 2)
-          createChar(c, c2, I, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+          createChar(RED, c2, I, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
         else if(j == 1)
-          createChar(c, c2, D, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+          createChar(RED, c2, D, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
         else if(j == 0)
-          createChar(c, c2, EXC, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+          createChar(RED, c2, EXC, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
       }
     }
     strip.show();
@@ -547,35 +651,35 @@ void goTimbers(uint32_t c, uint32_t c2)
   }
 }
 
-// void createWord(uint32_t c, uint32_t c2, bool (*word)[CHAR_HEIGHT][CHAR_WIDTH])
+// void createWord(uint32_t c, uint32_t c2, bool word[][CHAR_HEIGHT][CHAR_WIDTH])
 // {
 //   int array_size = 17;
 //   bool invert = false;
 //   int i = 0;
 //   int j = 0;
-//   // for(int i=0; i<(CHAR_WIDTH * array_size) + array_size; i++)
-//   // for(int i=(CHAR_WIDTH * array_size) + array_size; i>=0; i--)
-//   // {
-//   //   allOff();
-//   //   for(int j=array_size - 1; j>=0; j--)
-//   //   // for(int j=0; j<array_size; j++)
-//   //   {
-//   //     if(i >= (CHAR_WIDTH * j))
-//   //     {
-//   //       if(j == 16)
-//           createChar(c, c2, word[0], CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
-//     //   }
-//     // }
+//   for(int k=0; k<(CHAR_WIDTH * array_size) + array_size; k++)
+//   for(int i=(CHAR_WIDTH * array_size) + array_size; i>=0; i--)
+//   {
+//     allOff();
+//     for(int j=array_size - 1; j>=0; j--)
+//     // for(int j=0; j<array_size; j++)
+//     {
+//       if(i >= (CHAR_WIDTH * j))
+//       {
+//         if(j == 16)
+//           createChar(c, c2, word[k], CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+//       }
+//     }
 //     strip.show();
 //     delay(100);
-//   // }
+//   }
 // }
 
 void createAxe(uint32_t c, uint32_t c2)
 {
   for(int i=0; i<8; i++)
   { //rows
-    CHECKINT
+    
       setPixels(c, c2, AXE[i], AXE_WIDTH, i, 0, false);
   }
   // createChar(c, c2, AXE, CHAR_HEIGHT, CHAR_WIDTH, 0, false);
@@ -586,18 +690,18 @@ void bounce(int cycles)
 {
   for (int j=0; j < cycles; j++)
   { 
-    CHECKINT
+    
     uint32_t c = Wheel(random(255));
     for(int i=VERT-1; i>=0; i--)
     {
-      CHECKINT
+      
       setRow(c, i);
       strip.show();
       delay(10);
     }
     for(int i=0; i<VERT; i++)
     {
-      CHECKINT
+      
       setRow(BLACK, i);
       strip.show();
       delay(10);
@@ -610,18 +714,18 @@ void bounceSide(int cycles)
 {
   for (int j=0; j < cycles; j++)
   { 
-    CHECKINT
+    
     uint32_t c = Wheel(random(255));
     for(int i=HORI-1; i>=0; i--)
     {
-      CHECKINT
+      
       setCol(c, i);
       strip.show();
       delay(10);
     }
     for(int i=0; i<HORI; i++)
     {
-      CHECKINT
+      
       setCol(BLACK, i);
       strip.show();
       delay(10);
@@ -796,9 +900,9 @@ void particles() {
   emitter.stripPosition = random(100) / 100.0;
 
   for (int j=0; j < emitter.numParticles * 10; j++) {  
-    CHECKINT
+    
     for (int i=0; i < emitter.numParticles; i++) {
-      CHECKINT
+      
       particle prt = emitter.updateParticle(i);
       uint16_t pixel = NUM_PIXELS * prt.currentStripPosition;
   
@@ -807,7 +911,7 @@ void particles() {
       uint8_t slot = pixel;
       
       for (int z=0; z < tailLength; z++) { 
-        CHECKINT
+        
         float colorScale = ( (tailLength-z*0.999) / tailLength );
         if (z == 0 && prt.dimmed) {
           colorScale *= 0.25;

@@ -2,7 +2,7 @@
 #include "ParticleEmitter.h"
 
 #define PIN 4
-#define INT_PIN 6
+#define INT1_PIN 6
 #define VERT 8
 #define HORI 8
 #define NUM_PIXELS 64
@@ -17,395 +17,121 @@
 #define WHITE strip.Color(255, 255, 255)
 #define BLACK strip.Color(0, 0, 0)
 
-/*
-0 00 .. 17
-1 18 .. 35 //reverse
-2 36 .. 53
-3 54 .. 71 //reverse
-4 72 .. 89
-5 90 .. 107 //reverse
-6 108 .. 125
-7 126 .. 143 //reverse
-*/
+#define PROG_MAX 3
 
-// Parameter 1 = number of pixels in strip
-// Parameter 2 = pin number (most are valid)
-// Parameter 3 = pixel type flags, add together as needed:
-//   NEO_RGB     Pixels are wired for RGB bitstream
-//   NEO_GRB     Pixels are wired for GRB bitstream
-//   NEO_KHZ400  400 KHz bitstream (e.g. FLORA pixels)
-//   NEO_KHZ800  800 KHz bitstream (e.g. High Density LED strip)
+#define CHECKINT if(intOccured) {return;}
+
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_PIXELS, PIN, NEO_GRB + NEO_KHZ800);
 ParticleEmitter emitter = ParticleEmitter(NUM_PIXELS);
-
-bool A[][CHAR_WIDTH] = {{0, 0, 1, 1, 0, 0},
-                        {0, 1, 1, 1, 1, 0},
-                        {0, 1, 0, 0, 1, 0},
-                        {1, 1, 0, 0, 1, 1},
-                        {1, 1, 1, 1, 1, 1},
-                        {1, 1, 0, 0, 1, 1},
-                        {1, 1, 0, 0, 1, 1},
-                        {1, 1, 0, 0, 1, 1}};
-
-bool B[][CHAR_WIDTH] = {{1, 1, 1, 1, 1, 0},
-                        {1, 1, 1, 1, 1, 0},
-                        {1, 1, 0, 0, 1, 0},
-                        {1, 1, 1, 1, 0, 0},
-                        {1, 1, 1, 1, 0, 0},
-                        {1, 1, 0, 0, 1, 0},
-                        {1, 1, 1, 1, 1, 0},
-                        {1, 1, 1, 1, 1, 0}};
-
-bool C[][CHAR_WIDTH] = {{1, 1, 1, 1, 1, 0},
-                        {1, 1, 1, 1, 1, 0},
-                        {1, 1, 0, 0, 0, 0},
-                        {1, 1, 0, 0, 0, 0},
-                        {1, 1, 0, 0, 0, 0},
-                        {1, 1, 0, 0, 0, 0},
-                        {1, 1, 1, 1, 1, 0},
-                        {1, 1, 1, 1, 1, 0}};
-
-bool D[][CHAR_WIDTH] = {{1, 1, 1, 1, 0, 0},
-                        {1, 1, 1, 1, 1, 0},
-                        {1, 1, 0, 0, 1, 1},
-                        {1, 1, 0, 0, 1, 1},
-                        {1, 1, 0, 0, 1, 1},
-                        {1, 1, 0, 0, 1, 1},
-                        {1, 1, 1, 1, 1, 0},
-                        {1, 1, 1, 1, 0, 0}};
-
-bool E[][CHAR_WIDTH] = {{1, 1, 1, 1, 1, 0},
-                        {1, 1, 1, 1, 1, 0},
-                        {1, 1, 0, 0, 0, 0},
-                        {1, 1, 1, 1, 0, 0},
-                        {1, 1, 1, 1, 0, 0},
-                        {1, 1, 0, 0, 0, 0},
-                        {1, 1, 1, 1, 1, 0},
-                        {1, 1, 1, 1, 1, 0}};
-
-bool G[][CHAR_WIDTH] = {{1, 1, 1, 1, 1, 0},
-                        {1, 1, 1, 1, 1, 0},
-                        {1, 1, 0, 0, 0, 0},
-                        {1, 1, 0, 0, 0, 0},
-                        {1, 1, 0, 1, 1, 0},
-                        {1, 1, 0, 0, 1, 1},
-                        {1, 1, 1, 1, 1, 1},
-                        {1, 1, 1, 1, 1, 0}};
-
-bool I[][CHAR_WIDTH] = {{0, 1, 1, 1, 1, 0},
-                        {0, 1, 1, 1, 1, 0},
-                        {0, 0, 1, 1, 0, 0},
-                        {0, 0, 1, 1, 0, 0},
-                        {0, 0, 1, 1, 0, 0},
-                        {0, 0, 1, 1, 0, 0},
-                        {0, 1, 1, 1, 1, 0},
-                        {0, 1, 1, 1, 1, 0}};
-
-bool H[][CHAR_WIDTH] = {{1, 1, 0, 0, 1, 1},
-                        {1, 1, 0, 0, 1, 1},
-                        {1, 1, 0, 0, 1, 1},
-                        {1, 1, 1, 1, 1, 1},
-                        {1, 1, 1, 1, 1, 1},
-                        {1, 1, 0, 0, 1, 1},
-                        {1, 1, 0, 0, 1, 1},
-                        {1, 1, 0, 0, 1, 1}};
-
-bool L[][CHAR_WIDTH] = {{1, 1, 0, 0, 0, 0},
-                        {1, 1, 0, 0, 0, 0},
-                        {1, 1, 0, 0, 0, 0},
-                        {1, 1, 0, 0, 0, 0},
-                        {1, 1, 0, 0, 0, 0},
-                        {1, 1, 0, 0, 0, 0},
-                        {1, 1, 1, 1, 1, 0},
-                        {1, 1, 1, 1, 1, 0}};
-
-bool M[][CHAR_WIDTH] = {{1, 0, 0, 0, 0, 1},
-                        {1, 1, 0, 0, 1, 1},
-                        {1, 1, 1, 1, 1, 1},
-                        {1, 1, 1, 1, 1, 1},
-                        {1, 1, 1, 1, 1, 1},
-                        {1, 1, 0, 0, 1, 1},
-                        {1, 1, 0, 0, 1, 1},
-                        {1, 1, 0, 0, 1, 1}};
-
-bool N[][CHAR_WIDTH] = {{1, 1, 0, 0, 1, 1},
-                        {1, 1, 0, 0, 1, 1},
-                        {1, 1, 1, 0, 1, 1},
-                        {1, 1, 1, 1, 1, 1},
-                        {1, 1, 1, 1, 1, 1},
-                        {1, 1, 0, 1, 1, 1},
-                        {1, 1, 0, 0, 1, 1},
-                        {1, 1, 0, 0, 1, 1}};
-
-bool O[][CHAR_WIDTH] = {{0, 1, 1, 1, 1, 0},
-                        {0, 1, 1, 1, 1, 0},
-                        {1, 1, 0, 0, 1, 1},
-                        {1, 1, 0, 0, 1, 1},
-                        {1, 1, 0, 0, 1, 1},
-                        {1, 1, 0, 0, 1, 1},
-                        {0, 1, 1, 1, 1, 0},
-                        {0, 1, 1, 1, 1, 0}};
-
-bool P[][CHAR_WIDTH] = {{1, 1, 1, 1, 1, 1},
-                        {1, 1, 1, 1, 1, 1},
-                        {1, 1, 0, 0, 1, 1},
-                        {1, 1, 0, 0, 1, 1},
-                        {1, 1, 1, 1, 1, 1},
-                        {1, 1, 1, 1, 1, 1},
-                        {1, 1, 0, 0, 0, 0},
-                        {1, 1, 0, 0, 0, 0}};
-
-bool R[][CHAR_WIDTH] = {{1, 1, 1, 1, 1, 0},
-                        {1, 1, 1, 1, 1, 0},
-                        {1, 1, 0, 0, 1, 0},
-                        {1, 1, 1, 1, 0, 0},
-                        {1, 1, 1, 1, 0, 0},
-                        {1, 1, 0, 0, 1, 0},
-                        {1, 1, 0, 0, 1, 0},
-                        {1, 1, 0, 0, 1, 0}};
-
-bool S[][CHAR_WIDTH] = {{1, 1, 1, 1, 1, 0},
-                        {1, 1, 1, 1, 1, 0},
-                        {1, 1, 0, 0, 0, 0},
-                        {1, 1, 1, 1, 0, 0},
-                        {1, 1, 1, 1, 1, 0},
-                        {0, 0, 0, 0, 1, 0},
-                        {1, 1, 1, 1, 1, 0},
-                        {1, 1, 1, 1, 0, 0}};
-
-bool T[][CHAR_WIDTH] = {{1, 1, 1, 1, 1, 1},
-                        {1, 1, 1, 1, 1, 1},
-                        {0, 0, 1, 1, 0, 0},
-                        {0, 0, 1, 1, 0, 0},
-                        {0, 0, 1, 1, 0, 0},
-                        {0, 0, 1, 1, 0, 0},
-                        {0, 0, 1, 1, 0, 0},
-                        {0, 0, 1, 1, 0, 0}};
-
-bool W[][CHAR_WIDTH] = {{1, 1, 0, 0, 1, 1},
-                        {1, 1, 0, 0, 1, 1},
-                        {1, 0, 0, 0, 0, 1},
-                        {1, 0, 1, 1, 0, 1},
-                        {1, 0, 1, 1, 0, 1},
-                        {1, 0, 1, 1, 0, 1},
-                        {1, 1, 1, 1, 1, 1},
-                        {1, 1, 1, 1, 1, 1}};
-
-bool Y[][CHAR_WIDTH] = {{1, 1, 0, 0, 1, 1},
-                        {1, 1, 0, 0, 1, 1},
-                        {1, 1, 1, 0, 1, 1},
-                        {1, 1, 1, 1, 1, 1},
-                        {1, 1, 1, 1, 1, 1},
-                        {0, 0, 1, 1, 0, 0},
-                        {0, 0, 1, 1, 0, 0},
-                        {0, 0, 1, 1, 0, 0}};
-
-bool SPACE[][CHAR_WIDTH] = {{0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 0}};
-
-bool BLANK[][8] = { {0, 0, 0, 0, 0, 0, 0, 0},
-                    {0, 0, 0, 0, 0, 0, 0, 0},
-                    {0, 0, 0, 0, 0, 0, 0, 0},
-                    {0, 0, 0, 0, 0, 0, 0, 0},
-                    {0, 0, 0, 0, 0, 0, 0, 0},
-                    {0, 0, 0, 0, 0, 0, 0, 0},
-                    {0, 0, 0, 0, 0, 0, 0, 0},
-                    {0, 0, 0, 0, 0, 0, 0, 0}};
-
-bool LIGHTNING1[][8] = {{1, 1, 1, 0, 0, 0, 0, 0},
-                        {0, 1, 1, 0, 0, 0, 0, 0},
-                        {0, 0, 1, 1, 0, 0, 0, 0},
-                        {0, 0, 1, 1, 0, 0, 0, 0},
-                        {0, 0, 0, 1, 1, 0, 0, 0},
-                        {0, 0, 0, 1, 1, 0, 0, 0},
-                        {0, 0, 0, 0, 1, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 1, 0, 0}};
-
-bool LIGHTNING2[][8] = {{0, 1, 1, 1, 0, 0, 0, 0},
-                        {0, 0, 1, 1, 0, 0, 0, 0},
-                        {0, 0, 0, 1, 1, 0, 0, 0},
-                        {0, 0, 0, 1, 1, 0, 0, 0},
-                        {0, 0, 0, 0, 1, 1, 0, 0},
-                        {0, 0, 0, 0, 1, 1, 0, 0},
-                        {0, 0, 0, 0, 0, 1, 0, 0},
-                        {0, 0, 0, 0, 0, 0, 1, 0}};
-
-bool LIGHTNING3[][8] = {{0, 0, 1, 1, 1, 0, 0, 0},
-                        {0, 0, 0, 1, 1, 0, 0, 0},
-                        {0, 0, 0, 0, 1, 1, 0, 0},
-                        {0, 0, 0, 0, 1, 1, 0, 0},
-                        {0, 0, 0, 0, 0, 1, 1, 0},
-                        {0, 0, 0, 0, 0, 1, 1, 0},
-                        {0, 0, 0, 0, 0, 0, 1, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 1}};
-
-bool RAIN1[][8] = {{1, 1, 1, 0, 0, 1, 0, 0},
-                   {0, 1, 0, 1, 0, 1, 0, 1},
-                   {1, 0, 0, 0, 1, 0, 0, 1},
-                   {0, 1, 1, 0, 0, 0, 1, 0},
-                   {1, 0, 0, 1, 0, 1, 0, 1},
-                   {0, 1, 0, 0, 1, 0, 1, 0},
-                   {1, 0, 1, 1, 1, 1, 1, 1},
-                   {0, 0, 1, 0, 0, 1, 0, 1}};
-
-bool RAIN2[][8] = {{0, 0, 1, 0, 0, 1, 0, 1},
-                   {1, 1, 1, 0, 0, 1, 0, 0},
-                   {0, 1, 0, 1, 0, 1, 0, 1},
-                   {1, 0, 0, 0, 1, 0, 0, 1},
-                   {0, 1, 1, 0, 0, 0, 1, 0},
-                   {1, 0, 0, 1, 0, 1, 0, 1},
-                   {0, 1, 0, 0, 1, 0, 1, 0},
-                   {1, 0, 1, 1, 1, 1, 1, 1}};
-
-bool RAIN3[][8] = {{1, 0, 1, 1, 1, 1, 1, 1},
-                   {0, 0, 1, 0, 0, 1, 0, 1},
-                   {1, 1, 1, 0, 0, 1, 0, 0},
-                   {0, 1, 0, 1, 0, 1, 0, 1},
-                   {1, 0, 0, 0, 1, 0, 0, 1},
-                   {0, 1, 1, 0, 0, 0, 1, 0},
-                   {1, 0, 0, 1, 0, 1, 0, 1},
-                   {0, 1, 0, 0, 1, 0, 1, 0}};
-
-bool RAIN4[][8] = {{0, 1, 0, 0, 1, 0, 1, 0},
-                   {1, 0, 1, 1, 1, 1, 1, 1},
-                   {0, 0, 1, 0, 0, 1, 0, 1},
-                   {1, 1, 1, 0, 0, 1, 0, 0},
-                   {0, 1, 0, 1, 0, 1, 0, 1},
-                   {1, 0, 0, 0, 1, 0, 0, 1},
-                   {0, 1, 1, 0, 0, 0, 1, 0},
-                   {1, 0, 0, 1, 0, 1, 0, 1}};
-
-bool RAIN5[][8] = {{1, 0, 0, 1, 0, 1, 0, 1},
-                   {0, 1, 0, 0, 1, 0, 1, 0},
-                   {1, 0, 1, 1, 1, 1, 1, 1},
-                   {0, 0, 1, 0, 0, 1, 0, 1},
-                   {1, 1, 1, 0, 0, 1, 0, 0},
-                   {0, 1, 0, 1, 0, 1, 0, 1},
-                   {1, 0, 0, 0, 1, 0, 0, 1},
-                   {0, 1, 1, 0, 0, 0, 1, 0}};
-
-bool RAIN6[][8] = {{0, 1, 1, 0, 0, 0, 1, 0},
-                   {1, 0, 0, 1, 0, 1, 0, 1},
-                   {0, 1, 0, 0, 1, 0, 1, 0},
-                   {1, 0, 1, 1, 1, 1, 1, 1},
-                   {0, 0, 1, 0, 0, 1, 0, 1},
-                   {1, 1, 1, 0, 0, 1, 0, 0},
-                   {0, 1, 0, 1, 0, 1, 0, 1},
-                   {1, 0, 0, 0, 1, 0, 0, 1}};
-
-bool RAIN7[][8] = {{1, 0, 0, 0, 1, 0, 0, 1},
-                   {0, 1, 1, 0, 0, 0, 1, 0},
-                   {1, 0, 0, 1, 0, 1, 0, 1},
-                   {0, 1, 0, 0, 1, 0, 1, 0},
-                   {1, 0, 1, 1, 1, 1, 1, 1},
-                   {0, 0, 1, 0, 0, 1, 0, 1},
-                   {1, 1, 1, 0, 0, 1, 0, 0},
-                   {0, 1, 0, 1, 0, 1, 0, 1}};
-
-bool RAIN8[][8] = {{0, 1, 0, 1, 0, 1, 0, 1},
-                   {1, 0, 0, 0, 1, 0, 0, 1},
-                   {0, 1, 1, 0, 0, 0, 1, 0},
-                   {1, 0, 0, 1, 0, 1, 0, 1},
-                   {0, 1, 0, 0, 1, 0, 1, 0},
-                   {1, 0, 1, 1, 1, 1, 1, 1},
-                   {0, 0, 1, 0, 0, 1, 0, 1},
-                   {1, 1, 1, 0, 0, 1, 0, 0}};
-
-bool SUN[][8] =   { {0, 0, 0, 1, 1, 0, 0, 0},
-                    {0, 0, 1, 1, 1, 1, 0, 0},
-                    {0, 0, 1, 1, 1, 1, 0, 0},
-                    {0, 0, 1, 1, 1, 1, 0, 0},
-                    {0, 0, 1, 1, 1, 1, 0, 0},
-                    {0, 0, 1, 1, 1, 1, 0, 0},
-                    {0, 0, 1, 1, 1, 1, 0, 0},
-                    {0, 0, 0, 1, 1, 0, 0, 0}};
-
-bool ALL[][8] =   { {1, 1, 1, 1, 1, 1, 1, 1},
-                    {1, 1, 1, 1, 1, 1, 1, 1},
-                    {1, 1, 1, 1, 1, 1, 1, 1},
-                    {1, 1, 1, 1, 1, 1, 1, 1},
-                    {1, 1, 1, 1, 1, 1, 1, 1},
-                    {1, 1, 1, 1, 1, 1, 1, 1},
-                    {1, 1, 1, 1, 1, 1, 1, 1},
-                    {1, 1, 1, 1, 1, 1, 1, 1}};
 
 // bool HALLOWEEN[9][CHAR_HEIGHT][CHAR_WIDTH] = {H,A,L,L,O,W,E,E,N};
 // bool HAPPY[5][CHAR_HEIGHT][CHAR_WIDTH] = {H,A,P,P,Y};
 int SIZE_HAPPY = 5;
 int SIZE_HALLOWEEN = 9;
 volatile int pixelNum = 0;
-volatile int millisLastInterrupt = 0;
+volatile uint32_t millisLastInterrupt = 0;
+volatile int progNum = -1;
+volatile bool intOccured = false;
+volatile int bounceDelay = 180;
 
-void intHandler()
+void progChangeHandler()
 {
-  Serial.println("int");
+  Serial.println("int0");
+  intOccured = true;
   int m = millis();
-  if(m - millisLastInterrupt < 1000) {
+  Serial.print("millis since last: ");
+  uint32_t sinceLast = m - millisLastInterrupt;
+  Serial.println(sinceLast);
+
+  if(sinceLast > 0 && sinceLast < 250) {
     return;
   }
   millisLastInterrupt = m;
 
-  Serial.print("pixelNum:");
-  Serial.println(pixelNum);
-  pixelNum++;
+  if(progNum >= PROG_MAX)
+    progNum = 0;
+  else
+    progNum++;
+
+  Serial.print("progNum:");
+  Serial.println(progNum);
+
+  if(progNum == 0)
+  {
+    while(true)
+    {
+      intOccured = false;
+      rainbowCycle(100);
+    }
+    // letterTest();
+  }
+  else if(progNum == 1)
+  {
+    intOccured = false; 
+    while(true)
+    {
+      intOccured = false;
+      colorWipe(RED, 100);
+    }
+  }
+  else if(progNum == 2)
+  {
+    intOccured = false;
+    while(true)
+    {
+      intOccured = false;
+      bounce(20);
+    }
+  }
+  else if(progNum == 3)
+  {
+    intOccured = false;
+    while(true)
+    {
+      intOccured = false;
+      particles();
+    }
+  }
+}
+
+void bounceSet()
+{
+  Serial.println("bounceSet");
+  intOccured = true;
+  int m = millis();
+  Serial.print("millis since last: ");
+  uint32_t sinceLast = m - millisLastInterrupt;
+  Serial.println(sinceLast);
+
+  if(sinceLast > 0 && sinceLast < 50) {
+    return;
+  }
+  millisLastInterrupt = m;
+
+  bounceDelay = sinceLast;
+  Serial.print("bounceDelay:");
+  Serial.println(bounceDelay);
+  while(true)
+  {
+    intOccured = false;
+    bounce(20);
+  }
 }
 
 void setup() {
-  pinMode(INT_PIN, INPUT);
+  pinMode(INT1_PIN, INPUT);
   pinMode(PIN, OUTPUT);
 
-  attachInterrupt(INT_PIN, intHandler, FALLING);
+  attachInterrupt(INT1_PIN, bounceSet, FALLING);
 
   Serial.begin(9600);
-  
+
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
-
-  Serial.println("done with setup");
   millisLastInterrupt = millis();
 }
 
 void loop() {
-  Serial.print("digital pin read: ");
-  Serial.println(digitalRead(INT_PIN));
-
-  if (digitalRead(INT_PIN)) {
-    Serial.println("down");
-  }
-
-  uint32_t greyish = strip.Color(20,20,20);
-
-  // rainOnMe(5);
-  // lighting(3);
-  // rainOnMe(5);
-  // lightingCycle(1);
-  // rainOnMe(5);
-  // lightingCycle(1);
-  if(pixelNum % 2 == 0)
-  {
-    Serial.println("BLUE SKY");
-    fadeColor(SUN, BLUE, 0, 0, 255, 255, 255, 0);
-  }
-  else
-  {
-    Serial.println("GREEN SKY");
-    fadeColor(SUN, GREEN, 0, 0, 255, 255, 255, 0);
-  }
-  // delay(5000);
-  // colSwipe(BLUE, false);
-  // rainbowCycle(20);
-
-  // Some example procedures showing how to display to the pixels:
-  // colorWipe(strip.Color(255, 0, 0), 50); // Red
-  // colorWipe(strip.Color(0, 255, 0), 50); // Green
-  // colorWipe(strip.Color(0, 0, 255), 50); // Blue
-  // rainbow(20);
   
 }
 
@@ -419,90 +145,30 @@ void createObj(bool obj[8][8], uint32_t c, uint32_t c2)
   strip.show();
 }
 
-void rainOnMe(int cycles)
+void bounce(int cycles)
 {
-  int animDelay = 50;
-  uint32_t darkBlue = strip.Color(0,0,100);
-  uint32_t greyish = strip.Color(20,20,20);
-
-  for(int i=0; i<cycles; i++)
-  {
-    createObj(RAIN1, darkBlue, greyish);
-    delay(animDelay);
-    createObj(RAIN2, darkBlue, greyish);
-    delay(animDelay);
-    createObj(RAIN3, darkBlue, greyish);
-    delay(animDelay);
-    createObj(RAIN4, darkBlue, greyish);
-    delay(animDelay);
-    createObj(RAIN5, darkBlue, greyish);
-    delay(animDelay);
-    createObj(RAIN6, darkBlue, greyish);
-    delay(animDelay);
-    createObj(RAIN7, darkBlue, greyish);
-    delay(animDelay);
-    createObj(RAIN8, darkBlue, greyish);
-    delay(animDelay);
+  for (int j=0; j < cycles; j++)
+  { 
+    CHECKINT
+    uint32_t c = Wheel(random(255));
+    for(int i=VERT-1; i>=0; i--)
+    {
+      CHECKINT
+      setRow(c, i);
+      strip.show();
+      delay(10);
+    }
+    for(int i=0; i<VERT; i++)
+    {
+      CHECKINT
+      setRow(BLACK, i);
+      strip.show();
+      delay(10);
+    }
+    delay(bounceDelay);
   }
 }
 
-void lightingCycle(int cycles)
-{
-  int animDelay = 70;
-  uint32_t greyish = strip.Color(20,20,20);
-  for(int i=0; i<cycles; i++)
-  {
-    createObj(LIGHTNING1, YELLOW, greyish);
-    delay(animDelay);
-
-    allOff();
-    strip.show();
-    delay(animDelay);
-    
-    createObj(LIGHTNING2, YELLOW, greyish);
-    delay(animDelay);
-
-    allOff();
-    strip.show();
-    delay(animDelay);
-
-    createObj(LIGHTNING3, YELLOW, greyish);
-    delay(animDelay);
-
-    allOff();
-    strip.show();
-    delay(animDelay);
-
-    createObj(LIGHTNING2, YELLOW, greyish);
-    delay(animDelay);
-
-    allOff();
-    strip.show();
-    delay(animDelay);
-
-    createObj(LIGHTNING1, YELLOW, greyish);
-    delay(animDelay);
-
-    allOff();
-    strip.show();
-    delay(animDelay);
-  }
-}
-
-void lighting(int cycles)
-{
-  int animDelay = 70;
-  uint32_t greyish = strip.Color(20,20,20);
-  for(int i=0; i<cycles; i++)
-  {
-    createObj(LIGHTNING2, YELLOW, greyish);
-    delay(animDelay);
-
-    allOff();
-    strip.show();
-    delay(animDelay);
-  }
-}
 
 int calcFadeStep(int from, int to, int numSteps)
 {
