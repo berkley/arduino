@@ -1,6 +1,7 @@
-#include <Adafruit_NeoPixel.h>
-#include "ParticleEmitter.h"
 #include "letters.h"
+#include <Adafruit_NeoPixel.h>
+#include <ParticleEmitter.h>
+
 
 #define PIN 24
 #define INT0_PIN 0
@@ -11,13 +12,15 @@
 #define ORANGE strip.Color(255, 69, 0)
 #define YELLOW strip.Color(255, 255, 0)
 #define LIGHT_YELLOW strip.Color(50, 50, 0)
+#define PURPLE strip.Color(76, 0, 153)
 #define RED strip.Color(255, 0, 0)
 #define BLUE strip.Color(0, 0, 255)
 #define GREEN strip.Color(0, 255, 0)
+#define LIGHT_WHITE strip.Color(25, 25, 25)
 #define WHITE strip.Color(255, 255, 255)
 #define BLACK strip.Color(0, 0, 0)
 
-#define PROG_MAX 5
+#define PROG_MAX 6
 
 /*
 0 00 .. 17
@@ -123,6 +126,15 @@ void progChangeHandler()
       particles();
     }
   }
+  else if(progNum == 6)
+  {
+    while(true)
+    {
+      intOccured = false;
+      sparkle(LIGHT_WHITE, PURPLE);
+      delay(50);
+    }
+  }
 }
 
 void setup() {
@@ -140,8 +152,18 @@ void setup() {
 
 void loop() {
   if(!startupDone)
-    progChangeHandler();
-  
+    progChangeHandler();  
+}
+
+void sparkle(uint32_t c, uint32_t c2)
+{
+  setAll(c);
+  for(int i=0; i<10; i++)
+  {
+    int addr = random(VERT * HORI);
+    strip.setPixelColor(addr, c2);
+  }
+  strip.show();
 }
 
 void ptfc()
@@ -359,6 +381,26 @@ void spellGoal(uint32_t c, uint32_t c2)
           createChar(c, c2, EXC, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
         else if(j == 0)
           createChar(c, c2, EXC, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
+      }
+    }
+    strip.show();
+    delay(100);
+  }
+}
+
+void tree(uint32_t c, uint32_t c2)
+{
+  int array_size = 1;
+  bool invert = false;
+  for(int i=(CHAR_WIDTH * array_size) + SIZE_HALLOWEEN; i>=0; i--)
+  {
+    allOff();
+    for(int j=array_size; j>=0; j--)
+    {
+      if(i >= (CHAR_WIDTH * j))
+      {
+        if(j == 0)
+          createChar(c, c2, TREE, CHAR_HEIGHT, CHAR_WIDTH, i - (CHAR_WIDTH * j), invert);
       }
     }
     strip.show();
@@ -778,6 +820,15 @@ void allOff()
   setRow(strip.Color(0, 0, 0), 5);
   setRow(strip.Color(0, 0, 0), 6);
   setRow(strip.Color(0, 0, 0), 7);
+}
+
+void setAll(uint32_t c)
+{
+  for(int i=0; i<HORI; i++)
+  {
+    setCol(c, i);
+  }
+  strip.show();
 }
 
 void setRow(uint32_t c, uint8_t row)
