@@ -3,11 +3,11 @@
 #include <ParticleEmitter.h>
 
 
-#define PIN 24
+#define PIN 4
 #define INT0_PIN 0
-#define VERT 8
-#define HORI 18
-#define NUM_PIXELS 144
+#define VERT 12
+#define HORI 8
+#define NUM_PIXELS 91
 
 #define ORANGE strip.Color(255, 69, 0)
 #define YELLOW strip.Color(255, 255, 0)
@@ -88,10 +88,8 @@ void progChangeHandler()
       int del = 50;
       int iterations = 10;
 
-      rainbowCycle(5);
-
-      // candyCane(iterations, MAX_VAL, step, 10000);
-      // christmasFade(iterations, MAX_VAL, step, del);
+      candyCane(iterations, MAX_VAL, step, 10000);
+      christmasFade(iterations, MAX_VAL, step, del);
     }
     // letterTest();
   }
@@ -109,14 +107,8 @@ void progChangeHandler()
       int del = 50;
       int iterations = 10;
 
-      // candyCane(iterations, MAX_VAL, step, 10000);
-      // christmasFade(iterations, MAX_VAL, step, del);
-
-      colorWipe(strip.Color(255, 0, 0), 10); // Red
-      colorWipe(strip.Color(0, 255, 0), 10); // Green
-      colorWipe(strip.Color(0, 0, 255), 10); // Blue
-      colorWipe(strip.Color(0, 100, 100), 10);
-      colorWipe(strip.Color(100, 100, 100), 10);
+      candyCane(iterations, MAX_VAL, step, 10000);
+      christmasFade(iterations, MAX_VAL, step, del);
     }
   }
   else if(progNum == 2)
@@ -124,10 +116,7 @@ void progChangeHandler()
     while(true)
     {
       intOccured = false; 
-      rowSwipe(GREEN, false);
-      colSwipe(YELLOW, false);
-      rowSwipe(PURPLE, false);
-      colSwipe(ORANGE, false);
+      ptfc();
     }
   }
   else if(progNum == 3)
@@ -135,9 +124,8 @@ void progChangeHandler()
     while(true)
     {
       intOccured = false;
-      // mental(GREEN, BLACK);
-      rainbowCycle(10);
-      // rowSwipe(GREEN, false);
+      mental(GREEN, BLACK);
+      rowSwipe(GREEN, false);
       delay(2000);
     }
   }
@@ -171,7 +159,7 @@ void progChangeHandler()
     while(true)
     {
       intOccured = false;
-      sparkle(LIGHT_WHITE, GREEN);
+      happyBirthdayStefan(Wheel(random(200)), BLACK);
       delay(50);
     }
   }
@@ -181,7 +169,7 @@ void setup() {
   pinMode(INT0_PIN, INPUT);
   pinMode(PIN, OUTPUT);
 
-  attachInterrupt(INT0_PIN, progChangeHandler, FALLING);
+  // attachInterrupt(INT0_PIN, progChangeHandler, FALLING);
 
   Serial.begin(9600);
 
@@ -191,8 +179,14 @@ void setup() {
 }
 
 void loop() {
-  if(!startupDone)
-    progChangeHandler();  
+  // if(!startupDone)
+  //   progChangeHandler();  
+  rainbowCycle(20);
+  for(int i=0; i<20; i++)
+  {
+    particles();
+  }
+  
 }
 
 void happyBirthdayStefan(uint32_t c, uint32_t c2)

@@ -1,9 +1,9 @@
 #include <OctoWS2811.h>
 
-#define HORI 16
-#define VERT 16
+#define HORI 41
+#define VERT 8
 
-const int ledsPerStrip = 32;
+const int ledsPerStrip = 41;
 
 DMAMEM int displayMemory[ledsPerStrip*6];
 int drawingMemory[ledsPerStrip*6];
@@ -24,8 +24,10 @@ void setup() {
 #define PINK   0xFF1088
 #define ORANGE 0xE05800
 #define WHITE  0xFFFFFF
-#define LIGHT_WHITE 0x191919
+#define LIGHT_WHITE 0x202020
 #define PURPLE  0x4C0099
+#define BLACK  0x000000
+#define LIGHT_BLUE 0x0000A0
 
 void loop() 
 {
@@ -34,16 +36,16 @@ void loop()
   // uncomment for voltage controlled speed
   // millisec = analogRead(A9) / 40;
 
-  // colorWipe(RED, microsec);
-  // colorWipe(GREEN, microsec);
-  // colorWipe(BLUE, microsec);
-  // colorWipe(YELLOW, microsec);
-  // colorWipe(PINK, microsec);
-  // colorWipe(ORANGE, microsec);
-  // colorWipe(WHITE, microsec);
+  colorWipe(RED, microsec);
+  colorWipe(GREEN, microsec);
+  colorWipe(BLUE, microsec);
+  colorWipe(YELLOW, microsec);
+  colorWipe(PINK, microsec);
+  colorWipe(ORANGE, microsec);
+  colorWipe(WHITE, microsec);
 
-  sparkle(GREEN, RED);
-  delay(20);
+  // sparkle(LIGHT_WHITE, PURPLE);
+  // delay(30);
 }
 
 void colorWipe(int color, int wait)
