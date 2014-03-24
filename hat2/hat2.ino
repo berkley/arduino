@@ -1,6 +1,6 @@
 #include <OctoWS2811.h>
 #include "math.h"
-#include <ParticleEmitter.h>
+#include <LEDStripParticleEmitter.h>
 // #include <Audio.h>
 // #include <Wire.h>
 // #include <SD.h>
@@ -18,7 +18,7 @@ int drawingMemory[ledsPerStrip*6];
 const int config = WS2811_GRB | WS2811_800kHz;
 
 OctoWS2811 leds(ledsPerStrip, displayMemory, drawingMemory, config);
-ParticleEmitter emitter = ParticleEmitter(leds.numPixels());
+ParticleEmitter emitter = ParticleEmitter(leds.numPixels(), 0x999999);
 
 void setup() {
   Serial.begin(9600);
@@ -59,30 +59,30 @@ void loop()
   // colorWipe(ORANGE, microsec);
   // colorWipe(WHITE, microsec);
 
-  for(int i=0; i<200; i++)
-  {
-    sparkle(BLACK, PURPLE);
-    delay(30);
-  }
+  // for(int i=0; i<200; i++)
+  // {
+  //   sparkle(BLACK, PURPLE);
+  //   delay(30);
+  // }
 
-  for(int i=0; i<10; i++)
-  {
-    colorfulWipe();
-  }
+  // for(int i=0; i<10; i++)
+  // {
+  //   colorfulWipe();
+  // }
 
-  rainbowCycle(5);
+  // rainbowCycle(5);
 
-  for(int i=0; i<200; i++)
-  {
-    followMe();
-  }
+  // for(int i=0; i<200; i++)
+  // {
+  //   followMe();
+  // }
 
-  setAll(BLACK);
+  // setAll(BLACK);
 
-  for(int i=0; i<2; i++)
-  {
-    particles();
-  }
+  // for(int i=0; i<2; i++)
+  // {
+     particles();
+  // }
   
   
 }
@@ -200,11 +200,12 @@ void particles() {
     
     for (int i=0; i < emitter.numParticles; i++) {
       
-      particle prt = emitter.updateParticle(i);
-      uint16_t pixel = leds.numPixels() * prt.currentStripPosition;
+      Particle prt = emitter.updateParticle(i, true);
+      uint16_t pixel = leds.numPixels() * emitter.stripPosition;
   
       // High velocity particles have longer tails
-      uint8_t tailLength = abs(prt.velocity * 5);
+       uint8_t tailLength = abs(emitter.maxVelocity * 5);
+      // uint8_t tailLength = 10;
       uint8_t slot = pixel;
 
       
@@ -219,7 +220,7 @@ void particles() {
                                               prt.blueColor*colorScale, 
                                               prt.greenColor*colorScale));
 
-        slot = pixel + ((z+1) * (prt.velocity > 0 ? -1 : 1));
+        slot = pixel + ((z+1) * (emitter.maxVelocity > 0 ? -1 : 1));
       }
       Serial.println(slot);
       leds.setPixel(slot, colorFromRGB(0,0,0));
@@ -227,6 +228,7 @@ void particles() {
     leds.show();
     delay(50);
   }
+  // emitter.begin();
 }
 
 int getPixelAddress(int row, int col)
