@@ -8,11 +8,12 @@ var emitter = new events.EventEmitter();
 var currentPixel = 0;
 var currentTimeout = 10;
 
-var actualPixPerChannel = 48;
-var expectedPixPerChannel = 64;
+// var actualPixPerChannel = 48;
+// var expectedPixPerChannel = 64;
+var numRows = 24;
 var pixPerRow = 16;
-var numChannels = 8;
-var numPixels = actualPixPerChannel * 8;
+var numPixels = (pixPerRow * numRows);
+var PixelUtils = new require('./pixel-utils')(client, pixPerRow, numRows);
 
 var count = function()
 {
@@ -29,53 +30,23 @@ var count = function()
         {
             
 
-            client.setPixel(tpix(pixel), red, green, blue);
+            PixelUtils.setPixel(pixel, red, green, blue);
             // console.log("newpix: ", newpix);
             // console.log("slot: ", slot);
         }
         else
         {
             // console.log("pixel: ", pixel);
-            client.setPixel(tpix(pixel), 0, 0, 0);
+            PixelUtils.setPixel(pixel, 0, 0, 0);
         }
     }
 
     slot++;
     if(slot > numPixels)
         slot = 0;
-    client.writePixels();
+
+    PixelUtils.refresh();
 }
-
-function tpix(addr) {
-    var actualPixPerChannel = 48;
-    var expectedPixPerChannel = 64;
-    var pixPerRow = 16;
-    var numChannels = 8;
-    var numPixels = actualPixPerChannel * 8;
-
-
-    var mod = addr % actualPixPerChannel;
-    var base = addr - mod;
-    var newaddr;
-    var upperBounds = actualPixPerChannel - pixPerRow - 1;
-    var addrMinusBase = addr - base;
-
-    if(addrMinusBase >= 0 && addrMinusBase < pixPerRow)
-    {
-        newaddr = addrMinusBase;
-    }
-    if(addrMinusBase >= pixPerRow && addrMinusBase <= upperBounds)
-    { //invert
-        var offset = addrMinusBase - pixPerRow;
-        newaddr = upperBounds - offset;
-    }
-    if(addrMinusBase > upperBounds)
-    {
-        newaddr = addrMinusBase;
-    }
-    
-    return newaddr + base;
-};
 
 var theta = 0;
 var thetaDelta = 0.001;
