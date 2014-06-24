@@ -22,9 +22,9 @@ var count = function()
     var millis = new Date().getTime();
     for (var pixel = 0; pixel < numPixels; pixel++)
     {
-        var red = 255;
-        var blue = 255;
-        var green = 255;
+        var red = PixelUtils.randomColor();
+        var blue = PixelUtils.randomColor();
+        var green = PixelUtils.randomColor();
 
         if(pixel == slot)
         {

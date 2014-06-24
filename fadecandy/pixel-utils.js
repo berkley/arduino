@@ -13,43 +13,37 @@ module.exports = function(opcClient, WIDTH, HEIGHT)
 
 	function getPixelAddress(row, col)
 	{
-		var addr;
-		if(row % 2 == 0)
-		{
-			addr = (row * WIDTH) + col;
-		}
-		else
-		{
-			var offset = WIDTH - ((col * 2) + 1) ;
-			addr = ((row * WIDTH) + col) + offset;
-		}
-
-		return addr;
+		return (row * WIDTH) + col;
 	}
 
-	function setColumn(c, col)
+	function setColumn(column, red, green, blue)
 	{
 		for(var i=0; i<HEIGHT; i++)
 		{ 
-			opcClient.setPixelColor(getPixelAddress(i, col), c);
+			this.setPixel(getPixelAddress(i, column), red, green, blue);
 		}
 	}
 
-	function setRow(c, row)
+	function setRow(row, red, green, blue)
 	{
 		for(var i=0; i<WIDTH; i++)
 		{
-			opcClient.setPixelColor(i + (row * WIDTH), c);
+			this.setPixel(i + (row * WIDTH), red, green, blue);
 		}
 	}
 
 	// Fill the dots one after the other with a color
-	function colorWipe(c, wait) {
-		for(var i=0; i<this.numPixels(); i++) {
-			opcClient.setPixelColor(i, c);
-			opcClient.show();
-			delay(wait);
+	function colorWipe(wait, red, green, blue) {
+		for(var i=0; i<numPixels(); i++) {
+			this.setPixel(i, red, green, blue);
+
+			// if (wait > 0) {
+			// 	refresh();
+			// 	// delay(wait);
+			// }
 		}
+
+		refresh();
 	}
 
 	function numPixels() {
@@ -81,11 +75,17 @@ module.exports = function(opcClient, WIDTH, HEIGHT)
 	    return newaddr + base;
 	};
 
+	function randomColor(max) {
+		max = max || 255.0;
+		return parseInt((max/2.0) * Math.random() + (max/2.0));
+	}
+
 	return {
 		setPixel: setPixel,
 		setRow: setRow,
 		setColumn: setColumn,
 		colorWipe: colorWipe,
-		refresh: refresh
+		refresh: refresh,
+		randomColor: randomColor
 	};
 }
