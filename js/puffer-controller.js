@@ -1,8 +1,24 @@
 var five = require("johnny-five");
-var webSocket = require('ws');
 
-//websocket for the LeapMotion
-var ws = new webSocket('ws://127.0.0.1:6437');
+var WebSocketServer = require('ws').Server
+  , wss = new WebSocketServer({port: 8080});
+wss.on('connection', function(ws) {
+    ws.on('message', function(message) {
+        console.log('received: %s', message);
+        var json = JSON.parse(message);
+        P1_ON = json.P1_ON;
+        P2_ON = json.P2_ON;
+        P3_ON = json.P3_ON;
+        P4_ON = json.P4_ON;
+        P5_ON = json.P5_ON;
+        SEQ_123 = json.SEQ_123;
+        SEQ_321 = json.SEQ_321;
+        SEQ_CIRCLE = json.SEQ_CIRCLE;
+        SEQ_ALL = json.SEQ_ALL;
+        ws.send(message);
+    });
+    
+});
 
 var PORT_P1 = 8;
 var PORT_P2 = 9;
@@ -13,6 +29,8 @@ var PORT_P5 = 12;
 var P1_ON = 0;
 var P2_ON = 0;
 var P3_ON = 0;
+var P4_ON = 0;
+var P5_ON = 0;
 var SEQ_123 = 0;
 var SEQ_321 = 0;
 var SEQ_ALL = 0;
@@ -20,7 +38,7 @@ var SEQ_CIRCLE = 0;
 
 //set this to 1 when the arduino is connected, 
 //set to 0 for debugging without and arduino
-var BOARD_CONNECTED = 0;
+var BOARD_CONNECTED = 1;
 
 exports.puffMulti = function(p1, p2, p3, p4, p5) {
 	P1_ON = 0;
@@ -46,6 +64,7 @@ exports.puffMulti = function(p1, p2, p3, p4, p5) {
 if(BOARD_CONNECTED)
 {
 five.Board().on("ready", function() {
+	console.log("Board is ready");
 	var that = this;
 	this.pinMode(PORT_P1, 1);
 	this.pinMode(PORT_P2, 1);
@@ -154,6 +173,22 @@ five.Board().on("ready", function() {
 	  		}, delay);
 	  		P3_ON = 0;
 	  	}
+	  	else if(P4_ON)
+	  	{
+	  		PMulti(0,0,0,1,0);
+	  		setTimeout(function(){
+	  			PMulti(0,0,0,0,0);
+	  		}, delay);
+	  		P4_ON = 0;
+	  	}
+	  	else if(P5_ON)
+	  	{
+	  		PMulti(0,0,0,0,1);
+	  		setTimeout(function(){
+	  			PMulti(0,0,0,0,0);
+	  		}, delay);
+	  		P5_ON = 0;
+	  	}
 	  	else if(SEQ_123)
 	  	{
 	  		console.log("seq 123");
@@ -243,96 +278,98 @@ five.Board().on("ready", function() {
 }
 
 var numFingers;
+setTimeout(function(){SEQ_123 = 1; SEQ_123 = 1;}, 5000);
 
-ws.on('message', function(data, flags) {
-	//controls:
-	//1 pointable and swipe up: fire puffer 1
-	//2 pointables and swipe up: fire puffer 2
-	//3 pointables and swipe up: fire puffer 3
-	//4 pointables and swipe up: fire all puffers
-	//swipe left: fire puffers 1, 2, 3 in sequence
-	//swipe right: fire puffers 3, 2, 1 in sequence
+// ws.on('message', function(data, flags) {
+// 	//controls:
+// 	//1 pointable and swipe up: fire puffer 1
+// 	//2 pointables and swipe up: fire puffer 2
+// 	//3 pointables and swipe up: fire puffer 3
+// 	//4 pointables and swipe up: fire all puffers
+// 	//swipe left: fire puffers 1, 2, 3 in sequence
+// 	//swipe right: fire puffers 3, 2, 1 in sequence
 
 
-    // console.log(data);
-    var json = JSON.parse(data);
-    // if(json.gestures && json.gestures.length > 0)
-	   //  console.log("json.gestures:", json.gestures, "length:", json.gestures.length, "\n");
+//     // console.log(data);
+//     var json = JSON.parse(data);
+//     // if(json.gestures && json.gestures.length > 0)
+// 	   //  console.log("json.gestures:", json.gestures, "length:", json.gestures.length, "\n");
 
-	if(json.gestures && json.gestures.length > 0)
-	{
-		var g = json.gestures[0];
+// 	if(json.gestures && json.gestures.length > 0)
+// 	{
+// 		var g = json.gestures[0];
 
-		if(g.type == 'swipe' && 
-		   g.state == 'start')
-		{ //start with 0 fingers
-			numFingers = 0;
-		}
+// 		if(g.type == 'swipe' && 
+// 		   g.state == 'start')
+// 		{ //start with 0 fingers
+// 			numFingers = 0;
+// 		}
 
-		// if(g.type == 'circle' && 
-		//    g.state == 'stop')
-		// {
-		// 	SEQ_CIRCLE = 1; 
-		// }
+// 		// if(g.type == 'circle' && 
+// 		//    g.state == 'stop')
+// 		// {
+// 		// 	SEQ_CIRCLE = 1; 
+// 		// }
 
-		if(g.type == 'swipe' && 
-		   g.state == 'update')
-		{  //check how many fingers each update is recognizing
-		   //increment if needed.
-			if(!numFingers || json.gestures.length > numFingers)
-			{
-				numFingers = json.gestures.length;
-			}
-		}
+// 		if(g.type == 'swipe' && 
+// 		   g.state == 'update')
+// 		{  //check how many fingers each update is recognizing
+// 		   //increment if needed.
+// 			if(!numFingers || json.gestures.length > numFingers)
+// 			{
+// 				numFingers = json.gestures.length;
+// 			}
+// 		}
 
-		if(g.type == 'swipe' &&
-		   g.state == 'stop')
-		{
-			var swipeStart = g.startPosition;
-			var swipeEnd = g.position;
-			var deltaX = swipeEnd[0] - swipeStart[0];
-			var deltaY = swipeEnd[1] - swipeStart[1];
+// 		if(g.type == 'swipe' &&
+// 		   g.state == 'stop')
+// 		{
+// 			var swipeStart = g.startPosition;
+// 			var swipeEnd = g.position;
+// 			var deltaX = swipeEnd[0] - swipeStart[0];
+// 			var deltaY = swipeEnd[1] - swipeStart[1];
 
-			if(Math.abs(deltaX) > Math.abs(deltaY))
-			{ //swipe left/right
-				if(deltaX < 0)
-				{ //left
-					console.log("swipe left with ", numFingers, " fingers");
-					SEQ_321 = 1;
-				}
-				else
-				{ //right
-					console.log("swipe right with ", numFingers, " fingers");
-					SEQ_123 = 1;
-				}
-			}
-			else
-			{ //swipe up/down
-				if(deltaY < 0)
-				{ //down
-					console.log("swipe down with ", numFingers, " fingers");
-				}
-				else
-				{ //up
-					console.log("swipe up with ", numFingers, " fingers");
-					if(numFingers == 1)
-					{
-						P1_ON = 1;
-					}
-					else if(numFingers == 2)
-					{
-						P2_ON = 1;
-					}
-					else if(numFingers == 3)
-					{
-						P3_ON = 1;
-					}
-					else if(numFingers == 4)
-					{
-						SEQ_ALL = 1;
-					}
-				}
-			}
-		}
-	}
-});
+// 			if(Math.abs(deltaX) > Math.abs(deltaY))
+// 			{ //swipe left/right
+// 				if(deltaX < 0)
+// 				{ //left
+// 					console.log("swipe left with ", numFingers, " fingers");
+// 					SEQ_321 = 1;
+// 				}
+// 				else
+// 				{ //right
+// 					console.log("swipe right with ", numFingers, " fingers");
+// 					SEQ_123 = 1;
+// 				}
+// 			}
+// 			else
+// 			{ //swipe up/down
+// 				if(deltaY < 0)
+// 				{ //down
+// 					console.log("swipe down with ", numFingers, " fingers");
+// 				}
+// 				else
+// 				{ //up
+// 					console.log("swipe up with ", numFingers, " fingers");
+// 					if(numFingers == 1)
+// 					{
+// 						P1_ON = 1;
+// 					}
+// 					else if(numFingers == 2)
+// 					{
+// 						P2_ON = 1;
+// 					}
+// 					else if(numFingers == 3)
+// 					{
+// 						P3_ON = 1;
+// 					}
+// 					else if(numFingers == 4)
+// 					{
+// 						SEQ_ALL = 1;
+// 					}
+// 				}
+// 			}
+// 		}
+// 	}
+// });
+

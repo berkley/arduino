@@ -10,7 +10,7 @@ var currentTimeout = 10;
 
 // var actualPixPerChannel = 48;
 // var expectedPixPerChannel = 64;
-var numRows = 24;
+var numRows = 72;
 var pixPerRow = 16;
 var numPixels = (pixPerRow * numRows);
 var PixelUtils = new require('./pixel-utils')(client, pixPerRow, numRows);
@@ -52,7 +52,7 @@ var theta = 0;
 var thetaDelta = 0.001;
 var slot = 0;
 
-setInterval(count, 100);
+setInterval(count, 10);
 // var millis = new Date().getTime();
 // var t = 65 * 0.2 + millis * 0.002;
 // // setInterval(count, 30);

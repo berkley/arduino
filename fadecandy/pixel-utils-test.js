@@ -5,7 +5,7 @@ var client = new OPC('localhost', 7890);
 var events = require('events');
 var emitter = new events.EventEmitter();
 
-var HEIGHT = 24;
+var HEIGHT = 72;
 var WIDTH = 16;
 var numPixels = (WIDTH * HEIGHT);
 var PixelUtils = new require('./pixel-utils')(client, WIDTH, HEIGHT);
@@ -45,19 +45,40 @@ var colorWipes = function() {
     PixelUtils.colorWipe(10, PixelUtils.randomColor(), PixelUtils.randomColor(), PixelUtils.randomColor());
 }
 
+var BPM = 120;
+
+
+
+var fakeVU = function() {
+
+    var power = HEIGHT;
+    var color = PixelUtils.randomColor();
+
+    for (var row = HEIGHT-1; row >= 0; row--) {
+        PixelUtils.setRow(row, color, color, color);
+    }
+
+    PixelUtils.refresh();
+
+    // TODO: handle loop timing better
+}
+
 var program = 0;
 
 var allPrograms = [
     fillColumns,
     fillColumns,
     fillRows,
-    fillRows
+    fillRows,
+    colorWipes,
+    fakeVU
 ];
 
 function nextProgram() {
     PixelUtils.colorWipe(0, 0,0,0);
     PixelUtils.refresh();
     console.log("program", program);
+
     allPrograms[program++]();
     if (program >= allPrograms.length) { program = 0; } 
 }

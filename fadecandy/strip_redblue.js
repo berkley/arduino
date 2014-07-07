@@ -6,7 +6,7 @@ var events = require('events');
 var emitter = new events.EventEmitter();
 var currentPixel = 0;
 var currentTimeout = 10;
-var numPixels = 48 * 8;
+var numPixels = 72 * 16;
 
 // var fire  = function() {
 
@@ -38,10 +38,15 @@ var draw = function()
 
     for (var pixel = 0; pixel < numPixels; pixel++)
     {
+        // var t = pixel * 0.2 + millis * 0.002;
+        // var red = 128 + 96 * Math.sin(t + 0.1);
+        // var green = 128 + 96 * Math.sin(t + 0.6);
+        // var blue = 128 + 96 * Math.sin(t + 0.1);
+
         var t = pixel * 0.2 + millis * 0.002;
-        var red = 128 + 96 * Math.sin(t + 0.1);
-        var green = 128 + 96 * Math.sin(t + 0.6);
-        var blue = 128 + 96 * Math.sin(t + 0.1);
+        var red = 128 + 96 * Math.sin(t);
+        var green = 128 + 96 * Math.sin(t + 0.1);
+        var blue = 128 + 96 * Math.sin(t + 0.3);
 
         client.setPixel(tpix(pixel), red, green, blue);
         // client.setPixel(pixel, red, green, blue);

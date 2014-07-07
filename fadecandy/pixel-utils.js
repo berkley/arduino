@@ -34,7 +34,8 @@ module.exports = function(opcClient, WIDTH, HEIGHT)
 
 	// Fill the dots one after the other with a color
 	function colorWipe(wait, red, green, blue) {
-		for(var i=0; i<numPixels(); i++) {
+		var count = numPixels();
+		for(var i=0; i<count; i++) {
 			this.setPixel(i, red, green, blue);
 
 			// if (wait > 0) {
