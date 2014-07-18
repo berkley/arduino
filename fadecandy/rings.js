@@ -14,11 +14,18 @@ var simplex = new SimplexNoise(Math.random);
 var webSocket = require('ws');
 
 // websocket for the fire control
-var ws = new webSocket('ws://127.0.0.1:8080');
+
 
 var OPC = new require('./opc');
 var model = OPC.loadModel(process.argv[2] || './layouts/grid32x16z.json');
 var client = new OPC('localhost', 7890);
+
+//turn off for debugging without a fire controller
+var PUFFERS_ON = false;
+var ws;
+if(PUFFERS_ON) {
+    ws = new webSocket('ws://127.0.0.1:8080');
+}
 
 var noiseScale = 0.02;
 var speed = 0.002;
@@ -128,6 +135,8 @@ function draw()
 }
 
 function puff() {
+    if(!PUFFERS_ON)
+        return;
 
     console.log("!!!!!Sending fire command");
 
@@ -150,6 +159,9 @@ function puff() {
         var json = JSON.parse(data);
         console.log("websocket msg rcvd: ", json);
         puffing = false;
+        var ranTO = Math.random() * 20 * 1000;
+        console.log("puffing again in ", ranTO, " ms");
+        setTimeout(puff, ranTO);
     });
 
     ws.on('open', function() {
@@ -161,4 +173,4 @@ function puff() {
 };
 
 setInterval(draw, 10);
-setInterval(puff, 5000);
+setTimeout(puff, 5000);

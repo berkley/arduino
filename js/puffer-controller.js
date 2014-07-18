@@ -147,7 +147,7 @@ five.Board().on("ready", function() {
 
 	
 	var val = 0;
-	var delay = 250;
+	var delay = 100;
 	this.loop( 100, function() {
 	  	if(P1_ON) 
 	  	{
