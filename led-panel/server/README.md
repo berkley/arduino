@@ -1,0 +1,1 @@
+This server provides REST and WebSocket connects to the LED panel configured by a running fadecandy server.
