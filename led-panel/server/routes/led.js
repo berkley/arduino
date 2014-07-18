@@ -18,6 +18,14 @@ var setXYPixel = function(x, y, r, g, b) {
 	pixUtil.setXYPixel(x, y, r, g, b);
 };
 
+var setRow = function(row, r, g, b) {
+	pixUtil.setRow(row, r, g, b);
+};
+
+var setCol = function(col, r, g, b) {
+	pixUtil.setColumn(col, r, g, b);
+};
+
 var latch = function() {
 	console.log("latching pixels");
 	pixUtil.refresh();
@@ -74,6 +82,48 @@ exports.latchXYPixel = function(req, res) {
 	var g = params.g;
 	var b = params.b;
 	setXYPixel(x, y, r, g, b);
+	latch();
+	res.send("{status:ok}");
+};
+
+exports.setRow = function(req, res) {
+	var params = req.params;
+	var row = params.row;
+	var r = params.r;
+	var g = params.g;
+	var b = params.b;
+	setRow(row, r, g, b);
+	res.send("{status:ok}");
+};
+
+exports.latchRow = function(req, res) {
+	var params = req.params;
+	var row = params.row;
+	var r = params.r;
+	var g = params.g;
+	var b = params.b;
+	setRow(row, r, g, b);
+	latch();
+	res.send("{status:ok}");
+};
+
+exports.setCol = function(req, res) {
+	var params = req.params;
+	var col = params.col;
+	var r = params.r;
+	var g = params.g;
+	var b = params.b;
+	setCol(col, r, g, b);
+	res.send("{status:ok}");
+};
+
+exports.latchCol = function(req, res) {
+	var params = req.params;
+	var col = params.col;
+	var r = params.r;
+	var g = params.g;
+	var b = params.b;
+	setCol(col, r, g, b);
 	latch();
 	res.send("{status:ok}");
 };
