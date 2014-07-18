@@ -6,6 +6,12 @@ module.exports = function(opcClient, WIDTH, HEIGHT)
 		opcClient.setPixel(tpix(addr), red, green, blue);
 	}
 
+	function setXYPixel(x, y, red, green, blue)
+	{
+		var addr = getPixelAddress(x, y);
+		setPixel(addr, red, green, blue);
+	}
+
 	function refresh()
 	{
 		opcClient.writePixels();		
@@ -13,7 +19,9 @@ module.exports = function(opcClient, WIDTH, HEIGHT)
 
 	function getPixelAddress(row, col)
 	{
-		return (row * WIDTH) + col;
+		var rowWidth = parseInt(row) * WIDTH;
+		var add = rowWidth + parseInt(col);
+		return add;
 	}
 
 	function setColumn(column, red, green, blue)
@@ -91,6 +99,7 @@ module.exports = function(opcClient, WIDTH, HEIGHT)
 
 	return {
 		setPixel: setPixel,
+		setXYPixel: setXYPixel,
 		setRow: setRow,
 		setColumn: setColumn,
 		colorWipe: colorWipe,

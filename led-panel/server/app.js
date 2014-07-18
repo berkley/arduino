@@ -24,7 +24,8 @@ app.get('/pixel/set/:address/:r/:g/:b', led.setSerialPixel);
 app.get('/pixel/latch/:address/:r/:g/:b', led.latchSerialPixel);
 app.get('/pixel/latch/off', led.latchAllOff);
 app.get('/pixel/set/off', led.setAllOff);
-// app.get('/pixel/set/:x/:y/:r/:g/:b', led.setXYPixel);
+app.get('/pixel/set/:x/:y/:r/:g/:b', led.setXYPixel);
+app.get('/pixel/latch/:x/:y/:r/:g/:b', led.latchXYPixel);
 app.get('/latch', led.latch);
 // app.get('/program/set/:program', led.setProgram);
 // app.get('/program', led.getPrograms)

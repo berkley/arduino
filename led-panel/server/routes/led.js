@@ -1,5 +1,7 @@
 var pixPerRow = 16;
 var numRows = 24;
+var WIDTH = 16;
+var HEIGHT = 24;
 var numPixels = pixPerRow * numRows;
 
 var OPC = new require('../../pixel-util/opc.js');
@@ -9,6 +11,16 @@ var pixUtil = new require('../../pixel-util/pixel-utils')(client, pixPerRow, num
 var setSerialPixel = function(pix, r, g, b) {
 	console.log("pix: ", pix, "r: ", r, "g: ", g, "b: ", b);
 	pixUtil.setPixel(pix, r, g, b);
+};
+
+var setXYPixel = function(x, y, r, g, b) {
+	console.log("x: ", x, "y: ", y, "r: ", r, "g: ", g, "b: ", b);
+	pixUtil.setXYPixel(x, y, r, g, b);
+};
+
+var latch = function() {
+	console.log("latching pixels");
+	pixUtil.refresh();
 };
 
 exports.latchAllOff = function(req, res) {
@@ -43,9 +55,27 @@ exports.latchSerialPixel = function(req, res) {
   	res.send("{status:ok}");
 };
 
-var latch = function() {
-	console.log("latching pixels");
-	pixUtil.refresh();
+exports.setXYPixel = function(req, res) {
+	var params = req.params;
+	var x = params.x;
+	var y = params.y;
+	var r = params.r;
+	var g = params.g;
+	var b = params.b;
+	setXYPixel(x, y, r, g, b);
+	res.send("{status:ok}");
+};
+
+exports.latchXYPixel = function(req, res) {
+	var params = req.params;
+	var x = params.x;
+	var y = params.y;
+	var r = params.r;
+	var g = params.g;
+	var b = params.b;
+	setXYPixel(x, y, r, g, b);
+	latch();
+	res.send("{status:ok}");
 };
 
 exports.latch = function(req, res) {
