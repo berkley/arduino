@@ -16,7 +16,7 @@ var webSocket = require('ws');
 // websocket for the fire control
 
 
-var OPC = new require('./opc');
+var OPC = new require('../pixel-util/opc');
 var model = OPC.loadModel(process.argv[2] || './layouts/grid32x16z.json');
 var client = new OPC('localhost', 7890);
 
