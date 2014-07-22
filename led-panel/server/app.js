@@ -30,6 +30,8 @@ app.get('/row/set/:row/:r/:g/:b', led.setRow);
 app.get('/row/latch/:row/:r/:g/:b', led.latchRow);
 app.get('/col/set/:col/:r/:g/:b', led.setCol);
 app.get('/col/latch/:col/:r/:g/:b', led.latchCol);
+app.get('/screen/set/:screen/:r/:g/:b', led.setScreen);
+app.get('/screen/latch/:screen/:r/:g/:b', led.latchScreen);
 app.get('/latch', led.latch);
 // app.get('/program/set/:program', led.setProgram);
 // app.get('/program', led.getPrograms)

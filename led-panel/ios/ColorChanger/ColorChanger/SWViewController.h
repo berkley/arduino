@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SocketRocket/SRWebSocket.h>
 
-@interface SWViewController : UIViewController
+@interface SWViewController : UIViewController <SRWebSocketDelegate>
 
 @end

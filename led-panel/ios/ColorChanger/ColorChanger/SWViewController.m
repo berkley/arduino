@@ -15,6 +15,8 @@
 
 @implementation SWViewController
 
+SRWebSocket *webSocket;
+
 double r;
 double g;
 double b;
@@ -58,71 +60,65 @@ double chunk = 360.0/255.0;
          
          NSLog(@"r: %i, g: %i, b: %i", (int)r, (int)g, (int)b);
          
-         NSString *url = [NSString stringWithFormat:@"http://10.0.1.17:3000/pixel/latch/10/%i/%i/%i", (int)r, (int)g, (int)b];
-         NSLog(@"url: %@", url);
-         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]
-                                                                cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                            timeoutInterval:10];
+//         NSString *url = [NSString stringWithFormat:@"http://10.0.1.17:3000/screen/latch/0/%i/%i/%i", (int)r, (int)g, (int)b];
+//         NSLog(@"url: %@", url);
+//         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]
+//                                                                cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+//                                                            timeoutInterval:10];
+//         
+//         [request setHTTPMethod: @"GET"];
+//         
+//         NSError *requestError;
+//         NSURLResponse *urlResponse = nil;
+//         
+//         [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+//         NSLog(@"requestError: %@", requestError);
          
-         [request setHTTPMethod: @"GET"];
-         
-         NSError *requestError;
-         NSURLResponse *urlResponse = nil;
-         
-         [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-         NSLog(@"requestError: %@", requestError);
+         NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"latchScreen\", \"screen\":\"0\", \"r\":\"%i\", \"g\":\"%i\", \"b\":\"%i\"}", (int)r, (int)g, (int)b];
+         [webSocket send:cmd];
 
      }];
-//     startGyroUpdatesToQueue:[[NSOperationQueue alloc] init] withHandler:^(CMGyroData *data, NSError *error)
-//     {
-//
-//         dispatch_async(dispatch_get_main_queue(),
-//                        ^{
-////                            NSLog(@"motion: %@", data);
-//                            
-//                            if((data.rotationRate.x < 0 && data.rotationRate.x > -1) &&
-//                               (data.rotationRate.y < 0 && data.rotationRate.y > -1) &&
-//                               (data.rotationRate.z < 0 && data.rotationRate.z > -1))
-//                            {
-//                                return;
-//                            }
-//
-//                            double degX = data.rotationRate.x * (M_PI/180.0);
-//                            double degY = data.rotationRate.y * (M_PI/180.0);
-//                            double degZ = data.rotationRate.z * (M_PI/180.0);
-//                            
-//                            #define degrees(x) (180.0 * x / M_PI)
-//                            double vRoll = degrees(self.motionManager.deviceMotion.attitude.roll);
-//                            double vYaw  = degrees(self.motionManager.deviceMotion.attitude.yaw);
-//                            double vPitch= degrees(self.motionManager.deviceMotion.attitude.pitch);
-//                            
-//                            double chunk = 360.0/255.0;
-//                            
-//                            NSLog(@"degX: %f degY: %f degZ: %f chunk: %f", vRoll, vYaw, vPitch, chunk);
-//                            
-//                            r += degX * chunk;
-//                            g += degY * chunk;
-//                            b += degZ * chunk;
-//                            
-////                            NSLog(@"r: %f g: %f b: %f", r, g, b);
-//                            
-////                            [self rollOver:r];
-////                            [self rollOver:g];
-////                            [self rollOver:b];
-//                            
-////                            CGFloat *r = 
-//                        });
-//     }
-//     ];
-    
 }
 
-- (double)rollOver:(double)x
-{
-    if(x > 255)
-        return 0;
-    return x;
+#pragma mark - Connection
+
+- (void)connectWebSocket {
+    webSocket.delegate = nil;
+    webSocket = nil;
+    
+    NSString *urlString = @"ws://10.0.1.17:3001";
+    SRWebSocket *newWebSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:urlString]];
+    newWebSocket.delegate = self;
+    
+    [newWebSocket open];
 }
+
+
+#pragma mark - SRWebSocket delegate
+
+- (void)webSocketDidOpen:(SRWebSocket *)newWebSocket {
+    webSocket = newWebSocket;
+//    [webSocket send:[NSString stringWithFormat:@"Hello from %@", [UIDevice currentDevice].name]];
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
+    [self connectWebSocket];
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean
+{
+    [self connectWebSocket];
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
+//    NSLog(@"didReceiveMessage: %@\n", message);
+//    self.messagesTextView.text = [NSString stringWithFormat:@"%@\n%@", self.messagesTextView.text, message];
+}
+
+//- (void)sendMessage:(id)sender {
+//    [webSocket send:self.messageTextField.text];
+//    self.messageTextField.text = nil;
+//}
 
 - (void)viewDidLoad
 {
@@ -130,6 +126,7 @@ double chunk = 360.0/255.0;
     r = 0;
     g = 0;
     b = 0;
+    [self connectWebSocket];
     [self startMyMotionDetect];
 }
 
