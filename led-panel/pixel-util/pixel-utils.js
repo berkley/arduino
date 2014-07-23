@@ -12,6 +12,13 @@ module.exports = function(opcClient, WIDTH, HEIGHT)
 		setPixel(addr, red, green, blue);
 	}
 
+	function setWideXYPixel(x, y, red, green, blue)
+	{
+		var addr = wideAddr(x, y);
+		setPixel(addr, red, green, blue);
+	}
+
+
 	function refresh()
 	{
 		opcClient.writePixels();		
@@ -67,6 +74,23 @@ module.exports = function(opcClient, WIDTH, HEIGHT)
 		return (WIDTH * HEIGHT);
 	}
 
+	function wideAddr(x, y) {
+	     var SCREENS = 3
+		 var PPS = 384
+		 // var x = 31
+		 // var y = 23
+		 var w = 48
+		 var l = parseInt(w / SCREENS)
+		 var col = parseInt(x % w)
+		 var scn = parseInt(col / l)
+		 var xoffset = parseInt(x - (l * scn))
+		 var yoffset = parseInt(y * l)
+		 var p = (scn * PPS) + xoffset + yoffset
+		 // console.log("\npixel address:", p);
+		 // console.log("\nscreen:", scn);
+		 return tpix(p);
+	};
+
 	function tpix(addr) {
 	    var actualPixPerChannel = 48;
 	    var mod = addr % actualPixPerChannel;
@@ -106,6 +130,7 @@ module.exports = function(opcClient, WIDTH, HEIGHT)
 		refresh: refresh,
 		randomColor: randomColor, 
 		allOff: allOff, 
-		numPixels: numPixels
+		numPixels: numPixels,
+		setWideXYPixel: setWideXYPixel
 	};
 }
