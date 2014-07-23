@@ -47,9 +47,9 @@ double chunk = 360.0/255.0;
          double yaw  = degrees(self.motionManager.deviceMotion.attitude.yaw);    //180 < pitch > -180
          double pitch = degrees(self.motionManager.deviceMotion.attitude.pitch) * 2;  //90 < pitch > -90
          
-         if(roll < 0) roll += 180.0;
-         if(yaw < 0) yaw += 180.0;
-         if(pitch < 0) pitch += 180.0;
+         if(roll < 0) roll *= -1;
+         if(yaw < 0) yaw *= -1;
+         if(pitch < 0) pitch *= -1;
 //         NSLog(@"pitch: %i, b: %i", (int)pitch, (int)(pitch * chunk));
          
 //         NSLog(@"yaw: %f pitch: %f roll: %f chunk: %f", yaw, pitch, roll, chunk);
@@ -111,7 +111,7 @@ double chunk = 360.0/255.0;
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
-    NSLog(@"didReceiveMessage: %@\n", message);
+//    NSLog(@"didReceiveMessage: %@\n", message);
 //    self.messagesTextView.text = [NSString stringWithFormat:@"%@\n%@", self.messagesTextView.text, message];
 }
 
