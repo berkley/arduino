@@ -33,6 +33,8 @@ app.get('/col/latch/:col/:r/:g/:b', led.latchCol);
 app.get('/screen/set/:screen/:r/:g/:b', led.setScreen);
 app.get('/screen/latch/:screen/:r/:g/:b', led.latchScreen);
 app.get('/latch', led.latch);
+app.get('/line/set/:x1/:y1/:x2/:y2/:r/:g/:b', led.setLine);
+app.get('/line/latch/:x1/:y1/:x2/:y2/:r/:g/:b', led.latchLine);
 // app.get('/program/set/:program', led.setProgram);
 // app.get('/program', led.getPrograms)
 

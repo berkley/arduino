@@ -1,9 +1,9 @@
 //basic params about the LED array(s)
 //note you must have your fadecandy server configured correctly for your OPC setup
 var pixPerRow = 16;
-var numRows = 24;
-var WIDTH = 16;
-var HEIGHT = 24;
+var numRows = 48;
+var WIDTH = pixPerRow;
+var HEIGHT = numRows;
 var numPixels = pixPerRow * numRows;
 
 //setup the OPC and pixel util libs
@@ -41,6 +41,35 @@ var latch = function() {
 	pixUtil.refresh();
 };
 
+var line1 = function(x1, y1, x2, y2, r, g, b) {
+
+	x1 = parseInt(x1);	
+	y1 = parseInt(y1);	
+	x2 = parseInt(x2);	
+	y2 = parseInt(y2);	
+	r = parseInt(r);	
+	g = parseInt(g);	
+	b = parseInt(b);	
+	var dx=x2-x1;
+	var dy=y2-y1;
+	var e=0;
+
+	setXYPixel(x1,y1,r,g,b);
+	while (x1 < x2) {
+		if (e + 2 * dy < dx) {
+			x1 += 1;
+			e += 2 * dy;
+			setXYPixel(x1,y1,r,g,b);
+		}
+		else {
+			y1 += 1;
+			e -= 2 * dx;
+		}
+	}
+};
+
+var line = line1;
+
 //====================================================
 //============WS======================================
 //====================================================
@@ -61,21 +90,6 @@ var wss = new WebSocketServer({port: 3001});
     });
     
 });
-
-// ws.on('message', function(data, flags) {
-//     var json = JSON.parse(data);
-//     console.log("websocket msg rcvd: ", json);
-//     var ranTO = Math.random() * 20 * 1000;
-//     console.log("puffing again in ", ranTO, " ms");
-//     setTimeout(puff, ranTO);
-// });
-
-// ws.on('open', function() {
-//     console.log("sending command");
-//     // ws.send('{"P1_ON":1, "P2_ON":0, "P3_ON":0, "P4_ON":0, "P5_ON":0}');
-//     // ws.send('{"SEQ_123":1}');
-//     ws.send(JSON.stringify(msg));
-// });
 
 //====================================================
 //============REST====================================
@@ -199,6 +213,17 @@ exports.latchScreen = function(req, res) {
 };
 
 exports.latch = function(req, res) {
+	latch();
+	res.send("{status:ok}");	
+};
+
+exports.setLine = function(req, res) {
+	line(req.params.x1, req.params.y1, req.params.x2, req.params.y2, req.params.r, req.params.g, req.params.b);
+	res.send("{status:ok}");	
+};
+
+exports.latchLine = function(req, res) {
+	line(req.params.x1, req.params.y1, req.params.x2, req.params.y2, req.params.r, req.params.g, req.params.b);
 	latch();
 	res.send("{status:ok}");	
 };
