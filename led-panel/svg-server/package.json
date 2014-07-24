@@ -1,16 +1,16 @@
 {
-  "name": "d3Coord",
-  "version": "0.0.0",
-  "description": "",
-  "main": "d3.min.js",
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
-  "author": "Client Team <client-team@flightstats.com>",
-  "license": "ISC",
   "dependencies": {
+    "express": "3.4.8",
+    "ejs": "*",
+    "svg-path-parser": "0.0.1",
     "jsdom": "^0.11.0",
     "d3": "^3.4.8",
-    "svg-path-parser": "0.0.1"
+    "sockjs": "^0.3.9"
   }
 }
