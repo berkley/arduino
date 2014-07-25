@@ -135,7 +135,7 @@ double chunk = 360.0/255.0;
 {
     [self.motionManager stopDeviceMotionUpdates];
     webSocket.delegate = nil;
-    webSocket = nil;
+    webSocket = nil; 
 }
 
 - (void)didReceiveMemoryWarning
