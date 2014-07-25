@@ -37,7 +37,7 @@ var setScreen = function(screen, r, g, b) {
 }
 
 var latch = function() {
-	console.log("latching pixels");
+	// console.log("latching pixels");
 	pixUtil.refresh();
 };
 
@@ -101,7 +101,7 @@ exports.latchAllOff = function(req, res) {
 };
 
 exports.setAllOff = function(req, res) {
-	pixUtil.setAllOff();
+	pixUtil.allOff();
 	res.send("{status:ok}");
 };
 

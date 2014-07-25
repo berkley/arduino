@@ -76,10 +76,11 @@ module.exports = function(opcClient, WIDTH, HEIGHT)
 
 	function wideAddr(x, y) {
 	     var SCREENS = 3
+	     var COLUMNS_PER_SCREEN = 16
 		 var PPS = 384
 		 // var x = 31
 		 // var y = 23
-		 var w = 48
+		 var w = COLUMNS_PER_SCREEN * SCREENS
 		 var l = parseInt(w / SCREENS)
 		 var col = parseInt(x % w)
 		 var scn = parseInt(col / l)
