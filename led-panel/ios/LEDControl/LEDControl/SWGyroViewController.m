@@ -134,6 +134,8 @@ double chunk = 360.0/255.0;
 - (void)viewDidDisappear:(BOOL)animated
 {
     [self.motionManager stopDeviceMotionUpdates];
+    webSocket.delegate = nil;
+    webSocket = nil;
 }
 
 - (void)didReceiveMemoryWarning
