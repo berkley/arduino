@@ -8,8 +8,6 @@
 
 #import "SWMasterViewController.h"
 
-#import "SWDetailViewController.h"
-
 @interface SWMasterViewController () {
 }
 @end

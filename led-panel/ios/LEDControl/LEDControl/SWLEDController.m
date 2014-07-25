@@ -8,7 +8,6 @@
 
 #import "SWLEDController.h"
 
-NSString *serverAddress;
 SWLEDController *controller;
 
 @implementation SWLEDController
@@ -27,13 +26,14 @@ SWLEDController *controller;
     if(!self)
         self = [super init];
     
-    serverAddress = @"10.0.1.17:3000";
+    self.restAddress = @"10.0.1.17:3000";
+    self.wsAddress = @"10.0.1.17:3001";
     return self;
 }
 
 - (void)sendRESTCommand:(NSString*)command
 {
-         NSString *url = [NSString stringWithFormat:@"http://%@%@", serverAddress, command];
+         NSString *url = [NSString stringWithFormat:@"http://%@%@", self.restAddress, command];
          NSLog(@"url: %@", url);
          NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]
                                                                 cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		61E7C79AB33C46A081FB92E6 /* libPods-LEDControl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A120044E91469D83A537E4 /* libPods-LEDControl.a */; };
 		CD9565C219808C560081BB67 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9565C119808C560081BB67 /* Foundation.framework */; };
 		CD9565C419808C560081BB67 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9565C319808C560081BB67 /* CoreGraphics.framework */; };
 		CD9565C619808C560081BB67 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9565C519808C560081BB67 /* UIKit.framework */; };
@@ -15,7 +16,6 @@
 		CD9565D219808C560081BB67 /* SWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9565D119808C560081BB67 /* SWAppDelegate.m */; };
 		CD9565D519808C560081BB67 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD9565D319808C560081BB67 /* Main.storyboard */; };
 		CD9565D819808C560081BB67 /* SWMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9565D719808C560081BB67 /* SWMasterViewController.m */; };
-		CD9565DB19808C560081BB67 /* SWDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9565DA19808C560081BB67 /* SWDetailViewController.m */; };
 		CD9565DD19808C560081BB67 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD9565DC19808C560081BB67 /* Images.xcassets */; };
 		CD9565E419808C560081BB67 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9565E319808C560081BB67 /* XCTest.framework */; };
 		CD9565E519808C570081BB67 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9565C119808C560081BB67 /* Foundation.framework */; };
@@ -24,6 +24,7 @@
 		CD9565F019808C570081BB67 /* LEDControlTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9565EF19808C570081BB67 /* LEDControlTests.m */; };
 		CD9565FB1981EF650081BB67 /* SWBasicLEDControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9565FA1981EF650081BB67 /* SWBasicLEDControlViewController.m */; };
 		CD9565FE1981F2830081BB67 /* SWLEDController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9565FD1981F2830081BB67 /* SWLEDController.m */; };
+		CD956601198202950081BB67 /* SWGyroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD956600198202950081BB67 /* SWGyroViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		380413DD423A46D7AFB9717C /* Pods-LEDControl.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LEDControl.xcconfig"; path = "Pods/Pods-LEDControl.xcconfig"; sourceTree = "<group>"; };
 		CD9565BE19808C560081BB67 /* LEDControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LEDControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD9565C119808C560081BB67 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CD9565C319808C560081BB67 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -50,8 +52,6 @@
 		CD9565D419808C560081BB67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CD9565D619808C560081BB67 /* SWMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMasterViewController.h; sourceTree = "<group>"; };
 		CD9565D719808C560081BB67 /* SWMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMasterViewController.m; sourceTree = "<group>"; };
-		CD9565D919808C560081BB67 /* SWDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWDetailViewController.h; sourceTree = "<group>"; };
-		CD9565DA19808C560081BB67 /* SWDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWDetailViewController.m; sourceTree = "<group>"; };
 		CD9565DC19808C560081BB67 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CD9565E219808C560081BB67 /* LEDControlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LEDControlTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD9565E319808C560081BB67 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -62,6 +62,9 @@
 		CD9565FA1981EF650081BB67 /* SWBasicLEDControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWBasicLEDControlViewController.m; sourceTree = "<group>"; };
 		CD9565FC1981F2830081BB67 /* SWLEDController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWLEDController.h; sourceTree = "<group>"; };
 		CD9565FD1981F2830081BB67 /* SWLEDController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWLEDController.m; sourceTree = "<group>"; };
+		CD9565FF198202950081BB67 /* SWGyroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGyroViewController.h; sourceTree = "<group>"; };
+		CD956600198202950081BB67 /* SWGyroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGyroViewController.m; sourceTree = "<group>"; };
+		D4A120044E91469D83A537E4 /* libPods-LEDControl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LEDControl.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +75,7 @@
 				CD9565C419808C560081BB67 /* CoreGraphics.framework in Frameworks */,
 				CD9565C619808C560081BB67 /* UIKit.framework in Frameworks */,
 				CD9565C219808C560081BB67 /* Foundation.framework in Frameworks */,
+				61E7C79AB33C46A081FB92E6 /* libPods-LEDControl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +99,7 @@
 				CD9565E919808C570081BB67 /* LEDControlTests */,
 				CD9565C019808C560081BB67 /* Frameworks */,
 				CD9565BF19808C560081BB67 /* Products */,
+				380413DD423A46D7AFB9717C /* Pods-LEDControl.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -114,6 +119,7 @@
 				CD9565C319808C560081BB67 /* CoreGraphics.framework */,
 				CD9565C519808C560081BB67 /* UIKit.framework */,
 				CD9565E319808C560081BB67 /* XCTest.framework */,
+				D4A120044E91469D83A537E4 /* libPods-LEDControl.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -121,19 +127,19 @@
 		CD9565C719808C560081BB67 /* LEDControl */ = {
 			isa = PBXGroup;
 			children = (
-				CD9565D019808C560081BB67 /* SWAppDelegate.h */,
-				CD9565D119808C560081BB67 /* SWAppDelegate.m */,
-				CD9565D319808C560081BB67 /* Main.storyboard */,
-				CD9565D619808C560081BB67 /* SWMasterViewController.h */,
-				CD9565D719808C560081BB67 /* SWMasterViewController.m */,
-				CD9565D919808C560081BB67 /* SWDetailViewController.h */,
-				CD9565DA19808C560081BB67 /* SWDetailViewController.m */,
 				CD9565DC19808C560081BB67 /* Images.xcassets */,
 				CD9565C819808C560081BB67 /* Supporting Files */,
+				CD9565D319808C560081BB67 /* Main.storyboard */,
+				CD9565D019808C560081BB67 /* SWAppDelegate.h */,
+				CD9565D119808C560081BB67 /* SWAppDelegate.m */,
+				CD9565D619808C560081BB67 /* SWMasterViewController.h */,
+				CD9565D719808C560081BB67 /* SWMasterViewController.m */,
 				CD9565F91981EF650081BB67 /* SWBasicLEDControlViewController.h */,
 				CD9565FA1981EF650081BB67 /* SWBasicLEDControlViewController.m */,
 				CD9565FC1981F2830081BB67 /* SWLEDController.h */,
 				CD9565FD1981F2830081BB67 /* SWLEDController.m */,
+				CD9565FF198202950081BB67 /* SWGyroViewController.h */,
+				CD956600198202950081BB67 /* SWGyroViewController.m */,
 			);
 			path = LEDControl;
 			sourceTree = "<group>";
@@ -174,9 +180,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD9565F319808C570081BB67 /* Build configuration list for PBXNativeTarget "LEDControl" */;
 			buildPhases = (
+				625BFF1C08FF423AAFCB9C0B /* Check Pods Manifest.lock */,
 				CD9565BA19808C560081BB67 /* Sources */,
 				CD9565BB19808C560081BB67 /* Frameworks */,
 				CD9565BC19808C560081BB67 /* Resources */,
+				2E5CEC4B255244AAA8AA019D /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -260,6 +268,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2E5CEC4B255244AAA8AA019D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-LEDControl-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		625BFF1C08FF423AAFCB9C0B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CD9565BA19808C560081BB67 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -270,7 +311,7 @@
 				CD9565CE19808C560081BB67 /* main.m in Sources */,
 				CD9565FE1981F2830081BB67 /* SWLEDController.m in Sources */,
 				CD9565D819808C560081BB67 /* SWMasterViewController.m in Sources */,
-				CD9565DB19808C560081BB67 /* SWDetailViewController.m in Sources */,
+				CD956601198202950081BB67 /* SWGyroViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +433,7 @@
 		};
 		CD9565F419808C570081BB67 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 380413DD423A46D7AFB9717C /* Pods-LEDControl.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -405,6 +447,7 @@
 		};
 		CD9565F519808C570081BB67 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 380413DD423A46D7AFB9717C /* Pods-LEDControl.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -475,6 +518,7 @@
 				CD9565F519808C570081BB67 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CD9565F619808C570081BB67 /* Build configuration list for PBXNativeTarget "LEDControlTests" */ = {
 			isa = XCConfigurationList;
@@ -483,6 +527,7 @@
 				CD9565F819808C570081BB67 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

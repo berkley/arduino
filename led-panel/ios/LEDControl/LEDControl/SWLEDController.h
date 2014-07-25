@@ -16,6 +16,9 @@
 
 }
 
+@property (nonatomic, strong) NSString *restAddress;
+@property (nonatomic, strong) NSString *wsAddress;
+
 + (SWLEDController*)instance;
 - (void)setPixel:(NSInteger)pixel red:(NSInteger)r green:(NSInteger)g blue:(NSInteger)b;
 - (void)setPixelx:(NSInteger)x y:(NSInteger)y red:(NSInteger)r green:(NSInteger)g blue:(NSInteger)b;
