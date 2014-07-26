@@ -16,6 +16,7 @@ var timestamp = function() {
 }
 
 var fillColumns = function(wait) {
+    console.log("fillColumns");
     wait = wait || 100;
     var red = PixelUtils.randomColor();
     var blue = PixelUtils.randomColor();
@@ -63,6 +64,34 @@ var fakeVU = function() {
     // TODO: handle loop timing better
 }
 
+
+var atozX = atozY = 0;
+function atoz() {
+    // PixelUtils.allOff();
+    atozX++;
+    atozY++;
+
+    if (atozX > 48) { atozX = 0;}
+    if (atozY > 16) { atozY = 16}
+    for (var x=0; x < 48; x++) {
+        for (var y=0; y < 24; y++) {
+            console.log("x", x, "y", y);
+            
+            if (x == atozX && y == atozY) {
+                // paint
+                PixelUtils.setWideXYPixel(x, y, 0, 0, 200);
+            }            
+            else {
+                PixelUtils.setWideXYPixel(x, y, 0, 0, 0);                
+            }
+        }
+    }
+    
+    PixelUtils.refresh();
+
+}
+
+
 var program = 0;
 
 var allPrograms = [
@@ -74,13 +103,22 @@ var allPrograms = [
     fakeVU
 ];
 
-function nextProgram() {
-    PixelUtils.colorWipe(0, 0,0,0);
-    PixelUtils.refresh();
-    console.log("program", program);
 
-    allPrograms[program++]();
-    if (program >= allPrograms.length) { program = 0; } 
+var MODE = 0;
+
+if (MODE == 0) {
+    console.log("\n\ntesting...\n")
+    setInterval(atoz, 250);
 }
+else {    
+    function nextProgram() {
+        PixelUtils.colorWipe(0, 0,0,0);
+        PixelUtils.refresh();
+        console.log("program", program);
 
-setInterval(nextProgram, 1000);
+        allPrograms[program++]();
+        if (program >= allPrograms.length) { program = 0; } 
+    }
+
+    setInterval(nextProgram, 1000);
+}

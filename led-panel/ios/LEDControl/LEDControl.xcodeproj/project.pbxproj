@@ -1,0 +1,535 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		61E7C79AB33C46A081FB92E6 /* libPods-LEDControl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A120044E91469D83A537E4 /* libPods-LEDControl.a */; };
+		CD9565C219808C560081BB67 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9565C119808C560081BB67 /* Foundation.framework */; };
+		CD9565C419808C560081BB67 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9565C319808C560081BB67 /* CoreGraphics.framework */; };
+		CD9565C619808C560081BB67 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9565C519808C560081BB67 /* UIKit.framework */; };
+		CD9565CC19808C560081BB67 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD9565CA19808C560081BB67 /* InfoPlist.strings */; };
+		CD9565CE19808C560081BB67 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9565CD19808C560081BB67 /* main.m */; };
+		CD9565D219808C560081BB67 /* SWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9565D119808C560081BB67 /* SWAppDelegate.m */; };
+		CD9565D519808C560081BB67 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD9565D319808C560081BB67 /* Main.storyboard */; };
+		CD9565D819808C560081BB67 /* SWMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9565D719808C560081BB67 /* SWMasterViewController.m */; };
+		CD9565DD19808C560081BB67 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD9565DC19808C560081BB67 /* Images.xcassets */; };
+		CD9565E419808C560081BB67 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9565E319808C560081BB67 /* XCTest.framework */; };
+		CD9565E519808C570081BB67 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9565C119808C560081BB67 /* Foundation.framework */; };
+		CD9565E619808C570081BB67 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9565C519808C560081BB67 /* UIKit.framework */; };
+		CD9565EE19808C570081BB67 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD9565EC19808C570081BB67 /* InfoPlist.strings */; };
+		CD9565F019808C570081BB67 /* LEDControlTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9565EF19808C570081BB67 /* LEDControlTests.m */; };
+		CD9565FB1981EF650081BB67 /* SWBasicLEDControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9565FA1981EF650081BB67 /* SWBasicLEDControlViewController.m */; };
+		CD9565FE1981F2830081BB67 /* SWLEDController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9565FD1981F2830081BB67 /* SWLEDController.m */; };
+		CD956601198202950081BB67 /* SWGyroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD956600198202950081BB67 /* SWGyroViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CD9565E719808C570081BB67 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD9565B619808C560081BB67 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CD9565BD19808C560081BB67;
+			remoteInfo = LEDControl;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		380413DD423A46D7AFB9717C /* Pods-LEDControl.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LEDControl.xcconfig"; path = "Pods/Pods-LEDControl.xcconfig"; sourceTree = "<group>"; };
+		CD9565BE19808C560081BB67 /* LEDControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LEDControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD9565C119808C560081BB67 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CD9565C319808C560081BB67 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CD9565C519808C560081BB67 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CD9565C919808C560081BB67 /* LEDControl-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LEDControl-Info.plist"; sourceTree = "<group>"; };
+		CD9565CB19808C560081BB67 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CD9565CD19808C560081BB67 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CD9565CF19808C560081BB67 /* LEDControl-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LEDControl-Prefix.pch"; sourceTree = "<group>"; };
+		CD9565D019808C560081BB67 /* SWAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWAppDelegate.h; sourceTree = "<group>"; };
+		CD9565D119808C560081BB67 /* SWAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWAppDelegate.m; sourceTree = "<group>"; };
+		CD9565D419808C560081BB67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CD9565D619808C560081BB67 /* SWMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMasterViewController.h; sourceTree = "<group>"; };
+		CD9565D719808C560081BB67 /* SWMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMasterViewController.m; sourceTree = "<group>"; };
+		CD9565DC19808C560081BB67 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		CD9565E219808C560081BB67 /* LEDControlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LEDControlTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD9565E319808C560081BB67 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		CD9565EB19808C570081BB67 /* LEDControlTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LEDControlTests-Info.plist"; sourceTree = "<group>"; };
+		CD9565ED19808C570081BB67 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CD9565EF19808C570081BB67 /* LEDControlTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LEDControlTests.m; sourceTree = "<group>"; };
+		CD9565F91981EF650081BB67 /* SWBasicLEDControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWBasicLEDControlViewController.h; sourceTree = "<group>"; };
+		CD9565FA1981EF650081BB67 /* SWBasicLEDControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWBasicLEDControlViewController.m; sourceTree = "<group>"; };
+		CD9565FC1981F2830081BB67 /* SWLEDController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWLEDController.h; sourceTree = "<group>"; };
+		CD9565FD1981F2830081BB67 /* SWLEDController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWLEDController.m; sourceTree = "<group>"; };
+		CD9565FF198202950081BB67 /* SWGyroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGyroViewController.h; sourceTree = "<group>"; };
+		CD956600198202950081BB67 /* SWGyroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGyroViewController.m; sourceTree = "<group>"; };
+		D4A120044E91469D83A537E4 /* libPods-LEDControl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LEDControl.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CD9565BB19808C560081BB67 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD9565C419808C560081BB67 /* CoreGraphics.framework in Frameworks */,
+				CD9565C619808C560081BB67 /* UIKit.framework in Frameworks */,
+				CD9565C219808C560081BB67 /* Foundation.framework in Frameworks */,
+				61E7C79AB33C46A081FB92E6 /* libPods-LEDControl.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD9565DF19808C560081BB67 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD9565E419808C560081BB67 /* XCTest.framework in Frameworks */,
+				CD9565E619808C570081BB67 /* UIKit.framework in Frameworks */,
+				CD9565E519808C570081BB67 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CD9565B519808C560081BB67 = {
+			isa = PBXGroup;
+			children = (
+				CD9565C719808C560081BB67 /* LEDControl */,
+				CD9565E919808C570081BB67 /* LEDControlTests */,
+				CD9565C019808C560081BB67 /* Frameworks */,
+				CD9565BF19808C560081BB67 /* Products */,
+				380413DD423A46D7AFB9717C /* Pods-LEDControl.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		CD9565BF19808C560081BB67 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CD9565BE19808C560081BB67 /* LEDControl.app */,
+				CD9565E219808C560081BB67 /* LEDControlTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CD9565C019808C560081BB67 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CD9565C119808C560081BB67 /* Foundation.framework */,
+				CD9565C319808C560081BB67 /* CoreGraphics.framework */,
+				CD9565C519808C560081BB67 /* UIKit.framework */,
+				CD9565E319808C560081BB67 /* XCTest.framework */,
+				D4A120044E91469D83A537E4 /* libPods-LEDControl.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CD9565C719808C560081BB67 /* LEDControl */ = {
+			isa = PBXGroup;
+			children = (
+				CD9565DC19808C560081BB67 /* Images.xcassets */,
+				CD9565C819808C560081BB67 /* Supporting Files */,
+				CD9565D319808C560081BB67 /* Main.storyboard */,
+				CD9565D019808C560081BB67 /* SWAppDelegate.h */,
+				CD9565D119808C560081BB67 /* SWAppDelegate.m */,
+				CD9565D619808C560081BB67 /* SWMasterViewController.h */,
+				CD9565D719808C560081BB67 /* SWMasterViewController.m */,
+				CD9565F91981EF650081BB67 /* SWBasicLEDControlViewController.h */,
+				CD9565FA1981EF650081BB67 /* SWBasicLEDControlViewController.m */,
+				CD9565FC1981F2830081BB67 /* SWLEDController.h */,
+				CD9565FD1981F2830081BB67 /* SWLEDController.m */,
+				CD9565FF198202950081BB67 /* SWGyroViewController.h */,
+				CD956600198202950081BB67 /* SWGyroViewController.m */,
+			);
+			path = LEDControl;
+			sourceTree = "<group>";
+		};
+		CD9565C819808C560081BB67 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CD9565C919808C560081BB67 /* LEDControl-Info.plist */,
+				CD9565CA19808C560081BB67 /* InfoPlist.strings */,
+				CD9565CD19808C560081BB67 /* main.m */,
+				CD9565CF19808C560081BB67 /* LEDControl-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CD9565E919808C570081BB67 /* LEDControlTests */ = {
+			isa = PBXGroup;
+			children = (
+				CD9565EF19808C570081BB67 /* LEDControlTests.m */,
+				CD9565EA19808C570081BB67 /* Supporting Files */,
+			);
+			path = LEDControlTests;
+			sourceTree = "<group>";
+		};
+		CD9565EA19808C570081BB67 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CD9565EB19808C570081BB67 /* LEDControlTests-Info.plist */,
+				CD9565EC19808C570081BB67 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CD9565BD19808C560081BB67 /* LEDControl */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD9565F319808C570081BB67 /* Build configuration list for PBXNativeTarget "LEDControl" */;
+			buildPhases = (
+				625BFF1C08FF423AAFCB9C0B /* Check Pods Manifest.lock */,
+				CD9565BA19808C560081BB67 /* Sources */,
+				CD9565BB19808C560081BB67 /* Frameworks */,
+				CD9565BC19808C560081BB67 /* Resources */,
+				2E5CEC4B255244AAA8AA019D /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LEDControl;
+			productName = LEDControl;
+			productReference = CD9565BE19808C560081BB67 /* LEDControl.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CD9565E119808C560081BB67 /* LEDControlTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD9565F619808C570081BB67 /* Build configuration list for PBXNativeTarget "LEDControlTests" */;
+			buildPhases = (
+				CD9565DE19808C560081BB67 /* Sources */,
+				CD9565DF19808C560081BB67 /* Frameworks */,
+				CD9565E019808C560081BB67 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CD9565E819808C570081BB67 /* PBXTargetDependency */,
+			);
+			name = LEDControlTests;
+			productName = LEDControlTests;
+			productReference = CD9565E219808C560081BB67 /* LEDControlTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CD9565B619808C560081BB67 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = SW;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Chad Berkley";
+				TargetAttributes = {
+					CD9565E119808C560081BB67 = {
+						TestTargetID = CD9565BD19808C560081BB67;
+					};
+				};
+			};
+			buildConfigurationList = CD9565B919808C560081BB67 /* Build configuration list for PBXProject "LEDControl" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CD9565B519808C560081BB67;
+			productRefGroup = CD9565BF19808C560081BB67 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CD9565BD19808C560081BB67 /* LEDControl */,
+				CD9565E119808C560081BB67 /* LEDControlTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CD9565BC19808C560081BB67 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD9565DD19808C560081BB67 /* Images.xcassets in Resources */,
+				CD9565CC19808C560081BB67 /* InfoPlist.strings in Resources */,
+				CD9565D519808C560081BB67 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD9565E019808C560081BB67 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD9565EE19808C570081BB67 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2E5CEC4B255244AAA8AA019D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-LEDControl-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		625BFF1C08FF423AAFCB9C0B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CD9565BA19808C560081BB67 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD9565D219808C560081BB67 /* SWAppDelegate.m in Sources */,
+				CD9565FB1981EF650081BB67 /* SWBasicLEDControlViewController.m in Sources */,
+				CD9565CE19808C560081BB67 /* main.m in Sources */,
+				CD9565FE1981F2830081BB67 /* SWLEDController.m in Sources */,
+				CD9565D819808C560081BB67 /* SWMasterViewController.m in Sources */,
+				CD956601198202950081BB67 /* SWGyroViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD9565DE19808C560081BB67 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD9565F019808C570081BB67 /* LEDControlTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CD9565E819808C570081BB67 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CD9565BD19808C560081BB67 /* LEDControl */;
+			targetProxy = CD9565E719808C570081BB67 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CD9565CA19808C560081BB67 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CD9565CB19808C560081BB67 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CD9565D319808C560081BB67 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CD9565D419808C560081BB67 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CD9565EC19808C570081BB67 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CD9565ED19808C570081BB67 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CD9565F119808C570081BB67 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CD9565F219808C570081BB67 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CD9565F419808C570081BB67 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 380413DD423A46D7AFB9717C /* Pods-LEDControl.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LEDControl/LEDControl-Prefix.pch";
+				INFOPLIST_FILE = "LEDControl/LEDControl-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CD9565F519808C570081BB67 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 380413DD423A46D7AFB9717C /* Pods-LEDControl.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LEDControl/LEDControl-Prefix.pch";
+				INFOPLIST_FILE = "LEDControl/LEDControl-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		CD9565F719808C570081BB67 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LEDControl.app/LEDControl";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LEDControl/LEDControl-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "LEDControlTests/LEDControlTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		CD9565F819808C570081BB67 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LEDControl.app/LEDControl";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LEDControl/LEDControl-Prefix.pch";
+				INFOPLIST_FILE = "LEDControlTests/LEDControlTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CD9565B919808C560081BB67 /* Build configuration list for PBXProject "LEDControl" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD9565F119808C570081BB67 /* Debug */,
+				CD9565F219808C570081BB67 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CD9565F319808C570081BB67 /* Build configuration list for PBXNativeTarget "LEDControl" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD9565F419808C570081BB67 /* Debug */,
+				CD9565F519808C570081BB67 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CD9565F619808C570081BB67 /* Build configuration list for PBXNativeTarget "LEDControlTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD9565F719808C570081BB67 /* Debug */,
+				CD9565F819808C570081BB67 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CD9565B619808C560081BB67 /* Project object */;
+}

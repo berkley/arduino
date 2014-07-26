@@ -21,6 +21,8 @@ double r;
 double g;
 double b;
 
+
+
 - (CMMotionManager *)motionManager
 {
     CMMotionManager *motionManager = nil;
