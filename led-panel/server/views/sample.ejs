@@ -17,8 +17,6 @@
   <body>
     <script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script src="./javascripts/parse.js" charset="utf-8"></script>
-    <script src="./javascripts/bitmap.js" charset="utf-8"></script>
     <script type="text/javascript">
       var Message = function(type, attrs) {
         this.type = type;
@@ -36,7 +34,7 @@
 
       var width = 48;
       var height = 24;
-      var sock = new SockJS('http://localhost:2000/socket');
+      var sock = new SockJS('http://localhost:3000/socket');
       var svg;
 
       sock.onopen = function() {
@@ -45,8 +43,6 @@
                                .attr('viewBox', '0 0 ' + width + ' ' + height)
                                .attr('width', width)
                                .attr('height', height);
-
-        var bitmap = new Bitmap();
 
         var initialPoint = randomPoint(width, height);
 

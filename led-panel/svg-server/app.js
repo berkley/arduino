@@ -28,21 +28,6 @@ socket.on('connection', function(conn) {
     var number = connections.length;
     conn.write("Welcome, User " + number);
 
-    jsdom.env({
-    	features : { QuerySelector : true }, html : htmlStub, 
-    	done : function(errors, window) {
-    		var svg = d3.select('body').append('svg')
-    			.attr('width', 48)
-    			.attr('height', 24);
-    		
-    		// var path = svg.append('path').attr("d", lineFunction(lineData));
-    		
-    		// bitmap.parseD(path.attr('d'));
-    		// bitmap.draw();
-    		// bitmap.debugFrame();
-    	}
-    });
-
     conn.on('data', function(message) {
         var bitmap = new Bitmap.Bitmap(48,24);
         var svgObject = JSON.parse(message);

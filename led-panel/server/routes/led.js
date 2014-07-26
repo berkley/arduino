@@ -34,7 +34,20 @@ var setScreen = function(screen, r, g, b) {
 	{
 		setRow(i, r, g, b);
 	}
-}
+};
+
+var drawBitmap = function(bitmap) {
+	for (var i = 0; i < bitmap.length; i++) {
+		var row = bitmap[i];
+		for (var j = 0; j < row.length; j++) {
+			var col = row[j];
+			if (col != null) {
+				// console.log(i, j, col[0], col[1], col[2]);
+				pixUtil.setXYPixel(i, j, col[0], col[1], col[2]);
+			}
+		}
+	}
+};
 
 var latch = function() {
 	// console.log("latching pixels");
@@ -76,19 +89,23 @@ var line = line1;
 
 var WebSocketServer = require('ws').Server;
 var wss = new WebSocketServer({port: 3001});
-	
-	wss.on('connection', function(ws) {
+
+wss.on('connection', function(ws) {
     ws.on('message', function(message) {
-        console.log('received: %s', message);
-        var json = JSON.parse(message);
-        if(json.command == "latchScreen")
-        {
-        	setScreen(json.screen, json.r, json.g, json.b);
-        	latch();
+        console.log('received:', typeof message, message);
+        if (typeof message === 'string') {
+        	var json = JSON.parse(message);
+        	if (json.command == "latchScreen") {
+        		setScreen(json.screen, json.r, json.g, json.b);
+        		latch();
+        	}
+        	else if (json.command == "latchBitmap") {
+        		drawBitmap(json.bitmap);
+        		latch();
+        	}
+        	ws.send("ok");
         }
-        ws.send("ok");
     });
-    
 });
 
 //====================================================
@@ -212,6 +229,21 @@ exports.latchScreen = function(req, res) {
 	res.send("{status:ok}");
 };
 
+exports.setBitmap = function(req, res) {
+	var params = req.params;
+	var bitmap = req.body;
+	drawBitmap(bitmap);
+	res.send("{status:ok}");
+};
+
+exports.latchBitmap = function(req, res) {
+	var params = req.params;
+	var bitmap = req.body;
+	drawBitmap(bitmap);
+	latch();
+	res.send("{status:ok}");
+};
+
 exports.latch = function(req, res) {
 	latch();
 	res.send("{status:ok}");	
@@ -227,3 +259,5 @@ exports.latchLine = function(req, res) {
 	latch();
 	res.send("{status:ok}");	
 };
+
+exports.drawBitmap = drawBitmap;
