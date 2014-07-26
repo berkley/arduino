@@ -1,9 +1,11 @@
 //basic params about the LED array(s)
 //note you must have your fadecandy server configured correctly for your OPC setup
 var pixPerRow = 16;
-var numRows = 48;
+var numRows = 72;
 var WIDTH = pixPerRow;
 var HEIGHT = numRows;
+var SCREEN_HEIGHT = 24;
+var NUM_SCREENS = 3;
 var numPixels = pixPerRow * numRows;
 
 //setup the OPC and pixel util libs
@@ -18,7 +20,7 @@ var setSerialPixel = function(pix, r, g, b) {
 
 var setXYPixel = function(x, y, r, g, b) {
 	console.log("x: ", x, "y: ", y, "r: ", r, "g: ", g, "b: ", b);
-	pixUtil.setXYPixel(x, y, r, g, b);
+	pixUtil.setWideXYPixel(x, y, r, g, b);
 };
 
 var setRow = function(row, r, g, b) {
@@ -30,7 +32,23 @@ var setCol = function(col, r, g, b) {
 };
 
 var setScreen = function(screen, r, g, b) {
-	for(var i=0; i<HEIGHT; i++)
+	var start = 0;
+	var end = SCREEN_HEIGHT;
+	// console.log("screen: ", screen);
+	if(screen == 99)
+	{
+		start = 0;
+		end = HEIGHT - 1;
+	}
+	else if(screen != 0)
+	{
+		start = SCREEN_HEIGHT * screen;
+		end = SCREEN_HEIGHT + start;
+	}
+
+	// console.log("start: ", start, " end: ", end);
+
+	for(var i=start; i<end; i++)
 	{
 		setRow(i, r, g, b);
 	}
@@ -88,6 +106,7 @@ var line = line1;
 //====================================================
 
 var WebSocketServer = require('ws').Server;
+console.log("opening web socket on 3001");
 var wss = new WebSocketServer({port: 3001});
 
 wss.on('connection', function(ws) {
@@ -210,7 +229,7 @@ exports.latchCol = function(req, res) {
 
 exports.setScreen = function(req, res) {
 	var params = req.params;
-	var screen = params.col;
+	var screen = params.screen;
 	var r = params.r;
 	var g = params.g;
 	var b = params.b;
@@ -220,7 +239,7 @@ exports.setScreen = function(req, res) {
 
 exports.latchScreen = function(req, res) {
 	var params = req.params;
-	var screen = params.col;
+	var screen = params.screen;
 	var r = params.r;
 	var g = params.g;
 	var b = params.b;

@@ -37,7 +37,7 @@ double chunk = 360.0/255.0;
 
 - (void)startMyMotionDetect
 {
-    [self.motionManager startDeviceMotionUpdatesToQueue:[[NSOperationQueue alloc] init] withHandler:^(CMDeviceMotion *motion, NSError *error)
+    [self.motionManager startDeviceMotionUpdatesToQueue:opQueue withHandler:^(CMDeviceMotion *motion, NSError *error)
     {
          #define degrees(x) (180.0 * x / M_PI)
          double roll = degrees(self.motionManager.deviceMotion.attitude.roll);   //180 < roll > -180
@@ -66,8 +66,9 @@ double chunk = 360.0/255.0;
         [self performSelectorOnMainThread:@selector(updateLabels:) withObject:vals waitUntilDone:NO];
         
          NSLog(@"r: %i, g: %i, b: %i", (int)r, (int)g, (int)b);
-         
-         NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"latchScreen\", \"screen\":\"0\", \"r\":\"%i\", \"g\":\"%i\", \"b\":\"%i\"}", (int)r, (int)g, (int)b];
+        
+         NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"latchScreen\", \"screen\":\"%i\", \"r\":\"%i\", \"g\":\"%i\", \"b\":\"%i\"}", (int)screen, (int)r, (int)g, (int)b];
+//        NSLog(@"cmd: %@", cmd);
          [webSocket send:cmd];
      }];
 }
@@ -121,12 +122,34 @@ double chunk = 360.0/255.0;
 //    self.messageTextField.text = nil;
 //}
 
+#pragma mark - button selectors
+
+- (IBAction)screen1ButtonTouched:(id)sender {
+    screen = 0;
+}
+
+- (IBAction)screen2ButtonTouched:(id)sender {
+    screen = 1;
+}
+
+- (IBAction)screen3ButtonTouched:(id)sender {
+    screen = 2;
+}
+
+- (IBAction)allButtonTouched:(id)sender {
+    screen = 99;
+}
+
+#pragma mark - other shit
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     r = 0;
     g = 0;
     b = 0;
+    screen = 99;
+    opQueue = [[NSOperationQueue alloc] init];
     [self connectWebSocket];
     [self startMyMotionDetect];
 }
@@ -134,6 +157,7 @@ double chunk = 360.0/255.0;
 - (void)viewDidDisappear:(BOOL)animated
 {
     [self.motionManager stopDeviceMotionUpdates];
+    [opQueue cancelAllOperations];
     webSocket.delegate = nil;
     webSocket = nil; 
 }

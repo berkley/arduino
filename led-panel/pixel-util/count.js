@@ -17,20 +17,26 @@ var PixelUtils = new require('./pixel-utils')(client, pixPerRow, numRows);
 
 var xyCount = function() 
 {
-    for(var x = 0; x<48; x++)
+    for(var x = 0; x<72; x++)
     {
         for(var y=0; y<24; y++)
         {
             var red = PixelUtils.randomColor();
             var blue = PixelUtils.randomColor();
             var green = PixelUtils.randomColor();
+            PixelUtils.allOff();
             PixelUtils.setWideXYPixel(x, y, red, green, blue);
+            console.log("setting pixel x: ", x, "y: ", y);
             // if(y > 0)
             //     PixelUtils.setWideXYPixel(x, y - 1, 0, 0, 0);
 
             PixelUtils.refresh();
         }
     }
+
+    // PixelUtils.allOff();
+    // PixelUtils.setWideXYPixel(47, 23, 255, 255, 255);
+    // PixelUtils.refresh();
 };
 
 var count = function()
@@ -68,12 +74,12 @@ var theta = 0;
 var thetaDelta = 0.001;
 var slot = 0;
 
-// setInterval(xyCount, 1000);
+setInterval(xyCount, 1000);
 // var millis = new Date().getTime();
 // var t = 65 * 0.2 + millis * 0.002;
 // // setInterval(count, 30);
 
-PixelUtils.colorWipe(0, 0,0,0);
-PixelUtils.refresh();
-xyCount();
+// PixelUtils.colorWipe(0, 0,0,0);
+// PixelUtils.refresh();
+// xyCount();
 
