@@ -1,9 +1,11 @@
 //basic params about the LED array(s)
 //note you must have your fadecandy server configured correctly for your OPC setup
 var pixPerRow = 16;
-var numRows = 48;
+var numRows = 72;
 var WIDTH = pixPerRow;
 var HEIGHT = numRows;
+var SCREEN_HEIGHT = 24;
+var NUM_SCREENS = 3;
 var numPixels = pixPerRow * numRows;
 
 //setup the OPC and pixel util libs
@@ -30,8 +32,19 @@ var setCol = function(col, r, g, b) {
 };
 
 var setScreen = function(screen, r, g, b) {
-	for(var i=0; i<HEIGHT; i++)
+	var start = 0;
+	var end = SCREEN_HEIGHT;
+
+	console.log("screen: ", screen)
+	if(screen != 0)
 	{
+		start = SCREEN_HEIGHT * screen;
+		end = SCREEN_HEIGHT + start;
+	}
+
+	for(var i=start; i<end; i++)
+	{
+		console.log("i: ", i);
 		setRow(i, r, g, b);
 	}
 }
@@ -193,7 +206,7 @@ exports.latchCol = function(req, res) {
 
 exports.setScreen = function(req, res) {
 	var params = req.params;
-	var screen = params.col;
+	var screen = params.screen;
 	var r = params.r;
 	var g = params.g;
 	var b = params.b;
@@ -203,7 +216,7 @@ exports.setScreen = function(req, res) {
 
 exports.latchScreen = function(req, res) {
 	var params = req.params;
-	var screen = params.col;
+	var screen = params.screen;
 	var r = params.r;
 	var g = params.g;
 	var b = params.b;
