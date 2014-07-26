@@ -14,6 +14,7 @@
 @interface SWGyroViewController : UIViewController <SRWebSocketDelegate>
 {
     NSInteger screen;
+    NSOperationQueue *opQueue;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *yawLabel;

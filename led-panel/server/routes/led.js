@@ -35,24 +35,18 @@ var setScreen = function(screen, r, g, b) {
 	var start = 0;
 	var end = SCREEN_HEIGHT;
 	// console.log("screen: ", screen);
-	// if(screen == 99)
-	// {
-	// 	start = 0;
-	// 	end = HEIGHT;
-	// }
-	// else
-	// {
-	// 	start = 0;
-	// 	end = SCREEN_HEIGHT;
-	// }
-
-	// console.log("start: ", start, " end: ", end);
-
-	if(screen != 0)
+	if(screen == 99)
+	{
+		start = 0;
+		end = HEIGHT - 1;
+	}
+	else if(screen != 0)
 	{
 		start = SCREEN_HEIGHT * screen;
 		end = SCREEN_HEIGHT + start;
 	}
+
+	// console.log("start: ", start, " end: ", end);
 
 	for(var i=start; i<end; i++)
 	{
