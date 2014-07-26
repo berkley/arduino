@@ -20,7 +20,7 @@ var setSerialPixel = function(pix, r, g, b) {
 
 var setXYPixel = function(x, y, r, g, b) {
 	console.log("x: ", x, "y: ", y, "r: ", r, "g: ", g, "b: ", b);
-	pixUtil.setXYPixel(x, y, r, g, b);
+	pixUtil.setWideXYPixel(x, y, r, g, b);
 };
 
 var setRow = function(row, r, g, b) {
@@ -34,6 +34,19 @@ var setCol = function(col, r, g, b) {
 var setScreen = function(screen, r, g, b) {
 	var start = 0;
 	var end = SCREEN_HEIGHT;
+	// console.log("screen: ", screen);
+	// if(screen == 99)
+	// {
+	// 	start = 0;
+	// 	end = HEIGHT;
+	// }
+	// else
+	// {
+	// 	start = 0;
+	// 	end = SCREEN_HEIGHT;
+	// }
+
+	// console.log("start: ", start, " end: ", end);
 
 	if(screen != 0)
 	{
@@ -86,9 +99,11 @@ var line = line1;
 //====================================================
 
 var WebSocketServer = require('ws').Server;
+console.log("opening web socket on 3001");
 var wss = new WebSocketServer({port: 3001});
 	
 	wss.on('connection', function(ws) {
+		console.log("WS connection on 3001");
     ws.on('message', function(message) {
         console.log('received: %s', message);
         var json = JSON.parse(message);

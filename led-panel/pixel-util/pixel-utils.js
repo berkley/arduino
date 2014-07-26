@@ -15,7 +15,7 @@ module.exports = function(opcClient, WIDTH, HEIGHT)
 	function setWideXYPixel(x, y, red, green, blue)
 	{
 		var addr = wideAddr(x, y);
-		setPixel(addr, red, green, blue);
+		setPixel(tpix(addr), red, green, blue);
 	}
 
 

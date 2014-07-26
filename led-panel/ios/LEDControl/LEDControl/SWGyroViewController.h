@@ -12,6 +12,10 @@
 #import "SWLEDController.h"
 
 @interface SWGyroViewController : UIViewController <SRWebSocketDelegate>
+{
+    NSInteger screen;
+}
+
 @property (weak, nonatomic) IBOutlet UILabel *yawLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pitchLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rollLabel;
@@ -19,4 +23,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *rLabel;
 @property (weak, nonatomic) IBOutlet UILabel *gLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bLabel;
+
+
 @end
