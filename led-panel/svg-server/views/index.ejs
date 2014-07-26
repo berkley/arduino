@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SVG Tester</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+      SVG {
+        width: 480px;
+        height: 240px;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      var sock = new SockJS('http://localhost:3000/socket');
+      var svg, g, path;
+
+      sock.onopen = function() {
+        console.log("connected");
+        sock.send("chat");
+        svg = d3.select('body').append('svg')
+                               .attr('viewBox', '0 0 48 24')
+                               .attr('width', 48)
+                               .attr('height', 24);
+        // g = svg.append('g');
+        path = svg.append('path')
+                  .attr('stroke', 2)
+                  .attr('stroke-fill', 'blue');
+      };
+
+      sock.onmessage = function(message) {
+        console.log("message", message);
+        if (message.data[0] === 'M') {
+          path.attr('d', message.data);
+        }
+      };
+    </script>
+  </body>
+</html>

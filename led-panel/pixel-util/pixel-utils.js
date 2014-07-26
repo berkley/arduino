@@ -47,6 +47,72 @@ module.exports = function(opcClient, WIDTH, HEIGHT)
 		}
 	}
 
+	function hollowCircle(x, y, radius, red, green, blue)
+	{
+		var radians = 0;
+		var steps = 36;
+		var delta = Math.PI / 10;
+
+		for (var radians=0; i < Math.PI*2; i+=delta) {
+			this.setPixel(
+				parseInt(x + (Math.cos(radians)*radius)), 
+				parseInt(y + (Math.sin(radians)*radius)), 
+				red, green, blue);
+		}
+	}
+
+	function drawLine(x1, y1, x2, y2, r, g, b) {
+
+		x1 = parseInt(x1);
+		y1 = parseInt(y1);
+		x2 = parseInt(x2);
+		y2 = parseInt(y2);
+		r = parseInt(r);
+		g = parseInt(g);
+		b = parseInt(b);
+		var dx=x2-x1;
+		var dy=y2-y1;
+		var e=0;
+
+		setXYPixel(x1, y1, r, g, b);
+
+		while (x1 < x2) {
+			if (e + 2 * dy < dx) {
+				x1 += 1;
+				e += 2 * dy;
+				setXYPixel(x1, y1, r, g, b);
+			}
+			else {
+				y1 += 1;
+				e -= 2 * dx;
+			}
+		}
+	};
+
+	function filledCircle(x, y, radius, red, green, blue)
+	{
+		for (var smallerRadius=1; smallerRadius <= radius; smallerRadius++) {
+			hollowCircle(x, y, smallerRadius, red, green, blue);
+		}
+	}
+
+	function circle(x, y, radius, strokeRed, strokeGreen, fillBlue, fillRed, fillGreen, strokeBlue)
+	{
+		var defaultColor = 255;
+		strokeRed = strokeRed || defaultColor;
+		strokeGreen = strokeGreen || defaultColor;
+		strokeBlue = strokeBlue || defaultColor;
+		fillRed = fillRed || defaultColor;
+		fillGreen = fillGreen || defaultColor;
+		fillBlue = fillBlue || defaultColor;
+
+		filledCircle(x,y,radius,fillRed,fillGreen,fillBlue);
+
+		if (strokeRed !== fillRed && strokeGreen !== fillGreen && strokeBlue !== fillBlue) {
+			hollowCircle(x,y,radius,strokeRed,strokeGreen,strokeBlue);			
+		}
+	}
+
 	function allOff()
 	{
 		for(var i=0; i<numPixels(); i++)
@@ -117,6 +183,15 @@ module.exports = function(opcClient, WIDTH, HEIGHT)
 	    return newaddr + base;
 	};
 
+	function setBitmap(bitmap) {
+		for (var x=0; x < WIDTH; x++) {
+			for (var y=0; y < HEIGHT; y++) {
+				var pixel = bitmap[x][y];
+				setXYPixel(x, y, pixel.r, pixel.g, pixel.b);
+			}
+		}
+	}
+
 	function randomColor(max) {
 		max = max || 255.0;
 		return parseInt((max/2.0) * Math.random() + (max/2.0));
@@ -132,6 +207,7 @@ module.exports = function(opcClient, WIDTH, HEIGHT)
 		randomColor: randomColor, 
 		allOff: allOff, 
 		numPixels: numPixels,
+		circle: circle,
 		setWideXYPixel: setWideXYPixel
 	};
 }
