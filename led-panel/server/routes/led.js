@@ -35,7 +35,6 @@ var setScreen = function(screen, r, g, b) {
 	var start = 0;
 	var end = SCREEN_HEIGHT;
 
-	console.log("screen: ", screen)
 	if(screen != 0)
 	{
 		start = SCREEN_HEIGHT * screen;
@@ -44,7 +43,6 @@ var setScreen = function(screen, r, g, b) {
 
 	for(var i=start; i<end; i++)
 	{
-		console.log("i: ", i);
 		setRow(i, r, g, b);
 	}
 }
