@@ -52,13 +52,16 @@
            .attr('r', 10)
            .attr('fill', 'rgb(255, 255, 255)');
 
+           setInterval(function() {
+             var updatePoint = randomPoint(width, height);
+             circle
+                .transition()
+                .attr('cx', updatePoint[0])
+                .attr('cy', updatePoint[1])
+                .attr('fill', 'red');
+           }, 3000);
+
         setInterval(function() {
-          var updatePoint = randomPoint(width, height);
-          circle
-             .transition()
-             .attr('cx', updatePoint[0])
-             .attr('cy', updatePoint[1])
-             // .attr('fill', );
           var circleAttrs = {
             'cx': circle.attr('cx'),
             'cy': circle.attr('cy'),
@@ -67,7 +70,7 @@
           var message = new Message('circle', circleAttrs);
           console.log("sending ", message.stringify());
           sock.send(message.stringify());
-        }, 3000);
+        }, 10);
       };
 
       function randomPoint(width, height) {

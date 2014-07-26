@@ -55,16 +55,18 @@ var setScreen = function(screen, r, g, b) {
 };
 
 var drawBitmap = function(bitmap) {
+	pixUtil.allOff();
 	for (var i = 0; i < bitmap.length; i++) {
 		var row = bitmap[i];
 		for (var j = 0; j < row.length; j++) {
 			var col = row[j];
 			if (col != null) {
 				// console.log(i, j, col[0], col[1], col[2]);
-				pixUtil.setXYPixel(i, j, col[0], col[1], col[2]);
+				pixUtil.setWideXYPixel(i, j, col[0], col[1], col[2]);
 			}
 		}
 	}
+	latch();
 };
 
 var latch = function() {

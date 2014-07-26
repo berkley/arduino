@@ -27,7 +27,7 @@ socket.on('connection', function(conn) {
 
         if (svgObject.type) {
             if (svgObject.type === 'circle') {
-                bitmap.circle(svgObject.attrs.cx, svgObject.attrs.cy, svgObject.attrs.r);
+                bitmap.circle(svgObject.attrs.cx, svgObject.attrs.cy, svgObject.attrs.r, svgObject.attrs.red, svgObject.attrs.green, svgObject.attrs.blue, svgObject.attrs.red, svgObject.attrs.green, svgObject.attrs.blue);
             }
         }
 
