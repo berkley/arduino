@@ -61,15 +61,17 @@
           circle
              .transition()
              .attr('cx', updatePoint[0])
-             .attr('cy', updatePoint[1])
-             // .attr('fill', );
+             .attr('cy', updatePoint[1]);
+          
+          var rgb = parseRgb(circle.attr('fill'));
+
           var circleAttrs = {
             'cx': circle.attr('cx'),
             'cy': circle.attr('cy'),
             'r': circle.attr('r'),
-            'red': circle.attr('fill'),
-            'green': circle.attr('fill'),
-            'blue': circle.attr('fill')
+            'red': rgb[0],
+            'green': rgb[1],
+            'blue': rgb[2]
           };
           var message = new Message('circle', circleAttrs);
           console.log("sending ", message.stringify());
@@ -82,6 +84,13 @@
         point[0] = Math.floor(Math.random() * width);
         point[1] = Math.floor(Math.random() * height);
         return point;
+      }
+
+      function parseRgb(string) {
+        var parsed = string.replace('rgb(', '');
+        parsed = parsed.replace(')', '');
+        parsed = parsed.replace(' ', '');
+        return parsed.split(',');
       }
     </script>
   </body>

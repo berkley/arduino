@@ -58,7 +58,7 @@
                 .transition()
                 .attr('cx', updatePoint[0])
                 .attr('cy', updatePoint[1])
-                .attr('fill', 'red');
+                // .attr('fill', );
            }, 3000);
 
         setInterval(function() {
@@ -68,9 +68,9 @@
             'r': circle.attr('r')
           };
           var message = new Message('circle', circleAttrs);
-          console.log("sending ", message.stringify());
+          // console.log("sending ", message.stringify());
           sock.send(message.stringify());
-        }, 10);
+        }, 5);
       };
 
       function randomPoint(width, height) {
