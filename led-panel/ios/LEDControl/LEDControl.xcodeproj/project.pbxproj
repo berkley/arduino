@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		61E7C79AB33C46A081FB92E6 /* libPods-LEDControl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A120044E91469D83A537E4 /* libPods-LEDControl.a */; };
 		CD37147819847EE500CC0F68 /* SWBasicFireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37147719847EE500CC0F68 /* SWBasicFireViewController.m */; };
+		CD37147B19848B4100CC0F68 /* SWFireController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37147A19848B4100CC0F68 /* SWFireController.m */; };
+		CD37148019848C8A00CC0F68 /* SWRadThingController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37147F19848C8A00CC0F68 /* SWRadThingController.m */; };
 		CD9565C219808C560081BB67 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9565C119808C560081BB67 /* Foundation.framework */; };
 		CD9565C419808C560081BB67 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9565C319808C560081BB67 /* CoreGraphics.framework */; };
 		CD9565C619808C560081BB67 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9565C519808C560081BB67 /* UIKit.framework */; };
@@ -40,8 +42,12 @@
 
 /* Begin PBXFileReference section */
 		380413DD423A46D7AFB9717C /* Pods-LEDControl.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LEDControl.xcconfig"; path = "Pods/Pods-LEDControl.xcconfig"; sourceTree = "<group>"; };
-		CD37147619847EE500CC0F68 /* SWBasicFireViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWBasicFireViewController.h; path = LEDControl/SWBasicFireViewController.h; sourceTree = "<group>"; };
-		CD37147719847EE500CC0F68 /* SWBasicFireViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWBasicFireViewController.m; path = LEDControl/SWBasicFireViewController.m; sourceTree = "<group>"; };
+		CD37147619847EE500CC0F68 /* SWBasicFireViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWBasicFireViewController.h; sourceTree = "<group>"; };
+		CD37147719847EE500CC0F68 /* SWBasicFireViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWBasicFireViewController.m; sourceTree = "<group>"; };
+		CD37147919848B4100CC0F68 /* SWFireController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWFireController.h; sourceTree = "<group>"; };
+		CD37147A19848B4100CC0F68 /* SWFireController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWFireController.m; sourceTree = "<group>"; };
+		CD37147E19848C8A00CC0F68 /* SWRadThingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRadThingController.h; sourceTree = "<group>"; };
+		CD37147F19848C8A00CC0F68 /* SWRadThingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRadThingController.m; sourceTree = "<group>"; };
 		CD9565BE19808C560081BB67 /* LEDControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LEDControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD9565C119808C560081BB67 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CD9565C319808C560081BB67 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -95,11 +101,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD37147C19848B5E00CC0F68 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CD37147E19848C8A00CC0F68 /* SWRadThingController.h */,
+				CD37147F19848C8A00CC0F68 /* SWRadThingController.m */,
+				CD9565FC1981F2830081BB67 /* SWLEDController.h */,
+				CD9565FD1981F2830081BB67 /* SWLEDController.m */,
+				CD37147919848B4100CC0F68 /* SWFireController.h */,
+				CD37147A19848B4100CC0F68 /* SWFireController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		CD37147D19848B6F00CC0F68 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CD9565D619808C560081BB67 /* SWMasterViewController.h */,
+				CD9565D719808C560081BB67 /* SWMasterViewController.m */,
+				CD9565F91981EF650081BB67 /* SWBasicLEDControlViewController.h */,
+				CD9565FA1981EF650081BB67 /* SWBasicLEDControlViewController.m */,
+				CD9565FF198202950081BB67 /* SWGyroViewController.h */,
+				CD956600198202950081BB67 /* SWGyroViewController.m */,
+				CD37147619847EE500CC0F68 /* SWBasicFireViewController.h */,
+				CD37147719847EE500CC0F68 /* SWBasicFireViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		CD9565B519808C560081BB67 = {
 			isa = PBXGroup;
 			children = (
-				CD37147619847EE500CC0F68 /* SWBasicFireViewController.h */,
-				CD37147719847EE500CC0F68 /* SWBasicFireViewController.m */,
 				CD9565C719808C560081BB67 /* LEDControl */,
 				CD9565E919808C570081BB67 /* LEDControlTests */,
 				CD9565C019808C560081BB67 /* Frameworks */,
@@ -132,19 +164,13 @@
 		CD9565C719808C560081BB67 /* LEDControl */ = {
 			isa = PBXGroup;
 			children = (
+				CD37147D19848B6F00CC0F68 /* ViewControllers */,
+				CD37147C19848B5E00CC0F68 /* Controllers */,
 				CD9565DC19808C560081BB67 /* Images.xcassets */,
 				CD9565C819808C560081BB67 /* Supporting Files */,
 				CD9565D319808C560081BB67 /* Main.storyboard */,
 				CD9565D019808C560081BB67 /* SWAppDelegate.h */,
 				CD9565D119808C560081BB67 /* SWAppDelegate.m */,
-				CD9565D619808C560081BB67 /* SWMasterViewController.h */,
-				CD9565D719808C560081BB67 /* SWMasterViewController.m */,
-				CD9565F91981EF650081BB67 /* SWBasicLEDControlViewController.h */,
-				CD9565FA1981EF650081BB67 /* SWBasicLEDControlViewController.m */,
-				CD9565FC1981F2830081BB67 /* SWLEDController.h */,
-				CD9565FD1981F2830081BB67 /* SWLEDController.m */,
-				CD9565FF198202950081BB67 /* SWGyroViewController.h */,
-				CD956600198202950081BB67 /* SWGyroViewController.m */,
 			);
 			path = LEDControl;
 			sourceTree = "<group>";
@@ -312,12 +338,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD9565D219808C560081BB67 /* SWAppDelegate.m in Sources */,
+				CD37147B19848B4100CC0F68 /* SWFireController.m in Sources */,
 				CD37147819847EE500CC0F68 /* SWBasicFireViewController.m in Sources */,
 				CD9565FB1981EF650081BB67 /* SWBasicLEDControlViewController.m in Sources */,
 				CD9565CE19808C560081BB67 /* main.m in Sources */,
 				CD9565FE1981F2830081BB67 /* SWLEDController.m in Sources */,
 				CD9565D819808C560081BB67 /* SWMasterViewController.m in Sources */,
 				CD956601198202950081BB67 /* SWGyroViewController.m in Sources */,
+				CD37148019848C8A00CC0F68 /* SWRadThingController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

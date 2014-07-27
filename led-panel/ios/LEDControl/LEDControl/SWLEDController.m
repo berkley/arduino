@@ -31,23 +31,6 @@ SWLEDController *controller;
     return self;
 }
 
-- (void)sendRESTCommand:(NSString*)command
-{
-         NSString *url = [NSString stringWithFormat:@"http://%@%@", self.restAddress, command];
-         NSLog(@"url: %@", url);
-         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]
-                                                                cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                            timeoutInterval:10];
-
-         [request setHTTPMethod: @"GET"];
-
-         NSError *requestError;
-         NSURLResponse *urlResponse = nil;
-
-         [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-         NSLog(@"requestError: %@", requestError);
-}
-
 - (void)setPixel:(NSInteger)pixel red:(NSInteger)r green:(NSInteger)g blue:(NSInteger)b
 {
     NSString *cmd = [NSString stringWithFormat:@"/pixel/set/%i/%i/%i/%i", pixel, r, g, b];

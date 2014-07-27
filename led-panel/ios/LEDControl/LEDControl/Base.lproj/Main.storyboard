@@ -147,6 +147,9 @@
                                     <color key="titleColor" red="1" green="0.1145867518" blue="0.10984339410000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="fire1ButtonTouched:" destination="lHx-pg-xNA" eventType="touchUpInside" id="wgH-Cj-DwF"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TMM-H8-Opv">
                                 <rect key="frame" x="111" y="152" width="99" height="30"/>
@@ -155,6 +158,9 @@
                                     <color key="titleColor" red="1" green="0.1145867518" blue="0.10984339410000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="seq123ButtonTouched:" destination="lHx-pg-xNA" eventType="touchUpInside" id="Ot2-jI-vSD"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n7p-TU-VqK">
                                 <rect key="frame" x="111" y="216" width="99" height="30"/>
@@ -163,6 +169,9 @@
                                     <color key="titleColor" red="1" green="0.1145867518" blue="0.10984339410000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="seq321ButtonTouched:" destination="lHx-pg-xNA" eventType="touchUpInside" id="1bJ-Vj-L6Q"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7sg-LL-IEc">
                                 <rect key="frame" x="141" y="82" width="39" height="30"/>
@@ -171,6 +180,9 @@
                                     <color key="titleColor" red="1" green="0.1145867518" blue="0.10984339410000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="fire2ButtonTouched:" destination="lHx-pg-xNA" eventType="touchUpInside" id="6A7-gl-kBS"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ca-p7-Tm7">
                                 <rect key="frame" x="261" y="82" width="39" height="30"/>
@@ -179,6 +191,9 @@
                                     <color key="titleColor" red="1" green="0.1145867518" blue="0.10984339410000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="fire3ButtonTouched:" destination="lHx-pg-xNA" eventType="touchUpInside" id="oT3-2V-0If"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ObF-Qa-fGM">
                                 <rect key="frame" x="111" y="282" width="90" height="30"/>
@@ -187,6 +202,9 @@
                                     <color key="titleColor" red="1" green="0.1145867518" blue="0.10984339410000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="seqAllButtonTouched:" destination="lHx-pg-xNA" eventType="touchUpInside" id="Yyd-3y-8ML"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
