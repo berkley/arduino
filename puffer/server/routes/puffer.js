@@ -1,5 +1,41 @@
 var pcon = require('../puffer-controller');
 
+exports.p1 = function(req, res)
+{
+	pcon.puffMulti(1, 0, 0, 0, 0);
+	res.send(200, {"status":"OK"});
+};
+
+exports.p2 = function(req, res)
+{
+	pcon.puffMulti(0, 1, 0, 0, 0);
+	res.send(200, {"status":"OK"});
+};
+
+exports.p3 = function(req, res)
+{
+	pcon.puffMulti(0, 0, 1, 0, 0);
+	res.send(200, {"status":"OK"});
+};
+
+exports.p123 = function(req, res)
+{
+	pcon.puffSeq('SEQ_123');
+	res.send(200, {"status":"OK"});
+};
+
+exports.p321 = function(req, res)
+{
+	pcon.puffSeq('SEQ_321');
+	res.send(200, {"status":"OK"});
+};
+
+exports.pAll = function(req, res)
+{
+	pcon.puffSeq('SEQ_ALL');
+	res.send(200, {"status":"OK"});
+};
+
 exports.puff = function(req, res) {
 	console.log("puffing with body: ", req.body );
 	var body = req.body;
@@ -11,16 +47,11 @@ exports.puff = function(req, res) {
 	// 	"puffer4": 1,
 	// 	"puffer5": 1
 	// }
-
-	var done = function() {
-		res.send(200, {message:"OK"});
-	};
-
 	pcon.puffMulti(body.puffer1, 
 		           body.puffer2, 
 		           body.puffer3, 
 		           body.puffer4, 
 		           body.puffer5);
 
-	done();
+	res.send(200, {"status":"OK"});
 };

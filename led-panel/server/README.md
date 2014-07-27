@@ -17,6 +17,13 @@ REST routes
 * GET /col/set/:col/:r/:g/:b - set col to RGB
 * GET /col/latch/:col/:r/:g/:b - latch col to RGB
 * GET /latch - latch (display) the current buffer
+* GET /screen/set/:screen/:r/:g/:b - set screen to RGB
+* GET /screen/latch/:screen/:r/:g/:b - latch screen to RGB
+* GET /line/set/:x1/:y1/:x2/:y2/:r/:g/:b - set a line from (x1, y1) to (x2, y2) in RGB
+* GET /line/latch/:x1/:y1/:x2/:y2/:r/:g/:b - latch a line from (x1, y1) to (x2, y2) in RGB
+* POST /bitmap/set - set a bitmap to the panel array.  The POST body is a json array of RGB values.
+* POST /bitmap/latch - latch a bitmap to the panel array.  The POST body is a json array of RGB values.
+
 
 TODO
 ====
