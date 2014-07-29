@@ -1,6 +1,7 @@
 This server provides REST and WebSocket connects to the LED panel configured by a running fadecandy server.  
 
-Port: 3000
+REST Port: 3000
+WebSocket Port: 3001
 
 Note that for all REST "set" routes, you must call /latch after setting the buffer.  If you call the "latch" routes, latch will be called for you.
 
