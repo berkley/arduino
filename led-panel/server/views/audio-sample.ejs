@@ -26,11 +26,18 @@
     <script type="text/javascript">
       var width = 48;
       var height = 24;
-      var cellSize = 4;
+      var cellSize = 12;
       var cols = width / cellSize;
       var rows = height / cellSize;
       var sock = new SockJS('http://localhost:3000/socket');
       var svg, bitmap;
+
+      setInterval(function() {
+        var cellSizes = [1,2,4,8,12,24];
+        cellSize = cellSizes[Math.floor(Math.random() * cellSizes.length)];
+        cols = width / cellSize;
+        rows = height / cellSize;
+      }, getRandomInt(1500, 4000));
 
       sock.onopen = function() {
         var row, col, color;
@@ -67,6 +74,10 @@
         point[1] = Math.floor(Math.random() * height);
         return point;
       }
+
+      function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
       
       function randomColor(format) {
         var rint = Math.round(0xffffff * Math.random());
@@ -74,61 +85,63 @@
       }
       var context = new AudioContext()
 
-        // Create lineOut
-        var lineOut = new WebAudiox.LineOut(context)
-        lineOut.volume  = 0;
+      // Create lineOut
+      var lineOut = new WebAudiox.LineOut(context)
+      lineOut.volume  = 0;
 
-        var analyser  = context.createAnalyser()
-        analyser.connect(lineOut.destination);
-        lineOut.destination = analyser;
+      var analyser  = context.createAnalyser()
+      analyser.connect(lineOut.destination);
+      lineOut.destination = analyser;
+      
+      // get microphone as source
+      navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
+      navigator.getUserMedia( {audio:true},  function gotStream(stream) {
+       // Create an AudioNode from the stream.
+       var source  = context.createMediaStreamSource( stream );
         
-        // get microphone as source
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
-        navigator.getUserMedia( {audio:true},  function gotStream(stream) {
-         // Create an AudioNode from the stream.
-         var source  = context.createMediaStreamSource( stream );
-          
-         source.connect(lineOut.destination);
-        }, function didntGetStream(e) {
-          console.log("e", e);
-        });  
-        
-        
-        var analyser2volume = new WebAudiox.Analyser2Volume(analyser);
+       source.connect(lineOut.destination);
+      }, function didntGetStream(e) {
+        console.log("e", e);
+      });  
+      
+      
+      var analyser2volume = new WebAudiox.Analyser2Volume(analyser);
 
 
-        /**
-           * note on how to compute bpm
-           * - store the timestamp of each beat
-           * - store only the last 100
-           * - do a statistical computation on those timestamp to get bpm estimation
-           *   - simple average is one
-           *   - remove monster values in your average" 
-           *   - a simple median ?
-           *   - see http://en.wikipedia.org/wiki/Robust_statistics for details
-           * - do a dat gui to tune those parameters
-           * - test estimator by simulating a beat
-           */
+      /**
+         * note on how to compute bpm
+         * - store the timestamp of each beat
+         * - store only the last 100
+         * - do a statistical computation on those timestamp to get bpm estimation
+         *   - simple average is one
+         *   - remove monster values in your average" 
+         *   - a simple median ?
+         *   - see http://en.wikipedia.org/wiki/Robust_statistics for details
+         * - do a dat gui to tune those parameters
+         * - test estimator by simulating a beat
+         */
 
-          var beatDetector= new WebAudiox.AnalyserBeatDetector(analyser, function(){
-            console.log('beat');
-            for (var i = 0; i < rows; i++) {
-              row = i * cellSize;
-              for (var j = 0; j < cols; j++) {
-                col = j * cellSize;
-                color = randomColor('rgb');
+        var beatDetector = new WebAudiox.AnalyserBeatDetector(analyser, function(){
+          console.log('beat');
+          for (var i = 0; i < rows; i++) {
+            row = i * cellSize;
+            for (var j = 0; j < cols; j++) {
+              col = j * cellSize;
+              color = randomColor('rgb');
+              if (bitmap != null) {
                 bitmap.drawRect(col, row, col + cellSize, row + cellSize, color[0], color[1], color[2]);
               }
             }
+          }
 
-            bitmap.drawSVG();
-            // bitmap.debugFrame();
-          });
-          WebAudiox.addAnalyserBeatDetectorDatGui(beatDetector)
-          // loop and update
-          setInterval(function(){
-            beatDetector.update(1/60)
-          }, 1000/60);
+          bitmap.drawSVG();
+          // bitmap.debugFrame();
+        });
+        WebAudiox.addAnalyserBeatDetectorDatGui(beatDetector);
+        // loop and update
+        setInterval(function(){
+          beatDetector.update(1/60)
+        }, 1000/60);
     </script>
   </body>
 </html>
