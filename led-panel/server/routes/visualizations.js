@@ -14,3 +14,7 @@ exports.bezier = function(req, res){
 exports.sample = function(req, res){
   res.render('sample', { title: 'Express' });
 };
+
+exports.audioSample = function(req, res){
+  res.render('audio-sample', { title: 'Express' });
+};
