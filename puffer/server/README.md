@@ -1,7 +1,7 @@
 #Flame Effect Controls
 
-REST Port: 4000
-WS Port: 4001
+* REST Port: 4000
+* WebSocket Port: 4001
 
 Backend Express Routes
 ==============
