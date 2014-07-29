@@ -27,16 +27,15 @@ socket.on('connection', function(conn) {
 
         if (svgObject.type) {
             if (svgObject.type === 'circle') {
-                bitmap.circle(svgObject.attrs.cx, svgObject.attrs.cy, svgObject.attrs.r, svgObject.attrs.red, svgObject.attrs.green, svgObject.attrs.blue, svgObject.attrs.red, svgObject.attrs.green, svgObject.attrs.blue);
+                bitmap.circle(svgObject.attrs.cx, svgObject.attrs.cy, svgObject.attrs.r);
+                bitmap.draw();
+                led.drawBitmap(bitmap.data);
+            }
+            else if (svgObject.type === 'bitmap') {
+                led.drawBitmap(svgObject.bitmap);
             }
         }
 
-        bitmap.draw();
-        // bitmap.debugFrame();
-
-        led.drawBitmap(bitmap.data);
-
-    	console.log("data", message);
         for (var ii=0; ii < connections.length; ii++) {
             connections[ii].write("User " + number + " says: " + message);
         }
@@ -85,6 +84,8 @@ app.get('/line/latch/:x1/:y1/:x2/:y2/:r/:g/:b', led.latchLine);
 // app.get('/program', led.getPrograms)
 
 app.get('/sample', visualizations.sample);
+app.get('/audio-sample', visualizations.audioSample);
+app.get('/bar-volume', visualizations.barVolume);
 
 var server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
