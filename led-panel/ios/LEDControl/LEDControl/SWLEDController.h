@@ -7,17 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "SWRadThingController.h"
 /*
  controller for REST and WebSocket based LED controls
  */
-@interface SWLEDController : NSObject
+@interface SWLEDController : SWRadThingController
 {
 
 }
-
-@property (nonatomic, strong) NSString *restAddress;
-@property (nonatomic, strong) NSString *wsAddress;
 
 + (SWLEDController*)instance;
 - (void)setPixel:(NSInteger)pixel red:(NSInteger)r green:(NSInteger)g blue:(NSInteger)b;

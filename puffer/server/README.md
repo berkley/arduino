@@ -1,16 +1,24 @@
 #Flame Effect Controls
 
+REST Port: 4000
+WS Port: 4001
+
 Backend Express Routes
 ==============
-* POST http://localhost:5000/puff - puff 1 or more puffers.
+* POST /puff - puff 1 or more puffers.
   JSON body looks like: 
 	{
 		"puffer1": 0,
 		"puffer2": 1,
 		"puffer3": 0, 
-		"puffer4": 1,
-		"puffer5": 1
 	}
+* GET /puff/p1 - fire puffer 1
+* GET /puff/p2 - fire puffer 2
+* GET /puff/p3 - fire puffer 3
+* GET /puff/s123 - fire the 123 sequence
+* GET /puff/s321 - fire the 321 sequence
+* GET /puff/sAll - fire all puffers at once
+
 
 * WebSocket connection
 	- the puffers can be controlled via websockets by sending a json formatted command.
@@ -36,7 +44,7 @@ Backend Express Routes
     ("SEQ_321":1}
     ("SEQ_ALL":1}
 
-    Any sequence command that puffer-controller.js can handle can be sent over the websocket on port 8080.
+    Any sequence command that puffer-controller.js can handle can be sent over the websocket on port 4001.
 
 LeapMotion Support
 ==============

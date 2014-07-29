@@ -66,12 +66,15 @@
           var circleAttrs = {
             'cx': circle.attr('cx'),
             'cy': circle.attr('cy'),
-            'r': circle.attr('r')
+            'r': circle.attr('r'),
+            'red': circle.attr('fill'),
+            'green': circle.attr('fill'),
+            'blue': circle.attr('fill')
           };
           var message = new Message('circle', circleAttrs);
           console.log("sending ", message.stringify());
           sock.send(message.stringify());
-        }, 3000);
+        }, 30);
       };
 
       function randomPoint(width, height) {
