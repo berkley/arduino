@@ -76,7 +76,7 @@
 
         // Create lineOut
         var lineOut = new WebAudiox.LineOut(context)
-        lineOut.volume  = 0.2
+        lineOut.volume  = 0;
 
         var analyser  = context.createAnalyser()
         analyser.connect(lineOut.destination);
@@ -122,6 +122,7 @@
             }
 
             bitmap.drawSVG();
+            // bitmap.debugFrame();
           });
           WebAudiox.addAnalyserBeatDetectorDatGui(beatDetector)
           // loop and update

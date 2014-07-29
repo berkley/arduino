@@ -36,8 +36,6 @@ socket.on('connection', function(conn) {
             }
         }
 
-
-    	console.log("data", message);
         for (var ii=0; ii < connections.length; ii++) {
             connections[ii].write("User " + number + " says: " + message);
         }
