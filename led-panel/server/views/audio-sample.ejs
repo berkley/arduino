@@ -121,27 +121,27 @@
          * - test estimator by simulating a beat
          */
 
-        var beatDetector = new WebAudiox.AnalyserBeatDetector(analyser, function(){
-          console.log('beat');
-          for (var i = 0; i < rows; i++) {
-            row = i * cellSize;
-            for (var j = 0; j < cols; j++) {
-              col = j * cellSize;
-              color = randomColor('rgb');
-              if (bitmap != null) {
-                bitmap.drawRect(col, row, col + cellSize, row + cellSize, color[0], color[1], color[2]);
-              }
+      var beatDetector = new WebAudiox.AnalyserBeatDetector(analyser, function(){
+        console.log('beat');
+        for (var i = 0; i < rows; i++) {
+          row = i * cellSize;
+          for (var j = 0; j < cols; j++) {
+            col = j * cellSize;
+            color = randomColor('rgb');
+            if (bitmap != null) {
+              bitmap.drawRect(col, row, col + cellSize, row + cellSize, color[0], color[1], color[2]);
             }
           }
+        }
 
-          bitmap.drawSVG();
-          // bitmap.debugFrame();
-        });
-        WebAudiox.addAnalyserBeatDetectorDatGui(beatDetector);
-        // loop and update
-        setInterval(function(){
-          beatDetector.update(1/60)
-        }, 1000/60);
+        bitmap.drawSVG();
+        // bitmap.debugFrame();
+      });
+      WebAudiox.addAnalyserBeatDetectorDatGui(beatDetector);
+      // loop and update
+      setInterval(function(){
+        beatDetector.update(1/60)
+      }, 1000/60);
     </script>
   </body>
 </html>

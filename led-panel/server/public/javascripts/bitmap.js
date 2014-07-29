@@ -27,7 +27,13 @@ Bitmap.prototype.drawSVG = function() {
 			col = this.svgPixels[c];
 			for (r in col) {
 				row = this.data[c][r];
-				color = "rgb(" + row[0] + "," + row[1] + "," + row[2] + ")";
+				if (row != null) {
+					color = "rgb(" + row[0] + "," + row[1] + "," + row[2] + ")";	
+				}
+				else {
+					color = "rgb(255,255,255)";
+				}
+				
 				this.svgPixels[c][r].attr('fill', color);
 			}
 		}
@@ -71,6 +77,9 @@ Bitmap.prototype.drawRect = function(x1, y1, x2, y2, r, g, b) {
 	}
 
 	for (var i = x1; i < x2; i++) {
+		if (this.data[i] == null) {
+			// this.data[i] = [];
+		}
 		for (var j = y1; j < y2; j++) {
 			this.data[i][j] = [r, g, b];
 		}

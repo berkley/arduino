@@ -18,3 +18,7 @@ exports.sample = function(req, res){
 exports.audioSample = function(req, res){
   res.render('audio-sample', { title: 'Express' });
 };
+
+exports.barVolume = function(req, res){
+  res.render('bar-volume', { title: 'Express' });
+};
