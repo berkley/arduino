@@ -24,7 +24,7 @@ Backend Express Routes
 	- the puffers can be controlled via websockets by sending a json formatted command.
 	Here's some example code:
 	var webSocket = require('ws');
-	var ws = new webSocket('ws://127.0.0.1:8080');
+	var ws = new webSocket('ws://127.0.0.1:4001');
     ws.on('message', function(data, flags) {
         var json = JSON.parse(data);
         console.log("websocket msg rcvd: ", json);
