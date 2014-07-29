@@ -1,7 +1,7 @@
 var five = require("johnny-five");
 
 var WebSocketServer = require('ws').Server
-  , wss = new WebSocketServer({port: 8080});
+  , wss = new WebSocketServer({port: 4001});
 wss.on('connection', function(ws) {
     ws.on('message', function(message) {
         console.log('received: %s', message);
@@ -39,6 +39,23 @@ var SEQ_CIRCLE = 0;
 //set this to 1 when the arduino is connected, 
 //set to 0 for debugging without and arduino
 var BOARD_CONNECTED = 1;
+
+exports.puffSeq = function(seq) {
+	SEQ_123 = 0;
+	SEQ_321 = 0;
+	SEQ_ALL = 0;
+
+	if(seq == 'SEQ_123')
+		SEQ_123 = 1;
+	else if(seq == 'SEQ_321')
+		SEQ_321 = 1;
+	else if(seq == 'SEQ_ALL')
+		SEQ_ALL = 1;
+
+	console.log("SEQ_123: ", SEQ_123);
+	console.log("SEQ_321: ", SEQ_321);
+	console.log("SEQ_ALL: ", SEQ_ALL);
+};
 
 exports.puffMulti = function(p1, p2, p3, p4, p5) {
 	P1_ON = 0;

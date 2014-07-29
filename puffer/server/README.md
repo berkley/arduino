@@ -1,16 +1,50 @@
 #Flame Effect Controls
 
+* REST Port: 4000
+* WebSocket Port: 4001
+
 Backend Express Routes
 ==============
-* POST http://localhost:5000/puff - puff 1 or more puffers.
+* POST /puff - puff 1 or more puffers.
   JSON body looks like: 
 	{
 		"puffer1": 0,
 		"puffer2": 1,
 		"puffer3": 0, 
-		"puffer4": 1,
-		"puffer5": 1
 	}
+* GET /puff/p1 - fire puffer 1
+* GET /puff/p2 - fire puffer 2
+* GET /puff/p3 - fire puffer 3
+* GET /puff/s123 - fire the 123 sequence
+* GET /puff/s321 - fire the 321 sequence
+* GET /puff/sAll - fire all puffers at once
+
+
+* WebSocket connection
+	- the puffers can be controlled via websockets by sending a json formatted command.
+	Here's some example code:
+	var webSocket = require('ws');
+	var ws = new webSocket('ws://127.0.0.1:4001');
+    ws.on('message', function(data, flags) {
+        var json = JSON.parse(data);
+        console.log("websocket msg rcvd: ", json);
+    });
+
+    ws.on('open', function() {
+        console.log("sending command");
+        // ws.send('{"P1_ON":1, "P2_ON":0, "P3_ON":0, "P4_ON":0, "P5_ON":0}');
+        ws.send('{"SEQ_123":1}');
+    });
+
+    The json format includes commands for the following:
+    {"P1_ON":1}
+    {"P2_ON":1}
+    {"P3_ON":1}
+    ("SEQ_123":1}
+    ("SEQ_321":1}
+    ("SEQ_ALL":1}
+
+    Any sequence command that puffer-controller.js can handle can be sent over the websocket on port 4001.
 
 LeapMotion Support
 ==============
