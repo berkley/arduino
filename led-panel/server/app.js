@@ -15,6 +15,8 @@ var connections = [];
 var socket = sockjs.createServer();
 
 socket.on('connection', function(conn) {
+    // console.log("\n\nSOCKET CONNECTION\n\n",conn, "\n\n");
+
     connections.push(conn);
     var number = connections.length;
     conn.write("Welcome, User " + number);
@@ -33,11 +35,12 @@ socket.on('connection', function(conn) {
             }
             else if (svgObject.type === 'bitmap') {
                 led.drawBitmap(svgObject.bitmap);
-            }
-        }
 
-        for (var ii=0; ii < connections.length; ii++) {
-            connections[ii].write("User " + number + " says: " + message);
+                // Send the bitmap to other clients
+                for (var ii=0; ii < connections.length; ii++) {
+                    connections[ii].write(message);
+                }
+            }
         }
     });
 
