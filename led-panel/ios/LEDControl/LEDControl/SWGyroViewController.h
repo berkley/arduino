@@ -12,6 +12,7 @@
 #import "SWLEDController.h"
 
 #define chunk 360.0/255.0
+#define degrees(x) (180.0 * x / M_PI)
 
 @interface SWGyroViewController : UIViewController <SRWebSocketDelegate>
 {

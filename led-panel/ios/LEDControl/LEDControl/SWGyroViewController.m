@@ -35,7 +35,6 @@ double b;
 {
     [self.motionManager startDeviceMotionUpdatesToQueue:opQueue withHandler:^(CMDeviceMotion *motion, NSError *error)
     {
-         #define degrees(x) (180.0 * x / M_PI)
          double roll = degrees(self.motionManager.deviceMotion.attitude.roll);   //180 < roll > -180
          double yaw  = degrees(self.motionManager.deviceMotion.attitude.yaw);    //180 < pitch > -180
          double pitch = degrees(self.motionManager.deviceMotion.attitude.pitch) * 2;  //90 < pitch > -90

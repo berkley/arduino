@@ -16,6 +16,7 @@ double r;
 double g;
 double b;
 double accumulator;
+int threshold;
 
 @implementation SWKineticEnergyAccumulatorViewController
 
@@ -23,7 +24,7 @@ double accumulator;
 {
     [self.motionManager startDeviceMotionUpdatesToQueue:opQueue withHandler:^(CMDeviceMotion *motion, NSError *error)
      {
-#define degrees(x) (180.0 * x / M_PI)
+
          double roll = degrees(self.motionManager.deviceMotion.attitude.roll);   //180 < roll > -180
          double yaw  = degrees(self.motionManager.deviceMotion.attitude.yaw);    //180 < pitch > -180
          double pitch = degrees(self.motionManager.deviceMotion.attitude.pitch) * 2;  //90 < pitch > -90
@@ -40,7 +41,7 @@ double accumulator;
          if(yaw < 0) yaw *= -1;
          if(pitch < 0) pitch *= -1;
          
-         NSLog(@"accelX: %f accelY: %f accelZ: %f", accelX, accelY, accelZ);
+//         NSLog(@"accelX: %f accelY: %f accelZ: %f", accelX, accelY, accelZ);
          
          
          accumulator += accelX + accelY + accelZ;
@@ -69,7 +70,7 @@ double accumulator;
          
 //         NSLog(@"r: %i, g: %i, b: %i", (int)r, (int)g, (int)b);
          
-         NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"latchScreen\", \"screen\":\"%i\", \"r\":\"%i\", \"g\":\"%i\", \"b\":\"%i\"}", (int)screen, (int)r, (int)g, (int)b];
+         NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"accumRow\", \"value\":\"%i\", \"screen\":\"%i\", \"r\":\"%i\", \"g\":\"%i\", \"b\":\"%i\"}", (int)accumulator, (int)screen, (int)r, (int)g, (int)b];
          //        NSLog(@"cmd: %@", cmd);
          [self.webSocket send:cmd];
      }];
@@ -95,6 +96,10 @@ double accumulator;
     accumulator = 0;
 }
 
+- (IBAction)thresholdValueChanged:(id)sender {
+    threshold = [self.thresholdTextField.text intValue];
+    NSLog(@"threshold is: %i", threshold);
+}
 
 - (void)viewDidLoad
 {
@@ -105,6 +110,8 @@ double accumulator;
 {
     [super viewDidAppear:animated];
     accumulator = 0;
+    threshold = [self.thresholdTextField.text intValue];
+    NSLog(@"threshold is: %i", threshold);
 }
 
 - (void)didReceiveMemoryWarning

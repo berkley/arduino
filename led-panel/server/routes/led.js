@@ -31,6 +31,11 @@ var setCol = function(col, r, g, b) {
 	pixUtil.setColumn(col, r, g, b);
 };
 
+var setRowOnScreen = function(screen, row, r, g, b) {
+	var trueRow = (screen * SCREEN_HEIGHT) + row;
+	setRow(trueRow, r, g, b);
+}
+
 var setScreen = function(screen, r, g, b) {
 	var start = 0;
 	var end = SCREEN_HEIGHT;
@@ -197,6 +202,13 @@ exports.setRow = function(req, res) {
 	res.send("{status:ok}");
 };
 
+exports.setRowOnScreen = function(req, res) {
+	var params = req.params;
+	setRowOnScreen(parseInt(params.screen), parseInt(params.row), 
+		parseInt(params.r), parseInt(params.g), parseInt(params.b));
+	res.send("{status:ok}");
+};
+
 exports.latchRow = function(req, res) {
 	var params = req.params;
 	var row = params.row;
@@ -204,6 +216,14 @@ exports.latchRow = function(req, res) {
 	var g = params.g;
 	var b = params.b;
 	setRow(row, r, g, b);
+	latch();
+	res.send("{status:ok}");
+};
+
+exports.latchRowOnScreen = function(req, res) {
+	var params = req.params;
+	setRowOnScreen(parseInt(params.screen), parseInt(params.row), 
+		parseInt(params.r), parseInt(params.g), parseInt(params.b));
 	latch();
 	res.send("{status:ok}");
 };
