@@ -7,6 +7,7 @@
 //
 
 #import "SWKineticEnergyAccumulatorViewController.h"
+#import "SWFireController.h"
 
 @interface SWKineticEnergyAccumulatorViewController ()
 
@@ -20,6 +21,7 @@ int threshold;
 int numRows = 24;
 int prevRow;
 int currentRow;
+int goal;
 
 @implementation SWKineticEnergyAccumulatorViewController
 
@@ -67,28 +69,63 @@ int currentRow;
          [vals setObject:[NSNumber numberWithDouble:accelY] forKey:@"accelY"];
          [vals setObject:[NSNumber numberWithDouble:accelZ] forKey:@"accelZ"];
          [vals setObject:[NSNumber numberWithDouble:accumulator] forKey:@"accumulator"];
+         [vals setObject:[NSNumber numberWithDouble:goal] forKey:@"goal"];
+         [vals setObject:[NSNumber numberWithDouble:currentRow] forKey:@"row"];
          
          
          [self performSelectorOnMainThread:@selector(updateLabels:) withObject:vals waitUntilDone:NO];
          
          //set the accumulated values
-         int accumChunk = 1;
-         int breakPoint = threshold / numRows;
-         NSLog(@"accumChunk: %i", accumChunk);
-         NSLog(@"breakPoint: %i", breakPoint);
-         int newPosition = accumulator * 2;
-         NSLog(@"newPos: %i", newPosition);
-         if(newPosition >= (breakPoint * currentRow))
+         NSLog(@"accum: %i, goal: %i, currentRow: %i",
+               (int)accumulator, goal, currentRow);
+         if(accumulator >= goal)
          {
-             prevRow = currentRow;
-             currentRow = newPosition;
-             NSLog(@"currentRow: %i", currentRow);
-             NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"latchRowOnScreen\", \"row\":\"%i\", \"screen\":\"%i\", \"r\":\"%i\", \"g\":\"%i\", \"b\":\"%i\"}", (int)currentRow, (int)screen, (int)r, (int)g, (int)b];
-             //        NSLog(@"cmd: %@", cmd);
-             [self.webSocket send:cmd];
-             
+             goal += (threshold / numRows);
+             if(goal >= threshold)
+             {
+                 NSLog(@"someone won!");
+                 [[SWFireController instance] seq123];
+                 [[SWFireController instance] seq123];
+                 if(screen == 0)
+                 {
+                     [[SWFireController instance] puff1];
+                     [[SWFireController instance] puff1];
+                     [[SWFireController instance] puff1];
+                 }
+                 else if(screen == 1)
+                 {
+                     [[SWFireController instance] puff2];
+                     [[SWFireController instance] puff2];
+                     [[SWFireController instance] puff2];
+                 }
+                 else if(screen == 2)
+                 {
+                     [[SWFireController instance] puff3];
+                     [[SWFireController instance] puff3];
+                     [[SWFireController instance] puff3];
+                 }
+                 else
+                 {
+                     [[SWFireController instance] seqAll];
+                     [[SWFireController instance] seqAll];
+                     [[SWFireController instance] seqAll];
+                 }
+                 
+                 goal = threshold / numRows;
+                 accumulator = 0;
+                 currentRow = 0;
+                 
+                 NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"allOff\"}"];
+                 [self.webSocket send:cmd];
+             }
+             else
+             {
+                 currentRow++;
+                 NSLog(@"$$$$$ currentRow: %i", currentRow);
+                 NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"latchRowOnScreen\", \"row\":\"%i\", \"screen\":\"%i\", \"r\":\"%i\", \"g\":\"%i\", \"b\":\"%i\"}", (int)currentRow, (int)screen, (int)r, (int)g, (int)b];
+                 [self.webSocket send:cmd];
+             }
          }
-         
      }];
 }
 
@@ -103,7 +140,9 @@ int currentRow;
     self.accelXLabel.text = [NSString stringWithFormat:@"%f", [[vals objectForKey:@"accelX"] floatValue]];
     self.accelYLabel.text = [NSString stringWithFormat:@"%f", [[vals objectForKey:@"accelY"] floatValue]];
     self.accelZLabel.text = [NSString stringWithFormat:@"%f", [[vals objectForKey:@"accelZ"] floatValue]];
-    self.accumLabel.text = [NSString stringWithFormat:@"%f", [[vals objectForKey:@"accumulator"] floatValue]];
+    self.accumLabel.text = [NSString stringWithFormat:@"%i", [[vals objectForKey:@"accumulator"] intValue]];
+    self.goalLabel.text = [NSString stringWithFormat:@"%i", [[vals objectForKey:@"goal"] intValue]];
+    self.rowLabel.text = [NSString stringWithFormat:@"%i", [[vals objectForKey:@"row"] intValue]];
 }
 
 #pragma mark - selectors
@@ -112,15 +151,10 @@ int currentRow;
     accumulator = 0;
     prevRow = 0;
     currentRow = 0;
-    threshold = [self.thresholdTextField.text intValue];
+    threshold = 1000;
+    goal = threshold / numRows;
     NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"allOff\"}"];
-    //        NSLog(@"cmd: %@", cmd);
     [self.webSocket send:cmd];
-}
-
-- (IBAction)thresholdValueChanged:(id)sender {
-    threshold = [self.thresholdTextField.text intValue];
-    NSLog(@"threshold is: %i", threshold);
 }
 
 - (IBAction)screen1Touched:(id)sender {
@@ -157,20 +191,27 @@ int currentRow;
 
 - (void)viewDidLoad
 {
+    screen = 0;
+    goal = threshold / numRows;
     [super viewDidLoad];
+    [self resetButtonTouched:nil];
+    NSLog(@"threshold is: %i", threshold);
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    screen = 0;
-    [self resetButtonTouched:nil];
-    NSLog(@"threshold is: %i", threshold);
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    [self.motionManager stopDeviceMotionUpdates];
+    [opQueue cancelAllOperations];
+    [opQueue waitUntilAllOperationsAreFinished];
+    self.webSocket.delegate = nil;
+    self.webSocket = nil;
 }
 
 - (void)didReceiveMemoryWarning

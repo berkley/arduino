@@ -26,7 +26,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *accelYLabel;
 @property (weak, nonatomic) IBOutlet UILabel *accelZLabel;
 @property (weak, nonatomic) IBOutlet UILabel *accumLabel;
-@property (weak, nonatomic) IBOutlet UITextField *thresholdTextField;
+@property (weak, nonatomic) IBOutlet UILabel *goalLabel;
+@property (weak, nonatomic) IBOutlet UILabel *rowLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *screen2Button;
 @property (weak, nonatomic) IBOutlet UIButton *screen1Button;
