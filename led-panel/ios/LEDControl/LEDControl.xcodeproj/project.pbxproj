@@ -11,6 +11,7 @@
 		CD37147819847EE500CC0F68 /* SWBasicFireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37147719847EE500CC0F68 /* SWBasicFireViewController.m */; };
 		CD37147B19848B4100CC0F68 /* SWFireController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37147A19848B4100CC0F68 /* SWFireController.m */; };
 		CD37148019848C8A00CC0F68 /* SWRadThingController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37147F19848C8A00CC0F68 /* SWRadThingController.m */; };
+		CD37148319892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37148219892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.m */; };
 		CD9565C219808C560081BB67 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9565C119808C560081BB67 /* Foundation.framework */; };
 		CD9565C419808C560081BB67 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9565C319808C560081BB67 /* CoreGraphics.framework */; };
 		CD9565C619808C560081BB67 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9565C519808C560081BB67 /* UIKit.framework */; };
@@ -48,6 +49,8 @@
 		CD37147A19848B4100CC0F68 /* SWFireController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWFireController.m; sourceTree = "<group>"; };
 		CD37147E19848C8A00CC0F68 /* SWRadThingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRadThingController.h; sourceTree = "<group>"; };
 		CD37147F19848C8A00CC0F68 /* SWRadThingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRadThingController.m; sourceTree = "<group>"; };
+		CD37148119892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWKineticEnergyAccumulatorViewController.h; sourceTree = "<group>"; };
+		CD37148219892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWKineticEnergyAccumulatorViewController.m; sourceTree = "<group>"; };
 		CD9565BE19808C560081BB67 /* LEDControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LEDControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD9565C119808C560081BB67 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CD9565C319808C560081BB67 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -125,6 +128,8 @@
 				CD956600198202950081BB67 /* SWGyroViewController.m */,
 				CD37147619847EE500CC0F68 /* SWBasicFireViewController.h */,
 				CD37147719847EE500CC0F68 /* SWBasicFireViewController.m */,
+				CD37148119892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.h */,
+				CD37148219892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -340,6 +345,7 @@
 				CD9565D219808C560081BB67 /* SWAppDelegate.m in Sources */,
 				CD37147B19848B4100CC0F68 /* SWFireController.m in Sources */,
 				CD37147819847EE500CC0F68 /* SWBasicFireViewController.m in Sources */,
+				CD37148319892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.m in Sources */,
 				CD9565FB1981EF650081BB67 /* SWBasicLEDControlViewController.m in Sources */,
 				CD9565CE19808C560081BB67 /* main.m in Sources */,
 				CD9565FE1981F2830081BB67 /* SWLEDController.m in Sources */,

@@ -12,8 +12,6 @@
 
 @end
 
-SRWebSocket *webSocket;
-
 double r;
 double g;
 double b;
@@ -32,8 +30,6 @@ double b;
     
     return motionManager;
 }
-
-double chunk = 360.0/255.0;
 
 - (void)startMyMotionDetect
 {
@@ -69,7 +65,7 @@ double chunk = 360.0/255.0;
         
          NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"latchScreen\", \"screen\":\"%i\", \"r\":\"%i\", \"g\":\"%i\", \"b\":\"%i\"}", (int)screen, (int)r, (int)g, (int)b];
 //        NSLog(@"cmd: %@", cmd);
-         [webSocket send:cmd];
+         [_webSocket send:cmd];
      }];
 }
 
@@ -86,8 +82,8 @@ double chunk = 360.0/255.0;
 #pragma mark - Connection
 
 - (void)connectWebSocket {
-    webSocket.delegate = nil;
-    webSocket = nil;
+    _webSocket.delegate = nil;
+    _webSocket = nil;
     
     NSString *urlString = [NSString stringWithFormat:@"ws://%@", [SWLEDController instance].wsAddress];
     SRWebSocket *newWebSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:urlString]];
@@ -99,7 +95,7 @@ double chunk = 360.0/255.0;
 #pragma mark - SRWebSocket delegate
 
 - (void)webSocketDidOpen:(SRWebSocket *)newWebSocket {
-    webSocket = newWebSocket;
+    _webSocket = newWebSocket;
     //    [webSocket send:[NSString stringWithFormat:@"Hello from %@", [UIDevice currentDevice].name]];
 }
 
@@ -158,8 +154,8 @@ double chunk = 360.0/255.0;
 {
     [self.motionManager stopDeviceMotionUpdates];
     [opQueue cancelAllOperations];
-    webSocket.delegate = nil;
-    webSocket = nil; 
+    _webSocket.delegate = nil;
+    _webSocket = nil;
 }
 
 - (void)didReceiveMemoryWarning

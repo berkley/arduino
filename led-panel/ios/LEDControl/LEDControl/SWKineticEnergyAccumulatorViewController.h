@@ -1,22 +1,17 @@
 //
-//  SWGyroViewController.h
+//  SWKineticEnergyAccumulatorViewController.h
 //  LEDControl
 //
-//  Created by Chad Berkley on 7/24/14.
+//  Created by Chad Berkley on 7/30/14.
 //  Copyright (c) 2014 Chad Berkley. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreMotion/CoreMotion.h>
-#import <SocketRocket/SRWebSocket.h>
-#import "SWLEDController.h"
+#import "SWGyroViewController.h"
 
-#define chunk 360.0/255.0
-
-@interface SWGyroViewController : UIViewController <SRWebSocketDelegate>
+@interface SWKineticEnergyAccumulatorViewController : SWGyroViewController
 {
-    NSInteger screen;
-    NSOperationQueue *opQueue;
+
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *yawLabel;
@@ -26,10 +21,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *rLabel;
 @property (weak, nonatomic) IBOutlet UILabel *gLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bLabel;
-@property (strong, nonatomic) SRWebSocket *webSocket;
 
-- (CMMotionManager *)motionManager;
-- (void)startMyMotionDetect;
-
+@property (weak, nonatomic) IBOutlet UILabel *accelXLabel;
+@property (weak, nonatomic) IBOutlet UILabel *accelYLabel;
+@property (weak, nonatomic) IBOutlet UILabel *accelZLabel;
+@property (weak, nonatomic) IBOutlet UILabel *accumLabel;
 
 @end
