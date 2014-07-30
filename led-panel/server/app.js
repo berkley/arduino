@@ -86,6 +86,8 @@ app.get('/line/latch/:x1/:y1/:x2/:y2/:r/:g/:b', led.latchLine);
 app.get('/sample', visualizations.sample);
 app.get('/audio-sample', visualizations.audioSample);
 app.get('/bar-volume', visualizations.barVolume);
+app.get('/', visualizations.grid);
+app.get('/grid', visualizations.grid);
 
 var server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
