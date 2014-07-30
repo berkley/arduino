@@ -32,9 +32,24 @@ var setCol = function(col, r, g, b) {
 };
 
 var setRowOnScreen = function(screen, row, r, g, b) {
-	var trueRow = (screen * SCREEN_HEIGHT) + row;
-	setRow(trueRow, r, g, b);
-}
+	if(screen != 99) //all screens
+	{
+		var trueRow = (screen * SCREEN_HEIGHT) + row;
+		console.log("trueRow: ", trueRow);
+		if(row < 0 || row >= SCREEN_HEIGHT) //don't set rows outside the bounds of the screen
+		{
+			console.log("skipping row ", trueRow);
+			return;
+		}
+		setRow(trueRow, r, g, b);
+	}
+	else
+	{
+		setRow(row, r, g, b);
+		setRow(row + SCREEN_HEIGHT);
+		// setRow(row + SCREEN_HEIGHT + SCREEN_HEIGHT);
+	}
+};
 
 var setScreen = function(screen, r, g, b) {
 	var start = 0;
@@ -127,6 +142,18 @@ wss.on('connection', function(ws) {
         	}
         	else if (json.command == "latchBitmap") {
         		drawBitmap(json.bitmap);
+        		latch();
+        	}
+        	else if (json.command == "latchRowOnScreen") {
+        		setRowOnScreen(parseInt(json.screen), 
+        			           parseInt(json.row),
+        			           parseInt(json.r), 
+        			           parseInt(json.g),
+        			           parseInt(json.b));
+        		latch();
+        	} 
+        	else if(json.command == "allOff") {
+        		pixUtil.allOff();
         		latch();
         	}
         	ws.send("ok");

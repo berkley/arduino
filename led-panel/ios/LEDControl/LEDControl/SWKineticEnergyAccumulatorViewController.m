@@ -17,6 +17,9 @@ double g;
 double b;
 double accumulator;
 int threshold;
+int numRows = 24;
+int prevRow;
+int currentRow;
 
 @implementation SWKineticEnergyAccumulatorViewController
 
@@ -68,11 +71,24 @@ int threshold;
          
          [self performSelectorOnMainThread:@selector(updateLabels:) withObject:vals waitUntilDone:NO];
          
-//         NSLog(@"r: %i, g: %i, b: %i", (int)r, (int)g, (int)b);
+         //set the accumulated values
+         int accumChunk = 1;
+         int breakPoint = threshold / numRows;
+         NSLog(@"accumChunk: %i", accumChunk);
+         NSLog(@"breakPoint: %i", breakPoint);
+         int newPosition = accumulator * 2;
+         NSLog(@"newPos: %i", newPosition);
+         if(newPosition >= (breakPoint * currentRow))
+         {
+             prevRow = currentRow;
+             currentRow = newPosition;
+             NSLog(@"currentRow: %i", currentRow);
+             NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"latchRowOnScreen\", \"row\":\"%i\", \"screen\":\"%i\", \"r\":\"%i\", \"g\":\"%i\", \"b\":\"%i\"}", (int)currentRow, (int)screen, (int)r, (int)g, (int)b];
+             //        NSLog(@"cmd: %@", cmd);
+             [self.webSocket send:cmd];
+             
+         }
          
-         NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"accumRow\", \"value\":\"%i\", \"screen\":\"%i\", \"r\":\"%i\", \"g\":\"%i\", \"b\":\"%i\"}", (int)accumulator, (int)screen, (int)r, (int)g, (int)b];
-         //        NSLog(@"cmd: %@", cmd);
-         [self.webSocket send:cmd];
      }];
 }
 
@@ -94,11 +110,49 @@ int threshold;
 
 - (IBAction)resetButtonTouched:(id)sender {
     accumulator = 0;
+    prevRow = 0;
+    currentRow = 0;
+    threshold = [self.thresholdTextField.text intValue];
+    NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"allOff\"}"];
+    //        NSLog(@"cmd: %@", cmd);
+    [self.webSocket send:cmd];
 }
 
 - (IBAction)thresholdValueChanged:(id)sender {
     threshold = [self.thresholdTextField.text intValue];
     NSLog(@"threshold is: %i", threshold);
+}
+
+- (IBAction)screen1Touched:(id)sender {
+    screen = 0;
+    [self.screen1Button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [self.screen2Button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [self.screen3Button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [self.screenAllButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+}
+
+- (IBAction)screen2Touched:(id)sender {
+    screen = 1;
+    [self.screen1Button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [self.screen2Button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [self.screen3Button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [self.screenAllButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+}
+
+- (IBAction)screen3Touched:(id)sender {
+    screen = 2;
+    [self.screen1Button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [self.screen2Button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [self.screen3Button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [self.screenAllButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+}
+
+- (IBAction)screenAlltouched:(id)sender {
+    screen = 99;
+    [self.screen1Button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [self.screen2Button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [self.screen3Button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [self.screenAllButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
 }
 
 - (void)viewDidLoad
@@ -109,9 +163,14 @@ int threshold;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    accumulator = 0;
-    threshold = [self.thresholdTextField.text intValue];
+    screen = 0;
+    [self resetButtonTouched:nil];
     NSLog(@"threshold is: %i", threshold);
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning

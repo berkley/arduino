@@ -28,4 +28,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *accumLabel;
 @property (weak, nonatomic) IBOutlet UITextField *thresholdTextField;
 
+@property (weak, nonatomic) IBOutlet UIButton *screen2Button;
+@property (weak, nonatomic) IBOutlet UIButton *screen1Button;
+@property (weak, nonatomic) IBOutlet UIButton *screen3Button;
+@property (weak, nonatomic) IBOutlet UIButton *screenAllButton;
+
 @end

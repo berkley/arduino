@@ -285,6 +285,7 @@
                                 </state>
                                 <connections>
                                     <action selector="screen1ButtonTouched:" destination="3IB-2J-KBR" eventType="touchUpInside" id="MDA-3J-iJZ"/>
+                                    <action selector="screen1Touched:" destination="Hhb-Jk-ENm" eventType="touchUpInside" id="en0-cG-bc5"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XyG-my-rd6">
@@ -295,6 +296,7 @@
                                 </state>
                                 <connections>
                                     <action selector="screen2ButtonTouched:" destination="3IB-2J-KBR" eventType="touchUpInside" id="XrU-2d-pvk"/>
+                                    <action selector="screen2Touched:" destination="Hhb-Jk-ENm" eventType="touchUpInside" id="VCC-Q6-5Kt"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mWz-xu-5Is">
@@ -305,6 +307,7 @@
                                 </state>
                                 <connections>
                                     <action selector="screen3ButtonTouched:" destination="3IB-2J-KBR" eventType="touchUpInside" id="25U-9P-evS"/>
+                                    <action selector="screen3Touched:" destination="Hhb-Jk-ENm" eventType="touchUpInside" id="q8a-8n-HIN"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ShH-L1-uvf">
@@ -315,6 +318,7 @@
                                 </state>
                                 <connections>
                                     <action selector="allButtonTouched:" destination="3IB-2J-KBR" eventType="touchUpInside" id="adM-Cn-tiX"/>
+                                    <action selector="screenAlltouched:" destination="Hhb-Jk-ENm" eventType="touchUpInside" id="crK-Lj-Hvt"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MU7-uY-bu8">
@@ -348,6 +352,10 @@
                         <outlet property="accumLabel" destination="jJQ-tK-47D" id="bf5-sz-9Tr"/>
                         <outlet property="pitchLabel" destination="4SE-TD-Ck2" id="QKE-1l-TVs"/>
                         <outlet property="rollLabel" destination="cLA-sx-ovd" id="rig-qd-5JJ"/>
+                        <outlet property="screen1Button" destination="ZEN-qx-ZeN" id="DiK-PW-7zv"/>
+                        <outlet property="screen2Button" destination="XyG-my-rd6" id="uN8-1p-Dc4"/>
+                        <outlet property="screen3Button" destination="mWz-xu-5Is" id="x4t-90-XHv"/>
+                        <outlet property="screenAllButton" destination="ShH-L1-uvf" id="1gQ-wx-JCx"/>
                         <outlet property="thresholdTextField" destination="Fo0-QZ-yTD" id="gJw-Iw-iNA"/>
                         <outlet property="yawLabel" destination="N9P-F8-8Dp" id="AJW-52-Obq"/>
                     </connections>
