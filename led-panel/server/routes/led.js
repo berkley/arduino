@@ -328,4 +328,40 @@ exports.latchLine = function(req, res) {
 	res.send("{status:ok}");	
 };
 
+var runningProgram;
+
+exports.runProgram = function(req, res) {
+	var program = "node " + req.params.program;
+	console.log("program: ", program);
+	runningProgram = require('child_process').exec(program);
+	res.send("{status:ok}");
+};
+
+exports.stopProgram = function(req, res) {
+	console.log("runningProgram: ", runningProgram);
+	if(runningProgram == "browser")
+	{
+		console.log("stopping browser program");
+		var program = "chrome-cli close"
+		console.log("program: ", program);
+		runningProgram = require('child_process').exec(program);
+		runningProgram = null;
+	}
+	else if(runningProgram)
+	{
+		console.log("stopping program");
+		runningProgram.kill();
+	}
+
+	res.send("{status:ok}");
+};
+
+exports.runBrowserProgram = function(req, res) {
+	runningProgram = "browser";
+	var program = "chrome-cli open " + "http://localhost:3000/" + req.params.program;
+	console.log("browser program: ", program);
+	require('child_process').exec(program);
+	res.send("{status:ok}");
+};
+
 exports.drawBitmap = drawBitmap;

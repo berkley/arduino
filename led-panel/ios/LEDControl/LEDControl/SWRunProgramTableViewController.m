@@ -7,6 +7,7 @@
 //
 
 #import "SWRunProgramTableViewController.h"
+#import "SWLEDController.h"
 
 @interface SWRunProgramTableViewController ()
 
@@ -28,7 +29,25 @@
 {
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     NSLog(@"cell name: %@", cell.textLabel.text);
-    
+    if([cell.textLabel.text isEqualToString:@"Stop All"])
+    {
+        [[SWLEDController instance] sendRESTCommand:@"/program/stop"];
+    }
+    else if([cell.textLabel.text isEqualToString:@"SVG Beat Matched Cubes"])
+    {
+        [[SWLEDController instance] sendRESTCommand:@"/program/stop/all"];
+        [[SWLEDController instance] sendRESTCommand:[NSString stringWithFormat:@"/program/run/browser/audio-sample"]];
+    }
+    else if([cell.textLabel.text isEqualToString:@"Spotlight"])
+    {
+        [[SWLEDController instance] sendRESTCommand:@"/program/stop"];
+        [[SWLEDController instance] sendRESTCommand:[NSString stringWithFormat:@"/program/run/browser/sample"]];
+    }
+    else
+    {
+        [[SWLEDController instance] sendRESTCommand:@"/program/stop"];
+        [[SWLEDController instance] sendRESTCommand:[NSString stringWithFormat:@"/program/run/%@", cell.textLabel.text]];
+    }
 }
 
 @end

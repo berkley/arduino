@@ -1,6 +1,6 @@
 // Simple red/blue fade with Node and opc.js
 
-var OPC = new require('./opc')
+var OPC = new require('../pixel-util/opc')
 var client = new OPC('localhost', 7890);
 var events = require('events');
 var emitter = new events.EventEmitter();
