@@ -34,4 +34,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *screen3Button;
 @property (weak, nonatomic) IBOutlet UIButton *screenAllButton;
 
+@property (weak, nonatomic) IBOutlet UIButton *pauseButton;
+
 @end

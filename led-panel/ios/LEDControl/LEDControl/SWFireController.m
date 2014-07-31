@@ -23,10 +23,10 @@ SWFireController *instance;
 {
     if(!self)
         self = [super init];
-//    self.restAddress = @"10.0.1.17:4000";
-//    self.wsAddress = @"10.0.1.17:4000";
-    self.restAddress = @"10.250.220.224:4000";
-    self.wsAddress = @"10.250.220.224:4001";
+    self.restAddress = @"10.0.1.17:4000";
+    self.wsAddress = @"10.0.1.17:4000";
+//    self.restAddress = @"10.250.220.224:4000";
+//    self.wsAddress = @"10.250.220.224:4001";
 
     return self;
 }

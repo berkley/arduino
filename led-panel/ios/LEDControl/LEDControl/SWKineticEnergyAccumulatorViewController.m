@@ -22,6 +22,7 @@ int numRows = 24;
 int prevRow;
 int currentRow;
 int goal;
+BOOL running;
 
 @implementation SWKineticEnergyAccumulatorViewController
 
@@ -111,18 +112,20 @@ int goal;
                      [[SWFireController instance] seqAll];
                  }
                  
-                 goal = threshold / numRows;
-                 accumulator = 0;
-                 currentRow = 0;
-                 
-                 NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"allOff\"}"];
-                 [self.webSocket send:cmd];
+//                 goal = threshold / numRows;
+//                 accumulator = 0;
+//                 currentRow = 0;
+//                 
+//                 NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"allOff\"}"];
+//                 [self.webSocket send:cmd];
+                 [self performSelectorOnMainThread:@selector(runOrPause) withObject:nil waitUntilDone:YES];
+//                 [self performSelector:@selector(runOrPause) withObject:nil afterDelay:500];
              }
              else
              {
                  currentRow++;
-                 NSLog(@"$$$$$ currentRow: %i", currentRow);
-                 NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"latchRowOnScreen\", \"row\":\"%i\", \"screen\":\"%i\", \"r\":\"%i\", \"g\":\"%i\", \"b\":\"%i\"}", (int)currentRow, (int)screen, (int)r, (int)g, (int)b];
+                 NSLog(@"$$$$$ currentRow: %i", (numRows - currentRow));
+                 NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"latchRowOnScreen\", \"row\":\"%i\", \"screen\":\"%i\", \"r\":\"%i\", \"g\":\"%i\", \"b\":\"%i\"}", (numRows - (int)currentRow), (int)screen, (int)r, (int)g, (int)b];
                  [self.webSocket send:cmd];
              }
          }
@@ -148,13 +151,7 @@ int goal;
 #pragma mark - selectors
 
 - (IBAction)resetButtonTouched:(id)sender {
-    accumulator = 0;
-    prevRow = 0;
-    currentRow = 0;
-    threshold = 1000;
-    goal = threshold / numRows;
-    NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"allOff\"}"];
-    [self.webSocket send:cmd];
+    [self performSelectorOnMainThread:@selector(reset) withObject:nil waitUntilDone:YES];
 }
 
 - (IBAction)screen1Touched:(id)sender {
@@ -189,12 +186,48 @@ int goal;
     [self.screenAllButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
 }
 
+- (IBAction)pauseButtonTouched:(id)sender {
+    [self performSelectorOnMainThread:@selector(runOrPause) withObject:nil waitUntilDone:YES];
+}
+
+- (void)runOrPause
+{
+    if(running)
+    {
+        [self.motionManager stopDeviceMotionUpdates];
+        [self.pauseButton setTitle:@"Go!" forState:UIControlStateNormal];
+        [opQueue cancelAllOperations];
+//        [opQueue waitUntilAllOperationsAreFinished];
+    }
+    else
+    {
+        [self startMyMotionDetect];
+        [self.pauseButton setTitle:@"Pause" forState:UIControlStateNormal];
+    }
+    running = !running;
+}
+
+- (void)reset
+{
+    accumulator = 0;
+    prevRow = 0;
+    currentRow = 0;
+    threshold = 1000;
+    goal = threshold / numRows;
+    NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"allOff\"}"];
+    [self.webSocket send:cmd];
+    if(!running)
+        [self runOrPause];
+}
+
 - (void)viewDidLoad
 {
     screen = 0;
+    running = YES;
     goal = threshold / numRows;
     [super viewDidLoad];
     [self resetButtonTouched:nil];
+
     NSLog(@"threshold is: %i", threshold);
 
 }
@@ -202,6 +235,7 @@ int goal;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [self screenAlltouched:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
