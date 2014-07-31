@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		61E7C79AB33C46A081FB92E6 /* libPods-LEDControl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A120044E91469D83A537E4 /* libPods-LEDControl.a */; };
+		CD36B1EC198ABB0500DACE30 /* SWRunProgramTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD36B1EB198ABB0500DACE30 /* SWRunProgramTableViewController.m */; };
 		CD37147819847EE500CC0F68 /* SWBasicFireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37147719847EE500CC0F68 /* SWBasicFireViewController.m */; };
 		CD37147B19848B4100CC0F68 /* SWFireController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37147A19848B4100CC0F68 /* SWFireController.m */; };
 		CD37148019848C8A00CC0F68 /* SWRadThingController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37147F19848C8A00CC0F68 /* SWRadThingController.m */; };
@@ -43,6 +44,8 @@
 
 /* Begin PBXFileReference section */
 		380413DD423A46D7AFB9717C /* Pods-LEDControl.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LEDControl.xcconfig"; path = "Pods/Pods-LEDControl.xcconfig"; sourceTree = "<group>"; };
+		CD36B1EA198ABB0500DACE30 /* SWRunProgramTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRunProgramTableViewController.h; sourceTree = "<group>"; };
+		CD36B1EB198ABB0500DACE30 /* SWRunProgramTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRunProgramTableViewController.m; sourceTree = "<group>"; };
 		CD37147619847EE500CC0F68 /* SWBasicFireViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWBasicFireViewController.h; sourceTree = "<group>"; };
 		CD37147719847EE500CC0F68 /* SWBasicFireViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWBasicFireViewController.m; sourceTree = "<group>"; };
 		CD37147919848B4100CC0F68 /* SWFireController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWFireController.h; sourceTree = "<group>"; };
@@ -130,6 +133,8 @@
 				CD37147719847EE500CC0F68 /* SWBasicFireViewController.m */,
 				CD37148119892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.h */,
 				CD37148219892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.m */,
+				CD36B1EA198ABB0500DACE30 /* SWRunProgramTableViewController.h */,
+				CD36B1EB198ABB0500DACE30 /* SWRunProgramTableViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -346,6 +351,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD9565D219808C560081BB67 /* SWAppDelegate.m in Sources */,
+				CD36B1EC198ABB0500DACE30 /* SWRunProgramTableViewController.m in Sources */,
 				CD37147B19848B4100CC0F68 /* SWFireController.m in Sources */,
 				CD37147819847EE500CC0F68 /* SWBasicFireViewController.m in Sources */,
 				CD37148319892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.m in Sources */,
