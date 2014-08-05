@@ -26,10 +26,10 @@ SWLEDController *controller;
     if(!self)
         self = [super init];
     
-//    self.restAddress = @"10.0.1.17:3000";
-//    self.wsAddress = @"10.0.1.17:3001";
-    self.restAddress = @"10.250.220.224:3000";
-    self.wsAddress = @"10.250.220.224:3001";
+    self.restAddress = @"10.0.1.17:3000";
+    self.wsAddress = @"10.0.1.17:3001";
+//    self.restAddress = @"10.250.220.224:3000";
+//    self.wsAddress = @"10.250.220.224:3001";
     return self;
 }
 

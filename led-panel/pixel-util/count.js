@@ -74,7 +74,7 @@ var theta = 0;
 var thetaDelta = 0.001;
 var slot = 0;
 
-setInterval(xyCount, 1000);
+setInterval(count, 20);
 // var millis = new Date().getTime();
 // var t = 65 * 0.2 + millis * 0.002;
 // // setInterval(count, 30);
