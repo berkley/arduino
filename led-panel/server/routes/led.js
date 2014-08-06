@@ -58,7 +58,7 @@ var setScreen = function(screen, r, g, b) {
 	if(screen == 99)
 	{
 		start = 0;
-		end = HEIGHT - 1;
+		end = HEIGHT;
 	}
 	else if(screen != 0)
 	{

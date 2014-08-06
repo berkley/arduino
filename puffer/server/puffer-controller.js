@@ -38,7 +38,7 @@ var SEQ_CIRCLE = 0;
 
 //set this to 1 when the arduino is connected, 
 //set to 0 for debugging without and arduino
-var BOARD_CONNECTED = 0;
+var BOARD_CONNECTED = 1;
 
 exports.puffSeq = function(seq) {
 	SEQ_123 = 0;
