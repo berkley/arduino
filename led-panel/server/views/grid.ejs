@@ -152,7 +152,7 @@ sock.onopen = function() {
 
 		if (parsed.bitmap) {
 			var now = new Date().getTime();
-			if ((now - lastUpdateAt) < 100) {  // 10 is ok
+			if ((now - lastUpdateAt) < 20) {  // 10 is ok
 				return;
 			}
 

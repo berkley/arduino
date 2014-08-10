@@ -38,8 +38,10 @@ const short Y_STEP = 10;
             NSMutableArray *colColors = [NSMutableArray arrayWithCapacity:HEIGHT];
             
             for (int row=0; row < HEIGHT; row++) {
-                CGPoint point = CGPointMake(self.left + (col * X_STEP),
-                                            self.top + (row * Y_STEP));
+                CGPoint point = CGPointMake(self.left - (row * Y_STEP),
+                                            self.top + (col * X_STEP));  // actually right
+//                CGPoint point = CGPointMake(self.left + (col * X_STEP),
+//                                            self.top + (row * Y_STEP));
                 
                 [colColors addObject:[self getPixelColorRGBNumberArrayAtLocation:point]];
             }

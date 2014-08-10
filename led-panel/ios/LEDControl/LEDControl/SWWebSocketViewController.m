@@ -92,7 +92,7 @@
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
-    NSLog(@"didReceiveMessage: %@\n", message);
+//    NSLog(@"didReceiveMessage: %@\n", message);
     //    self.messagesTextView.text = [NSString stringWithFormat:@"%@\n%@", self.messagesTextView.text, message];
 }
 

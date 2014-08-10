@@ -8,7 +8,7 @@
 
 #import "SWContentStreamViewController.h"
 
-const CGFloat SEC_PER_FRAME = (1.0/0.5);  // 24 is good
+const CGFloat SEC_PER_FRAME = (1.0/24);  // 24 is good
 
 @interface SWContentStreamViewController ()
 {
@@ -49,7 +49,7 @@ const CGFloat SEC_PER_FRAME = (1.0/0.5);  // 24 is good
     self.streamedContentArea.transform = xfm;
     [self.view addSubview:self.streamedContentArea];
     
-    _left = self.streamedContentArea.frame.origin.x;
+    _left = self.streamedContentArea.frame.origin.x + self.streamedContentArea.frame.size.width;
     _top = self.streamedContentArea.frame.origin.y;
     
     _opQueue = [[NSOperationQueue alloc] init];
