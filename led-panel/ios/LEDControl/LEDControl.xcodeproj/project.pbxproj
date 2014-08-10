@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		61E7C79AB33C46A081FB92E6 /* libPods-LEDControl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A120044E91469D83A537E4 /* libPods-LEDControl.a */; };
-		A6DCD0141996E08E00CF12BD /* SWContentStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DCD0131996E08E00CF12BD /* SWContentStreamViewController.m */; };
 		A6DCD0171996E1BE00CF12BD /* SWWebSocketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DCD0161996E1BE00CF12BD /* SWWebSocketViewController.m */; };
-		A6DCD01A1996EC0400CF12BD /* CaptureAndSendBitmapOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DCD0191996EC0400CF12BD /* CaptureAndSendBitmapOperation.m */; };
+		A6DCD0201996F1F500CF12BD /* SWContentStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DCD01C1996F1F500CF12BD /* SWContentStreamViewController.m */; };
+		A6DCD0211996F1F500CF12BD /* CaptureAndSendBitmapOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DCD01F1996F1F500CF12BD /* CaptureAndSendBitmapOperation.m */; };
 		CD36B1EC198ABB0500DACE30 /* SWRunProgramTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD36B1EB198ABB0500DACE30 /* SWRunProgramTableViewController.m */; };
 		CD37147819847EE500CC0F68 /* SWBasicFireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37147719847EE500CC0F68 /* SWBasicFireViewController.m */; };
 		CD37147B19848B4100CC0F68 /* SWFireController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37147A19848B4100CC0F68 /* SWFireController.m */; };
@@ -47,12 +47,12 @@
 
 /* Begin PBXFileReference section */
 		380413DD423A46D7AFB9717C /* Pods-LEDControl.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LEDControl.xcconfig"; path = "Pods/Pods-LEDControl.xcconfig"; sourceTree = "<group>"; };
-		A6DCD0121996E08E00CF12BD /* SWContentStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWContentStreamViewController.h; sourceTree = "<group>"; };
-		A6DCD0131996E08E00CF12BD /* SWContentStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWContentStreamViewController.m; sourceTree = "<group>"; };
 		A6DCD0151996E1BE00CF12BD /* SWWebSocketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWWebSocketViewController.h; sourceTree = "<group>"; };
 		A6DCD0161996E1BE00CF12BD /* SWWebSocketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWWebSocketViewController.m; sourceTree = "<group>"; };
-		A6DCD0181996EC0400CF12BD /* CaptureAndSendBitmapOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureAndSendBitmapOperation.h; sourceTree = "<group>"; };
-		A6DCD0191996EC0400CF12BD /* CaptureAndSendBitmapOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureAndSendBitmapOperation.m; sourceTree = "<group>"; };
+		A6DCD01C1996F1F500CF12BD /* SWContentStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWContentStreamViewController.m; sourceTree = "<group>"; };
+		A6DCD01D1996F1F500CF12BD /* SWContentStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWContentStreamViewController.h; sourceTree = "<group>"; };
+		A6DCD01E1996F1F500CF12BD /* CaptureAndSendBitmapOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureAndSendBitmapOperation.h; sourceTree = "<group>"; };
+		A6DCD01F1996F1F500CF12BD /* CaptureAndSendBitmapOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureAndSendBitmapOperation.m; sourceTree = "<group>"; };
 		CD36B1EA198ABB0500DACE30 /* SWRunProgramTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRunProgramTableViewController.h; sourceTree = "<group>"; };
 		CD36B1EB198ABB0500DACE30 /* SWRunProgramTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRunProgramTableViewController.m; sourceTree = "<group>"; };
 		CD37147619847EE500CC0F68 /* SWBasicFireViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWBasicFireViewController.h; sourceTree = "<group>"; };
@@ -116,6 +116,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A6DCD01B1996F1C100CF12BD /* ContentStreamers */ = {
+			isa = PBXGroup;
+			children = (
+				A6DCD01C1996F1F500CF12BD /* SWContentStreamViewController.m */,
+				A6DCD01D1996F1F500CF12BD /* SWContentStreamViewController.h */,
+				A6DCD01E1996F1F500CF12BD /* CaptureAndSendBitmapOperation.h */,
+				A6DCD01F1996F1F500CF12BD /* CaptureAndSendBitmapOperation.m */,
+			);
+			path = ContentStreamers;
+			sourceTree = "<group>";
+		};
 		CD37147C19848B5E00CC0F68 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -132,14 +143,11 @@
 		CD37147D19848B6F00CC0F68 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				A6DCD0181996EC0400CF12BD /* CaptureAndSendBitmapOperation.h */,
-				A6DCD0191996EC0400CF12BD /* CaptureAndSendBitmapOperation.m */,
+				A6DCD01B1996F1C100CF12BD /* ContentStreamers */,
 				CD37147619847EE500CC0F68 /* SWBasicFireViewController.h */,
 				CD37147719847EE500CC0F68 /* SWBasicFireViewController.m */,
 				CD9565F91981EF650081BB67 /* SWBasicLEDControlViewController.h */,
 				CD9565FA1981EF650081BB67 /* SWBasicLEDControlViewController.m */,
-				A6DCD0121996E08E00CF12BD /* SWContentStreamViewController.h */,
-				A6DCD0131996E08E00CF12BD /* SWContentStreamViewController.m */,
 				CD9565FF198202950081BB67 /* SWGyroViewController.h */,
 				CD956600198202950081BB67 /* SWGyroViewController.m */,
 				CD37148119892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.h */,
@@ -371,9 +379,9 @@
 				CD37147819847EE500CC0F68 /* SWBasicFireViewController.m in Sources */,
 				CD37148319892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.m in Sources */,
 				CD9565FB1981EF650081BB67 /* SWBasicLEDControlViewController.m in Sources */,
+				A6DCD0201996F1F500CF12BD /* SWContentStreamViewController.m in Sources */,
+				A6DCD0211996F1F500CF12BD /* CaptureAndSendBitmapOperation.m in Sources */,
 				A6DCD0171996E1BE00CF12BD /* SWWebSocketViewController.m in Sources */,
-				A6DCD01A1996EC0400CF12BD /* CaptureAndSendBitmapOperation.m in Sources */,
-				A6DCD0141996E08E00CF12BD /* SWContentStreamViewController.m in Sources */,
 				CD9565CE19808C560081BB67 /* main.m in Sources */,
 				CD9565FE1981F2830081BB67 /* SWLEDController.m in Sources */,
 				CD9565D819808C560081BB67 /* SWMasterViewController.m in Sources */,
