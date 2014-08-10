@@ -132,8 +132,10 @@ console.log("opening web socket on 3001");
 var wss = new WebSocketServer({port: 3001});
 
 wss.on('connection', function(ws) {
-    ws.on('message', function(message) {
-        console.log('received:', typeof message, message);
+	console.log('led.js: client connected.')
+	
+	ws.on('message', function(message) {
+        // console.log('received:', typeof message, message);
         if (typeof message === 'string') {
         	var json = JSON.parse(message);
         	if (json.command == "latchScreen") {
@@ -141,15 +143,22 @@ wss.on('connection', function(ws) {
         		latch();
         	}
         	else if (json.command == "latchBitmap") {
-        		drawBitmap(json.bitmap);
-        		latch();
+        		// drawBitmap(json.bitmap);
+        		// latch();
+
+        		// console.log("B");
+        		if (exports.delegate) {
+        			// json.type = 'bitmap';
+        			exports.delegate.didReceiveBitmap(message);
+        		}
+
         	}
         	else if (json.command == "latchRowOnScreen") {
         		setRowOnScreen(parseInt(json.screen), 
-        			           parseInt(json.row),
-        			           parseInt(json.r), 
-        			           parseInt(json.g),
-        			           parseInt(json.b));
+        			parseInt(json.row),
+        			parseInt(json.r), 
+        			parseInt(json.g),
+        			parseInt(json.b));
         		latch();
         	} 
         	else if(json.command == "allOff") {
@@ -365,3 +374,4 @@ exports.runBrowserProgram = function(req, res) {
 };
 
 exports.drawBitmap = drawBitmap;
+exports.delegate = null;

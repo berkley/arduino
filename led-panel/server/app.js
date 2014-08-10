@@ -2,6 +2,7 @@ var express = require('express');
 var routes = require('./routes');
 var visualizations = require('./routes/visualizations');
 var led = require('./routes/led');
+led.delegate = this;
 var http = require('http');
 var path = require('path');
 var Bitmap = require('./lib/bitmap.js');
@@ -13,9 +14,10 @@ var sockjs = require('sockjs');
 var connections = [];
 
 var socket = sockjs.createServer();
+var self = this;
 
 socket.on('connection', function(conn) {
-    // console.log("\n\nSOCKET CONNECTION\n\n",conn, "\n\n");
+    console.log("\n\nSOCKET CONNECTION\n\n",conn, "\n\n");
 
     connections.push(conn);
     var number = connections.length;
@@ -36,10 +38,7 @@ socket.on('connection', function(conn) {
             else if (svgObject.type === 'bitmap') {
                 // led.drawBitmap(svgObject.bitmap);
 
-                // Send the bitmap to other clients
-                for (var ii=0; ii < connections.length; ii++) {
-                    connections[ii].write(message);
-                }
+                self.didReceiveBitmap(message);
             }
         }
     });
@@ -51,6 +50,15 @@ socket.on('connection', function(conn) {
         }
     });
 });
+
+self.didReceiveBitmap = function(bitmap) {
+    // Send the bitmap to other clients
+    // console.log("b");
+    for (var ii=0; ii < connections.length; ii++) {
+        connections[ii].write(bitmap);
+    }
+};
+
 
 // all environments
 app.set('port', process.env.PORT || 3000);

@@ -8,7 +8,7 @@
 
 #import "SWContentStreamViewController.h"
 
-const CGFloat SEC_PER_FRAME = (1.0/24);
+const CGFloat SEC_PER_FRAME = (1.0/0.5);  // 24 is good
 
 @interface SWContentStreamViewController ()
 {
@@ -48,13 +48,37 @@ const CGFloat SEC_PER_FRAME = (1.0/24);
     self.streamedContentArea.layer.cornerRadius = 2;
     self.streamedContentArea.transform = xfm;
     [self.view addSubview:self.streamedContentArea];
+    
+    _left = self.streamedContentArea.frame.origin.x;
+    _top = self.streamedContentArea.frame.origin.y;
+    
+    _opQueue = [[NSOperationQueue alloc] init];
+
 }
 
-- (void)frameCaptureComplete
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    _lastCaptureAt = CACurrentMediaTime();
+    [self captureFrame];
+    
+}
+
+
+- (void)addContentView:(UIView*)v
+{
+    v.transform = self.streamedContentArea.transform;
+    [self.streamedContentArea addSubview:v];
+}
+
+- (void)frameCaptureComplete:(NSArray*)bitmap
 {
     
     //    [self captureFrame];
     //    [self performSelector:@selector(captureFrame) withObject:nil afterDelay:wait];
+
+    [self sendBitmap:bitmap];
     [self performSelectorInBackground:@selector(captureFrame) withObject:nil];
 }
 
@@ -65,7 +89,7 @@ const CGFloat SEC_PER_FRAME = (1.0/24);
     
     // Wait at least SEC_PER_FRAME before processing another frame.
     CFTimeInterval wait = (SEC_PER_FRAME - delta);
-    NSLog(@"delta %.4f, wait %.4f\n\n", delta, wait);
+//    NSLog(@"delta %.4f, wait %.4f\n\n", delta, wait);
     
     if (wait < 0.0) {
         wait = 0.0;

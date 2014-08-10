@@ -404,10 +404,10 @@
             </objects>
             <point key="canvasLocation" x="994" y="1423"/>
         </scene>
-        <!--Content Stream View Controller-->
+        <!--SlideshowCS View Controller-->
         <scene sceneID="uj7-0F-C4M">
             <objects>
-                <viewController id="LMT-7C-UVk" customClass="SWContentStreamViewController" sceneMemberID="viewController">
+                <viewController id="LMT-7C-UVk" customClass="SWSlideshowCSViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Imt-ek-vu2"/>
                         <viewControllerLayoutGuide type="bottom" id="khT-9t-wxC"/>

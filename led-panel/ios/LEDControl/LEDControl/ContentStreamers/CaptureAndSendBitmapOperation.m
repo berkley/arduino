@@ -27,6 +27,8 @@ const short Y_STEP = 10;
 @implementation CaptureAndSendBitmapOperation
 
 - (void)main {
+    
+    NSArray *bitmap = nil;
     @try {
         [self captureViewToFrameData];
         
@@ -39,13 +41,14 @@ const short Y_STEP = 10;
                 CGPoint point = CGPointMake(self.left + (col * X_STEP),
                                             self.top + (row * Y_STEP));
                 
-                [colColors addObject:[self getPixelColorRGBStringAtLocation:point]];
+                [colColors addObject:[self getPixelColorRGBNumberArrayAtLocation:point]];
             }
             
             [cols addObject:colColors];
         }
-        
-        [self jsonStringify:cols error:nil];
+
+        bitmap = cols;
+//        [self jsonStringify:cols error:nil];
         
     }
     @catch (NSException *exception) {
@@ -54,7 +57,7 @@ const short Y_STEP = 10;
     @finally {
     }
     
-    [self.delegate frameCaptureComplete];
+    [self.delegate frameCaptureComplete:bitmap];
     self.delegate = nil;
 }
 
@@ -134,6 +137,34 @@ const short Y_STEP = 10;
     
     if (!color) {
         color = @"0,0,0";
+    }
+    
+    // When finished, release the context
+    //CGContextRelease(cgctx);
+    
+    return color;
+}
+
+- (NSArray*) getPixelColorRGBNumberArrayAtLocation:(CGPoint)point {
+    NSArray* color = nil;
+    
+    if (_frameData != NULL) {
+        //offset locates the pixel in the data from x,y.
+        //4 for 4 bytes of data per pixel, w is width of one row of data.
+        int offset = 4*((_wFrame*round(point.y))+round(point.x));
+        //        alpha =  _frameData[offset];
+        int red = _frameData[offset+1];
+        int green = _frameData[offset+2];
+        int blue = _frameData[offset+3];
+        color = [NSArray arrayWithObjects:
+                 [NSNumber numberWithInteger:red],
+                 [NSNumber numberWithInteger:green],
+                 [NSNumber numberWithInteger:blue],
+                 nil];
+    }
+    
+    if (!color) {
+        color = @[];
     }
     
     // When finished, release the context

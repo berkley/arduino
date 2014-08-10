@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol CaptureAndSendBitmapOperationDelegate <NSObject>
-- (void)frameCaptureComplete;
+- (void)frameCaptureComplete:(NSArray*)bitmap;
 @end
 
 @interface CaptureAndSendBitmapOperation : NSOperation

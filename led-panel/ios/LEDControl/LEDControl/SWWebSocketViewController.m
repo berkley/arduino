@@ -41,8 +41,14 @@
 
 - (void)sendBitmap:(NSArray*)bitmap {
     NSError *error = nil;
+    
+#if 0
     NSString *cmd = [NSString stringWithFormat:@"{\"type\":\"bitmap\", \"bitmap\":\"%@\"}",
                      [self jsonStringify:bitmap error:&error]];
+#else
+    NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"latchBitmap\", \"bitmap\":\"%@\"}",
+                     [self jsonStringify:bitmap error:&error]];
+#endif
     
     if (error) {
         NSLog(@"Error stringifying bitmap: %@", error);
@@ -58,7 +64,8 @@
     _webSocket.delegate = nil;
     _webSocket = nil;
     
-    NSString *urlString = [NSString stringWithFormat:@"ws://%@", [SWLEDController instance].wsAddress];
+    NSString *urlString = @"ws://127.0.0.1:3001/";
+    NSLog(@"ws connecting to %@", urlString);
     SRWebSocket *newWebSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:urlString]];
     newWebSocket.delegate = self;
     [newWebSocket open];
@@ -68,21 +75,24 @@
 #pragma mark - SRWebSocket delegate
 
 - (void)webSocketDidOpen:(SRWebSocket *)newWebSocket {
+    NSLog(@"socket open");
     _webSocket = newWebSocket;
     //    [webSocket send:[NSString stringWithFormat:@"Hello from %@", [UIDevice currentDevice].name]];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
+    NSLog(@"socket fail: %@", error);
     [self connectWebSocket];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean
 {
+    NSLog(@"socket close: %@", reason);
     [self connectWebSocket];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
-    //    NSLog(@"didReceiveMessage: %@\n", message);
+    NSLog(@"didReceiveMessage: %@\n", message);
     //    self.messagesTextView.text = [NSString stringWithFormat:@"%@\n%@", self.messagesTextView.text, message];
 }
 

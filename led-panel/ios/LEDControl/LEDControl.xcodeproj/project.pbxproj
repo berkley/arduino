@@ -11,6 +11,8 @@
 		A6DCD0171996E1BE00CF12BD /* SWWebSocketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DCD0161996E1BE00CF12BD /* SWWebSocketViewController.m */; };
 		A6DCD0201996F1F500CF12BD /* SWContentStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DCD01C1996F1F500CF12BD /* SWContentStreamViewController.m */; };
 		A6DCD0211996F1F500CF12BD /* CaptureAndSendBitmapOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DCD01F1996F1F500CF12BD /* CaptureAndSendBitmapOperation.m */; };
+		A6DCD0241996F2FA00CF12BD /* SWSlideshowCSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DCD0231996F2FA00CF12BD /* SWSlideshowCSViewController.m */; };
+		A6DCD0271996F4F700CF12BD /* gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = A6DCD0261996F4F700CF12BD /* gradient.png */; };
 		CD36B1EC198ABB0500DACE30 /* SWRunProgramTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD36B1EB198ABB0500DACE30 /* SWRunProgramTableViewController.m */; };
 		CD37147819847EE500CC0F68 /* SWBasicFireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37147719847EE500CC0F68 /* SWBasicFireViewController.m */; };
 		CD37147B19848B4100CC0F68 /* SWFireController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37147A19848B4100CC0F68 /* SWFireController.m */; };
@@ -53,6 +55,9 @@
 		A6DCD01D1996F1F500CF12BD /* SWContentStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWContentStreamViewController.h; sourceTree = "<group>"; };
 		A6DCD01E1996F1F500CF12BD /* CaptureAndSendBitmapOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureAndSendBitmapOperation.h; sourceTree = "<group>"; };
 		A6DCD01F1996F1F500CF12BD /* CaptureAndSendBitmapOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureAndSendBitmapOperation.m; sourceTree = "<group>"; };
+		A6DCD0221996F2FA00CF12BD /* SWSlideshowCSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWSlideshowCSViewController.h; sourceTree = "<group>"; };
+		A6DCD0231996F2FA00CF12BD /* SWSlideshowCSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWSlideshowCSViewController.m; sourceTree = "<group>"; };
+		A6DCD0261996F4F700CF12BD /* gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradient.png; sourceTree = "<group>"; };
 		CD36B1EA198ABB0500DACE30 /* SWRunProgramTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRunProgramTableViewController.h; sourceTree = "<group>"; };
 		CD36B1EB198ABB0500DACE30 /* SWRunProgramTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRunProgramTableViewController.m; sourceTree = "<group>"; };
 		CD37147619847EE500CC0F68 /* SWBasicFireViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWBasicFireViewController.h; sourceTree = "<group>"; };
@@ -119,12 +124,23 @@
 		A6DCD01B1996F1C100CF12BD /* ContentStreamers */ = {
 			isa = PBXGroup;
 			children = (
+				A6DCD0251996F4F700CF12BD /* assets */,
 				A6DCD01C1996F1F500CF12BD /* SWContentStreamViewController.m */,
 				A6DCD01D1996F1F500CF12BD /* SWContentStreamViewController.h */,
 				A6DCD01E1996F1F500CF12BD /* CaptureAndSendBitmapOperation.h */,
 				A6DCD01F1996F1F500CF12BD /* CaptureAndSendBitmapOperation.m */,
+				A6DCD0221996F2FA00CF12BD /* SWSlideshowCSViewController.h */,
+				A6DCD0231996F2FA00CF12BD /* SWSlideshowCSViewController.m */,
 			);
 			path = ContentStreamers;
+			sourceTree = "<group>";
+		};
+		A6DCD0251996F4F700CF12BD /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				A6DCD0261996F4F700CF12BD /* gradient.png */,
+			);
+			path = assets;
 			sourceTree = "<group>";
 		};
 		CD37147C19848B5E00CC0F68 /* Controllers */ = {
@@ -320,6 +336,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD9565DD19808C560081BB67 /* Images.xcassets in Resources */,
+				A6DCD0271996F4F700CF12BD /* gradient.png in Resources */,
 				CD9565CC19808C560081BB67 /* InfoPlist.strings in Resources */,
 				CD9565D519808C560081BB67 /* Main.storyboard in Resources */,
 			);
@@ -376,6 +393,7 @@
 				CD9565D219808C560081BB67 /* SWAppDelegate.m in Sources */,
 				CD36B1EC198ABB0500DACE30 /* SWRunProgramTableViewController.m in Sources */,
 				CD37147B19848B4100CC0F68 /* SWFireController.m in Sources */,
+				A6DCD0241996F2FA00CF12BD /* SWSlideshowCSViewController.m in Sources */,
 				CD37147819847EE500CC0F68 /* SWBasicFireViewController.m in Sources */,
 				CD37148319892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.m in Sources */,
 				CD9565FB1981EF650081BB67 /* SWBasicLEDControlViewController.m in Sources */,

@@ -29,8 +29,8 @@
 	</style>
 </head>
 <body>
-	<script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
-	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<script src="/javascripts/sockjs-0.3.min.js"></script>
+	<script src="/javascripts/d3.v3.min.js" charset="utf-8"></script>
 	<script type="text/javascript">
 	var Message = function(type, attrs) {
 		this.type = type;
@@ -94,7 +94,20 @@ function refreshGrid() {
 	svg.selectAll("circle")
 		.data(gridData)
 		.attr('fill', function(d, i) { 
-			return 'rgb(' + (d?d.join(',') : '0,0,0') + ')';
+			var rgb;
+			if (d) {
+				if (typeof(d) === 'array') {
+
+					rgb = d.join(',');					
+				}
+				else {
+					rgb = d;
+				}
+			}
+			else {
+				rgb = '255,0,0';				
+			}
+			return 'rgb(' + rgb + ')';
 		});
 }
 
@@ -125,6 +138,7 @@ sock.onopen = function() {
 		.attr('height', height);
 
 	sock.onmessage = function(e) {
+		// console.log("d:", e.data);
 		var parsed;
 		try {
 			parsed = JSON.parse(e.data);
@@ -134,17 +148,21 @@ sock.onopen = function() {
 			return;
 		}
 
-		// console.log('message: ', parsed);
+		 // console.log('bitmap: ', typeof(parsed), parsed);
 
-		if (parsed.type === 'bitmap') {
+		if (parsed.bitmap) {
 			var now = new Date().getTime();
-			if ((now - lastUpdateAt) < 10) {
+			if ((now - lastUpdateAt) < 100) {  // 10 is ok
 				return;
 			}
 
 			lastUpdateAt = now;
 
 			gridData = [];
+
+			if (typeof(parsed.bitmap) === 'string') {
+				parsed.bitmap = JSON.parse(parsed.bitmap);
+			}
 
 			if (false) {
 				for (var w=0; w < width; w++) {
@@ -155,6 +173,7 @@ sock.onopen = function() {
 				var i=0;
 				for (var w=0; w < width; w++) {
 					for (var h=0; h < height; h++) {
+						// console.log(w, h, ":", parsed.bitmap[w][h])
 						gridData[i++] = parsed.bitmap[w][h];
 					}			
 				}
