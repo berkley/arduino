@@ -31,10 +31,10 @@ socket.on('connection', function(conn) {
             if (svgObject.type === 'circle') {
                 bitmap.circle(svgObject.attrs.cx, svgObject.attrs.cy, svgObject.attrs.r);
                 bitmap.draw();
-                led.drawBitmap(bitmap.data);
+                // led.drawBitmap(bitmap.data);
             }
             else if (svgObject.type === 'bitmap') {
-                led.drawBitmap(svgObject.bitmap);
+                // led.drawBitmap(svgObject.bitmap);
 
                 // Send the bitmap to other clients
                 for (var ii=0; ii < connections.length; ii++) {
