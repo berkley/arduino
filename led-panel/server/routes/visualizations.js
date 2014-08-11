@@ -22,3 +22,7 @@ exports.audioSample = function(req, res){
 exports.barVolume = function(req, res){
   res.render('bar-volume', { title: 'Express' });
 };
+
+exports.grid = function(req, res){
+  res.render('grid', { title: 'Express' });
+};

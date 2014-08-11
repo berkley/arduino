@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Grid</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+	SVG {
+		width: 960px;
+		height: 480px;
+		background: #000;
+		border-radius:4px;
+		position: absolute;
+		top: 0; right: 0; bottom: 0; left: 0;
+		margin: auto;
+	}
+
+	html,
+	body {
+		margin:0;
+		padding:0;
+		width:100%;
+		height:100%;
+	}
+
+	body {
+		background: #fff url('/images/playa.jpg');
+	}
+
+	</style>
+</head>
+<body>
+	<script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<script type="text/javascript">
+	var Message = function(type, attrs) {
+		this.type = type;
+		this.attrs = attrs;
+	};
+
+	Message.prototype.stringify = function() {
+		return JSON.stringify({
+			'type': this.type,
+			'attrs': this.attrs
+		});
+	};
+
+//////////////
+var width = 48;
+var height = 24;
+var svg;
+var gridData = [];
+var radius = 0.25;
+var xStep = radius * 4;
+var yStep = radius * 4;
+
+
+function initializeGrid1() {    	
+    for (var w=0; w < width; w++) {
+    	var d = {};
+    	d.x = w;
+    	var color = parseInt((width-w) / width * 255) ;
+
+    	for (var h=0; h < height; h++) {
+    		var color2 = parseInt((h) / height * 255) ;
+    		gridData.push({
+    			x: d.x,
+    			y: h,
+    			color: [0,0,0]
+    			// color: [color2, 255, color]
+    		});
+    	}			
+    }
+
+    drawGrid();
+}
+
+function initializeGrid() {
+	gridData = [];
+	var i = 0;
+    for (var w=0; w < width; w++) {
+    	// gridData[w] = [];
+
+    	for (var h=0; h < height; h++) {
+    		gridData[i++] = [50,50,50];
+    	}			
+    }
+
+    drawGrid();
+}
+
+var lastUpdateAt;
+function refreshGrid() {
+	// console.log("refresh:", gridData[1151][0], gridData[1151][1], gridData[1151][2]);
+	svg.selectAll("circle")
+		.data(gridData)
+		.attr('fill', function(d, i) { 
+			return 'rgb(' + (d?d.join(',') : '0,0,0') + ')';
+		});
+}
+
+function drawGrid() {
+	// console.log("drawing grid...", gridData[1151])
+	svg.selectAll("circle")
+	.data(gridData)
+	.enter().append("circle")
+		// .attr("cx", function(d, i) { return (d.x * xStep) + radius * 2; })
+		// .attr("cy", function(d, i) { return (d.y * yStep) + radius * 2; })
+		// .attr('fill', function(d, i) { return 'rgb(' + d.color.join(',') + ')'; })
+	    .attr("cx", function(d, i) { return parseInt((i / height)) + radius * 2; })
+	    .attr("cy", function(d, i) { return parseInt((i % height)) + radius * 2; })
+	    .attr('fill', function(d, i) { 
+	    	return 'rgb(' + (d?d.join(',') : '0,0,0') + ')';
+	    })
+	    .attr("r", radius);
+}
+
+var sock = new SockJS('http://localhost:3000/socket');
+
+sock.onopen = function() {
+	console.log("connected");
+
+	svg = d3.select('body').append('svg')
+		.attr('viewBox', '0 0 ' + width + ' ' + height)
+		.attr('width', width)
+		.attr('height', height);
+
+	sock.onmessage = function(e) {
+		var parsed;
+		try {
+			parsed = JSON.parse(e.data);
+		}
+		catch(ex) {
+			console.log("Can't parse:", ex, "\n\n", e);
+			return;
+		}
+
+		// console.log('message: ', parsed);
+
+		if (parsed.type === 'bitmap') {
+			var now = new Date().getTime();
+			if ((now - lastUpdateAt) < 10) {
+				return;
+			}
+
+			lastUpdateAt = now;
+
+			gridData = [];
+
+			if (false) {
+				for (var w=0; w < width; w++) {
+					Array.prototype.push.apply(gridData, parsed.bitmap[w]);
+				}
+			}
+			else {
+				var i=0;
+				for (var w=0; w < width; w++) {
+					for (var h=0; h < height; h++) {
+						gridData[i++] = parsed.bitmap[w][h];
+					}			
+				}
+			}
+
+			refreshGrid();
+		}
+	};
+
+    initializeGrid();
+}
+
+        </script>
+    </body>
+    </html>

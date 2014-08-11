@@ -11,6 +11,9 @@
 #import <SocketRocket/SRWebSocket.h>
 #import "SWLEDController.h"
 
+#define chunk 360.0/255.0
+#define degrees(x) (180.0 * x / M_PI)
+
 @interface SWGyroViewController : UIViewController <SRWebSocketDelegate>
 {
     NSInteger screen;
@@ -24,6 +27,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *rLabel;
 @property (weak, nonatomic) IBOutlet UILabel *gLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bLabel;
+@property (strong, nonatomic) SRWebSocket *webSocket;
+
+- (CMMotionManager *)motionManager;
+- (void)startMyMotionDetect;
 
 
 @end

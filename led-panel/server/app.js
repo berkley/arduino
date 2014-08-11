@@ -15,6 +15,8 @@ var connections = [];
 var socket = sockjs.createServer();
 
 socket.on('connection', function(conn) {
+    // console.log("\n\nSOCKET CONNECTION\n\n",conn, "\n\n");
+
     connections.push(conn);
     var number = connections.length;
     conn.write("Welcome, User " + number);
@@ -33,11 +35,12 @@ socket.on('connection', function(conn) {
             }
             else if (svgObject.type === 'bitmap') {
                 led.drawBitmap(svgObject.bitmap);
-            }
-        }
 
-        for (var ii=0; ii < connections.length; ii++) {
-            connections[ii].write("User " + number + " says: " + message);
+                // Send the bitmap to other clients
+                for (var ii=0; ii < connections.length; ii++) {
+                    connections[ii].write(message);
+                }
+            }
         }
     });
 
@@ -70,7 +73,9 @@ app.get('/pixel/set/off', led.setAllOff);
 app.get('/pixel/set/:x/:y/:r/:g/:b', led.setXYPixel);
 app.get('/pixel/latch/:x/:y/:r/:g/:b', led.latchXYPixel);
 app.get('/row/set/:row/:r/:g/:b', led.setRow);
+app.get('/row/set/:screen/:row/:r/:g/:b', led.setRowOnScreen);
 app.get('/row/latch/:row/:r/:g/:b', led.latchRow);
+app.get('/row/latch/:screen/:row/:r/:g/:b', led.latchRowOnScreen);
 app.get('/col/set/:col/:r/:g/:b', led.setCol);
 app.get('/col/latch/:col/:r/:g/:b', led.latchCol);
 app.get('/screen/set/:screen/:r/:g/:b', led.setScreen);
@@ -80,12 +85,17 @@ app.post('/bitmap/latch', led.latchBitmap);
 app.get('/latch', led.latch);
 app.get('/line/set/:x1/:y1/:x2/:y2/:r/:g/:b', led.setLine);
 app.get('/line/latch/:x1/:y1/:x2/:y2/:r/:g/:b', led.latchLine);
+app.get('/program/run/:program', led.runProgram);
+app.get('/program/run/browser/:program', led.runBrowserProgram);
+app.get('/program/stop', led.stopProgram);
 // app.get('/program/set/:program', led.setProgram);
 // app.get('/program', led.getPrograms)
 
 app.get('/sample', visualizations.sample);
 app.get('/audio-sample', visualizations.audioSample);
 app.get('/bar-volume', visualizations.barVolume);
+app.get('/', visualizations.grid);
+app.get('/grid', visualizations.grid);
 
 var server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

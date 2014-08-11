@@ -17,7 +17,7 @@ var webSocket = require('ws');
 
 
 var OPC = new require('../pixel-util/opc');
-var model = OPC.loadModel(process.argv[2] || './layouts/grid32x16z.json');
+var model = OPC.loadModel(process.argv[2] || './layouts/grid48x24.json');
 var client = new OPC('localhost', 7890);
 
 //turn off for debugging without a fire controller

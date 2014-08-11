@@ -31,6 +31,26 @@ var setCol = function(col, r, g, b) {
 	pixUtil.setColumn(col, r, g, b);
 };
 
+var setRowOnScreen = function(screen, row, r, g, b) {
+	if(screen != 99) //all screens
+	{
+		var trueRow = (screen * SCREEN_HEIGHT) + row;
+		console.log("trueRow: ", trueRow);
+		if(row < 0 || row >= SCREEN_HEIGHT) //don't set rows outside the bounds of the screen
+		{
+			console.log("skipping row ", trueRow);
+			return;
+		}
+		setRow(trueRow, r, g, b);
+	}
+	else
+	{
+		setRow(row, r, g, b);
+		setRow(row + SCREEN_HEIGHT);
+	    setRow(row + SCREEN_HEIGHT + SCREEN_HEIGHT);
+	}
+};
+
 var setScreen = function(screen, r, g, b) {
 	var start = 0;
 	var end = SCREEN_HEIGHT;
@@ -38,7 +58,7 @@ var setScreen = function(screen, r, g, b) {
 	if(screen == 99)
 	{
 		start = 0;
-		end = HEIGHT - 1;
+		end = HEIGHT;
 	}
 	else if(screen != 0)
 	{
@@ -124,6 +144,18 @@ wss.on('connection', function(ws) {
         		drawBitmap(json.bitmap);
         		latch();
         	}
+        	else if (json.command == "latchRowOnScreen") {
+        		setRowOnScreen(parseInt(json.screen), 
+        			           parseInt(json.row),
+        			           parseInt(json.r), 
+        			           parseInt(json.g),
+        			           parseInt(json.b));
+        		latch();
+        	} 
+        	else if(json.command == "allOff") {
+        		pixUtil.allOff();
+        		latch();
+        	}
         	ws.send("ok");
         }
     });
@@ -197,6 +229,13 @@ exports.setRow = function(req, res) {
 	res.send("{status:ok}");
 };
 
+exports.setRowOnScreen = function(req, res) {
+	var params = req.params;
+	setRowOnScreen(parseInt(params.screen), parseInt(params.row), 
+		parseInt(params.r), parseInt(params.g), parseInt(params.b));
+	res.send("{status:ok}");
+};
+
 exports.latchRow = function(req, res) {
 	var params = req.params;
 	var row = params.row;
@@ -204,6 +243,14 @@ exports.latchRow = function(req, res) {
 	var g = params.g;
 	var b = params.b;
 	setRow(row, r, g, b);
+	latch();
+	res.send("{status:ok}");
+};
+
+exports.latchRowOnScreen = function(req, res) {
+	var params = req.params;
+	setRowOnScreen(parseInt(params.screen), parseInt(params.row), 
+		parseInt(params.r), parseInt(params.g), parseInt(params.b));
 	latch();
 	res.send("{status:ok}");
 };
@@ -279,6 +326,42 @@ exports.latchLine = function(req, res) {
 	line(req.params.x1, req.params.y1, req.params.x2, req.params.y2, req.params.r, req.params.g, req.params.b);
 	latch();
 	res.send("{status:ok}");	
+};
+
+var runningProgram;
+
+exports.runProgram = function(req, res) {
+	var program = "node " + req.params.program;
+	console.log("program: ", program);
+	runningProgram = require('child_process').exec(program);
+	res.send("{status:ok}");
+};
+
+exports.stopProgram = function(req, res) {
+	console.log("runningProgram: ", runningProgram);
+	if(runningProgram == "browser")
+	{
+		console.log("stopping browser program");
+		var program = "chrome-cli close"
+		console.log("program: ", program);
+		runningProgram = require('child_process').exec(program);
+		runningProgram = null;
+	}
+	else if(runningProgram)
+	{
+		console.log("stopping program");
+		runningProgram.kill();
+	}
+
+	res.send("{status:ok}");
+};
+
+exports.runBrowserProgram = function(req, res) {
+	runningProgram = "browser";
+	var program = "chrome-cli open " + "http://localhost:3000/" + req.params.program;
+	console.log("browser program: ", program);
+	require('child_process').exec(program);
+	res.send("{status:ok}");
 };
 
 exports.drawBitmap = drawBitmap;
