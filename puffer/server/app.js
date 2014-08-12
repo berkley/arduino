@@ -17,6 +17,7 @@ app.get('/puff/p3', puffer.p3);
 app.get('/puff/s123', puffer.p123);
 app.get('/puff/s321', puffer.p321);
 app.get('/puff/sAll', puffer.pAll);
+app.get('/program/random/:on', puffer.random);
 app.post('/puff', puffer.puff);
 
 http.createServer(app).listen(app.get('port'), function(){

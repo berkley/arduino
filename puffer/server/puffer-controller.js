@@ -40,7 +40,7 @@ var SEQ_CIRCLE = 0;
 //set to 0 for debugging without and arduino
 var BOARD_CONNECTED = 1;
 
-exports.puffSeq = function(seq) {
+puffSeq = function(seq) {
 	SEQ_123 = 0;
 	SEQ_321 = 0;
 	SEQ_ALL = 0;
@@ -56,8 +56,9 @@ exports.puffSeq = function(seq) {
 	console.log("SEQ_321: ", SEQ_321);
 	console.log("SEQ_ALL: ", SEQ_ALL);
 };
+exports.puffSeq = puffSeq;
 
-exports.puffMulti = function(p1, p2, p3, p4, p5) {
+puffMulti = function(p1, p2, p3, p4, p5) {
 	P1_ON = 0;
 	P2_ON = 0;
 	P3_ON = 0;
@@ -77,6 +78,49 @@ exports.puffMulti = function(p1, p2, p3, p4, p5) {
 
 	console.log("p1:", p1, "p2:", p2, "p3:", p3, "p4:", p4, "p5:", p5);
 };
+exports.puffMulti = puffMulti;
+
+var ranSecs = -1;
+var ranInterval;
+random = function(on)
+{
+	console.log("puffing random puffs: ", on);
+
+	var numPrograms = 6;
+	var maxSecs = 30;
+	var num = parseInt(Math.random() * numPrograms);
+	console.log("num: ", num);
+	if(on)
+	{
+		if(num == 0) {
+			puffMulti(1, 0, 0, 0, 0);
+		}
+		else if(num == 1) {
+			puffMulti(0, 1, 0, 0, 0);
+		}
+		else if(num == 2) {
+			puffMulti(0, 0, 1, 0, 0);
+		}
+		else if(num == 3) {
+			puffSeq('SEQ_123');
+		}
+		else if(num == 4) {
+			puffSeq('SEQ_321');
+		}
+		else if(num == 5) {
+			puffSeq('SEQ_ALL');
+		}
+		ranSecs = parseInt(Math.random() * maxSecs);
+		console.log("puffing again in ", ranSecs, " seconds");
+		ranInterval = setTimeout(function(){random(true)}, ranSecs * 1000);
+	}
+	else
+	{
+		console.log("turning off random puffs: " + ranInterval);
+		clearTimeout(ranInterval);
+	}
+};
+exports.random = random;
 
 if(BOARD_CONNECTED)
 {

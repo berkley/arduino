@@ -18,7 +18,8 @@ Backend Express Routes
 * GET /puff/s123 - fire the 123 sequence
 * GET /puff/s321 - fire the 321 sequence
 * GET /puff/sAll - fire all puffers at once
-
+* GET /program/random/1 - turn on random puffing
+* GET /program/random/0 - turn off random puffing
 
 * WebSocket connection
 	- the puffers can be controlled via websockets by sending a json formatted command.

@@ -11,7 +11,10 @@
 
 @interface SWFireController : SWRadThingController
 {
+    BOOL _randomPuffs;
 }
+
+@property (nonatomic, assign) BOOL randomPuffs;
 
 + (SWFireController*)instance;
 - (void)puff1;
@@ -20,5 +23,6 @@
 - (void)seq123;
 - (void)seq321;
 - (void)seqAll;
+- (void)toggleRandomPuffs;
 
 @end
