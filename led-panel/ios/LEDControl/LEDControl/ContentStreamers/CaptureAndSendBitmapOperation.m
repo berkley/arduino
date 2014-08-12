@@ -8,8 +8,8 @@
 
 #import "CaptureAndSendBitmapOperation.h"
 
-const short WIDTH = 48;
-const short HEIGHT = 24;
+const short WIDTH = 24;
+const short HEIGHT = 48;
 const short X_STEP = 10;
 const short Y_STEP = 10;
 
@@ -32,16 +32,17 @@ const short Y_STEP = 10;
     @try {
         [self captureViewToFrameData];
         
+        CGFloat w = self.view.frame.size.width;
+//        CGFloat h = self.view.frame.size.height;
+        
         NSMutableArray *cols = [NSMutableArray arrayWithCapacity:WIDTH];
         
         for (int col=0; col < WIDTH; col++) {
             NSMutableArray *colColors = [NSMutableArray arrayWithCapacity:HEIGHT];
             
             for (int row=0; row < HEIGHT; row++) {
-                CGPoint point = CGPointMake(self.left - (row * Y_STEP),
-                                            self.top + (col * X_STEP));  // actually right
-//                CGPoint point = CGPointMake(self.left + (col * X_STEP),
-//                                            self.top + (row * Y_STEP));
+                CGPoint point = CGPointMake(w - (row * Y_STEP),
+                                            0 + (col * X_STEP));
                 
                 [colColors addObject:[self getPixelColorRGBNumberArrayAtLocation:point]];
             }
@@ -50,8 +51,6 @@ const short Y_STEP = 10;
         }
 
         bitmap = cols;
-//        [self jsonStringify:cols error:nil];
-        
     }
     @catch (NSException *exception) {
         NSLog(@"Error: %@", exception);
@@ -97,7 +96,9 @@ const short Y_STEP = 10;
     
     CGImageRef inImage;
     
-    inImage = [self imageWithView:self.view].CGImage;
+    UIImage *image = [self imageWithView:self.view];
+//    NSLog(@"img %.0f, %.0f", image.size.width, image.size.height);
+    inImage = image.CGImage;
     
     // Create off screen bitmap context to draw the image into. Format ARGB is 4 bytes for each pixel: Alpa, Red, Green, Blue
     CGContextRef cgctx = [self createARGBBitmapContextFromImage:inImage];
@@ -158,6 +159,8 @@ const short Y_STEP = 10;
         int red = _frameData[offset+1];
         int green = _frameData[offset+2];
         int blue = _frameData[offset+3];
+        
+//        NSLog(@"%.0f, %.0f: %i, %i, %i", point.x, point.y, red, green, blue);
         color = [NSArray arrayWithObjects:
                  [NSNumber numberWithInteger:red],
                  [NSNumber numberWithInteger:green],
