@@ -434,8 +434,25 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="KfW-8D-1P0" style="IBUITableViewCellStyleDefault" id="Bdq-wK-pw0">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="2xm-n8-qdv" style="IBUITableViewCellStyleDefault" id="q6f-ra-kPj">
                                         <rect key="frame" x="0.0" y="196" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q6f-ra-kPj" id="KGk-Ak-dnv">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="..%2Ffadecandy%2Fparticle_trail.js%20..%2Ffadecandy%2Flayouts%2Fgrid48x24.json" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2xm-n8-qdv">
+                                                    <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="KfW-8D-1P0" style="IBUITableViewCellStyleDefault" id="Bdq-wK-pw0">
+                                        <rect key="frame" x="0.0" y="240" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bdq-wK-pw0" id="jkR-lO-HxU">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -456,7 +473,7 @@
                             <tableViewSection headerTitle="Browser-Based" id="PAT-OO-VhK">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="qCs-Gp-a5n" style="IBUITableViewCellStyleDefault" id="d7D-NO-Gmw">
-                                        <rect key="frame" x="0.0" y="262" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="306" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="d7D-NO-Gmw" id="Bh2-rL-yaV">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -473,7 +490,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="fkM-AE-h43" style="IBUITableViewCellStyleDefault" id="IpC-V8-uB7">
-                                        <rect key="frame" x="0.0" y="306" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="350" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IpC-V8-uB7" id="H0B-Mx-sWi">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
