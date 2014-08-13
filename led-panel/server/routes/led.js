@@ -331,16 +331,19 @@ exports.latchLine = function(req, res) {
 var noiseTimeout;
 var startNoise = function(req, res) {
 	var cycleLength = parseInt(req.params.cycleLength);
+	var maxr = parseInt(req.params.maxr);
+	var maxg = parseInt(req.params.maxg);
+	var maxb = parseInt(req.params.maxb);
 	if(cycleLength == -1) //make it random
 	{
-		cycleLength = parseInt(Math.random() * 20);
+		cycleLength = parseInt(Math.random() * 5);
 	}
 	console.log("setting noise");
 	for(var i=0; i<numPixels; i++)
 	{
-		var r = pixUtil.randomColor();
-		var g = pixUtil.randomColor();
-		var b = pixUtil.randomColor();
+		var r = pixUtil.randomColor(maxr);
+		var g = pixUtil.randomColor(maxg);
+		var b = pixUtil.randomColor(maxb);
 		pixUtil.setPixel(i, r, g, b);
 	}
 	pixUtil.refresh();

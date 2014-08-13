@@ -85,7 +85,7 @@ app.get('/latch', led.latch);
 app.get('/line/set/:x1/:y1/:x2/:y2/:r/:g/:b', led.setLine);
 app.get('/line/latch/:x1/:y1/:x2/:y2/:r/:g/:b', led.latchLine);
 
-app.get('/program/run/noise/:cycleLength', led.startNoise);
+app.get('/program/run/noise/:cycleLength/:maxr/:maxg/:maxb', led.startNoise);
 app.get('/program/run/:program', led.runProgram);
 app.get('/program/run/browser/:program', led.runBrowserProgram);
 app.get('/program/stop', led.stopProgram);
