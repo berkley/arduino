@@ -328,6 +328,44 @@ exports.latchLine = function(req, res) {
 	res.send("{status:ok}");	
 };
 
+var heartCount = 0;
+var heartTimeout;
+var startHeartbeat = function(req, res) {
+	var r = req.params.r;
+	var g = req.params.g;
+	var b = req.params.b;
+	if(heartCount == 0)
+	{ 
+		setScreen(99, r, g, b);
+		latch();
+		heartCount++;
+		heartTimeout = setTimeout(function(){startHeartbeat(req, res)}, 250);
+	}
+	else if(heartCount == 1)
+	{
+		setScreen(99, 0, 0, 0);
+		latch();
+		heartCount++;
+		heartTimeout = setTimeout(function(){startHeartbeat(req, res)}, 250);
+	}
+	else if(heartCount == 2)
+	{ 
+		setScreen(99, r, g, b);
+		latch();
+		heartCount++;
+		heartTimeout = setTimeout(function(){startHeartbeat(req, res)}, 250);
+	}
+	else if(heartCount == 3)
+	{
+		setScreen(99, 0, 0, 0);
+		latch();
+		heartCount = 0;
+		heartTimeout = setTimeout(function(){startHeartbeat(req, res)}, 2000);
+	}
+	res.send("{status:ok}");
+};
+exports.startHeartbeat = startHeartbeat;
+
 var noiseTimeout;
 var startNoise = function(req, res) {
 	var cycleLength = parseInt(req.params.cycleLength);
@@ -382,6 +420,12 @@ exports.stopProgram = function(req, res) {
 		console.log("stopping noise");
 		clearTimeout(noiseTimeout);
 		noiseTimeout = null;
+	}
+	else if(heartTimeout)
+	{
+		console.log("stopping heartbeat");
+		clearTimeout(heartTimeout);
+		heartTimeout = null;
 	}
 
 	res.send("{status:ok}");

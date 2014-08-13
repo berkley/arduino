@@ -385,7 +385,7 @@
             </objects>
             <point key="canvasLocation" x="994" y="1423"/>
         </scene>
-        <!--Noise View Controller-->
+        <!--Noise View Controller - Random Noise-->
         <scene sceneID="zoX-gC-8ZV">
             <objects>
                 <viewController storyboardIdentifier="SWNoiseViewController" id="7kF-5y-jB4" customClass="SWNoiseViewController" sceneMemberID="viewController">
@@ -467,7 +467,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="yuR-4A-mdl"/>
+                    <navigationItem key="navigationItem" title="Random Noise" id="yuR-4A-mdl"/>
                     <connections>
                         <outlet property="blueSlider" destination="EF3-rk-eaw" id="0DD-L7-gnR"/>
                         <outlet property="changeIntervalTextField" destination="zkz-qc-ho0" id="Slk-MQ-04V"/>
@@ -478,7 +478,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FMp-zR-fOB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1433" y="2102"/>
+            <point key="canvasLocation" x="1436" y="2102"/>
         </scene>
         <!--Run Program Table View Controller - Run a Program-->
         <scene sceneID="zS2-4m-vCC">
@@ -623,6 +623,26 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <segue destination="7kF-5y-jB4" kind="push" id="qCs-CO-oYs"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="dz1-SZ-1Je" style="IBUITableViewCellStyleDefault" id="ZXc-cJ-hQe">
+                                        <rect key="frame" x="0.0" y="460" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZXc-cJ-hQe" id="9E6-bQ-Jbz">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Heartbeat" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dz1-SZ-1Je">
+                                                    <rect key="frame" x="15" y="0.0" width="270" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="2hU-OV-95w" kind="push" id="LHD-HD-mkL"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -978,6 +998,87 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SQd-7E-Rz6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="994" y="-666"/>
+        </scene>
+        <!--Heartbeat View Controller - Heartbeat-->
+        <scene sceneID="Paf-Y8-MKc">
+            <objects>
+                <viewController storyboardIdentifier="SWHeartbeatViewController" id="2hU-OV-95w" customClass="SWHeartbeatViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3VG-Mk-tbX"/>
+                        <viewControllerLayoutGuide type="bottom" id="pqu-VX-7Tm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Lsq-FF-ezo">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="128" minValue="1" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="oRp-5d-Nmx">
+                                <rect key="frame" x="49" y="121" width="222" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="maximumTrackTintColor" red="1" green="0.034760625420000003" blue="0.06115189972" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="thumbTintColor" red="1" green="0.034760625420000003" blue="0.06115189972" alpha="1" colorSpace="calibratedRGB"/>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="128" minValue="1" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="ecO-HI-xhQ">
+                                <rect key="frame" x="49" y="168" width="222" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="maximumTrackTintColor" red="0.25330771169999999" green="0.79482736899999995" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="thumbTintColor" red="0.25330771169999999" green="0.79482736899999995" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="128" minValue="1" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="keN-12-qFf">
+                                <rect key="frame" x="49" y="214" width="222" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="maximumTrackTintColor" red="0.087981153460000003" green="0.15959070519999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="thumbTintColor" red="0.087981153460000003" green="0.15959070519999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </slider>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Color" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uSm-df-BQq">
+                                <rect key="frame" x="139" y="92" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lon-ju-M16">
+                                <rect key="frame" x="93" y="272" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Go">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="goButtonTouched:" destination="2hU-OV-95w" eventType="touchUpInside" id="HGt-uz-QAU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="09t-Fn-rPb">
+                                <rect key="frame" x="144" y="272" width="33" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Stop">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="stopButtonTouched:" destination="2hU-OV-95w" eventType="touchUpInside" id="0MI-MO-bSx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dVL-wa-aaq">
+                                <rect key="frame" x="198" y="272" width="42" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="All Off">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="allOffButtonTouche:" destination="2hU-OV-95w" eventType="touchUpInside" id="XiV-VA-CgZ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Heartbeat" id="NwW-Mk-2o7"/>
+                    <connections>
+                        <outlet property="blueSlider" destination="keN-12-qFf" id="WPD-vV-fTW"/>
+                        <outlet property="greenSlider" destination="ecO-HI-xhQ" id="1Rq-wg-DV6"/>
+                        <outlet property="redSlider" destination="oRp-5d-Nmx" id="sjz-93-yhJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lGj-fe-m1G" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1442" y="2795"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
