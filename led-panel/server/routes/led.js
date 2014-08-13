@@ -46,8 +46,8 @@ var setRowOnScreen = function(screen, row, r, g, b) {
 	else
 	{
 		setRow(row, r, g, b);
-		setRow(row + SCREEN_HEIGHT);
-	    setRow(row + SCREEN_HEIGHT + SCREEN_HEIGHT);
+		setRow(row + SCREEN_HEIGHT, r, g, b);
+	    setRow(row + SCREEN_HEIGHT + SCREEN_HEIGHT, r, g, b);
 	}
 };
 
