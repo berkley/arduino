@@ -328,6 +328,28 @@ exports.latchLine = function(req, res) {
 	res.send("{status:ok}");	
 };
 
+var noiseTimeout;
+var startNoise = function(req, res) {
+	var cycleLength = parseInt(req.params.cycleLength);
+	if(cycleLength == -1) //make it random
+	{
+		cycleLength = parseInt(Math.random() * 20);
+	}
+	console.log("setting noise");
+	for(var i=0; i<numPixels; i++)
+	{
+		var r = pixUtil.randomColor();
+		var g = pixUtil.randomColor();
+		var b = pixUtil.randomColor();
+		pixUtil.setPixel(i, r, g, b);
+	}
+	pixUtil.refresh();
+	console.log("new noise in ", cycleLength, " seconds");
+	noiseTimeout = setTimeout(function(){startNoise(req, res);}, cycleLength * 1000);
+	res.send("{status:ok}");
+};
+exports.startNoise = startNoise;
+
 var runningProgram;
 
 exports.runProgram = function(req, res) {
@@ -351,6 +373,12 @@ exports.stopProgram = function(req, res) {
 	{
 		console.log("stopping program");
 		runningProgram.kill();
+	}
+	else if(noiseTimeout)
+	{
+		console.log("stopping noise");
+		clearTimeout(noiseTimeout);
+		noiseTimeout = null;
 	}
 
 	res.send("{status:ok}");
