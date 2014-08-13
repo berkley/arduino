@@ -328,6 +328,35 @@ exports.latchLine = function(req, res) {
 	res.send("{status:ok}");	
 };
 
+var staticTimeout;
+var startStatic = function(req, res) {
+	var r = req.params.r;
+	var g = req.params.g;
+	var b = req.params.b;
+	var cycleLength = req.params.cycleLength;
+	pixUtil.allOff();
+	pixUtil.refresh();
+	var time = new Date().getTime();
+	for(var i=0; i<numPixels; i++)
+	{
+		var on = parseInt(Math.random() * 2);
+		// console.log("on: ", on);
+		if(on == 1)
+		{
+			var red = parseInt(Math.abs(Math.sin(i * time) * r));
+			var green = parseInt(Math.abs(Math.sin(i * time) * g));
+			var blue = parseInt(Math.abs(Math.sin(i * time) * b));
+			console.log("red: ", red);
+			pixUtil.setPixel(i, red, green, blue);
+		}
+	}
+	pixUtil.refresh();
+	// console.log("refreshing static in 1000ms");
+	staticTimeout = setTimeout(function(){startStatic(req, res)}, cycleLength);
+	res.send("{status:ok}");
+};
+exports.startStatic = startStatic;
+
 var heartCount = 0;
 var heartTimeout;
 var startHeartbeat = function(req, res) {
@@ -401,7 +430,7 @@ exports.runProgram = function(req, res) {
 };
 
 exports.stopProgram = function(req, res) {
-	console.log("runningProgram: ", runningProgram);
+	// console.log("runningProgram: ", runningProgram);
 	if(runningProgram == "browser")
 	{
 		console.log("stopping browser program");
@@ -414,6 +443,7 @@ exports.stopProgram = function(req, res) {
 	{
 		console.log("stopping program");
 		runningProgram.kill();
+		runningProgram = null;
 	}
 	else if(noiseTimeout)
 	{
@@ -425,6 +455,12 @@ exports.stopProgram = function(req, res) {
 	{
 		console.log("stopping heartbeat");
 		clearTimeout(heartTimeout);
+		heartTimeout = null;
+	}
+	else if(staticTimeout)
+	{
+		console.log("stopping static");
+		clearTimeout(staticTimeout);
 		heartTimeout = null;
 	}
 

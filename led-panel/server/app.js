@@ -87,6 +87,7 @@ app.get('/line/latch/:x1/:y1/:x2/:y2/:r/:g/:b', led.latchLine);
 
 app.get('/program/run/noise/:cycleLength/:maxr/:maxg/:maxb', led.startNoise);
 app.get('/program/run/heartbeat/:r/:g/:b', led.startHeartbeat);
+app.get('/program/run/static/:cycleLength/:r/:g/:b', led.startStatic);
 app.get('/program/run/:program', led.runProgram);
 app.get('/program/run/browser/:program', led.runBrowserProgram);
 app.get('/program/stop', led.stopProgram);
