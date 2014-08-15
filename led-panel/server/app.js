@@ -85,7 +85,7 @@ app.get('/latch', led.latch);
 app.get('/line/set/:x1/:y1/:x2/:y2/:r/:g/:b', led.setLine);
 app.get('/line/latch/:x1/:y1/:x2/:y2/:r/:g/:b', led.latchLine);
 
-app.get('/program/run/animateOneWave/:r/:g/:b', led.animateOneWave);
+app.get('/program/run/animateOneWave/:cycleLength/:r/:g/:b', led.animateOneWave);
 app.get('/program/run/waveAtRow/:row/:r/:g/:b', led.waveAtRow);
 app.get('/program/run/wave/:cycleLength/:r/:g/:b', led.startWave);
 app.get('/program/run/noise/:cycleLength/:maxr/:maxg/:maxb', led.startNoise);

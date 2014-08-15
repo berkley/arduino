@@ -356,11 +356,8 @@ var animateOneWave = function(req, res) {
 	var r = req.params.r;
 	var g = req.params.g;
 	var b = req.params.b;
-	// for(var i=0; i<SCREEN_HEIGHT; i++)
-	{
-		// setTimeout(function(){drawWaveAtRow(-1, i, r, g, b)}, i * 10);
-		drawWaveAtRow(50, waveRow, r, g, b, true);
-	}
+	var cycleLength = parseInt(req.params.cycleLength);
+	drawWaveAtRow(cycleLength, waveRow, r, g, b, true);
 	res.send("{status:ok}");
 };
 exports.animateOneWave = animateOneWave;
@@ -378,7 +375,7 @@ var drawWaveAtRow = function(cycleLength, row, r, g, b, stopAfterOne) {
 	for(var i=row; i<(row + waveSize); i++)
 	{
 		console.log("j: ", j, " i: ", i);
-		if(i < SCREEN_HEIGHT)
+		if(i < SCREEN_HEIGHT && i >= 0)
 		{
 			pixUtil.setRow(i, rIncrement * j, gIncrement * j, bIncrement * j);
 			pixUtil.setRow(i + SCREEN_HEIGHT, rIncrement * j, gIncrement * j, bIncrement * j);
@@ -391,15 +388,13 @@ var drawWaveAtRow = function(cycleLength, row, r, g, b, stopAfterOne) {
 			j++;
 	}
 	pixUtil.refresh();
-	console.log("stopAfterOne: ", stopAfterOne);
 	waveRow--;
-	if(waveRow == -1)
+	if(waveRow == -1 * waveSize)
 	{
 		waveRow = SCREEN_HEIGHT;
 
 		if(stopAfterOne)
 		{
-			console.log("STOPPING!: ", waveTimeout);
 			clearTimeout(waveTimeout);
 			waveTimeout = null;
 			return;
