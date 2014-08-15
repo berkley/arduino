@@ -329,43 +329,85 @@ exports.latchLine = function(req, res) {
 };
 
 var waveTimeout;
-var waveRow = 0;
+var waveRow = SCREEN_HEIGHT;
 var startWave = function(req, res) {
 	var r = req.params.r;
 	var g = req.params.g;
 	var b = req.params.b;
 	var cycleLength = req.params.cycleLength;
-	pixUtil.allOff();
-	pixUtil.refresh();
 	var time = new Date().getTime();
 	
-	// console.log("refreshing static in 1000ms");
-	waveTimeout = setTimeout(function(){drawWaveAtRow(waveRow, r, g, b)}, cycleLength);
+	waveTimeout = setTimeout(function(){drawWaveAtRow(cycleLength, waveRow, r, g, b)}, cycleLength);
 	res.send("{status:ok}");
 };
-exports.startStatic = startStatic;
+exports.startWave = startWave;
 
-var drawWaveAtRow = function(row, r, g, b) {
-	var waveSize = 10;
+var waveAtRow = function(req, res){
+	var r = parseInt(req.params.r);
+	var g = parseInt(req.params.g);
+	var b = parseInt(req.params.b);
+	var row = parseInt(req.params.row);
+	drawWaveAtRow(-1, row, r, g, b);
+	res.send("{status:ok}");
+};
+exports.waveAtRow = waveAtRow;
+
+var animateOneWave = function(req, res) {
+	var r = req.params.r;
+	var g = req.params.g;
+	var b = req.params.b;
+	// for(var i=0; i<SCREEN_HEIGHT; i++)
+	{
+		// setTimeout(function(){drawWaveAtRow(-1, i, r, g, b)}, i * 10);
+		drawWaveAtRow(50, waveRow, r, g, b, true);
+	}
+	res.send("{status:ok}");
+};
+exports.animateOneWave = animateOneWave;
+
+var drawWaveAtRow = function(cycleLength, row, r, g, b, stopAfterOne) {
+	console.log("drawing wave at row ", row);
+	var waveSize = 11;
 	var rIncrement = r / (waveSize / 2);
 	var gIncrement = g / (waveSize / 2);
 	var bIncrement = b / (waveSize / 2); 
-	for(var i=row; i<row + waveSize; i++)
+	pixUtil.allOff();
+	pixUtil.refresh();
+	var j = 0;
+	console.log("row + waveSize: ", row + waveSize);
+	for(var i=row; i<(row + waveSize); i++)
 	{
-		// if(i <= (row + waveSize) / 2)
+		console.log("j: ", j, " i: ", i);
+		if(i < SCREEN_HEIGHT)
 		{
-			pixUtil.setRow((row + waveSize) - i, rIncrement * i, gIncrement * i, bIncrement * i);
+			pixUtil.setRow(i, rIncrement * j, gIncrement * j, bIncrement * j);
+			pixUtil.setRow(i + SCREEN_HEIGHT, rIncrement * j, gIncrement * j, bIncrement * j);
+			pixUtil.setRow(i + SCREEN_HEIGHT + SCREEN_HEIGHT, rIncrement * j, gIncrement * j, bIncrement * j);
 		}
-		// else
-		// {
-		// 	pixUtil.setRow((row + waveSize) - i, rIncrement * (i - ()), gIncrement * (1/i), bIncrement * (1/i));
-		// }
+
+		if(i >= (row + parseInt(waveSize / 2)))
+			j--;
+		else
+			j++;
 	}
-	waveRow++;
-	if(waveRow >= SCREEN_HEIGHT)
+	pixUtil.refresh();
+	console.log("stopAfterOne: ", stopAfterOne);
+	waveRow--;
+	if(waveRow == -1)
 	{
-		waveRow = 0;
+		waveRow = SCREEN_HEIGHT;
+
+		if(stopAfterOne)
+		{
+			console.log("STOPPING!: ", waveTimeout);
+			clearTimeout(waveTimeout);
+			waveTimeout = null;
+			return;
+		}
 	}
+	console.log("waveRow: ", waveRow);
+	if(cycleLength > 0)
+		waveTimeout = setTimeout(function(){drawWaveAtRow(cycleLength, waveRow, r, g, b, stopAfterOne)}, cycleLength);
 }
 
 var staticTimeout;
