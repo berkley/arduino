@@ -85,6 +85,7 @@ app.get('/latch', led.latch);
 app.get('/line/set/:x1/:y1/:x2/:y2/:r/:g/:b', led.setLine);
 app.get('/line/latch/:x1/:y1/:x2/:y2/:r/:g/:b', led.latchLine);
 
+app.get('/program/run/wave/:cycleLength/:r/:g/:b', led.startWave);
 app.get('/program/run/noise/:cycleLength/:maxr/:maxg/:maxb', led.startNoise);
 app.get('/program/run/heartbeat/:r/:g/:b', led.startHeartbeat);
 app.get('/program/run/static/:cycleLength/:r/:g/:b', led.startStatic);

@@ -328,6 +328,46 @@ exports.latchLine = function(req, res) {
 	res.send("{status:ok}");	
 };
 
+var waveTimeout;
+var waveRow = 0;
+var startWave = function(req, res) {
+	var r = req.params.r;
+	var g = req.params.g;
+	var b = req.params.b;
+	var cycleLength = req.params.cycleLength;
+	pixUtil.allOff();
+	pixUtil.refresh();
+	var time = new Date().getTime();
+	
+	// console.log("refreshing static in 1000ms");
+	waveTimeout = setTimeout(function(){drawWaveAtRow(waveRow, r, g, b)}, cycleLength);
+	res.send("{status:ok}");
+};
+exports.startStatic = startStatic;
+
+var drawWaveAtRow = function(row, r, g, b) {
+	var waveSize = 10;
+	var rIncrement = r / (waveSize / 2);
+	var gIncrement = g / (waveSize / 2);
+	var bIncrement = b / (waveSize / 2); 
+	for(var i=row; i<row + waveSize; i++)
+	{
+		// if(i <= (row + waveSize) / 2)
+		{
+			pixUtil.setRow((row + waveSize) - i, rIncrement * i, gIncrement * i, bIncrement * i);
+		}
+		// else
+		// {
+		// 	pixUtil.setRow((row + waveSize) - i, rIncrement * (i - ()), gIncrement * (1/i), bIncrement * (1/i));
+		// }
+	}
+	waveRow++;
+	if(waveRow >= SCREEN_HEIGHT)
+	{
+		waveRow = 0;
+	}
+}
+
 var staticTimeout;
 var startStatic = function(req, res) {
 	var r = req.params.r;
@@ -462,6 +502,12 @@ exports.stopProgram = function(req, res) {
 		console.log("stopping static");
 		clearTimeout(staticTimeout);
 		heartTimeout = null;
+	}
+	else if(waveTimeout)
+	{
+		console.log("stopping wave");
+		clearTimeout(waveTimeout);
+		waveTimeout = null;
 	}
 
 	res.send("{status:ok}");
