@@ -7,7 +7,6 @@
 //
 
 #import "SWSlideshowCSViewController.h"
-#import "JBKenBurnsView.h"
 
 @interface SWSlideshowCSViewController ()
 {
@@ -24,18 +23,34 @@
 {
     [super viewDidLoad];
     
+    self.closeButton.transform = CGAffineTransformMakeRotation(M_PI_2);
+    self.moreButton.transform = CGAffineTransformMakeRotation(M_PI_2);
+    
+    self.kenView = [[JBKenBurnsView alloc] initWithFrame:self.streamedContentArea.bounds];
+    self.kenView.delegate = self;
+    [self addContentView:self.kenView];
+    
+    NSArray *images = @[[UIImage imageNamed:@"ATcellorangekillingacancercellmauve1.jpg"],
+                        [UIImage imageNamed:@"anime-eye.png"],
+                        [UIImage imageNamed:@"attenae-galaxy.jpg"],
+                        [UIImage imageNamed:@"gradient.png"]];
+    
+    [self.kenView animateWithImages:images
+                 transitionDuration:3.0
+                       initialDelay:0
+                               loop:YES
+                        isLandscape:NO];
+
+//    [self addTestGradient];
+}
+
+- (void)addTestGradient
+{
     _scale = 1.0;
     _scaleDirection = 1.0;
     _iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"gradient.png"]];
     [self addContentView:_iv];
-    self.closeButton.transform = CGAffineTransformMakeRotation(M_PI_2);
     [self animate];
-    
-//    [self.kenView animateWithImages:myImages
-//                 transitionDuration:6
-//                       initialDelay:0
-//                               loop:YES
-//                        isLandscape:YES];
 }
 
 - (void)animate {
@@ -57,5 +72,27 @@
         self.opQueue = nil;
     }];
 }
+
+- (IBAction)moreButtonWasTapped:(id)sender {
+}
+
+- (void)kenBurns:(JBKenBurnsView *)kenBurns didShowImage:(UIImage *)image atIndex:(NSUInteger)index
+{
+    
+}
+
+- (void)kenBurns:(JBKenBurnsView *)kenBurns didFinishAllImages:(NSArray *)images
+{
+    
+}
+
+- (void)viewDidUnload
+{
+    [self.kenView stopAnimation];
+    [self setKenView:nil];
+    
+    [super viewDidUnload];
+}
+
 
 @end

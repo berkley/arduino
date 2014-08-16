@@ -14,6 +14,9 @@
 		A6D3B431199F2F0200862D65 /* SWSlideshowCSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D3B42D199F2F0200862D65 /* SWSlideshowCSViewController.m */; };
 		A6D3B435199F361F00862D65 /* gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = A6D3B434199F361F00862D65 /* gradient.png */; };
 		A6D3B439199F3A2A00862D65 /* JBKenBurnsView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D3B438199F3A2A00862D65 /* JBKenBurnsView.m */; };
+		A6D3B43D199F5F6200862D65 /* anime-eye.png in Resources */ = {isa = PBXBuildFile; fileRef = A6D3B43A199F5F6200862D65 /* anime-eye.png */; };
+		A6D3B43E199F5F6200862D65 /* ATcellorangekillingacancercellmauve1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A6D3B43B199F5F6200862D65 /* ATcellorangekillingacancercellmauve1.jpg */; };
+		A6D3B43F199F5F6200862D65 /* attenae-galaxy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A6D3B43C199F5F6200862D65 /* attenae-galaxy.jpg */; };
 		CD36B1EC198ABB0500DACE30 /* SWRunProgramTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD36B1EB198ABB0500DACE30 /* SWRunProgramTableViewController.m */; };
 		CD37147819847EE500CC0F68 /* SWBasicFireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37147719847EE500CC0F68 /* SWBasicFireViewController.m */; };
 		CD37147B19848B4100CC0F68 /* SWFireController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37147A19848B4100CC0F68 /* SWFireController.m */; };
@@ -65,6 +68,9 @@
 		A6D3B434199F361F00862D65 /* gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradient.png; sourceTree = "<group>"; };
 		A6D3B437199F3A2A00862D65 /* JBKenBurnsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBKenBurnsView.h; sourceTree = "<group>"; };
 		A6D3B438199F3A2A00862D65 /* JBKenBurnsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBKenBurnsView.m; sourceTree = "<group>"; };
+		A6D3B43A199F5F6200862D65 /* anime-eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "anime-eye.png"; sourceTree = "<group>"; };
+		A6D3B43B199F5F6200862D65 /* ATcellorangekillingacancercellmauve1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ATcellorangekillingacancercellmauve1.jpg; sourceTree = "<group>"; };
+		A6D3B43C199F5F6200862D65 /* attenae-galaxy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "attenae-galaxy.jpg"; sourceTree = "<group>"; };
 		CD36B1EA198ABB0500DACE30 /* SWRunProgramTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRunProgramTableViewController.h; sourceTree = "<group>"; };
 		CD36B1EB198ABB0500DACE30 /* SWRunProgramTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRunProgramTableViewController.m; sourceTree = "<group>"; };
 		CD37147619847EE500CC0F68 /* SWBasicFireViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWBasicFireViewController.h; sourceTree = "<group>"; };
@@ -154,6 +160,9 @@
 		A6D3B426199F2F0200862D65 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				A6D3B43A199F5F6200862D65 /* anime-eye.png */,
+				A6D3B43B199F5F6200862D65 /* ATcellorangekillingacancercellmauve1.jpg */,
+				A6D3B43C199F5F6200862D65 /* attenae-galaxy.jpg */,
 				A6D3B434199F361F00862D65 /* gradient.png */,
 			);
 			path = assets;
@@ -368,10 +377,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6D3B43E199F5F6200862D65 /* ATcellorangekillingacancercellmauve1.jpg in Resources */,
 				CD9565DD19808C560081BB67 /* Images.xcassets in Resources */,
 				A6D3B435199F361F00862D65 /* gradient.png in Resources */,
 				CD9565CC19808C560081BB67 /* InfoPlist.strings in Resources */,
+				A6D3B43F199F5F6200862D65 /* attenae-galaxy.jpg in Resources */,
 				CD9565D519808C560081BB67 /* Main.storyboard in Resources */,
+				A6D3B43D199F5F6200862D65 /* anime-eye.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

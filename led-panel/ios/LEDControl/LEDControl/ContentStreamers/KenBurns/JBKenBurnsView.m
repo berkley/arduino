@@ -23,6 +23,8 @@
 //
 
 #import "JBKenBurnsView.h"
+#include <stdlib.h>
+#define randomUnit() (arc4random() % 100) / 100
 
 #define enlargeRatio 1.1
 #define imageBufer 3
@@ -242,10 +244,11 @@ enum JBSourceMode {
         oldImageView = nil;
     }
     
+    imageView.transform = CGAffineTransformMakeRotation((10 * M_PI_2 * randomUnit()) + M_PI_2);
     [self addSubview:imageView];
     
     // Generates the animation
-    [UIView animateWithDuration:_showImageDuration + 2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^
+    [UIView animateWithDuration:_showImageDuration + 2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^
      {
          CGAffineTransform rotate    = CGAffineTransformMakeRotation(rotation);
          CGAffineTransform moveRight = CGAffineTransformMakeTranslation(moveX, moveY);
