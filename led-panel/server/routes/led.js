@@ -163,7 +163,15 @@ wss.on('connection', function(ws) {
         		var b = parseInt(json.b);
         		drawWaveAtRow(-1, row, r, g, b);
         	}
-        	ws.send("ok");
+        	else if(json.command == "animateOneWave") {
+        		var r = parseInt(json.r);
+        		var g = parseInt(json.g); 
+        		var b = parseInt(json.b);
+        		var cycleLength = parseInt(json.cycleLength);
+        		clearTimeout(waveTimeout);
+        		drawWaveAtRow(cycleLength, waveRow, r, g, b, true);
+        	}
+        	// ws.send("ok");
         }
     });
 });
@@ -370,7 +378,7 @@ var animateOneWave = function(req, res) {
 exports.animateOneWave = animateOneWave;
 
 var drawWaveAtRow = function(cycleLength, row, r, g, b, stopAfterOne) {
-	console.log("drawing wave at row ", row);
+	 console.log("drawing wave at row ", row);
 	var waveSize = 11;
 	var rIncrement = r / (waveSize / 2);
 	var gIncrement = g / (waveSize / 2);
@@ -378,10 +386,9 @@ var drawWaveAtRow = function(cycleLength, row, r, g, b, stopAfterOne) {
 	pixUtil.allOff();
 	pixUtil.refresh();
 	var j = 0;
-	console.log("row + waveSize: ", row + waveSize);
 	for(var i=row; i<(row + waveSize); i++)
 	{
-		console.log("j: ", j, " i: ", i);
+		// console.log("j: ", j, " i: ", i);
 		if(i < SCREEN_HEIGHT && i >= 0)
 		{
 			pixUtil.setRow(i, rIncrement * j, gIncrement * j, bIncrement * j);
@@ -407,7 +414,7 @@ var drawWaveAtRow = function(cycleLength, row, r, g, b, stopAfterOne) {
 			return;
 		}
 	}
-	console.log("waveRow: ", waveRow);
+
 	if(cycleLength > 0)
 		waveTimeout = setTimeout(function(){drawWaveAtRow(cycleLength, waveRow, r, g, b, stopAfterOne)}, cycleLength);
 }
