@@ -156,6 +156,13 @@ wss.on('connection', function(ws) {
         		pixUtil.allOff();
         		latch();
         	}
+        	else if(json.command == "drawWaveAtRow") {
+        		var row = parseInt(json.row);
+        		var r = parseInt(json.r);
+        		var g = parseInt(json.g); 
+        		var b = parseInt(json.b);
+        		drawWaveAtRow(-1, row, r, g, b);
+        	}
         	ws.send("ok");
         }
     });

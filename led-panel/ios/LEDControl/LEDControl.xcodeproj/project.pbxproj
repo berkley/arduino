@@ -33,6 +33,7 @@
 		CD9565FE1981F2830081BB67 /* SWLEDController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9565FD1981F2830081BB67 /* SWLEDController.m */; };
 		CD956601198202950081BB67 /* SWGyroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD956600198202950081BB67 /* SWGyroViewController.m */; };
 		CDAEC655199C287500F4A379 /* SWStaticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDAEC654199C287500F4A379 /* SWStaticViewController.m */; };
+		CDAEC658199F103000F4A379 /* SWWaveFlickrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDAEC657199F103000F4A379 /* SWWaveFlickrViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,8 @@
 		CD956600198202950081BB67 /* SWGyroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGyroViewController.m; sourceTree = "<group>"; };
 		CDAEC653199C287500F4A379 /* SWStaticViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWStaticViewController.h; sourceTree = "<group>"; };
 		CDAEC654199C287500F4A379 /* SWStaticViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWStaticViewController.m; sourceTree = "<group>"; };
+		CDAEC656199F103000F4A379 /* SWWaveFlickrViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWWaveFlickrViewController.h; sourceTree = "<group>"; };
+		CDAEC657199F103000F4A379 /* SWWaveFlickrViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWWaveFlickrViewController.m; sourceTree = "<group>"; };
 		D4A120044E91469D83A537E4 /* libPods-LEDControl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LEDControl.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -150,6 +153,8 @@
 				CD7B9F92199BD74A00B77258 /* SWHeartbeatViewController.m */,
 				CDAEC653199C287500F4A379 /* SWStaticViewController.h */,
 				CDAEC654199C287500F4A379 /* SWStaticViewController.m */,
+				CDAEC656199F103000F4A379 /* SWWaveFlickrViewController.h */,
+				CDAEC657199F103000F4A379 /* SWWaveFlickrViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -374,6 +379,7 @@
 				CD37148319892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.m in Sources */,
 				CD9565FB1981EF650081BB67 /* SWBasicLEDControlViewController.m in Sources */,
 				CD9565CE19808C560081BB67 /* main.m in Sources */,
+				CDAEC658199F103000F4A379 /* SWWaveFlickrViewController.m in Sources */,
 				CD9565FE1981F2830081BB67 /* SWLEDController.m in Sources */,
 				CD9565D819808C560081BB67 /* SWMasterViewController.m in Sources */,
 				CD956601198202950081BB67 /* SWGyroViewController.m in Sources */,
