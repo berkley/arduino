@@ -64,7 +64,8 @@
     _webSocket.delegate = nil;
     _webSocket = nil;
     
-    NSString *urlString = @"ws://127.0.0.1:3001/";
+//    NSString *urlString = @"ws://127.0.0.1:3001/";
+    NSString *urlString = @"ws://10.0.1.17:3001/";
     NSLog(@"ws connecting to %@", urlString);
     SRWebSocket *newWebSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:urlString]];
     newWebSocket.delegate = self;
@@ -82,13 +83,17 @@
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
     NSLog(@"socket fail: %@", error);
-    [self connectWebSocket];
+    if (self.webSocket) {
+        [self connectWebSocket];
+    }
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean
 {
     NSLog(@"socket close: %@", reason);
-    [self connectWebSocket];
+    if (self.webSocket) {
+        [self connectWebSocket];
+    }
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {

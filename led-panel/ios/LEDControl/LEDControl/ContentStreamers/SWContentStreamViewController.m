@@ -8,12 +8,11 @@
 
 #import "SWContentStreamViewController.h"
 
-const CGFloat SEC_PER_FRAME = (1.0/24);  // 24 is good
+const CGFloat SEC_PER_FRAME = (1.0/24.0);  // 24 is good
 
 @interface SWContentStreamViewController ()
 {
     NSTimeInterval _lastCaptureAt;
-    NSOperationQueue *_opQueue;
     CGFloat _left;
     CGFloat _top;
 }
@@ -24,21 +23,21 @@ const CGFloat SEC_PER_FRAME = (1.0/24);  // 24 is good
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithWhite:0.97 alpha:1.0];
+    self.view.backgroundColor = [UIColor colorWithWhite:0.25 alpha:1.0];
 
-#if 0
+#if 1
     // formatted for portrait
     CGFloat h = 480;
     CGFloat w = 240;
     CGFloat x = (self.view.bounds.size.width - w) / 2;
-    CGFloat y = (self.view.bounds.size.height - h) / 2 + 32;
+    CGFloat y = (self.view.bounds.size.height - h) / 2;
     CGAffineTransform xfm = CGAffineTransformIdentity;
 #else
     // rotated
     CGFloat w = 480;
     CGFloat h = 240;
     CGFloat x = (self.view.bounds.size.width - w) / 2;
-    CGFloat y = (self.view.bounds.size.height - h) / 2 + 32;
+    CGFloat y = (self.view.bounds.size.height - h) / 2;
     CGAffineTransform xfm = CGAffineTransformMakeRotation(M_PI_2);
 //    CGAffineTransform xfm = CGAffineTransformIdentity;
 #endif

@@ -7,6 +7,7 @@
 //
 
 #import "SWSlideshowCSViewController.h"
+#import "JBKenBurnsView.h"
 
 @interface SWSlideshowCSViewController ()
 {
@@ -27,8 +28,14 @@
     _scaleDirection = 1.0;
     _iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"gradient.png"]];
     [self addContentView:_iv];
-    
+    self.closeButton.transform = CGAffineTransformMakeRotation(M_PI_2);
     [self animate];
+    
+//    [self.kenView animateWithImages:myImages
+//                 transitionDuration:6
+//                       initialDelay:0
+//                               loop:YES
+//                        isLandscape:YES];
 }
 
 - (void)animate {
@@ -40,6 +47,15 @@
     _iv.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(_scale, _scale),
                                             CGAffineTransformMakeRotation(_angle));
     [self performSelector:@selector(animate) withObject:nil afterDelay:1/24];
+}
+
+- (IBAction)closeButtonWasTapped:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.webSocket close];
+        self.webSocket = nil;
+        [self.opQueue cancelAllOperations];
+        self.opQueue = nil;
+    }];
 }
 
 @end

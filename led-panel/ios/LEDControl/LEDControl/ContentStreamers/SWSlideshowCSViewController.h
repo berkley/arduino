@@ -10,4 +10,8 @@
 
 @interface SWSlideshowCSViewController : SWContentStreamViewController
 
+@property (weak, nonatomic) IBOutlet UIButton *closeButton;
+
+- (IBAction)closeButtonWasTapped:(id)sender;
+
 @end

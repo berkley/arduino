@@ -60,6 +60,9 @@ const short Y_STEP = 10;
     
     [self.delegate frameCaptureComplete:bitmap];
     self.delegate = nil;
+
+    if (_frameData) { free(_frameData); }
+
 }
 
 - (NSString*)jsonStringify:(id)object error:(NSError**)err

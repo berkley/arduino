@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		61E7C79AB33C46A081FB92E6 /* libPods-LEDControl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A120044E91469D83A537E4 /* libPods-LEDControl.a */; };
+		A6D3B424199F2EF300862D65 /* SWWebSocketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D3B423199F2EF300862D65 /* SWWebSocketViewController.m */; };
+		A6D3B42F199F2F0200862D65 /* CaptureAndSendBitmapOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D3B429199F2F0200862D65 /* CaptureAndSendBitmapOperation.m */; };
+		A6D3B430199F2F0200862D65 /* SWContentStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D3B42B199F2F0200862D65 /* SWContentStreamViewController.m */; };
+		A6D3B431199F2F0200862D65 /* SWSlideshowCSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D3B42D199F2F0200862D65 /* SWSlideshowCSViewController.m */; };
+		A6D3B435199F361F00862D65 /* gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = A6D3B434199F361F00862D65 /* gradient.png */; };
+		A6D3B439199F3A2A00862D65 /* JBKenBurnsView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D3B438199F3A2A00862D65 /* JBKenBurnsView.m */; };
 		CD36B1EC198ABB0500DACE30 /* SWRunProgramTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD36B1EB198ABB0500DACE30 /* SWRunProgramTableViewController.m */; };
 		CD37147819847EE500CC0F68 /* SWBasicFireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37147719847EE500CC0F68 /* SWBasicFireViewController.m */; };
 		CD37147B19848B4100CC0F68 /* SWFireController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37147A19848B4100CC0F68 /* SWFireController.m */; };
@@ -48,6 +54,17 @@
 
 /* Begin PBXFileReference section */
 		380413DD423A46D7AFB9717C /* Pods-LEDControl.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LEDControl.xcconfig"; path = "Pods/Pods-LEDControl.xcconfig"; sourceTree = "<group>"; };
+		A6D3B422199F2EF300862D65 /* SWWebSocketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWWebSocketViewController.h; sourceTree = "<group>"; };
+		A6D3B423199F2EF300862D65 /* SWWebSocketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWWebSocketViewController.m; sourceTree = "<group>"; };
+		A6D3B428199F2F0200862D65 /* CaptureAndSendBitmapOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureAndSendBitmapOperation.h; sourceTree = "<group>"; };
+		A6D3B429199F2F0200862D65 /* CaptureAndSendBitmapOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureAndSendBitmapOperation.m; sourceTree = "<group>"; };
+		A6D3B42A199F2F0200862D65 /* SWContentStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWContentStreamViewController.h; sourceTree = "<group>"; };
+		A6D3B42B199F2F0200862D65 /* SWContentStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWContentStreamViewController.m; sourceTree = "<group>"; };
+		A6D3B42C199F2F0200862D65 /* SWSlideshowCSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWSlideshowCSViewController.h; sourceTree = "<group>"; };
+		A6D3B42D199F2F0200862D65 /* SWSlideshowCSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWSlideshowCSViewController.m; sourceTree = "<group>"; };
+		A6D3B434199F361F00862D65 /* gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradient.png; sourceTree = "<group>"; };
+		A6D3B437199F3A2A00862D65 /* JBKenBurnsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBKenBurnsView.h; sourceTree = "<group>"; };
+		A6D3B438199F3A2A00862D65 /* JBKenBurnsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBKenBurnsView.m; sourceTree = "<group>"; };
 		CD36B1EA198ABB0500DACE30 /* SWRunProgramTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRunProgramTableViewController.h; sourceTree = "<group>"; };
 		CD36B1EB198ABB0500DACE30 /* SWRunProgramTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRunProgramTableViewController.m; sourceTree = "<group>"; };
 		CD37147619847EE500CC0F68 /* SWBasicFireViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWBasicFireViewController.h; sourceTree = "<group>"; };
@@ -119,6 +136,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A6D3B425199F2F0200862D65 /* ContentStreamers */ = {
+			isa = PBXGroup;
+			children = (
+				A6D3B436199F3A2A00862D65 /* KenBurns */,
+				A6D3B426199F2F0200862D65 /* assets */,
+				A6D3B428199F2F0200862D65 /* CaptureAndSendBitmapOperation.h */,
+				A6D3B429199F2F0200862D65 /* CaptureAndSendBitmapOperation.m */,
+				A6D3B42A199F2F0200862D65 /* SWContentStreamViewController.h */,
+				A6D3B42B199F2F0200862D65 /* SWContentStreamViewController.m */,
+				A6D3B42C199F2F0200862D65 /* SWSlideshowCSViewController.h */,
+				A6D3B42D199F2F0200862D65 /* SWSlideshowCSViewController.m */,
+			);
+			path = ContentStreamers;
+			sourceTree = "<group>";
+		};
+		A6D3B426199F2F0200862D65 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				A6D3B434199F361F00862D65 /* gradient.png */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		A6D3B436199F3A2A00862D65 /* KenBurns */ = {
+			isa = PBXGroup;
+			children = (
+				A6D3B437199F3A2A00862D65 /* JBKenBurnsView.h */,
+				A6D3B438199F3A2A00862D65 /* JBKenBurnsView.m */,
+			);
+			path = KenBurns;
+			sourceTree = "<group>";
+		};
 		CD37147C19848B5E00CC0F68 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +184,9 @@
 		CD37147D19848B6F00CC0F68 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				A6D3B425199F2F0200862D65 /* ContentStreamers */,
+				A6D3B422199F2EF300862D65 /* SWWebSocketViewController.h */,
+				A6D3B423199F2EF300862D65 /* SWWebSocketViewController.m */,
 				CD9565D619808C560081BB67 /* SWMasterViewController.h */,
 				CD9565D719808C560081BB67 /* SWMasterViewController.m */,
 				CD9565F91981EF650081BB67 /* SWBasicLEDControlViewController.h */,
@@ -317,6 +369,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD9565DD19808C560081BB67 /* Images.xcassets in Resources */,
+				A6D3B435199F361F00862D65 /* gradient.png in Resources */,
 				CD9565CC19808C560081BB67 /* InfoPlist.strings in Resources */,
 				CD9565D519808C560081BB67 /* Main.storyboard in Resources */,
 			);
@@ -375,11 +428,16 @@
 				CD36B1EC198ABB0500DACE30 /* SWRunProgramTableViewController.m in Sources */,
 				CD37147B19848B4100CC0F68 /* SWFireController.m in Sources */,
 				CDAEC655199C287500F4A379 /* SWStaticViewController.m in Sources */,
+				A6D3B431199F2F0200862D65 /* SWSlideshowCSViewController.m in Sources */,
 				CD37147819847EE500CC0F68 /* SWBasicFireViewController.m in Sources */,
+				A6D3B430199F2F0200862D65 /* SWContentStreamViewController.m in Sources */,
+				A6D3B424199F2EF300862D65 /* SWWebSocketViewController.m in Sources */,
+				A6D3B42F199F2F0200862D65 /* CaptureAndSendBitmapOperation.m in Sources */,
 				CD37148319892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.m in Sources */,
 				CD9565FB1981EF650081BB67 /* SWBasicLEDControlViewController.m in Sources */,
 				CD9565CE19808C560081BB67 /* main.m in Sources */,
 				CDAEC658199F103000F4A379 /* SWWaveFlickrViewController.m in Sources */,
+				A6D3B439199F3A2A00862D65 /* JBKenBurnsView.m in Sources */,
 				CD9565FE1981F2830081BB67 /* SWLEDController.m in Sources */,
 				CD9565D819808C560081BB67 /* SWMasterViewController.m in Sources */,
 				CD956601198202950081BB67 /* SWGyroViewController.m in Sources */,
