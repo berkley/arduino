@@ -13,8 +13,10 @@
  */
 @interface SWLEDController : SWRadThingController
 {
-
 }
+@property (readonly) NSInteger numRows; //the number of rows in the array
+@property (readonly) NSInteger numCols; //the number of rows in the array
+@property (readonly) NSInteger numPanels; //the number of rows in the array
 
 + (SWLEDController*)instance;
 - (void)setPixel:(NSInteger)pixel red:(NSInteger)r green:(NSInteger)g blue:(NSInteger)b;

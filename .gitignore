@@ -1,2 +1,6 @@
 .DS_Store
 led-panel/svg-server/node_modules
+led-panel/ios/LEDControl/Pods/Pods.xcodeproj/xcuserdata/*.xcuserdatad/
+led-panel/ios/LEDControl/LEDControl.xcodeproj/xcuserdata/*.xcuserdatad/
+led-panel/ios/LEDControl/LEDControl.xcworkspace/xcuserdata/*.xcuserdatad/
+led-panel/ios/LEDControl/LEDControl.xcodeproj/project.xcworkspace/xcuserdata/*.xcuserdatad/

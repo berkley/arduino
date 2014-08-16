@@ -26,6 +26,10 @@ SWLEDController *controller;
     if(!self)
         self = [super init];
     
+    _numPanels = 3;
+    _numRows = 24;
+    _numCols = _numPanels * 16;
+    
     self.restAddress = @"10.0.1.17:3000";
     self.wsAddress = @"10.0.1.17:3001";
 //    self.restAddress = @"10.250.220.224:3000";

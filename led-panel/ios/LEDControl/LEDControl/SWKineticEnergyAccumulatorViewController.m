@@ -77,39 +77,34 @@ BOOL running;
          [self performSelectorOnMainThread:@selector(updateLabels:) withObject:vals waitUntilDone:NO];
          
          //set the accumulated values
-         NSLog(@"accum: %i, goal: %i, currentRow: %i",
-               (int)accumulator, goal, currentRow);
+//         NSLog(@"accum: %i, goal: %i, currentRow: %i",
+//               (int)accumulator, goal, currentRow);
          if(accumulator >= goal)
          {
              goal += (threshold / numRows);
              if(goal >= threshold)
              {
+                 NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"latchRowOnScreen\", \"row\":\"%i\", \"screen\":\"%i\", \"r\":\"%i\", \"g\":\"%i\", \"b\":\"%i\"}", 0, (int)screen, (int)r, (int)g, (int)b];
+                 
+                 [self.webSocket send:cmd];
+                 
                  NSLog(@"someone won!");
-                 [[SWFireController instance] seq123];
-                 [[SWFireController instance] seq123];
+
                  if(screen == 0)
                  {
-                     [[SWFireController instance] puff1];
-                     [[SWFireController instance] puff1];
-                     [[SWFireController instance] puff1];
+                     [self performSelectorOnMainThread:@selector(tripplePuff1) withObject:nil waitUntilDone:NO];
                  }
                  else if(screen == 1)
                  {
-                     [[SWFireController instance] puff2];
-                     [[SWFireController instance] puff2];
-                     [[SWFireController instance] puff2];
+                     [self performSelectorOnMainThread:@selector(tripplePuff2) withObject:nil waitUntilDone:NO];
                  }
                  else if(screen == 2)
                  {
-                     [[SWFireController instance] puff3];
-                     [[SWFireController instance] puff3];
-                     [[SWFireController instance] puff3];
+                     [self performSelectorOnMainThread:@selector(tripplePuff3) withObject:nil waitUntilDone:NO];
                  }
                  else
                  {
-                     [[SWFireController instance] seqAll];
-                     [[SWFireController instance] seqAll];
-                     [[SWFireController instance] seqAll];
+                     [self performSelectorOnMainThread:@selector(tripplePuffAll) withObject:nil waitUntilDone:NO];
                  }
                  
 //                 goal = threshold / numRows;
@@ -130,6 +125,59 @@ BOOL running;
              }
          }
      }];
+}
+
+- (void)puff1
+{
+    [[SWFireController instance] puff1];
+}
+
+- (void)tripplePuff1
+{
+    [self performSelector:@selector(puff1) withObject:nil afterDelay:.1];
+    [self performSelector:@selector(puff1) withObject:nil afterDelay:.4];
+    [self performSelector:@selector(puff1) withObject:nil afterDelay:.9];
+}
+
+- (void)puff2
+{
+    [[SWFireController instance] puff2];
+}
+
+- (void)tripplePuff2
+{
+    [self performSelector:@selector(puff2) withObject:nil afterDelay:.1];
+    [self performSelector:@selector(puff2) withObject:nil afterDelay:.4];
+    [self performSelector:@selector(puff2) withObject:nil afterDelay:.9];
+}
+
+- (void)puff3
+{
+    [[SWFireController instance] puff3];
+}
+
+- (void)tripplePuff3
+{
+    [self performSelector:@selector(puff3) withObject:nil afterDelay:.1];
+    [self performSelector:@selector(puff3) withObject:nil afterDelay:.4];
+    [self performSelector:@selector(puff3) withObject:nil afterDelay:.9];
+}
+
+- (void)puffAll
+{
+    [[SWFireController instance] seqAll];
+}
+
+- (void)tripplePuffAll
+{
+    [self performSelector:@selector(puffAll) withObject:nil afterDelay:.1];
+    [self performSelector:@selector(puffAll) withObject:nil afterDelay:.4];
+    [self performSelector:@selector(puffAll) withObject:nil afterDelay:.9];
+}
+
+- (void)puff123
+{
+    [[SWFireController instance] seq123];
 }
 
 - (void)updateLabels:(NSDictionary*)vals
@@ -222,7 +270,7 @@ BOOL running;
 
 - (void)viewDidLoad
 {
-    screen = 0;
+    screen = 99;
     running = YES;
     goal = threshold / numRows;
     [super viewDidLoad];

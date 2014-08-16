@@ -8,16 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		61E7C79AB33C46A081FB92E6 /* libPods-LEDControl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A120044E91469D83A537E4 /* libPods-LEDControl.a */; };
-		A6DCD0171996E1BE00CF12BD /* SWWebSocketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DCD0161996E1BE00CF12BD /* SWWebSocketViewController.m */; };
-		A6DCD0201996F1F500CF12BD /* SWContentStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DCD01C1996F1F500CF12BD /* SWContentStreamViewController.m */; };
-		A6DCD0211996F1F500CF12BD /* CaptureAndSendBitmapOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DCD01F1996F1F500CF12BD /* CaptureAndSendBitmapOperation.m */; };
-		A6DCD0241996F2FA00CF12BD /* SWSlideshowCSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DCD0231996F2FA00CF12BD /* SWSlideshowCSViewController.m */; };
-		A6DCD0271996F4F700CF12BD /* gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = A6DCD0261996F4F700CF12BD /* gradient.png */; };
 		CD36B1EC198ABB0500DACE30 /* SWRunProgramTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD36B1EB198ABB0500DACE30 /* SWRunProgramTableViewController.m */; };
 		CD37147819847EE500CC0F68 /* SWBasicFireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37147719847EE500CC0F68 /* SWBasicFireViewController.m */; };
 		CD37147B19848B4100CC0F68 /* SWFireController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37147A19848B4100CC0F68 /* SWFireController.m */; };
 		CD37148019848C8A00CC0F68 /* SWRadThingController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37147F19848C8A00CC0F68 /* SWRadThingController.m */; };
 		CD37148319892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37148219892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.m */; };
+		CD7B9F90199BCFCB00B77258 /* SWNoiseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7B9F8F199BCFCB00B77258 /* SWNoiseViewController.m */; };
+		CD7B9F93199BD74A00B77258 /* SWHeartbeatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7B9F92199BD74A00B77258 /* SWHeartbeatViewController.m */; };
 		CD9565C219808C560081BB67 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9565C119808C560081BB67 /* Foundation.framework */; };
 		CD9565C419808C560081BB67 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9565C319808C560081BB67 /* CoreGraphics.framework */; };
 		CD9565C619808C560081BB67 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9565C519808C560081BB67 /* UIKit.framework */; };
@@ -35,6 +32,8 @@
 		CD9565FB1981EF650081BB67 /* SWBasicLEDControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9565FA1981EF650081BB67 /* SWBasicLEDControlViewController.m */; };
 		CD9565FE1981F2830081BB67 /* SWLEDController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9565FD1981F2830081BB67 /* SWLEDController.m */; };
 		CD956601198202950081BB67 /* SWGyroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD956600198202950081BB67 /* SWGyroViewController.m */; };
+		CDAEC655199C287500F4A379 /* SWStaticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDAEC654199C287500F4A379 /* SWStaticViewController.m */; };
+		CDAEC658199F103000F4A379 /* SWWaveFlickrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDAEC657199F103000F4A379 /* SWWaveFlickrViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,15 +48,6 @@
 
 /* Begin PBXFileReference section */
 		380413DD423A46D7AFB9717C /* Pods-LEDControl.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LEDControl.xcconfig"; path = "Pods/Pods-LEDControl.xcconfig"; sourceTree = "<group>"; };
-		A6DCD0151996E1BE00CF12BD /* SWWebSocketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWWebSocketViewController.h; sourceTree = "<group>"; };
-		A6DCD0161996E1BE00CF12BD /* SWWebSocketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWWebSocketViewController.m; sourceTree = "<group>"; };
-		A6DCD01C1996F1F500CF12BD /* SWContentStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWContentStreamViewController.m; sourceTree = "<group>"; };
-		A6DCD01D1996F1F500CF12BD /* SWContentStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWContentStreamViewController.h; sourceTree = "<group>"; };
-		A6DCD01E1996F1F500CF12BD /* CaptureAndSendBitmapOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureAndSendBitmapOperation.h; sourceTree = "<group>"; };
-		A6DCD01F1996F1F500CF12BD /* CaptureAndSendBitmapOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureAndSendBitmapOperation.m; sourceTree = "<group>"; };
-		A6DCD0221996F2FA00CF12BD /* SWSlideshowCSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWSlideshowCSViewController.h; sourceTree = "<group>"; };
-		A6DCD0231996F2FA00CF12BD /* SWSlideshowCSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWSlideshowCSViewController.m; sourceTree = "<group>"; };
-		A6DCD0261996F4F700CF12BD /* gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradient.png; sourceTree = "<group>"; };
 		CD36B1EA198ABB0500DACE30 /* SWRunProgramTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRunProgramTableViewController.h; sourceTree = "<group>"; };
 		CD36B1EB198ABB0500DACE30 /* SWRunProgramTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRunProgramTableViewController.m; sourceTree = "<group>"; };
 		CD37147619847EE500CC0F68 /* SWBasicFireViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWBasicFireViewController.h; sourceTree = "<group>"; };
@@ -68,6 +58,10 @@
 		CD37147F19848C8A00CC0F68 /* SWRadThingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRadThingController.m; sourceTree = "<group>"; };
 		CD37148119892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWKineticEnergyAccumulatorViewController.h; sourceTree = "<group>"; };
 		CD37148219892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWKineticEnergyAccumulatorViewController.m; sourceTree = "<group>"; };
+		CD7B9F8E199BCFCB00B77258 /* SWNoiseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWNoiseViewController.h; sourceTree = "<group>"; };
+		CD7B9F8F199BCFCB00B77258 /* SWNoiseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWNoiseViewController.m; sourceTree = "<group>"; };
+		CD7B9F91199BD74A00B77258 /* SWHeartbeatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWHeartbeatViewController.h; sourceTree = "<group>"; };
+		CD7B9F92199BD74A00B77258 /* SWHeartbeatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWHeartbeatViewController.m; sourceTree = "<group>"; };
 		CD9565BE19808C560081BB67 /* LEDControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LEDControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD9565C119808C560081BB67 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CD9565C319808C560081BB67 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -93,6 +87,10 @@
 		CD9565FD1981F2830081BB67 /* SWLEDController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWLEDController.m; sourceTree = "<group>"; };
 		CD9565FF198202950081BB67 /* SWGyroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGyroViewController.h; sourceTree = "<group>"; };
 		CD956600198202950081BB67 /* SWGyroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGyroViewController.m; sourceTree = "<group>"; };
+		CDAEC653199C287500F4A379 /* SWStaticViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWStaticViewController.h; sourceTree = "<group>"; };
+		CDAEC654199C287500F4A379 /* SWStaticViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWStaticViewController.m; sourceTree = "<group>"; };
+		CDAEC656199F103000F4A379 /* SWWaveFlickrViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWWaveFlickrViewController.h; sourceTree = "<group>"; };
+		CDAEC657199F103000F4A379 /* SWWaveFlickrViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWWaveFlickrViewController.m; sourceTree = "<group>"; };
 		D4A120044E91469D83A537E4 /* libPods-LEDControl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LEDControl.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -121,28 +119,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A6DCD01B1996F1C100CF12BD /* ContentStreamers */ = {
-			isa = PBXGroup;
-			children = (
-				A6DCD0251996F4F700CF12BD /* assets */,
-				A6DCD01C1996F1F500CF12BD /* SWContentStreamViewController.m */,
-				A6DCD01D1996F1F500CF12BD /* SWContentStreamViewController.h */,
-				A6DCD01E1996F1F500CF12BD /* CaptureAndSendBitmapOperation.h */,
-				A6DCD01F1996F1F500CF12BD /* CaptureAndSendBitmapOperation.m */,
-				A6DCD0221996F2FA00CF12BD /* SWSlideshowCSViewController.h */,
-				A6DCD0231996F2FA00CF12BD /* SWSlideshowCSViewController.m */,
-			);
-			path = ContentStreamers;
-			sourceTree = "<group>";
-		};
-		A6DCD0251996F4F700CF12BD /* assets */ = {
-			isa = PBXGroup;
-			children = (
-				A6DCD0261996F4F700CF12BD /* gradient.png */,
-			);
-			path = assets;
-			sourceTree = "<group>";
-		};
 		CD37147C19848B5E00CC0F68 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,21 +135,26 @@
 		CD37147D19848B6F00CC0F68 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				A6DCD01B1996F1C100CF12BD /* ContentStreamers */,
-				CD37147619847EE500CC0F68 /* SWBasicFireViewController.h */,
-				CD37147719847EE500CC0F68 /* SWBasicFireViewController.m */,
+				CD9565D619808C560081BB67 /* SWMasterViewController.h */,
+				CD9565D719808C560081BB67 /* SWMasterViewController.m */,
 				CD9565F91981EF650081BB67 /* SWBasicLEDControlViewController.h */,
 				CD9565FA1981EF650081BB67 /* SWBasicLEDControlViewController.m */,
 				CD9565FF198202950081BB67 /* SWGyroViewController.h */,
 				CD956600198202950081BB67 /* SWGyroViewController.m */,
+				CD37147619847EE500CC0F68 /* SWBasicFireViewController.h */,
+				CD37147719847EE500CC0F68 /* SWBasicFireViewController.m */,
 				CD37148119892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.h */,
 				CD37148219892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.m */,
-				CD9565D619808C560081BB67 /* SWMasterViewController.h */,
-				CD9565D719808C560081BB67 /* SWMasterViewController.m */,
 				CD36B1EA198ABB0500DACE30 /* SWRunProgramTableViewController.h */,
 				CD36B1EB198ABB0500DACE30 /* SWRunProgramTableViewController.m */,
-				A6DCD0151996E1BE00CF12BD /* SWWebSocketViewController.h */,
-				A6DCD0161996E1BE00CF12BD /* SWWebSocketViewController.m */,
+				CD7B9F8E199BCFCB00B77258 /* SWNoiseViewController.h */,
+				CD7B9F8F199BCFCB00B77258 /* SWNoiseViewController.m */,
+				CD7B9F91199BD74A00B77258 /* SWHeartbeatViewController.h */,
+				CD7B9F92199BD74A00B77258 /* SWHeartbeatViewController.m */,
+				CDAEC653199C287500F4A379 /* SWStaticViewController.h */,
+				CDAEC654199C287500F4A379 /* SWStaticViewController.m */,
+				CDAEC656199F103000F4A379 /* SWWaveFlickrViewController.h */,
+				CDAEC657199F103000F4A379 /* SWWaveFlickrViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -336,7 +317,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD9565DD19808C560081BB67 /* Images.xcassets in Resources */,
-				A6DCD0271996F4F700CF12BD /* gradient.png in Resources */,
 				CD9565CC19808C560081BB67 /* InfoPlist.strings in Resources */,
 				CD9565D519808C560081BB67 /* Main.storyboard in Resources */,
 			);
@@ -391,19 +371,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD9565D219808C560081BB67 /* SWAppDelegate.m in Sources */,
+				CD7B9F90199BCFCB00B77258 /* SWNoiseViewController.m in Sources */,
 				CD36B1EC198ABB0500DACE30 /* SWRunProgramTableViewController.m in Sources */,
 				CD37147B19848B4100CC0F68 /* SWFireController.m in Sources */,
-				A6DCD0241996F2FA00CF12BD /* SWSlideshowCSViewController.m in Sources */,
+				CDAEC655199C287500F4A379 /* SWStaticViewController.m in Sources */,
 				CD37147819847EE500CC0F68 /* SWBasicFireViewController.m in Sources */,
 				CD37148319892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.m in Sources */,
 				CD9565FB1981EF650081BB67 /* SWBasicLEDControlViewController.m in Sources */,
-				A6DCD0201996F1F500CF12BD /* SWContentStreamViewController.m in Sources */,
-				A6DCD0211996F1F500CF12BD /* CaptureAndSendBitmapOperation.m in Sources */,
-				A6DCD0171996E1BE00CF12BD /* SWWebSocketViewController.m in Sources */,
 				CD9565CE19808C560081BB67 /* main.m in Sources */,
+				CDAEC658199F103000F4A379 /* SWWaveFlickrViewController.m in Sources */,
 				CD9565FE1981F2830081BB67 /* SWLEDController.m in Sources */,
 				CD9565D819808C560081BB67 /* SWMasterViewController.m in Sources */,
 				CD956601198202950081BB67 /* SWGyroViewController.m in Sources */,
+				CD7B9F93199BD74A00B77258 /* SWHeartbeatViewController.m in Sources */,
 				CD37148019848C8A00CC0F68 /* SWRadThingController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

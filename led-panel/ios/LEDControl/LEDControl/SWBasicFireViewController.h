@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface SWBasicFireViewController : UIViewController
+{
+
+}
+
+@property (weak, nonatomic) IBOutlet UIButton *randomPuffsButton;
 
 @end

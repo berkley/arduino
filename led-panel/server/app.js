@@ -73,7 +73,6 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// app.get('/', routes.index);
 app.get('/pixel/set/:address/:r/:g/:b', led.setSerialPixel);
 app.get('/pixel/latch/:address/:r/:g/:b', led.latchSerialPixel);
 app.get('/pixel/latch/off', led.latchAllOff);
@@ -93,11 +92,17 @@ app.post('/bitmap/latch', led.latchBitmap);
 app.get('/latch', led.latch);
 app.get('/line/set/:x1/:y1/:x2/:y2/:r/:g/:b', led.setLine);
 app.get('/line/latch/:x1/:y1/:x2/:y2/:r/:g/:b', led.latchLine);
+
+app.get('/program/run/animateOneWave/:cycleLength/:r/:g/:b', led.animateOneWave);
+app.get('/program/run/waveAtRow/:row/:r/:g/:b', led.waveAtRow);
+app.get('/program/run/wave/:cycleLength/:r/:g/:b', led.startWave);
+app.get('/program/run/noise/:cycleLength/:maxr/:maxg/:maxb', led.startNoise);
+app.get('/program/run/heartbeat/:r/:g/:b', led.startHeartbeat);
+app.get('/program/run/static/:cycleLength/:r/:g/:b', led.startStatic);
 app.get('/program/run/:program', led.runProgram);
 app.get('/program/run/browser/:program', led.runBrowserProgram);
 app.get('/program/stop', led.stopProgram);
-// app.get('/program/set/:program', led.setProgram);
-// app.get('/program', led.getPrograms)
+
 
 app.get('/sample', visualizations.sample);
 app.get('/audio-sample', visualizations.audioSample);

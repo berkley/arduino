@@ -36,6 +36,19 @@ exports.pAll = function(req, res)
 	res.send(200, {"status":"OK"});
 };
 
+exports.random = function(req, res)
+{
+	if(req.params.on == '1')
+	{ //turn random puffs on
+		pcon.random(true);
+	}
+	else
+	{ //turn random puffs off
+		pcon.random(false);
+	}
+	res.send(200, {"status":"OK"});
+};
+
 exports.puff = function(req, res) {
 	console.log("puffing with body: ", req.body );
 	var body = req.body;

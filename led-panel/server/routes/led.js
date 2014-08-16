@@ -46,8 +46,8 @@ var setRowOnScreen = function(screen, row, r, g, b) {
 	else
 	{
 		setRow(row, r, g, b);
-		setRow(row + SCREEN_HEIGHT);
-	    setRow(row + SCREEN_HEIGHT + SCREEN_HEIGHT);
+		setRow(row + SCREEN_HEIGHT, r, g, b);
+	    setRow(row + SCREEN_HEIGHT + SCREEN_HEIGHT, r, g, b);
 	}
 };
 
@@ -164,6 +164,13 @@ wss.on('connection', function(ws) {
         	else if(json.command == "allOff") {
         		pixUtil.allOff();
         		latch();
+        	}
+        	else if(json.command == "drawWaveAtRow") {
+        		var row = parseInt(json.row);
+        		var r = parseInt(json.r);
+        		var g = parseInt(json.g); 
+        		var b = parseInt(json.b);
+        		drawWaveAtRow(-1, row, r, g, b);
         	}
         	ws.send("ok");
         }
@@ -337,6 +344,175 @@ exports.latchLine = function(req, res) {
 	res.send("{status:ok}");	
 };
 
+var waveTimeout;
+var waveRow = SCREEN_HEIGHT;
+var startWave = function(req, res) {
+	var r = req.params.r;
+	var g = req.params.g;
+	var b = req.params.b;
+	var cycleLength = req.params.cycleLength;
+	var time = new Date().getTime();
+	
+	waveTimeout = setTimeout(function(){drawWaveAtRow(cycleLength, waveRow, r, g, b)}, cycleLength);
+	res.send("{status:ok}");
+};
+exports.startWave = startWave;
+
+var waveAtRow = function(req, res){
+	var r = parseInt(req.params.r);
+	var g = parseInt(req.params.g);
+	var b = parseInt(req.params.b);
+	var row = parseInt(req.params.row);
+	drawWaveAtRow(-1, row, r, g, b);
+	res.send("{status:ok}");
+};
+exports.waveAtRow = waveAtRow;
+
+var animateOneWave = function(req, res) {
+	var r = req.params.r;
+	var g = req.params.g;
+	var b = req.params.b;
+	var cycleLength = parseInt(req.params.cycleLength);
+	drawWaveAtRow(cycleLength, waveRow, r, g, b, true);
+	res.send("{status:ok}");
+};
+exports.animateOneWave = animateOneWave;
+
+var drawWaveAtRow = function(cycleLength, row, r, g, b, stopAfterOne) {
+	console.log("drawing wave at row ", row);
+	var waveSize = 11;
+	var rIncrement = r / (waveSize / 2);
+	var gIncrement = g / (waveSize / 2);
+	var bIncrement = b / (waveSize / 2); 
+	pixUtil.allOff();
+	pixUtil.refresh();
+	var j = 0;
+	console.log("row + waveSize: ", row + waveSize);
+	for(var i=row; i<(row + waveSize); i++)
+	{
+		console.log("j: ", j, " i: ", i);
+		if(i < SCREEN_HEIGHT && i >= 0)
+		{
+			pixUtil.setRow(i, rIncrement * j, gIncrement * j, bIncrement * j);
+			pixUtil.setRow(i + SCREEN_HEIGHT, rIncrement * j, gIncrement * j, bIncrement * j);
+			pixUtil.setRow(i + SCREEN_HEIGHT + SCREEN_HEIGHT, rIncrement * j, gIncrement * j, bIncrement * j);
+		}
+
+		if(i >= (row + parseInt(waveSize / 2)))
+			j--;
+		else
+			j++;
+	}
+	pixUtil.refresh();
+	waveRow--;
+	if(waveRow == -1 * waveSize)
+	{
+		waveRow = SCREEN_HEIGHT;
+
+		if(stopAfterOne)
+		{
+			clearTimeout(waveTimeout);
+			waveTimeout = null;
+			return;
+		}
+	}
+	console.log("waveRow: ", waveRow);
+	if(cycleLength > 0)
+		waveTimeout = setTimeout(function(){drawWaveAtRow(cycleLength, waveRow, r, g, b, stopAfterOne)}, cycleLength);
+}
+
+var staticTimeout;
+var startStatic = function(req, res) {
+	var r = req.params.r;
+	var g = req.params.g;
+	var b = req.params.b;
+	var cycleLength = req.params.cycleLength;
+	pixUtil.allOff();
+	pixUtil.refresh();
+	var time = new Date().getTime();
+	for(var i=0; i<numPixels; i++)
+	{
+		var on = parseInt(Math.random() * 2);
+		// console.log("on: ", on);
+		if(on == 1)
+		{
+			var red = parseInt(Math.abs(Math.sin(i * time) * r));
+			var green = parseInt(Math.abs(Math.sin(i * time) * g));
+			var blue = parseInt(Math.abs(Math.sin(i * time) * b));
+			console.log("red: ", red);
+			pixUtil.setPixel(i, red, green, blue);
+		}
+	}
+	pixUtil.refresh();
+	// console.log("refreshing static in 1000ms");
+	staticTimeout = setTimeout(function(){startStatic(req, res)}, cycleLength);
+	res.send("{status:ok}");
+};
+exports.startStatic = startStatic;
+
+var heartCount = 0;
+var heartTimeout;
+var startHeartbeat = function(req, res) {
+	var r = req.params.r;
+	var g = req.params.g;
+	var b = req.params.b;
+	if(heartCount == 0)
+	{ 
+		setScreen(99, r, g, b);
+		latch();
+		heartCount++;
+		heartTimeout = setTimeout(function(){startHeartbeat(req, res)}, 250);
+	}
+	else if(heartCount == 1)
+	{
+		setScreen(99, 0, 0, 0);
+		latch();
+		heartCount++;
+		heartTimeout = setTimeout(function(){startHeartbeat(req, res)}, 250);
+	}
+	else if(heartCount == 2)
+	{ 
+		setScreen(99, r, g, b);
+		latch();
+		heartCount++;
+		heartTimeout = setTimeout(function(){startHeartbeat(req, res)}, 250);
+	}
+	else if(heartCount == 3)
+	{
+		setScreen(99, 0, 0, 0);
+		latch();
+		heartCount = 0;
+		heartTimeout = setTimeout(function(){startHeartbeat(req, res)}, 2000);
+	}
+	res.send("{status:ok}");
+};
+exports.startHeartbeat = startHeartbeat;
+
+var noiseTimeout;
+var startNoise = function(req, res) {
+	var cycleLength = parseInt(req.params.cycleLength);
+	var maxr = parseInt(req.params.maxr);
+	var maxg = parseInt(req.params.maxg);
+	var maxb = parseInt(req.params.maxb);
+	if(cycleLength == -1) //make it random
+	{
+		cycleLength = parseInt(Math.random() * 5);
+	}
+	console.log("setting noise");
+	for(var i=0; i<numPixels; i++)
+	{
+		var r = pixUtil.randomColor(maxr);
+		var g = pixUtil.randomColor(maxg);
+		var b = pixUtil.randomColor(maxb);
+		pixUtil.setPixel(i, r, g, b);
+	}
+	pixUtil.refresh();
+	console.log("new noise in ", cycleLength, " seconds");
+	noiseTimeout = setTimeout(function(){startNoise(req, res);}, cycleLength * 1000);
+	res.send("{status:ok}");
+};
+exports.startNoise = startNoise;
+
 var runningProgram;
 
 exports.runProgram = function(req, res) {
@@ -347,7 +523,7 @@ exports.runProgram = function(req, res) {
 };
 
 exports.stopProgram = function(req, res) {
-	console.log("runningProgram: ", runningProgram);
+	// console.log("runningProgram: ", runningProgram);
 	if(runningProgram == "browser")
 	{
 		console.log("stopping browser program");
@@ -360,6 +536,31 @@ exports.stopProgram = function(req, res) {
 	{
 		console.log("stopping program");
 		runningProgram.kill();
+		runningProgram = null;
+	}
+	else if(noiseTimeout)
+	{
+		console.log("stopping noise");
+		clearTimeout(noiseTimeout);
+		noiseTimeout = null;
+	}
+	else if(heartTimeout)
+	{
+		console.log("stopping heartbeat");
+		clearTimeout(heartTimeout);
+		heartTimeout = null;
+	}
+	else if(staticTimeout)
+	{
+		console.log("stopping static");
+		clearTimeout(staticTimeout);
+		heartTimeout = null;
+	}
+	else if(waveTimeout)
+	{
+		console.log("stopping wave");
+		clearTimeout(waveTimeout);
+		waveTimeout = null;
 	}
 
 	res.send("{status:ok}");

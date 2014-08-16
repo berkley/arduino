@@ -3,14 +3,14 @@
 // Simple particle system example with Node and opc.js
 // Specify a layout file on the command line, or use the default (grid32x16z)
 
-var OPC = new require('./opc');
+var OPC = new require('../pixel-util/opc');
 var model = OPC.loadModel(process.argv[2] || '../layouts/grid32x16z.json');
 var client = new OPC('localhost', 7890);
 
 function draw() {
 
     var time = 0.009 * new Date().getTime();
-    var numParticles = 200;
+    var numParticles = 400;
     var particles = [];
 
     for (var i = 0; i < numParticles; i++) {
