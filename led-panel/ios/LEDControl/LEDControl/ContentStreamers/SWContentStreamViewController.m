@@ -69,7 +69,6 @@ const CGFloat SEC_PER_FRAME = (1.0/24);  // 24 is good
     
 }
 
-
 - (void)addContentView:(UIView*)v
 {
 //    v.transform = self.streamedContentArea.transform;
