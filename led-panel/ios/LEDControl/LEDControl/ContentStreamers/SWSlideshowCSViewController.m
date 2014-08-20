@@ -33,7 +33,7 @@
     [self addContentView:self.kenView];
     
     [self.kenView animateWithImages:images
-                 transitionDuration:1.0
+                 transitionDuration:3.0
                        initialDelay:0
                                loop:YES
                         isLandscape:YES];
@@ -43,8 +43,8 @@
 {
     [super viewDidLoad];
     
-    self.closeButton.transform = CGAffineTransformMakeRotation(M_PI_2);
-    self.moreButton.transform = CGAffineTransformMakeRotation(M_PI_2);
+//    self.closeButton.transform = CGAffineTransformMakeRotation(M_PI_2);
+//    self.moreButton.transform = CGAffineTransformMakeRotation(M_PI_2);
     
     NSArray *images = @[[UIImage imageNamed:@"ATcellorangekillingacancercellmauve1.jpg"],
                         [UIImage imageNamed:@"anime-eye.png"],
@@ -63,6 +63,8 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    
     static BOOL first = false;
     
     if (first) {
@@ -157,14 +159,7 @@
 	for (NSDictionary *dict in info) {
         if ([dict objectForKey:UIImagePickerControllerMediaType] == ALAssetTypePhoto){
             if ([dict objectForKey:UIImagePickerControllerOriginalImage]){
-#if 0
-                EYLargePhoto *photo = [[EYLargePhoto alloc] init];
-                photo.thumb = [dict objectForKey:UIImagePickerControllerOriginalImage];
-                UIImage* image = photo.thumb;
-                [images addObject:image];
-#else
                 [images addObject:[dict objectForKey:UIImagePickerControllerOriginalImage]];
-#endif
             }
             else {
                 NSLog(@"UIImagePickerControllerReferenceURL = %@", dict);

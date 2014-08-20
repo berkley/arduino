@@ -24,6 +24,8 @@
 		A68577BE199FAA88001C291D /* EYLargePhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A68577BA199FAA88001C291D /* EYLargePhotoManager.m */; };
 		A68577BF199FAA88001C291D /* UIImage+EYFixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = A68577BC199FAA88001C291D /* UIImage+EYFixOrientation.m */; };
 		A68577C1199FC53A001C291D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A68577C0199FC53A001C291D /* AssetsLibrary.framework */; };
+		A698B3B819A45726009F1339 /* bomb_25x25@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A698B3B619A45726009F1339 /* bomb_25x25@2x.png */; };
+		A698B3B919A45726009F1339 /* pills_25x25@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A698B3B719A45726009F1339 /* pills_25x25@2x.png */; };
 		A6D3B424199F2EF300862D65 /* SWWebSocketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D3B423199F2EF300862D65 /* SWWebSocketViewController.m */; };
 		A6D3B42F199F2F0200862D65 /* CaptureAndSendBitmapOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D3B429199F2F0200862D65 /* CaptureAndSendBitmapOperation.m */; };
 		A6D3B430199F2F0200862D65 /* SWContentStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D3B42B199F2F0200862D65 /* SWContentStreamViewController.m */; };
@@ -103,6 +105,8 @@
 		A68577BB199FAA88001C291D /* UIImage+EYFixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+EYFixOrientation.h"; sourceTree = "<group>"; };
 		A68577BC199FAA88001C291D /* UIImage+EYFixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+EYFixOrientation.m"; sourceTree = "<group>"; };
 		A68577C0199FC53A001C291D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		A698B3B619A45726009F1339 /* bomb_25x25@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bomb_25x25@2x.png"; sourceTree = "<group>"; };
+		A698B3B719A45726009F1339 /* pills_25x25@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pills_25x25@2x.png"; sourceTree = "<group>"; };
 		A6D3B422199F2EF300862D65 /* SWWebSocketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWWebSocketViewController.h; sourceTree = "<group>"; };
 		A6D3B423199F2EF300862D65 /* SWWebSocketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWWebSocketViewController.m; sourceTree = "<group>"; };
 		A6D3B428199F2F0200862D65 /* CaptureAndSendBitmapOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureAndSendBitmapOperation.h; sourceTree = "<group>"; };
@@ -260,6 +264,8 @@
 		A6D3B426199F2F0200862D65 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				A698B3B619A45726009F1339 /* bomb_25x25@2x.png */,
+				A698B3B719A45726009F1339 /* pills_25x25@2x.png */,
 				A6D3B43A199F5F6200862D65 /* anime-eye.png */,
 				A6D3B43B199F5F6200862D65 /* ATcellorangekillingacancercellmauve1.jpg */,
 				A6D3B43C199F5F6200862D65 /* attenae-galaxy.jpg */,
@@ -478,11 +484,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A698B3B819A45726009F1339 /* bomb_25x25@2x.png in Resources */,
 				A6D3B43E199F5F6200862D65 /* ATcellorangekillingacancercellmauve1.jpg in Resources */,
 				CD9565DD19808C560081BB67 /* Images.xcassets in Resources */,
 				A68577B2199FAA55001C291D /* ELCAssetTablePicker.xib in Resources */,
 				A6D3B435199F361F00862D65 /* gradient.png in Resources */,
 				A68577B3199FAA55001C291D /* Overlay.png in Resources */,
+				A698B3B919A45726009F1339 /* pills_25x25@2x.png in Resources */,
 				A68577B4199FAA55001C291D /* Overlay@2x.png in Resources */,
 				CD9565CC19808C560081BB67 /* InfoPlist.strings in Resources */,
 				A68577B0199FAA55001C291D /* ELCAlbumPickerController.xib in Resources */,

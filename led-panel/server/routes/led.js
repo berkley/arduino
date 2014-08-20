@@ -133,6 +133,10 @@ var wss = new WebSocketServer({port: 3001});
 
 wss.on('connection', function(ws) {
 	console.log('led.js: client connected.')
+
+	ws.on('error', function(a,b,c) {
+		console.log("ws error:", a, b, c);
+	});
 	
 	ws.on('message', function(message) {
         // console.log('received:', typeof message, message);

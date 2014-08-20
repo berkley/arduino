@@ -8,8 +8,8 @@
 
 #import "CaptureAndSendBitmapOperation.h"
 
-const short WIDTH = 24;
-const short HEIGHT = 48;
+const short WIDTH = 48;
+const short HEIGHT = 24;
 const short X_STEP = 10;
 const short Y_STEP = 10;
 
@@ -32,17 +32,13 @@ const short Y_STEP = 10;
     @try {
         [self captureViewToFrameData];
         
-        CGFloat w = self.view.frame.size.width;
-//        CGFloat h = self.view.frame.size.height;
-        
         NSMutableArray *cols = [NSMutableArray arrayWithCapacity:WIDTH];
-        
         for (int col=0; col < WIDTH; col++) {
+
             NSMutableArray *colColors = [NSMutableArray arrayWithCapacity:HEIGHT];
-            
             for (int row=0; row < HEIGHT; row++) {
-                CGPoint point = CGPointMake(w - (row * Y_STEP),
-                                            0 + (col * X_STEP));
+                CGPoint point = CGPointMake(0 + (col * X_STEP),
+                                            0 + (row * Y_STEP));
                 
                 [colColors addObject:[self getPixelColorRGBNumberArrayAtLocation:point]];
             }

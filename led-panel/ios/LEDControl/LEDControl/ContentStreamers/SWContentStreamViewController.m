@@ -8,7 +8,7 @@
 
 #import "SWContentStreamViewController.h"
 
-const CGFloat SEC_PER_FRAME = (1.0/24.0);  // 24 is good
+const CGFloat FPS = 15;  // 24 is good
 
 @interface SWContentStreamViewController ()
 {
@@ -23,30 +23,33 @@ const CGFloat SEC_PER_FRAME = (1.0/24.0);  // 24 is good
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithWhite:0.25 alpha:1.0];
+//    self.view.backgroundColor = [UIColor colorWithWhite:0.25 alpha:1.0];
 
-#if 1
     // formatted for portrait
-    CGFloat h = 480;
-    CGFloat w = 240;
-    CGFloat x = (self.view.bounds.size.width - w) / 2;
-    CGFloat y = (self.view.bounds.size.height - h) / 2;
-    CGAffineTransform xfm = CGAffineTransformIdentity;
-#else
+//    CGFloat h = 480;
+//    CGFloat w = 240;
+//    CGFloat x = (self.view.bounds.size.width - w) / 2;
+//    CGFloat y = (self.view.bounds.size.height - h) / 2;
+//    CGAffineTransform xfm = CGAffineTransformIdentity;
+
     // rotated
+//    CGFloat w = 480;
+//    CGFloat h = 240;
+//    CGFloat x = (self.view.bounds.size.width - w) / 2;
+//    CGFloat y = (self.view.bounds.size.height - h) / 2;
+//    CGAffineTransform xfm = CGAffineTransformMakeRotation(M_PI_2);
+
     CGFloat w = 480;
     CGFloat h = 240;
     CGFloat x = (self.view.bounds.size.width - w) / 2;
     CGFloat y = (self.view.bounds.size.height - h) / 2;
-    CGAffineTransform xfm = CGAffineTransformMakeRotation(M_PI_2);
-//    CGAffineTransform xfm = CGAffineTransformIdentity;
-#endif
-    
+
+
     self.streamedContentArea = [[UIView alloc] initWithFrame:CGRectMake(x, y, w, h)];
 //    self.streamedContentArea.layer.borderColor = [UIColor colorWithWhite:1.0 alpha:0.25].CGColor;
 //    self.streamedContentArea.layer.borderWidth = 3.0;
 //    self.streamedContentArea.layer.cornerRadius = 2;
-    self.streamedContentArea.transform = xfm;
+//    self.streamedContentArea.transform = xfm;
     self.streamedContentArea.clipsToBounds = YES;
     self.streamedContentArea.backgroundColor = [UIColor blackColor];
 
@@ -70,7 +73,7 @@ const CGFloat SEC_PER_FRAME = (1.0/24.0);  // 24 is good
 
 - (void)addContentView:(UIView*)v
 {
-    v.transform = self.streamedContentArea.transform;
+//    v.transform = self.streamedContentArea.transform;
     [self.streamedContentArea addSubview:v];
 }
 
@@ -88,9 +91,7 @@ const CGFloat SEC_PER_FRAME = (1.0/24.0);  // 24 is good
 {
     CFTimeInterval now = CACurrentMediaTime();
     CFTimeInterval delta = (now - _lastCaptureAt);
-    
-    // Wait at least SEC_PER_FRAME before processing another frame.
-    CFTimeInterval wait = (SEC_PER_FRAME - delta);
+    CFTimeInterval wait = ( (1/FPS) - delta);
 //    NSLog(@"delta %.4f, wait %.4f\n\n", delta, wait);
     
     if (wait < 0.0) {

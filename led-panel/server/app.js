@@ -55,7 +55,13 @@ self.didReceiveBitmap = function(bitmap) {
     // Send the bitmap to other clients
     // console.log("b");
     for (var ii=0; ii < connections.length; ii++) {
-        connections[ii].write(bitmap);
+        try {
+            connections[ii].write(bitmap);            
+        }
+        catch(ex) {
+            console.log("Removing connection #" + ii);
+            connections.splice(ii, 1);
+        }
     }
 };
 
