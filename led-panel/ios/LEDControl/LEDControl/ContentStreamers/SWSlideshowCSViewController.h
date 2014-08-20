@@ -8,12 +8,15 @@
 
 #import "SWContentStreamViewController.h"
 #import "JBKenBurnsView.h"
+#import "ELCImagePickerHeader.h"
 
-@interface SWSlideshowCSViewController : SWContentStreamViewController <KenBurnsViewDelegate>
+@interface SWSlideshowCSViewController : SWContentStreamViewController <KenBurnsViewDelegate, ELCImagePickerControllerDelegate>
 
 @property (nonatomic, strong) JBKenBurnsView *kenView;
 @property (weak, nonatomic) IBOutlet UIButton *closeButton;
 @property (weak, nonatomic) IBOutlet UIButton *moreButton;
+@property (nonatomic) UIImagePickerController *imagePickerController;
+@property (nonatomic) NSMutableArray *chosenImages;
 
 - (IBAction)closeButtonWasTapped:(id)sender;
 - (IBAction)moreButtonWasTapped:(id)sender;

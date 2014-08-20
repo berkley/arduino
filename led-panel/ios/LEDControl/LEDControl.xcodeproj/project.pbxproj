@@ -8,6 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		61E7C79AB33C46A081FB92E6 /* libPods-LEDControl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A120044E91469D83A537E4 /* libPods-LEDControl.a */; };
+		A68577A9199FAA55001C291D /* ELCAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6857793199FAA55001C291D /* ELCAlbumPickerController.m */; };
+		A68577AA199FAA55001C291D /* ELCAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = A6857795199FAA55001C291D /* ELCAsset.m */; };
+		A68577AB199FAA55001C291D /* ELCAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6857797199FAA55001C291D /* ELCAssetCell.m */; };
+		A68577AC199FAA55001C291D /* ELCAssetTablePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = A685779B199FAA55001C291D /* ELCAssetTablePicker.m */; };
+		A68577AD199FAA55001C291D /* ELCConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = A685779D199FAA55001C291D /* ELCConsole.m */; };
+		A68577AE199FAA55001C291D /* ELCImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A685779F199FAA55001C291D /* ELCImagePickerController.m */; };
+		A68577AF199FAA55001C291D /* ELCOverlayImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A68577A2199FAA55001C291D /* ELCOverlayImageView.m */; };
+		A68577B0199FAA55001C291D /* ELCAlbumPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A68577A4199FAA55001C291D /* ELCAlbumPickerController.xib */; };
+		A68577B1199FAA55001C291D /* ELCAssetPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = A68577A5199FAA55001C291D /* ELCAssetPicker.xib */; };
+		A68577B2199FAA55001C291D /* ELCAssetTablePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = A68577A6199FAA55001C291D /* ELCAssetTablePicker.xib */; };
+		A68577B3199FAA55001C291D /* Overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = A68577A7199FAA55001C291D /* Overlay.png */; };
+		A68577B4199FAA55001C291D /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A68577A8199FAA55001C291D /* Overlay@2x.png */; };
+		A68577BD199FAA88001C291D /* EYLargePhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = A68577B7199FAA88001C291D /* EYLargePhoto.m */; };
+		A68577BE199FAA88001C291D /* EYLargePhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A68577BA199FAA88001C291D /* EYLargePhotoManager.m */; };
+		A68577BF199FAA88001C291D /* UIImage+EYFixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = A68577BC199FAA88001C291D /* UIImage+EYFixOrientation.m */; };
+		A68577C1199FC53A001C291D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A68577C0199FC53A001C291D /* AssetsLibrary.framework */; };
 		A6D3B424199F2EF300862D65 /* SWWebSocketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D3B423199F2EF300862D65 /* SWWebSocketViewController.m */; };
 		A6D3B42F199F2F0200862D65 /* CaptureAndSendBitmapOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D3B429199F2F0200862D65 /* CaptureAndSendBitmapOperation.m */; };
 		A6D3B430199F2F0200862D65 /* SWContentStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D3B42B199F2F0200862D65 /* SWContentStreamViewController.m */; };
@@ -57,6 +73,36 @@
 
 /* Begin PBXFileReference section */
 		380413DD423A46D7AFB9717C /* Pods-LEDControl.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LEDControl.xcconfig"; path = "Pods/Pods-LEDControl.xcconfig"; sourceTree = "<group>"; };
+		A6857792199FAA55001C291D /* ELCAlbumPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAlbumPickerController.h; sourceTree = "<group>"; };
+		A6857793199FAA55001C291D /* ELCAlbumPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAlbumPickerController.m; sourceTree = "<group>"; };
+		A6857794199FAA55001C291D /* ELCAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAsset.h; sourceTree = "<group>"; };
+		A6857795199FAA55001C291D /* ELCAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAsset.m; sourceTree = "<group>"; };
+		A6857796199FAA55001C291D /* ELCAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetCell.h; sourceTree = "<group>"; };
+		A6857797199FAA55001C291D /* ELCAssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAssetCell.m; sourceTree = "<group>"; };
+		A6857798199FAA55001C291D /* ELCAssetPickerFilterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetPickerFilterDelegate.h; sourceTree = "<group>"; };
+		A6857799199FAA55001C291D /* ELCAssetSelectionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetSelectionDelegate.h; sourceTree = "<group>"; };
+		A685779A199FAA55001C291D /* ELCAssetTablePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetTablePicker.h; sourceTree = "<group>"; };
+		A685779B199FAA55001C291D /* ELCAssetTablePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAssetTablePicker.m; sourceTree = "<group>"; };
+		A685779C199FAA55001C291D /* ELCConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCConsole.h; sourceTree = "<group>"; };
+		A685779D199FAA55001C291D /* ELCConsole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCConsole.m; sourceTree = "<group>"; };
+		A685779E199FAA55001C291D /* ELCImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCImagePickerController.h; sourceTree = "<group>"; };
+		A685779F199FAA55001C291D /* ELCImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCImagePickerController.m; sourceTree = "<group>"; };
+		A68577A0199FAA55001C291D /* ELCImagePickerHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCImagePickerHeader.h; sourceTree = "<group>"; };
+		A68577A1199FAA55001C291D /* ELCOverlayImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCOverlayImageView.h; sourceTree = "<group>"; };
+		A68577A2199FAA55001C291D /* ELCOverlayImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCOverlayImageView.m; sourceTree = "<group>"; };
+		A68577A4199FAA55001C291D /* ELCAlbumPickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAlbumPickerController.xib; sourceTree = "<group>"; };
+		A68577A5199FAA55001C291D /* ELCAssetPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAssetPicker.xib; sourceTree = "<group>"; };
+		A68577A6199FAA55001C291D /* ELCAssetTablePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAssetTablePicker.xib; sourceTree = "<group>"; };
+		A68577A7199FAA55001C291D /* Overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Overlay.png; sourceTree = "<group>"; };
+		A68577A8199FAA55001C291D /* Overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Overlay@2x.png"; sourceTree = "<group>"; };
+		A68577B6199FAA88001C291D /* EYLargePhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EYLargePhoto.h; sourceTree = "<group>"; };
+		A68577B7199FAA88001C291D /* EYLargePhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EYLargePhoto.m; sourceTree = "<group>"; };
+		A68577B8199FAA88001C291D /* EYLargePhotoHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EYLargePhotoHeader.h; sourceTree = "<group>"; };
+		A68577B9199FAA88001C291D /* EYLargePhotoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EYLargePhotoManager.h; sourceTree = "<group>"; };
+		A68577BA199FAA88001C291D /* EYLargePhotoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EYLargePhotoManager.m; sourceTree = "<group>"; };
+		A68577BB199FAA88001C291D /* UIImage+EYFixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+EYFixOrientation.h"; sourceTree = "<group>"; };
+		A68577BC199FAA88001C291D /* UIImage+EYFixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+EYFixOrientation.m"; sourceTree = "<group>"; };
+		A68577C0199FC53A001C291D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		A6D3B422199F2EF300862D65 /* SWWebSocketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWWebSocketViewController.h; sourceTree = "<group>"; };
 		A6D3B423199F2EF300862D65 /* SWWebSocketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWWebSocketViewController.m; sourceTree = "<group>"; };
 		A6D3B428199F2F0200862D65 /* CaptureAndSendBitmapOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureAndSendBitmapOperation.h; sourceTree = "<group>"; };
@@ -122,6 +168,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A68577C1199FC53A001C291D /* AssetsLibrary.framework in Frameworks */,
 				CD9565C419808C560081BB67 /* CoreGraphics.framework in Frameworks */,
 				CD9565C619808C560081BB67 /* UIKit.framework in Frameworks */,
 				CD9565C219808C560081BB67 /* Foundation.framework in Frameworks */,
@@ -142,11 +189,64 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A6857791199FAA55001C291D /* ELCImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				A6857792199FAA55001C291D /* ELCAlbumPickerController.h */,
+				A6857793199FAA55001C291D /* ELCAlbumPickerController.m */,
+				A6857794199FAA55001C291D /* ELCAsset.h */,
+				A6857795199FAA55001C291D /* ELCAsset.m */,
+				A6857796199FAA55001C291D /* ELCAssetCell.h */,
+				A6857797199FAA55001C291D /* ELCAssetCell.m */,
+				A6857798199FAA55001C291D /* ELCAssetPickerFilterDelegate.h */,
+				A6857799199FAA55001C291D /* ELCAssetSelectionDelegate.h */,
+				A685779A199FAA55001C291D /* ELCAssetTablePicker.h */,
+				A685779B199FAA55001C291D /* ELCAssetTablePicker.m */,
+				A685779C199FAA55001C291D /* ELCConsole.h */,
+				A685779D199FAA55001C291D /* ELCConsole.m */,
+				A685779E199FAA55001C291D /* ELCImagePickerController.h */,
+				A685779F199FAA55001C291D /* ELCImagePickerController.m */,
+				A68577A0199FAA55001C291D /* ELCImagePickerHeader.h */,
+				A68577A1199FAA55001C291D /* ELCOverlayImageView.h */,
+				A68577A2199FAA55001C291D /* ELCOverlayImageView.m */,
+				A68577A3199FAA55001C291D /* Resources */,
+			);
+			path = ELCImagePicker;
+			sourceTree = "<group>";
+		};
+		A68577A3199FAA55001C291D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A68577A4199FAA55001C291D /* ELCAlbumPickerController.xib */,
+				A68577A5199FAA55001C291D /* ELCAssetPicker.xib */,
+				A68577A6199FAA55001C291D /* ELCAssetTablePicker.xib */,
+				A68577A7199FAA55001C291D /* Overlay.png */,
+				A68577A8199FAA55001C291D /* Overlay@2x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A68577B5199FAA88001C291D /* EYLargePhoto */ = {
+			isa = PBXGroup;
+			children = (
+				A68577B6199FAA88001C291D /* EYLargePhoto.h */,
+				A68577B7199FAA88001C291D /* EYLargePhoto.m */,
+				A68577B8199FAA88001C291D /* EYLargePhotoHeader.h */,
+				A68577B9199FAA88001C291D /* EYLargePhotoManager.h */,
+				A68577BA199FAA88001C291D /* EYLargePhotoManager.m */,
+				A68577BB199FAA88001C291D /* UIImage+EYFixOrientation.h */,
+				A68577BC199FAA88001C291D /* UIImage+EYFixOrientation.m */,
+			);
+			path = EYLargePhoto;
+			sourceTree = "<group>";
+		};
 		A6D3B425199F2F0200862D65 /* ContentStreamers */ = {
 			isa = PBXGroup;
 			children = (
-				A6D3B436199F3A2A00862D65 /* KenBurns */,
 				A6D3B426199F2F0200862D65 /* assets */,
+				A68577B5199FAA88001C291D /* EYLargePhoto */,
+				A6857791199FAA55001C291D /* ELCImagePicker */,
+				A6D3B436199F3A2A00862D65 /* KenBurns */,
 				A6D3B428199F2F0200862D65 /* CaptureAndSendBitmapOperation.h */,
 				A6D3B429199F2F0200862D65 /* CaptureAndSendBitmapOperation.m */,
 				A6D3B42A199F2F0200862D65 /* SWContentStreamViewController.h */,
@@ -243,6 +343,7 @@
 		CD9565C019808C560081BB67 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A68577C0199FC53A001C291D /* AssetsLibrary.framework */,
 				CD9565C119808C560081BB67 /* Foundation.framework */,
 				CD9565C319808C560081BB67 /* CoreGraphics.framework */,
 				CD9565C519808C560081BB67 /* UIKit.framework */,
@@ -379,9 +480,14 @@
 			files = (
 				A6D3B43E199F5F6200862D65 /* ATcellorangekillingacancercellmauve1.jpg in Resources */,
 				CD9565DD19808C560081BB67 /* Images.xcassets in Resources */,
+				A68577B2199FAA55001C291D /* ELCAssetTablePicker.xib in Resources */,
 				A6D3B435199F361F00862D65 /* gradient.png in Resources */,
+				A68577B3199FAA55001C291D /* Overlay.png in Resources */,
+				A68577B4199FAA55001C291D /* Overlay@2x.png in Resources */,
 				CD9565CC19808C560081BB67 /* InfoPlist.strings in Resources */,
+				A68577B0199FAA55001C291D /* ELCAlbumPickerController.xib in Resources */,
 				A6D3B43F199F5F6200862D65 /* attenae-galaxy.jpg in Resources */,
+				A68577B1199FAA55001C291D /* ELCAssetPicker.xib in Resources */,
 				CD9565D519808C560081BB67 /* Main.storyboard in Resources */,
 				A6D3B43D199F5F6200862D65 /* anime-eye.png in Resources */,
 			);
@@ -437,21 +543,31 @@
 			files = (
 				CD9565D219808C560081BB67 /* SWAppDelegate.m in Sources */,
 				CD7B9F90199BCFCB00B77258 /* SWNoiseViewController.m in Sources */,
+				A68577BF199FAA88001C291D /* UIImage+EYFixOrientation.m in Sources */,
 				CD36B1EC198ABB0500DACE30 /* SWRunProgramTableViewController.m in Sources */,
 				CD37147B19848B4100CC0F68 /* SWFireController.m in Sources */,
+				A68577BD199FAA88001C291D /* EYLargePhoto.m in Sources */,
 				CDAEC655199C287500F4A379 /* SWStaticViewController.m in Sources */,
 				A6D3B431199F2F0200862D65 /* SWSlideshowCSViewController.m in Sources */,
 				CD37147819847EE500CC0F68 /* SWBasicFireViewController.m in Sources */,
 				A6D3B430199F2F0200862D65 /* SWContentStreamViewController.m in Sources */,
+				A68577AE199FAA55001C291D /* ELCImagePickerController.m in Sources */,
+				A68577A9199FAA55001C291D /* ELCAlbumPickerController.m in Sources */,
 				A6D3B424199F2EF300862D65 /* SWWebSocketViewController.m in Sources */,
+				A68577AC199FAA55001C291D /* ELCAssetTablePicker.m in Sources */,
 				A6D3B42F199F2F0200862D65 /* CaptureAndSendBitmapOperation.m in Sources */,
 				CD37148319892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.m in Sources */,
 				CD9565FB1981EF650081BB67 /* SWBasicLEDControlViewController.m in Sources */,
 				CD9565CE19808C560081BB67 /* main.m in Sources */,
+				A68577AF199FAA55001C291D /* ELCOverlayImageView.m in Sources */,
 				CDAEC658199F103000F4A379 /* SWWaveFlickrViewController.m in Sources */,
+				A68577AA199FAA55001C291D /* ELCAsset.m in Sources */,
 				A6D3B439199F3A2A00862D65 /* JBKenBurnsView.m in Sources */,
+				A68577BE199FAA88001C291D /* EYLargePhotoManager.m in Sources */,
+				A68577AD199FAA55001C291D /* ELCConsole.m in Sources */,
 				CD9565FE1981F2830081BB67 /* SWLEDController.m in Sources */,
 				CD9565D819808C560081BB67 /* SWMasterViewController.m in Sources */,
+				A68577AB199FAA55001C291D /* ELCAssetCell.m in Sources */,
 				CD956601198202950081BB67 /* SWGyroViewController.m in Sources */,
 				CD7B9F93199BD74A00B77258 /* SWHeartbeatViewController.m in Sources */,
 				CD37148019848C8A00CC0F68 /* SWRadThingController.m in Sources */,

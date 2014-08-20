@@ -231,6 +231,7 @@ enum JBSourceMode {
     picLayer.position    = CGPointMake(originX, originY);
     
     [imageView.layer addSublayer:picLayer];
+//    imageView.transform = CGAffineTransformMakeRotation(M_PI_2);
     
     CATransition *animation = [CATransition animation];
     [animation setDuration:1];
@@ -244,7 +245,7 @@ enum JBSourceMode {
         oldImageView = nil;
     }
     
-    imageView.transform = CGAffineTransformMakeRotation((10 * M_PI_2 * randomUnit()) + M_PI_2);
+//    imageView.transform = CGAffineTransformMakeRotation((10 * M_PI_2 * randomUnit()) + M_PI_2);
     [self addSubview:imageView];
     
     // Generates the animation
