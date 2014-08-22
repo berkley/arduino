@@ -30,11 +30,17 @@ SWLEDController *controller;
     _numRows = 24;
     _numCols = _numPanels * 16;
     
-    self.restAddress = @"10.0.1.17:3000";
-    self.wsAddress = @"10.0.1.17:3001";
-//    self.restAddress = @"10.250.220.224:3000";
-//    self.wsAddress = @"10.250.220.224:3001";
+    
+    self.restAddress = [NSString stringWithFormat:@"%@:3000", super.ip];
+    self.wsAddress = [NSString stringWithFormat:@"%@:3001", super.ip];
     return self;
+}
+
+- (void)updateIp
+{
+    [super updateIp];
+    self.restAddress = [NSString stringWithFormat:@"%@:3000", super.ip];
+    self.wsAddress = [NSString stringWithFormat:@"%@:3001", super.ip];
 }
 
 - (void)setPixel:(NSInteger)pixel red:(NSInteger)r green:(NSInteger)g blue:(NSInteger)b
