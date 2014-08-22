@@ -50,11 +50,10 @@ const CGFloat FPS = 24;  // 24 is good
     [self captureFrame];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewDidDisappear:animated];
+    [super viewWillDisappear:animated];
     
-    [self.opQueue cancelAllOperations];
 }
 
 - (void)addContentView:(UIView*)v
@@ -70,6 +69,10 @@ const CGFloat FPS = 24;  // 24 is good
 
 - (void)captureFrame
 {
+    if (self.closing) {
+        return;
+    }
+    
     CFTimeInterval now = CACurrentMediaTime();
     CFTimeInterval delta = (now - _lastCaptureAt);
     CFTimeInterval wait = ( (1/FPS) - delta);
