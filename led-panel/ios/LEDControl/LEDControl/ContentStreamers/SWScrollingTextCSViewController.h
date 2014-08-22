@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *closeButton;
 @property (weak, nonatomic) IBOutlet UIButton *moreButton;
 @property (strong, nonatomic) UITextField *textField;
+@property (strong, nonatomic) UITextField *textField2;
 
 - (IBAction)closeButtonWasTapped:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *moreButtonWasTapped;

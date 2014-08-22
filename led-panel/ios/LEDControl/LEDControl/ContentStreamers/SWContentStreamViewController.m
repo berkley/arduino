@@ -8,7 +8,7 @@
 
 #import "SWContentStreamViewController.h"
 
-const CGFloat FPS = 24;  // 24 is good
+const CGFloat FPS = 18;  // 24 is good
 
 @interface SWContentStreamViewController ()
 {
