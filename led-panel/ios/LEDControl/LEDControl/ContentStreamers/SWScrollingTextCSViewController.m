@@ -9,7 +9,7 @@
 #import "SWScrollingTextCSViewController.h"
 
 #define THROB_SCALE_DELTA 0.00075
-#define THROB_SCALE_MAX 1.5
+#define THROB_SCALE_MAX 1.75
 #define THROB_SCALE_MIN 0.75
 
 #define SCROLL_TEXT_KEY @"SCROLL_TEXT_KEY"
@@ -93,8 +93,8 @@
     f.origin.x =  (rightEdge - _xText) - f.size.width;
     self.textField2.frame = f;
 
-    self.textField.transform = CGAffineTransformMakeScale(_throbScale, _throbScale);
-    self.textField2.transform = CGAffineTransformMakeScale(_throbScale*0.75, _throbScale*0.75);
+    self.textField.transform = CGAffineTransformMakeScale(1.0, _throbScale);
+    self.textField2.transform = CGAffineTransformMakeScale(0.75, _throbScale*0.75);
     
     [self performSelector:@selector(animate) withObject:nil afterDelay:delaySec];
 }
