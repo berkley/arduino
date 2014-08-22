@@ -8,7 +8,7 @@
 
 #import "SWScrollingTextCSViewController.h"
 
-#define THROB_SCALE_DELTA 0.001
+#define THROB_SCALE_DELTA 0.00075
 #define THROB_SCALE_MAX 1.5
 #define THROB_SCALE_MIN 0.75
 
@@ -32,7 +32,7 @@
     self.textField2 = [[UITextField alloc] init];
     self.textField.font = self.textField2.font = [UIFont systemFontOfSize:180];
     self.textField.textColor = [UIColor whiteColor];
-    self.textField2.textColor = [UIColor colorWithRed:0 green:1.0 blue:1.0 alpha:0.175];
+    self.textField2.textColor = [UIColor colorWithRed:0 green:1.0 blue:1.0 alpha:0.33];
     
     _xText = self.streamedContentArea.frame.size.width;
     _throbScale = 1.0;
@@ -79,7 +79,7 @@
     }
 
     CGFloat delaySec = 1.0/60.0;
-    _xText -= delaySec * 250;
+    _xText -= delaySec * 150;
 
     _throbScale += (THROB_SCALE_DELTA * _throbDirection);
     if (_throbScale >= THROB_SCALE_MAX || _throbScale < THROB_SCALE_MIN) {
@@ -94,7 +94,7 @@
     self.textField2.frame = f;
 
     self.textField.transform = CGAffineTransformMakeScale(_throbScale, _throbScale);
-    self.textField2.transform = CGAffineTransformMakeScale(_throbScale*0.66, _throbScale*0.66);
+    self.textField2.transform = CGAffineTransformMakeScale(_throbScale*0.75, _throbScale*0.75);
     
     [self performSelector:@selector(animate) withObject:nil afterDelay:delaySec];
 }

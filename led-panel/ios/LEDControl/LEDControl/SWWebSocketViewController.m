@@ -18,7 +18,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self connectWebSocket];
 }
 
 - (NSString*)jsonStringify:(id)object error:(NSError**)err
@@ -105,5 +104,19 @@
 //    [webSocket send:self.messageTextField.text];
 //    self.messageTextField.text = nil;
 //}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self connectWebSocket];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.webSocket.delegate = nil;
+    [self.webSocket close];
+}
+
 
 @end
