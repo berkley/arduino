@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		61E7C79AB33C46A081FB92E6 /* libPods-LEDControl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A120044E91469D83A537E4 /* libPods-LEDControl.a */; };
 		A617349819A57EF700BA69E1 /* SWWebCSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A617349719A57EF700BA69E1 /* SWWebCSViewController.m */; };
+		A617349B19A6BE1B00BA69E1 /* SWScrollingTextCSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A617349A19A6BE1B00BA69E1 /* SWScrollingTextCSViewController.m */; };
 		A68577A9199FAA55001C291D /* ELCAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6857793199FAA55001C291D /* ELCAlbumPickerController.m */; };
 		A68577AA199FAA55001C291D /* ELCAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = A6857795199FAA55001C291D /* ELCAsset.m */; };
 		A68577AB199FAA55001C291D /* ELCAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6857797199FAA55001C291D /* ELCAssetCell.m */; };
@@ -78,6 +79,8 @@
 		380413DD423A46D7AFB9717C /* Pods-LEDControl.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LEDControl.xcconfig"; path = "Pods/Pods-LEDControl.xcconfig"; sourceTree = "<group>"; };
 		A617349619A57EF700BA69E1 /* SWWebCSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWWebCSViewController.h; sourceTree = "<group>"; };
 		A617349719A57EF700BA69E1 /* SWWebCSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWWebCSViewController.m; sourceTree = "<group>"; };
+		A617349919A6BE1B00BA69E1 /* SWScrollingTextCSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWScrollingTextCSViewController.h; sourceTree = "<group>"; };
+		A617349A19A6BE1B00BA69E1 /* SWScrollingTextCSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWScrollingTextCSViewController.m; sourceTree = "<group>"; };
 		A6857792199FAA55001C291D /* ELCAlbumPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAlbumPickerController.h; sourceTree = "<group>"; };
 		A6857793199FAA55001C291D /* ELCAlbumPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAlbumPickerController.m; sourceTree = "<group>"; };
 		A6857794199FAA55001C291D /* ELCAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAsset.h; sourceTree = "<group>"; };
@@ -262,6 +265,8 @@
 				A6D3B42D199F2F0200862D65 /* SWSlideshowCSViewController.m */,
 				A617349619A57EF700BA69E1 /* SWWebCSViewController.h */,
 				A617349719A57EF700BA69E1 /* SWWebCSViewController.m */,
+				A617349919A6BE1B00BA69E1 /* SWScrollingTextCSViewController.h */,
+				A617349A19A6BE1B00BA69E1 /* SWScrollingTextCSViewController.m */,
 			);
 			path = ContentStreamers;
 			sourceTree = "<group>";
@@ -561,6 +566,7 @@
 				CD37147B19848B4100CC0F68 /* SWFireController.m in Sources */,
 				A68577BD199FAA88001C291D /* EYLargePhoto.m in Sources */,
 				CDAEC655199C287500F4A379 /* SWStaticViewController.m in Sources */,
+				A617349B19A6BE1B00BA69E1 /* SWScrollingTextCSViewController.m in Sources */,
 				A6D3B431199F2F0200862D65 /* SWSlideshowCSViewController.m in Sources */,
 				CD37147819847EE500CC0F68 /* SWBasicFireViewController.m in Sources */,
 				A6D3B430199F2F0200862D65 /* SWContentStreamViewController.m in Sources */,
