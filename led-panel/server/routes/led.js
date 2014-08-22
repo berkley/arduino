@@ -147,10 +147,11 @@ wss.on('connection', function(ws) {
         		latch();
         	}
         	else if (json.command == "latchBitmap") {
-        		// drawBitmap(json.bitmap);
+        		// console.log(json.bitmap);
+        		drawBitmap(JSON.parse(json.bitmap));
         		// latch();
 
-        		// console.log("B");
+        		 // console.log("B");
         		if (exports.delegate) {
         			// json.type = 'bitmap';
         			exports.delegate.didReceiveBitmap(message);
