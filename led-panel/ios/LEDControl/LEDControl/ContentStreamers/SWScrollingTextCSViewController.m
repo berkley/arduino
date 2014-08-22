@@ -100,6 +100,8 @@
 }
 
 - (IBAction)closeButtonWasTapped:(id)sender {
+    self.closing = YES;
+
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
