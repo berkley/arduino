@@ -12,6 +12,8 @@
 #define THROB_SCALE_MAX 1.5
 #define THROB_SCALE_MIN 0.75
 
+#define SCROLL_TEXT_KEY @"SCROLL_TEXT_KEY"
+
 @interface SWScrollingTextCSViewController ()
 {
     CGFloat _xText;
@@ -39,7 +41,14 @@
     [self addContentView:self.textField2];
     [self addContentView:self.textField];
     
-    [self setText:@"Cosmic Giggle"];
+    NSString *text = [[NSUserDefaults standardUserDefaults] objectForKey:SCROLL_TEXT_KEY];
+    if ([text length] == 0) {
+        text = @"Giggle on!";
+    }
+    
+    self.textEntryField.text = text;
+
+    [self setText:text];
     [self animate];
 }
 
@@ -56,14 +65,17 @@
 
     f.origin.y = yMid + (vh * 0.15);
     self.textField2.frame = f;
+    
+    [[NSUserDefaults standardUserDefaults] setObject:text forKey:SCROLL_TEXT_KEY];
 }
 
 - (void)animate {
     CGRect f = self.textField.frame;
     CGFloat w = f.size.width;
+    CGFloat rightEdge = self.streamedContentArea.frame.size.width;
 
     if (_xText < -w) {
-        _xText = self.streamedContentArea.frame.size.width;
+        _xText = rightEdge;
     }
 
     CGFloat delaySec = 1.0/60.0;
@@ -78,7 +90,7 @@
     self.textField.frame = f;
 
     f = self.textField2.frame;
-    f.origin.x = -_xText - f.size.width;
+    f.origin.x =  (rightEdge - _xText) - f.size.width;
     self.textField2.frame = f;
 
     self.textField.transform = CGAffineTransformMakeScale(_throbScale, _throbScale);
@@ -90,5 +102,16 @@
 - (IBAction)closeButtonWasTapped:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (IBAction)moreButtonWasTapped:(id)sender {
+    
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self setText:textField.text];
+    [textField resignFirstResponder];
+    return YES;
+}
+
 
 @end

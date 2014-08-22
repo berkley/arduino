@@ -8,13 +8,15 @@
 
 #import "SWContentStreamViewController.h"
 
-@interface SWScrollingTextCSViewController : SWContentStreamViewController
+@interface SWScrollingTextCSViewController : SWContentStreamViewController <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *closeButton;
 @property (weak, nonatomic) IBOutlet UIButton *moreButton;
 @property (strong, nonatomic) UITextField *textField;
 @property (strong, nonatomic) UITextField *textField2;
+@property (weak, nonatomic) IBOutlet UITextField *textEntryField;
 
 - (IBAction)closeButtonWasTapped:(id)sender;
-@property (weak, nonatomic) IBOutlet UIButton *moreButtonWasTapped;
+- (IBAction)moreButtonWasTapped:(id)sender;
+
 @end
