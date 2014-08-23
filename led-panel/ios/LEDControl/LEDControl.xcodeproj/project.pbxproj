@@ -39,9 +39,10 @@
 		A6D3B43F199F5F6200862D65 /* attenae-galaxy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A6D3B43C199F5F6200862D65 /* attenae-galaxy.jpg */; };
 		CD36B1EC198ABB0500DACE30 /* SWRunProgramTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD36B1EB198ABB0500DACE30 /* SWRunProgramTableViewController.m */; };
 		CD37147819847EE500CC0F68 /* SWBasicFireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37147719847EE500CC0F68 /* SWBasicFireViewController.m */; };
-		CD37147B19848B4100CC0F68 /* SWFireController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37147A19848B4100CC0F68 /* SWFireController.m */; };
 		CD37148019848C8A00CC0F68 /* SWRadThingController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37147F19848C8A00CC0F68 /* SWRadThingController.m */; };
 		CD37148319892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD37148219892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.m */; };
+		CD652C1F19A6F11400FE35CB /* SWSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD652C1E19A6F11400FE35CB /* SWSettingViewController.m */; };
+		CD652C2619A6F72100FE35CB /* SWFireController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD652C2519A6F72100FE35CB /* SWFireController.m */; };
 		CD7B9F90199BCFCB00B77258 /* SWNoiseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7B9F8F199BCFCB00B77258 /* SWNoiseViewController.m */; };
 		CD7B9F93199BD74A00B77258 /* SWHeartbeatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7B9F92199BD74A00B77258 /* SWHeartbeatViewController.m */; };
 		CD9565C219808C560081BB67 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9565C119808C560081BB67 /* Foundation.framework */; };
@@ -131,12 +132,15 @@
 		CD36B1EB198ABB0500DACE30 /* SWRunProgramTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRunProgramTableViewController.m; sourceTree = "<group>"; };
 		CD37147619847EE500CC0F68 /* SWBasicFireViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWBasicFireViewController.h; sourceTree = "<group>"; };
 		CD37147719847EE500CC0F68 /* SWBasicFireViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWBasicFireViewController.m; sourceTree = "<group>"; };
-		CD37147919848B4100CC0F68 /* SWFireController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWFireController.h; sourceTree = "<group>"; };
-		CD37147A19848B4100CC0F68 /* SWFireController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWFireController.m; sourceTree = "<group>"; };
 		CD37147E19848C8A00CC0F68 /* SWRadThingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRadThingController.h; sourceTree = "<group>"; };
 		CD37147F19848C8A00CC0F68 /* SWRadThingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRadThingController.m; sourceTree = "<group>"; };
 		CD37148119892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWKineticEnergyAccumulatorViewController.h; sourceTree = "<group>"; };
 		CD37148219892AAE00CC0F68 /* SWKineticEnergyAccumulatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWKineticEnergyAccumulatorViewController.m; sourceTree = "<group>"; };
+		CD652C1D19A6F11400FE35CB /* SWSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWSettingViewController.h; sourceTree = "<group>"; };
+		CD652C1E19A6F11400FE35CB /* SWSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWSettingViewController.m; sourceTree = "<group>"; };
+		CD652C2019A6F54900FE35CB /* SWConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWConstants.h; sourceTree = "<group>"; };
+		CD652C2419A6F72100FE35CB /* SWFireController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWFireController.h; sourceTree = "<group>"; };
+		CD652C2519A6F72100FE35CB /* SWFireController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWFireController.m; sourceTree = "<group>"; };
 		CD7B9F8E199BCFCB00B77258 /* SWNoiseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWNoiseViewController.h; sourceTree = "<group>"; };
 		CD7B9F8F199BCFCB00B77258 /* SWNoiseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWNoiseViewController.m; sourceTree = "<group>"; };
 		CD7B9F91199BD74A00B77258 /* SWHeartbeatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWHeartbeatViewController.h; sourceTree = "<group>"; };
@@ -296,12 +300,12 @@
 		CD37147C19848B5E00CC0F68 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				CD652C2419A6F72100FE35CB /* SWFireController.h */,
+				CD652C2519A6F72100FE35CB /* SWFireController.m */,
 				CD37147E19848C8A00CC0F68 /* SWRadThingController.h */,
 				CD37147F19848C8A00CC0F68 /* SWRadThingController.m */,
 				CD9565FC1981F2830081BB67 /* SWLEDController.h */,
 				CD9565FD1981F2830081BB67 /* SWLEDController.m */,
-				CD37147919848B4100CC0F68 /* SWFireController.h */,
-				CD37147A19848B4100CC0F68 /* SWFireController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -332,6 +336,8 @@
 				CDAEC654199C287500F4A379 /* SWStaticViewController.m */,
 				CDAEC656199F103000F4A379 /* SWWaveFlickrViewController.h */,
 				CDAEC657199F103000F4A379 /* SWWaveFlickrViewController.m */,
+				CD652C1D19A6F11400FE35CB /* SWSettingViewController.h */,
+				CD652C1E19A6F11400FE35CB /* SWSettingViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -379,6 +385,7 @@
 				CD9565D319808C560081BB67 /* Main.storyboard */,
 				CD9565D019808C560081BB67 /* SWAppDelegate.h */,
 				CD9565D119808C560081BB67 /* SWAppDelegate.m */,
+				CD652C2019A6F54900FE35CB /* SWConstants.h */,
 			);
 			path = LEDControl;
 			sourceTree = "<group>";
@@ -563,13 +570,14 @@
 				CD7B9F90199BCFCB00B77258 /* SWNoiseViewController.m in Sources */,
 				A68577BF199FAA88001C291D /* UIImage+EYFixOrientation.m in Sources */,
 				CD36B1EC198ABB0500DACE30 /* SWRunProgramTableViewController.m in Sources */,
-				CD37147B19848B4100CC0F68 /* SWFireController.m in Sources */,
 				A68577BD199FAA88001C291D /* EYLargePhoto.m in Sources */,
+				CD652C2619A6F72100FE35CB /* SWFireController.m in Sources */,
 				CDAEC655199C287500F4A379 /* SWStaticViewController.m in Sources */,
 				A617349B19A6BE1B00BA69E1 /* SWScrollingTextCSViewController.m in Sources */,
 				A6D3B431199F2F0200862D65 /* SWSlideshowCSViewController.m in Sources */,
 				CD37147819847EE500CC0F68 /* SWBasicFireViewController.m in Sources */,
 				A6D3B430199F2F0200862D65 /* SWContentStreamViewController.m in Sources */,
+				CD652C1F19A6F11400FE35CB /* SWSettingViewController.m in Sources */,
 				A68577AE199FAA55001C291D /* ELCImagePickerController.m in Sources */,
 				A68577A9199FAA55001C291D /* ELCAlbumPickerController.m in Sources */,
 				A6D3B424199F2EF300862D65 /* SWWebSocketViewController.m in Sources */,

@@ -65,6 +65,10 @@
     NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"drawWaveAtRow\", \"row\":\"%i\", \"r\":\"%i\", \"g\":\"%i\", \"b\":\"%i\"}", (int)row, (int)r, (int)g, (int)b];
 //    NSLog(@"cmd: %@", cmd);
     [_webSocket send:cmd];
+    if(row < 3)
+    {
+        [self performSelector:@selector(fireAll) withObject:nil afterDelay:0];
+    }
 }
 
 - (IBAction)tapGestureHappened:(id)sender {
@@ -76,19 +80,15 @@
     int b = arc4random() % 255;
     int cycleLength = 5;
 
-//    for(int i=-10; i<34; i++)
-//    {
-//        NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"drawWaveAtRow\", \"row\":\"%i\", \"r\":\"%i\", \"g\":\"%i\", \"b\":\"%i\"}", i, (int)r, (int)g, (int)b];
-//        NSLog(@"cmd: %@", cmd);
-//        [_webSocket send:cmd];
-//    }
-    
-//    NSString *cmd = [NSString stringWithFormat:@"/program/run/animateOneWave/10/%i/%i/%i", r, g, b];
-//    [[SWLEDController instance] sendRESTCommand:cmd];
-    
     NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"animateOneWave\", \"cycleLength\":\"%i\", \"r\":\"%i\", \"g\":\"%i\", \"b\":\"%i\"}", cycleLength, (int)r, (int)g, (int)b];
     //    NSLog(@"cmd: %@", cmd);
     [_webSocket send:cmd];
+    [self performSelector:@selector(fireAll) withObject:nil afterDelay:.2];
+}
+
+- (void)fireAll
+{
+    [[SWFireController instance] seqAll];
 }
 
 #pragma mark - Connection
