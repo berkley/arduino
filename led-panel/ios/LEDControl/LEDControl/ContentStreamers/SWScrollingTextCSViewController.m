@@ -67,6 +67,7 @@
     self.textField2.frame = f;
     
     [[NSUserDefaults standardUserDefaults] setObject:text forKey:SCROLL_TEXT_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)animate {

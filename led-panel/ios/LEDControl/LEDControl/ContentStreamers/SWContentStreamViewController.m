@@ -8,7 +8,7 @@
 
 #import "SWContentStreamViewController.h"
 
-const CGFloat FPS = 24;  // 24 is good
+const CGFloat FPS = 20;  // 24 is good
 
 @interface SWContentStreamViewController ()
 {
@@ -63,8 +63,16 @@ const CGFloat FPS = 24;  // 24 is good
 
 - (void)frameCaptureComplete:(NSArray*)bitmap
 {
-    [self sendBitmap:bitmap];
-    [self performSelectorInBackground:@selector(captureFrame) withObject:nil];
+//    [self sendBitmap:bitmap];
+    
+    [_opQueue cancelAllOperations];
+
+    NSLog(@"making new..");
+
+   [self performSelectorInBackground:@selector(captureFrame) withObject:nil];
+    
+    NSLog(@"done...");
+
 }
 
 - (void)captureFrame
@@ -78,11 +86,10 @@ const CGFloat FPS = 24;  // 24 is good
     CFTimeInterval wait = ( (1/FPS) - delta);
 //    NSLog(@"delta %.4f, wait %.4f\n\n", delta, wait);
     
-    if (wait < 0.0) {
-        wait = 0.0;
+    if (wait > 0.0001) {
+        [NSThread sleepForTimeInterval:wait];
     }
     
-    [NSThread sleepForTimeInterval:wait];
     _lastCaptureAt = CACurrentMediaTime();
     
     CaptureAndSendBitmapOperation *op = [[CaptureAndSendBitmapOperation alloc] init];
@@ -90,7 +97,11 @@ const CGFloat FPS = 24;  // 24 is good
     op.view = self.streamedContentArea;
     op.left = _left;
     op.top = _top;
+    NSLog(@"adding new...");
+
     [_opQueue addOperation:op];
+    
+    
 }
 
 

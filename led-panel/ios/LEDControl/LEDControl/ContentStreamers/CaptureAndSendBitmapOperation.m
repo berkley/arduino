@@ -51,8 +51,6 @@ const short Y_STEP = 10;
     @catch (NSException *exception) {
         NSLog(@"Error: %@", exception);
     }
-    @finally {
-    }
     
     [self.delegate frameCaptureComplete:bitmap];
     self.delegate = nil;
@@ -81,10 +79,19 @@ const short Y_STEP = 10;
 
 - (UIImage*) imageWithView:(UIView *)view
 {
+    UIImage *img = nil;
     UIGraphicsBeginImageContext(view.bounds.size);
-    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+
+    CGContextRef ctxt = UIGraphicsGetCurrentContext();
+
+    if (ctxt != NULL) {
+
+        [view.layer renderInContext:ctxt];
+        img = UIGraphicsGetImageFromCurrentImageContext();
+    }
+    
     UIGraphicsEndImageContext();
+    
     return img;
 }
 
@@ -100,9 +107,19 @@ const short Y_STEP = 10;
     inImage = image.CGImage;
     
     // Create off screen bitmap context to draw the image into. Format ARGB is 4 bytes for each pixel: Alpa, Red, Green, Blue
-    CGContextRef cgctx = [self createARGBBitmapContextFromImage:inImage];
+    
+    CGContextRef cgctx = NULL;
+    
+    if (inImage != NULL) {
+        cgctx = [self createARGBBitmapContextFromImage:inImage];
+    }
+    else {
+        NSLog(@"NULL inImage!");
+    }
+    
     if (cgctx == NULL) {
         /* error */
+        NSLog(@"error!!");
         _frameData = NULL;
         return;
     }
@@ -149,27 +166,28 @@ const short Y_STEP = 10;
 
 - (NSArray*) getPixelColorRGBNumberArrayAtLocation:(CGPoint)point {
     NSArray* color = nil;
+
+    int red = 0;
+    int green = 0;
+    int blue = 0;
     
     if (_frameData != NULL) {
         //offset locates the pixel in the data from x,y.
         //4 for 4 bytes of data per pixel, w is width of one row of data.
         int offset = 4*((_wFrame*round(point.y))+round(point.x));
         //        alpha =  _frameData[offset];
-        int red = _frameData[offset+1];
-        int green = _frameData[offset+2];
-        int blue = _frameData[offset+3];
+        red = _frameData[offset+1];
+        green = _frameData[offset+2];
+        blue = _frameData[offset+3];
         
 //        NSLog(@"%.0f, %.0f: %i, %i, %i", point.x, point.y, red, green, blue);
-        color = [NSArray arrayWithObjects:
-                 [NSNumber numberWithInteger:red],
-                 [NSNumber numberWithInteger:green],
-                 [NSNumber numberWithInteger:blue],
-                 nil];
     }
     
-    if (!color) {
-        color = @[];
-    }
+    color = [NSArray arrayWithObjects:
+             [NSNumber numberWithInteger:red],
+             [NSNumber numberWithInteger:green],
+             [NSNumber numberWithInteger:blue],
+             nil];
     
     // When finished, release the context
     //CGContextRelease(cgctx);
@@ -235,6 +253,11 @@ const short Y_STEP = 10;
     CGColorSpaceRelease( colorSpace );
     
     return context;
+}
+
+- (void)dealloc {
+    self.delegate = nil;
+    NSLog(@"op dealloc");
 }
 
 @end

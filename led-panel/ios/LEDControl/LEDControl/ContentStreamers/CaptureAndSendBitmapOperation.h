@@ -15,7 +15,7 @@
 @interface CaptureAndSendBitmapOperation : NSOperation
 
 @property (assign, nonatomic) id<CaptureAndSendBitmapOperationDelegate> delegate;
-@property (nonatomic, weak) UIView *view;
+@property (nonatomic, strong) UIView *view;
 @property (assign, nonatomic) CGFloat left;
 @property (assign, nonatomic) CGFloat top;
 
