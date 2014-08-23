@@ -10,6 +10,19 @@
 		61E7C79AB33C46A081FB92E6 /* libPods-LEDControl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A120044E91469D83A537E4 /* libPods-LEDControl.a */; };
 		A617349819A57EF700BA69E1 /* SWWebCSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A617349719A57EF700BA69E1 /* SWWebCSViewController.m */; };
 		A617349B19A6BE1B00BA69E1 /* SWScrollingTextCSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A617349A19A6BE1B00BA69E1 /* SWScrollingTextCSViewController.m */; };
+		A665125119A85ACA0050B598 /* omg-particles-2.html in Resources */ = {isa = PBXBuildFile; fileRef = A665125019A85ACA0050B598 /* omg-particles-2.html */; };
+		A665125219A85C490050B598 /* d3.v3.min.js in Resources */ = {isa = PBXBuildFile; fileRef = A665124E19A85ABE0050B598 /* d3.v3.min.js */; };
+		A665125619A85CE80050B598 /* hexbins.html in Resources */ = {isa = PBXBuildFile; fileRef = A665125319A85CE80050B598 /* hexbins.html */; };
+		A665125719A85CE80050B598 /* icosahedron.html in Resources */ = {isa = PBXBuildFile; fileRef = A665125419A85CE80050B598 /* icosahedron.html */; };
+		A665125819A85CE80050B598 /* pma-bubbles.html in Resources */ = {isa = PBXBuildFile; fileRef = A665125519A85CE80050B598 /* pma-bubbles.html */; };
+		A665126019A85DF90050B598 /* clock.html in Resources */ = {isa = PBXBuildFile; fileRef = A665125919A85DF90050B598 /* clock.html */; };
+		A665126119A85DF90050B598 /* geo-rainbow.html in Resources */ = {isa = PBXBuildFile; fileRef = A665125A19A85DF90050B598 /* geo-rainbow.html */; };
+		A665126319A85DF90050B598 /* pma-spiral.html in Resources */ = {isa = PBXBuildFile; fileRef = A665125C19A85DF90050B598 /* pma-spiral.html */; };
+		A665126519A85DF90050B598 /* rainbow-worm.html in Resources */ = {isa = PBXBuildFile; fileRef = A665125E19A85DF90050B598 /* rainbow-worm.html */; };
+		A665126619A85DF90050B598 /* spermatazoa.html in Resources */ = {isa = PBXBuildFile; fileRef = A665125F19A85DF90050B598 /* spermatazoa.html */; };
+		A665126A19A85F420050B598 /* countdown.html in Resources */ = {isa = PBXBuildFile; fileRef = A665126919A85F420050B598 /* countdown.html */; };
+		A665126D19A868400050B598 /* d3.geodesic.v0.min.js in Resources */ = {isa = PBXBuildFile; fileRef = A665126B19A868290050B598 /* d3.geodesic.v0.min.js */; };
+		A665127019A8731B0050B598 /* d3.hexbin.v0.min.js in Resources */ = {isa = PBXBuildFile; fileRef = A665126E19A872D00050B598 /* d3.hexbin.v0.min.js */; };
 		A68577A9199FAA55001C291D /* ELCAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6857793199FAA55001C291D /* ELCAlbumPickerController.m */; };
 		A68577AA199FAA55001C291D /* ELCAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = A6857795199FAA55001C291D /* ELCAsset.m */; };
 		A68577AB199FAA55001C291D /* ELCAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6857797199FAA55001C291D /* ELCAssetCell.m */; };
@@ -82,6 +95,19 @@
 		A617349719A57EF700BA69E1 /* SWWebCSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWWebCSViewController.m; sourceTree = "<group>"; };
 		A617349919A6BE1B00BA69E1 /* SWScrollingTextCSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWScrollingTextCSViewController.h; sourceTree = "<group>"; };
 		A617349A19A6BE1B00BA69E1 /* SWScrollingTextCSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWScrollingTextCSViewController.m; sourceTree = "<group>"; };
+		A665124E19A85ABE0050B598 /* d3.v3.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = d3.v3.min.js; sourceTree = "<group>"; };
+		A665125019A85ACA0050B598 /* omg-particles-2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "omg-particles-2.html"; sourceTree = "<group>"; };
+		A665125319A85CE80050B598 /* hexbins.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = hexbins.html; sourceTree = "<group>"; };
+		A665125419A85CE80050B598 /* icosahedron.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = icosahedron.html; sourceTree = "<group>"; };
+		A665125519A85CE80050B598 /* pma-bubbles.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "pma-bubbles.html"; sourceTree = "<group>"; };
+		A665125919A85DF90050B598 /* clock.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = clock.html; sourceTree = "<group>"; };
+		A665125A19A85DF90050B598 /* geo-rainbow.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "geo-rainbow.html"; sourceTree = "<group>"; };
+		A665125C19A85DF90050B598 /* pma-spiral.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "pma-spiral.html"; sourceTree = "<group>"; };
+		A665125E19A85DF90050B598 /* rainbow-worm.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "rainbow-worm.html"; sourceTree = "<group>"; };
+		A665125F19A85DF90050B598 /* spermatazoa.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = spermatazoa.html; sourceTree = "<group>"; };
+		A665126919A85F420050B598 /* countdown.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = countdown.html; sourceTree = "<group>"; };
+		A665126B19A868290050B598 /* d3.geodesic.v0.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = d3.geodesic.v0.min.js; sourceTree = "<group>"; };
+		A665126E19A872D00050B598 /* d3.hexbin.v0.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = d3.hexbin.v0.min.js; sourceTree = "<group>"; };
 		A6857792199FAA55001C291D /* ELCAlbumPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAlbumPickerController.h; sourceTree = "<group>"; };
 		A6857793199FAA55001C291D /* ELCAlbumPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAlbumPickerController.m; sourceTree = "<group>"; };
 		A6857794199FAA55001C291D /* ELCAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAsset.h; sourceTree = "<group>"; };
@@ -278,12 +304,25 @@
 		A6D3B426199F2F0200862D65 /* assets */ = {
 			isa = PBXGroup;
 			children = (
-				A698B3B619A45726009F1339 /* bomb_25x25@2x.png */,
-				A698B3B719A45726009F1339 /* pills_25x25@2x.png */,
 				A6D3B43A199F5F6200862D65 /* anime-eye.png */,
 				A6D3B43B199F5F6200862D65 /* ATcellorangekillingacancercellmauve1.jpg */,
 				A6D3B43C199F5F6200862D65 /* attenae-galaxy.jpg */,
+				A698B3B619A45726009F1339 /* bomb_25x25@2x.png */,
+				A665125919A85DF90050B598 /* clock.html */,
+				A665126919A85F420050B598 /* countdown.html */,
+				A665126B19A868290050B598 /* d3.geodesic.v0.min.js */,
+				A665126E19A872D00050B598 /* d3.hexbin.v0.min.js */,
+				A665124E19A85ABE0050B598 /* d3.v3.min.js */,
+				A665125A19A85DF90050B598 /* geo-rainbow.html */,
 				A6D3B434199F361F00862D65 /* gradient.png */,
+				A665125319A85CE80050B598 /* hexbins.html */,
+				A665125419A85CE80050B598 /* icosahedron.html */,
+				A665125019A85ACA0050B598 /* omg-particles-2.html */,
+				A698B3B719A45726009F1339 /* pills_25x25@2x.png */,
+				A665125519A85CE80050B598 /* pma-bubbles.html */,
+				A665125C19A85DF90050B598 /* pma-spiral.html */,
+				A665125E19A85DF90050B598 /* rainbow-worm.html */,
+				A665125F19A85DF90050B598 /* spermatazoa.html */,
 			);
 			path = assets;
 			sourceTree = "<group>";
@@ -501,19 +540,32 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A665127019A8731B0050B598 /* d3.hexbin.v0.min.js in Resources */,
+				A665126D19A868400050B598 /* d3.geodesic.v0.min.js in Resources */,
+				A665125219A85C490050B598 /* d3.v3.min.js in Resources */,
 				A698B3B819A45726009F1339 /* bomb_25x25@2x.png in Resources */,
+				A665125719A85CE80050B598 /* icosahedron.html in Resources */,
+				A665125119A85ACA0050B598 /* omg-particles-2.html in Resources */,
+				A665126519A85DF90050B598 /* rainbow-worm.html in Resources */,
+				A665126A19A85F420050B598 /* countdown.html in Resources */,
 				A6D3B43E199F5F6200862D65 /* ATcellorangekillingacancercellmauve1.jpg in Resources */,
 				CD9565DD19808C560081BB67 /* Images.xcassets in Resources */,
 				A68577B2199FAA55001C291D /* ELCAssetTablePicker.xib in Resources */,
 				A6D3B435199F361F00862D65 /* gradient.png in Resources */,
 				A68577B3199FAA55001C291D /* Overlay.png in Resources */,
 				A698B3B919A45726009F1339 /* pills_25x25@2x.png in Resources */,
+				A665126119A85DF90050B598 /* geo-rainbow.html in Resources */,
+				A665125619A85CE80050B598 /* hexbins.html in Resources */,
+				A665126619A85DF90050B598 /* spermatazoa.html in Resources */,
 				A68577B4199FAA55001C291D /* Overlay@2x.png in Resources */,
 				CD9565CC19808C560081BB67 /* InfoPlist.strings in Resources */,
+				A665126019A85DF90050B598 /* clock.html in Resources */,
 				A68577B0199FAA55001C291D /* ELCAlbumPickerController.xib in Resources */,
 				A6D3B43F199F5F6200862D65 /* attenae-galaxy.jpg in Resources */,
+				A665126319A85DF90050B598 /* pma-spiral.html in Resources */,
 				A68577B1199FAA55001C291D /* ELCAssetPicker.xib in Resources */,
 				CD9565D519808C560081BB67 /* Main.storyboard in Resources */,
+				A665125819A85CE80050B598 /* pma-bubbles.html in Resources */,
 				A6D3B43D199F5F6200862D65 /* anime-eye.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

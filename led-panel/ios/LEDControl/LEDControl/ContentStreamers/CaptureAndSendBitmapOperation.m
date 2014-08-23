@@ -257,7 +257,6 @@ const short Y_STEP = 10;
 
 - (void)dealloc {
     self.delegate = nil;
-    NSLog(@"op dealloc");
 }
 
 @end

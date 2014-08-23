@@ -63,16 +63,8 @@ const CGFloat FPS = 20;  // 24 is good
 
 - (void)frameCaptureComplete:(NSArray*)bitmap
 {
-//    [self sendBitmap:bitmap];
-    
-    [_opQueue cancelAllOperations];
-
-    NSLog(@"making new..");
-
+    [self sendBitmap:bitmap];
    [self performSelectorInBackground:@selector(captureFrame) withObject:nil];
-    
-    NSLog(@"done...");
-
 }
 
 - (void)captureFrame
@@ -97,7 +89,6 @@ const CGFloat FPS = 20;  // 24 is good
     op.view = self.streamedContentArea;
     op.left = _left;
     op.top = _top;
-    NSLog(@"adding new...");
 
     [_opQueue addOperation:op];
     

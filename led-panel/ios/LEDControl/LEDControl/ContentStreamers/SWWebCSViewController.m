@@ -46,9 +46,28 @@
     [self loadStuff];
 }
 
+- (void)loadLocalWebPage:(NSString*)name
+{
+    
+    NSURL *url = [[NSBundle mainBundle] URLForResource:name withExtension:@"html"];
+    NSString *html = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
+    NSLog(@"base: %@", [url URLByDeletingLastPathComponent]);
+    [self.webView loadHTMLString:html baseURL:[url URLByDeletingLastPathComponent]];
+    
+}
+
 - (void)loadStuff {
     // omg particles 2
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://bl.ocks.org/mbostock/raw/9539958/"]]];
+//    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://bl.ocks.org/mbostock/raw/9539958/"]]];
+//    [self loadLocalWebPage:@"omg-particles-2"];
+//    [self loadLocalWebPage:@"icosahedron"];
+//    [self loadLocalWebPage:@"pma-bubbles"];
+//    [self loadLocalWebPage:@"pma-spiral"];
+//    [self loadLocalWebPage:@"countdown"];
+//    [self loadLocalWebPage:@"geo-rainbow"];
+//    [self loadLocalWebPage:@"clock"];
+    [self loadLocalWebPage:@"hexbins"];
+//    [self loadLocalWebPage:@"spermatazoa"];
     
     // clock
 //    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://bl.ocks.org/mbostock/raw/10685278/"]]];

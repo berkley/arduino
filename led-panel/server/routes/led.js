@@ -148,7 +148,7 @@ wss.on('connection', function(ws) {
         	}
         	else if (json.command == "latchBitmap") {
         		// console.log(json.bitmap);
-        		drawBitmap(JSON.parse(json.bitmap));
+        		// drawBitmap(JSON.parse(json.bitmap));
         		// latch();
 
         		 // console.log("B");
