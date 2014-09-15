@@ -112,6 +112,7 @@ app.get('/program/stop', led.stopProgram);
 
 app.get('/sample', visualizations.sample);
 app.get('/audio-sample', visualizations.audioSample);
+app.get('/audio-particles', visualizations.audioParticles);
 app.get('/bar-volume', visualizations.barVolume);
 app.get('/', visualizations.grid);
 app.get('/grid', visualizations.grid);

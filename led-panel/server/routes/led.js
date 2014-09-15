@@ -47,7 +47,7 @@ var setRowOnScreen = function(screen, row, r, g, b) {
 	{
 		setRow(row, r, g, b);
 		setRow(row + SCREEN_HEIGHT, r, g, b);
-	    setRow(row + SCREEN_HEIGHT + SCREEN_HEIGHT, r, g, b);
+		setRow(row + SCREEN_HEIGHT + SCREEN_HEIGHT, r, g, b);
 	}
 };
 
@@ -148,11 +148,18 @@ wss.on('connection', function(ws) {
         	}
         	else if (json.command == "latchBitmap") {
         		// console.log(json.bitmap);
-        		drawBitmap(JSON.parse(json.bitmap));
+        		var bitmap = json.bitmap;
+        		try {
+        			bitmap = JSON.parse(json.bitmap);
+        		}
+        		catch(ex) {
+        			console.log("error parsing bitmap:", ex);
+        		}
+        		drawBitmap(bitmap);
         		// latch();
 
         		 // console.log("B");
-        		if (exports.delegate) {
+        		 if (exports.delegate) {
         			// json.type = 'bitmap';
         			exports.delegate.didReceiveBitmap(message);
         		}
@@ -222,7 +229,7 @@ exports.latchSerialPixel = function(req, res) {
 	var b = params.b;
 	setSerialPixel(pix, r, g, b);
 	latch();
-  	res.send("{status:ok}");
+	res.send("{status:ok}");
 };
 
 exports.setXYPixel = function(req, res) {
@@ -392,7 +399,7 @@ var animateOneWave = function(req, res) {
 exports.animateOneWave = animateOneWave;
 
 var drawWaveAtRow = function(cycleLength, row, r, g, b, stopAfterOne) {
-	 console.log("drawing wave at row ", row);
+	console.log("drawing wave at row ", row);
 	var waveSize = 11;
 	var rIncrement = r / (waveSize / 2);
 	var gIncrement = g / (waveSize / 2);
