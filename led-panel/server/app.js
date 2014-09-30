@@ -103,6 +103,7 @@ app.get('/program/run/animateOneWave/:cycleLength/:r/:g/:b', led.animateOneWave)
 app.get('/program/run/waveAtRow/:row/:r/:g/:b', led.waveAtRow);
 app.get('/program/run/wave/:cycleLength/:r/:g/:b', led.startWave);
 app.get('/program/run/noise/:cycleLength/:maxr/:maxg/:maxb', led.startNoise);
+app.get('/program/run/fastNoise/:cycleLength/:maxr/:maxg/:maxb', led.startFastNoise);
 app.get('/program/run/heartbeat/:r/:g/:b', led.startHeartbeat);
 app.get('/program/run/static/:cycleLength/:r/:g/:b', led.startStatic);
 app.get('/program/run/:program', led.runProgram);

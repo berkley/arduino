@@ -532,6 +532,31 @@ var startNoise = function(req, res) {
 };
 exports.startNoise = startNoise;
 
+var startFastNoiseTimeout;
+var startFastNoise = function(req, res) {
+	var cycleLength = parseInt(req.params.cycleLength); //this should be in millis
+	var maxr = parseInt(req.params.maxr);
+	var maxg = parseInt(req.params.maxg);
+	var maxb = parseInt(req.params.maxb);
+	if(cycleLength == -1) //make it random
+	{
+		cycleLength = parseInt(Math.random() * 5000);
+	}
+	console.log("setting noise");
+	for(var i=0; i<numPixels; i++)
+	{
+		var r = pixUtil.randomColor(maxr);
+		var g = pixUtil.randomColor(maxg);
+		var b = pixUtil.randomColor(maxb);
+		pixUtil.setPixel(i, r, g, b);
+	}
+	pixUtil.refresh();
+	console.log("new fastnoise in ", cycleLength, " milliseconds");
+	startFastNoiseTimeout = setTimeout(function(){startFastNoise(req, res);}, cycleLength);
+	res.send("{status:ok}");
+};
+exports.startFastNoise = startFastNoise;
+
 var runningProgram;
 
 exports.runProgram = function(req, res) {
@@ -562,6 +587,12 @@ exports.stopProgram = function(req, res) {
 		console.log("stopping noise");
 		clearTimeout(noiseTimeout);
 		noiseTimeout = null;
+	}
+	else if(startFastNoiseTimeout)
+	{
+		console.log("stopping fastNoise");
+		clearTimeout(startFastNoiseTimeout);
+		startFastNoiseTimeout = null;
 	}
 	else if(heartTimeout)
 	{
