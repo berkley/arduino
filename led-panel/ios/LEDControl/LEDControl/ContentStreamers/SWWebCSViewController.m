@@ -117,6 +117,38 @@
 
 - (void)loadStuff {
     
+    
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    NSLog(@"webview did finish load");
+//    [self performSelector:@selector(onLoad) withObject:nil afterDelay:0.75];
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    NSLog(@"webview did start load");
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    NSLog(@"webview fail: %@", error);
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self loadStuff];
+}
+
+- (void)loadLocalWebPage:(NSString*)name
+{
+    
+    NSURL *url = [[NSBundle mainBundle] URLForResource:name withExtension:@"html"];
+    NSString *html = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
+    NSLog(@"base: %@", [url URLByDeletingLastPathComponent]);
+    [self.webView loadHTMLString:html baseURL:[url URLByDeletingLastPathComponent]];
+    
+}
+
+- (void)loadStuff {
     // omg particles 2
 //    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://bl.ocks.org/mbostock/raw/9539958/"]]];
 //    [self loadLocalWebPage:@"omg-particles-2"];
@@ -126,7 +158,11 @@
 //    [self loadLocalWebPage:@"countdown"];
 //    [self loadLocalWebPage:@"geo-rainbow"];
 //    [self loadLocalWebPage:@"clock"];
+<<<<<<< HEAD
 //    [self loadLocalWebPage:@"hexbins"];
+=======
+    [self loadLocalWebPage:@"hexbins"];
+>>>>>>> 16750a0899500cbfe690fdd425778a06c9a8b235
 //    [self loadLocalWebPage:@"spermatazoa"];
     
     // clock

@@ -65,6 +65,7 @@
 - (void)connectWebSocket {
     _webSocket.delegate = nil;
     _webSocket = nil;
+<<<<<<< HEAD
 
     NSString *ip = [[NSUserDefaults standardUserDefaults] objectForKey:IP_ADDRESS];
     if([ip length] == 0)
@@ -76,6 +77,11 @@
     NSString *urlString = [NSString stringWithFormat:@"ws://%@:3001/", ip];
 //NSString *urlString = @"ws://127.0.0.1:3001/";
 //NSString *urlString = @"ws://10.0.1.17:3001/";
+=======
+    
+        NSString *urlString = @"ws://127.0.0.1:3001/";
+//    NSString *urlString = @"ws://10.0.1.17:3001/";
+>>>>>>> 16750a0899500cbfe690fdd425778a06c9a8b235
     NSLog(@"ws connecting to %@", urlString);
     SRWebSocket *newWebSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:urlString]];
     newWebSocket.delegate = self;

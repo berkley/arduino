@@ -8,11 +8,15 @@
 
 #import "SWContentStreamViewController.h"
 
+<<<<<<< HEAD
 const CGFloat FPS = 18;  // 24 is good
 const short WIDTH = 48;
 const short HEIGHT = 24;
 const short X_STEP = 10;
 const short Y_STEP = 10;
+=======
+const CGFloat FPS = 20;  // 24 is good
+>>>>>>> 16750a0899500cbfe690fdd425778a06c9a8b235
 
 @interface SWContentStreamViewController ()
 {
@@ -123,7 +127,11 @@ natural_t lastMem;
 //    NSLog(@" XXX complete XXX");
     
     [self sendBitmap:bitmap];
+<<<<<<< HEAD
     [self nextFrame];
+=======
+   [self performSelectorInBackground:@selector(captureFrame) withObject:nil];
+>>>>>>> 16750a0899500cbfe690fdd425778a06c9a8b235
 }
 
 - (void)captureFrame
@@ -143,6 +151,7 @@ natural_t lastMem;
     
     _lastCaptureAt = CACurrentMediaTime();
     
+<<<<<<< HEAD
 //    CaptureAndSendBitmapOperation *op = [[CaptureAndSendBitmapOperation alloc] init];
 //    op.delegate = self;
 //    op.view = self.streamedContentArea;
@@ -332,6 +341,17 @@ void bitmapContextReleaseCallback(void *releaseInfo,
         frameData = NULL;
     }
     
+=======
+    CaptureAndSendBitmapOperation *op = [[CaptureAndSendBitmapOperation alloc] init];
+    op.delegate = self;
+    op.view = self.streamedContentArea;
+    op.left = _left;
+    op.top = _top;
+
+    [_opQueue addOperation:op];
+    
+    
+>>>>>>> 16750a0899500cbfe690fdd425778a06c9a8b235
 }
 
 - (NSString*)jsonStringify:(id)object error:(NSError**)err
