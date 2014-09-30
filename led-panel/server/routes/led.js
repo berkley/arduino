@@ -1,11 +1,11 @@
 //basic params about the LED array(s)
 //note you must have your fadecandy server configured correctly for your OPC setup
-var pixPerRow = 16;
-var numRows = 72;
+var pixPerRow = 8;
+var numRows = 8;
 var WIDTH = pixPerRow;
 var HEIGHT = numRows;
-var SCREEN_HEIGHT = 24;
-var NUM_SCREENS = 3;
+var SCREEN_HEIGHT = 8;
+var NUM_SCREENS = 1;
 var numPixels = pixPerRow * numRows;
 
 //setup the OPC and pixel util libs
@@ -148,7 +148,6 @@ wss.on('connection', function(ws) {
         	}
         	else if (json.command == "latchBitmap") {
         		// console.log(json.bitmap);
-<<<<<<< HEAD
         		var bitmap = json.bitmap;
         		try {
         			bitmap = JSON.parse(json.bitmap);
@@ -157,9 +156,7 @@ wss.on('connection', function(ws) {
         			console.log("error parsing bitmap:", ex);
         		}
         		drawBitmap(bitmap);
-=======
         		// drawBitmap(JSON.parse(json.bitmap));
->>>>>>> 16750a0899500cbfe690fdd425778a06c9a8b235
         		// latch();
 
         		 // console.log("B");

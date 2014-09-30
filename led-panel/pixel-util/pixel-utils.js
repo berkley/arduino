@@ -3,7 +3,8 @@ module.exports = function(opcClient, WIDTH, HEIGHT)
 {
 	function setPixel(addr, red, green, blue)
 	{
-		opcClient.setPixel(tpix(addr), red, green, blue);
+		// opcClient.setPixel(tpix(addr), red, green, blue);
+		opcClient.setPixel(addr, red, green, blue);
 	}
 
 	function setXYPixel(x, y, red, green, blue)
@@ -14,8 +15,9 @@ module.exports = function(opcClient, WIDTH, HEIGHT)
 
 	function setWideXYPixel(x, y, red, green, blue)
 	{
-		var addr = wideAddr(x, y);
-		setPixel(tpix(addr), red, green, blue);
+		// var addr = wideAddr(x, y);
+		var addr = getPixelAddress(x, y);
+		setPixel(addr, red, green, blue);
 	}
 
 
@@ -27,7 +29,9 @@ module.exports = function(opcClient, WIDTH, HEIGHT)
 	function getPixelAddress(row, col)
 	{
 		var rowWidth = parseInt(row) * WIDTH;
+		console.log("rowWidth: ", rowWidth);
 		var add = rowWidth + parseInt(col);
+		console.log("add: ", add);
 		return add;
 	}
 
@@ -159,7 +163,7 @@ module.exports = function(opcClient, WIDTH, HEIGHT)
 	};
 
 	function tpix(addr) {
-	    var actualPixPerChannel = 48;
+	    var actualPixPerChannel = 64;
 	    var mod = addr % actualPixPerChannel;
 	    var base = addr - mod;
 	    var newaddr;

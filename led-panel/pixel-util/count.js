@@ -8,24 +8,23 @@ var emitter = new events.EventEmitter();
 var currentPixel = 0;
 var currentTimeout = 10;
 
-// var actualPixPerChannel = 48;
-// var expectedPixPerChannel = 64;
-var numRows = 72;
-var pixPerRow = 16;
+var numRows = 8;
+var pixPerRow = 8;
 var numPixels = (pixPerRow * numRows);
 var PixelUtils = new require('./pixel-utils')(client, pixPerRow, numRows);
 
 var xyCount = function() 
 {
-    for(var x = 0; x<72; x++)
+    for(var x = 0; x<8; x++)
     {
-        for(var y=0; y<24; y++)
+        for(var y=0; y<8; y++)
         {
             var red = PixelUtils.randomColor();
             var blue = PixelUtils.randomColor();
             var green = PixelUtils.randomColor();
             PixelUtils.allOff();
-            PixelUtils.setWideXYPixel(x, y, red, green, blue);
+            // PixelUtils.setWideXYPixel(x, y, red, green, blue);
+            PixelUtils.setXYPixel(x, y, red, green, blue);
             console.log("setting pixel x: ", x, "y: ", y);
             // if(y > 0)
             //     PixelUtils.setWideXYPixel(x, y - 1, 0, 0, 0);
@@ -53,13 +52,14 @@ var count = function()
         if(pixel == slot)
         {
             PixelUtils.setPixel(pixel, red, green, blue);
-            // console.log("newpix: ", newpix);
-            // console.log("slot: ", slot);
+            // client.setPixel(pixel, red, green, blue);
+            console.log("newpix: ", pixel);
         }
         else
         {
             // console.log("pixel: ", pixel);
             PixelUtils.setPixel(pixel, 0, 0, 0);
+            // client.setPixel(pixel, 0, 0, 0);
         }
     }
 
@@ -74,12 +74,7 @@ var theta = 0;
 var thetaDelta = 0.001;
 var slot = 0;
 
-setInterval(count, 20);
-// var millis = new Date().getTime();
-// var t = 65 * 0.2 + millis * 0.002;
-// // setInterval(count, 30);
+// setInterval(count, 20);
+setInterval(xyCount, 1000);
 
-// PixelUtils.colorWipe(0, 0,0,0);
-// PixelUtils.refresh();
-// xyCount();
 
