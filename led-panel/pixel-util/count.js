@@ -41,6 +41,5 @@ var thetaDelta = 0.001;
 var slot = 0;
 
 setInterval(count, 20);
-// setInterval(xyCount, 1000);
 
 
