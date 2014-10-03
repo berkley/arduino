@@ -1,26 +1,21 @@
 var OPC = new require('./opc')
 var client = new OPC('localhost', 7890);
-var events = require('events');
-var emitter = new events.EventEmitter();
 
 var numRows = 8;
-var pixPerRow = 8;
-var numPixels = (pixPerRow * numRows);
-var PixelUtils = new require('./pixel-utils')(client, pixPerRow, numRows);
+var numCols = 8;
+var numPixels = (numCols * numRows);
+var PixelUtils = new require('./pixel-utils')(client, numCols, numRows);
+var slot = 0;
 
 var count = function()
 {
-    theta += thetaDelta;
-
-    var millis = new Date().getTime();
     for (var pixel = 0; pixel < numPixels; pixel++)
     {
-        var red = PixelUtils.randomColor();
-        var blue = PixelUtils.randomColor();
-        var green = PixelUtils.randomColor();
-
         if(pixel == slot)
         {
+            var red = PixelUtils.randomColor();
+            var blue = PixelUtils.randomColor();
+            var green = PixelUtils.randomColor();
             PixelUtils.setPixel(pixel, red, green, blue);
         }
         else
@@ -35,10 +30,6 @@ var count = function()
 
     PixelUtils.refresh();
 }
-
-var theta = 0;
-var thetaDelta = 0.001;
-var slot = 0;
 
 setInterval(count, 20);
 
