@@ -16,6 +16,7 @@ var count = function()
             var red = PixelUtils.randomColor();
             var blue = PixelUtils.randomColor();
             var green = PixelUtils.randomColor();
+            console.log("Setting pixel " + pixel + " to color " + red + "/" + green + "/" + blue);
             PixelUtils.setPixel(pixel, red, green, blue);
         }
         else
