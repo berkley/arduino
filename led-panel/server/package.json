@@ -10,6 +10,7 @@
     "ejs": "*",
     "ws": "0.4.31",
     "svg-path-parser": "0.0.1",
-    "sockjs": "^0.3.9"
+    "sockjs": "^0.3.9",
+    "request": "*"
   }
 }

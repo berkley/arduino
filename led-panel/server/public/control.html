@@ -1,0 +1,54 @@
+<html>
+<head>
+</head>
+<body>
+	<h3>Turn Off</h3>
+	<form action="http://localhost:3000/house/run/allOff" method="get">
+		<input type="submit" value="All Pixels Off"/>
+	</form>
+
+	<h3>Set All Single Color</h3>
+	<form action="http://localhost:3000/house/run/setAll" method="get">
+		Red: <br/>
+		<input type="range"  min="0" max="255" name="r"/>
+		<br/>
+		Green: <br/>
+		<input type="range"  min="0" max="255" name="g"/>
+		<br/>
+		Blue: <br/>
+		<input type="range"  min="0" max="255" name="b"/>
+		<br/>
+		<input type="submit" value="Go"/>
+	</form>
+	
+	<h3>Alernate colors</h3>
+	<form action="http://localhost:3000/house/run/alternate" method="get">
+		Red1: <br/>
+		<input type="range"  min="0" max="255" name="r1"/>
+		<br/>
+		Green1: <br/>
+		<input type="range"  min="0" max="255" name="g1"/>
+		<br/>
+		Blue1: <br/>
+		<input type="range"  min="0" max="255" name="b1"/>
+		<br/>
+
+		Red2: <br/>
+		<input type="range"  min="0" max="255" name="r2"/>
+		<br/>
+		Green2: <br/>
+		<input type="range"  min="0" max="255" name="g2"/>
+		<br/>
+		Blue2: <br/>
+		<input type="range"  min="0" max="255" name="b2"/>
+		<br/>
+
+		<input type="submit" value="Go"/>
+	</form>
+
+	<h3>Rainbow</h3>
+	<form action="http://localhost:3000/house/run/rainbow" method="get">
+		<input type="submit" value="Go"/>
+    </form>
+</body>
+</html>
