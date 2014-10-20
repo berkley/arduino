@@ -147,8 +147,6 @@ wss.on('connection', function(ws) {
         		latch();
         	}
         	else if (json.command == "latchBitmap") {
-        		// console.log(json.bitmap);
-<<<<<<< HEAD
         		var bitmap = json.bitmap;
         		try {
         			bitmap = JSON.parse(json.bitmap);
@@ -156,11 +154,10 @@ wss.on('connection', function(ws) {
         		catch(ex) {
         			console.log("error parsing bitmap:", ex);
         		}
-        		drawBitmap(bitmap);
-=======
-        		// drawBitmap(JSON.parse(json.bitmap));
->>>>>>> 16750a0899500cbfe690fdd425778a06c9a8b235
-        		// latch();
+        		// drawBitmap(bitmap);
+
+        		drawBitmap(JSON.parse(json.bitmap));
+        		latch();
 
         		 // console.log("B");
         		 if (exports.delegate) {

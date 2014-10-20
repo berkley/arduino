@@ -2,6 +2,7 @@ var express = require('express');
 var routes = require('./routes');
 var visualizations = require('./routes/visualizations');
 var led = require('./routes/led');
+var house = require('./routes/house');
 led.delegate = this;
 var http = require('http');
 var path = require('path');
@@ -110,6 +111,10 @@ app.get('/program/run/:program', led.runProgram);
 app.get('/program/run/browser/:program', led.runBrowserProgram);
 app.get('/program/stop', led.stopProgram);
 
+app.get('/house/run/allOff', house.allOff);
+app.get('/house/run/setAll', house.setAll);
+app.get('/house/run/alternate', house.alternate);
+app.get('/house/run/rainbow', house.rainbow);
 
 app.get('/sample', visualizations.sample);
 app.get('/audio-sample', visualizations.audioSample);

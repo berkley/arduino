@@ -44,8 +44,15 @@ void loop()
   // colorWipe(ORANGE, microsec);
   // colorWipe(WHITE, microsec);
 
-  sparkle(LIGHT_WHITE, PURPLE);
+  // sparkle(LIGHT_WHITE, PURPLE);
   // delay(30);
+
+  colorWipe(GREEN, 50);
+  colorWipe(BLACK, 50);
+  colorWipe(PINK, 50);
+  colorWipe(BLACK, 50);
+  delay(1000);
+
 }
 
 void colorWipe(int color, int wait)

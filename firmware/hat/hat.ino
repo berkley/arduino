@@ -1,13 +1,24 @@
 #include "letters.h"
-#include <Adafruit_NeoPixel.h>
+// #include <Adafruit_NeoPixel.h>
 #include <ParticleEmitter.h>
+#include <OctoWS2811.h>
 
 
 #define PIN 24
 #define INT0_PIN 0
 #define VERT 8
-#define HORI 18
-#define NUM_PIXELS 144
+#define HORI 41
+#define NUM_PIXELS VERT * HORI
+
+//OctoWS2811 Defn. Stuff
+#define COLS_LEDs 41  // all of the following params need to be adjusted for screen size
+#define ROWS_LEDs 8  // LED_LAYOUT assumed 0 if ROWS_LEDs > 8
+#define LEDS_PER_STRIP (HORI * (VERT / 6))
+
+DMAMEM int displayMemory[LEDS_PER_STRIP*6];
+int drawingMemory[LEDS_PER_STRIP*6];
+const int config = WS2811_GRB | WS2811_800kHz;
+OctoWS2811 strip(LEDS_PER_STRIP, displayMemory, drawingMemory, config);
 
 #define ORANGE strip.Color(255, 69, 0)
 #define YELLOW strip.Color(255, 255, 0)
@@ -23,6 +34,8 @@
 #define PROG_MAX 7
 
 uint32_t currentChristmasFade = 0;
+
+
 
 /*
 0 00 .. 17
@@ -1098,7 +1111,7 @@ void rainbowCycle(uint8_t wait) {
 
   for(j=0; j<256*5; j++) { // 5 cycles of all colors on wheel
     for(i=0; i< strip.numPixels(); i++) {
-      strip.setPixelColor(i, Wheel(((i * 256 / strip.numPixels()) + j) & 255));
+      strip.setPixelColor(i, Wheel(((i * 256 / strip.numPixels()) + j) & 128));
     }
     strip.show();
     delay(wait);
