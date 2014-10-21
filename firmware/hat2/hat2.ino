@@ -122,6 +122,12 @@ uint8_t rsl[1008] PROGMEM = {0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,
 uint8_t rsl_w = 42;
 uint8_t rsl_h = 8;
 
+uint8_t invader4_1[240] PROGMEM = {0,0,0, 0,0,0, 255,255,255, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 255,255,255, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 255,255,255, 0,0,0, 0,0,0, 255,255,255, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 0,0,0, 0,0,0, 0,0,0, 255,255,255, 255,255,255, 183,5,249, 255,255,255, 255,255,255, 183,5,249, 255,255,255, 255,255,255, 0,0,0, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 0,0,0, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 0,0,0, 255,255,255, 255,255,255, 0,0,0, 0,0,0, 255,255,255, 0,0,0, 0,0,0, 255,255,255, 0,0,0, 0,0,0, 255,255,255, 0,0,0, 0,0,0, 255,255,255, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 255,255,255, 0,0,0, 0,0,0};
+uint8_t invader4_1_w = 10;
+uint8_t invader4_1_h = 8;
+uint8_t invader4_2[264] PROGMEM = {0,0,0, 0,0,0, 0,0,0, 255,255,255, 0,0,0, 0,0,0, 0,0,0, 255,255,255, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 0,0,0, 0,0,0, 0,0,0, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 0,0,0, 255,255,255, 255,255,255, 255,255,255, 0,255,0, 255,255,255, 255,255,255, 255,255,255, 0,255,0, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 0,255,0, 255,255,255, 255,255,255, 255,255,255, 0,255,0, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 0,0,0, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 255,255,255, 0,0,0, 255,255,255, 255,255,255, 0,0,0, 0,0,0, 255,255,255, 0,0,0, 0,0,0, 0,0,0, 255,255,255, 0,0,0, 0,0,0, 255,255,255, 0,0,0, 0,0,0, 255,255,255, 255,255,255, 0,0,0, 0,0,0, 0,0,0, 255,255,255, 255,255,255, 0,0,0, 0,0,0};
+uint8_t invader4_2_w = 11;
+uint8_t invader4_2_h = 8;
 
 
 void setAllOff(bool show)
@@ -139,23 +145,45 @@ void setAllOff(bool show)
 
 void spaceInvaders()
 {
-  int i = 0;
-  // for(int i=0; i<HORI; i++)
-  while(true)
+  // for(int i=0; i<100; i+=2)
+  // // while(true)
+  // {
+  //   setBitmap(invader4_1, invader4_1_h, invader4_1_w, i, false);
+  //   // setBitmap(invader3_1, invader3_1_h, invader3_1_w, i + 24, false);
+  //   leds.show();
+  //   delay(200);
+  //   setAllOff(false);
+
+  //   setBitmap(invader4_2, invader4_2_h, invader4_2_w, i+2, false);
+  //   // setBitmap(invader3_1, invader3_1_h, invader3_1_w, i + 24, false);
+  //   leds.show();
+  //   delay(200);
+  //   setAllOff(false);
+
+  //   // setBitmap(invader2_2, invader2_2_h, invader2_2_w, i, false);
+  //   // // setBitmap(invader3_2, invader3_2_h, invader3_2_w, i + 24, false);
+  //   // leds.show();
+  //   // delay(500);
+  //   // setAllOff();
+  //   // i++;
+  //   // if(i > (HORI * 2) + (invader3_1_w * 4))
+  //   //   i = 0;
+  // }
+  
+  for(int i=0; i<100; i+=2)
+  // while(true)
   {
     setBitmap(invader3_1, invader3_1_h, invader3_1_w, i, false);
     // setBitmap(invader3_1, invader3_1_h, invader3_1_w, i + 24, false);
     leds.show();
     delay(200);
     setAllOff(false);
-    i++;
 
-    setBitmap(invader3_2, invader3_2_h, invader3_2_w, i, false);
+    setBitmap(invader3_2, invader3_2_h, invader3_2_w, i+2, false);
     // setBitmap(invader3_1, invader3_1_h, invader3_1_w, i + 24, false);
     leds.show();
     delay(200);
     setAllOff(false);
-    i++;
 
     // setBitmap(invader2_2, invader2_2_h, invader2_2_w, i, false);
     // // setBitmap(invader3_2, invader3_2_h, invader3_2_w, i + 24, false);
@@ -163,8 +191,8 @@ void spaceInvaders()
     // delay(500);
     // setAllOff();
     // i++;
-    if(i > (HORI * 2) + (invader3_1_w * 4))
-      i = 0;
+    // if(i > (HORI * 2) + (invader3_1_w * 4))
+    //   i = 0;
   }
 }
 
@@ -179,9 +207,9 @@ void setBitmap(uint8_t* bmp, int height, int width, int upperLeft, bool show)
       int addr;
       int realx = x / 3;
       addr = getPixelAddress(y,realx);
-      int r = bmp[index + 0];
-      int g = bmp[index + 1];
-      int b = bmp[index + 2];
+      int r = bmp[index + 0] / 8;
+      int g = bmp[index + 1] / 8;
+      int b = bmp[index + 2] / 8;
       leds.setPixel(addr, colorFromRGB(r, g, b));
       index += 3;
     }
@@ -211,7 +239,7 @@ void timbers()
 
 void pac()
 {
-  setBitmap(rsl, rsl_h, rsl_w, 0, true);
+  // setBitmap(rsl, rsl_h, rsl_w, 0, true);
   for(int i=0; i<100; i+=3)
   {
     setBitmap(pac1, pac1_h, pac1_w, i, true);
@@ -227,9 +255,13 @@ void loop()
 {
   pac();
   delay(1000);
-  timbers();
+  // timbers();
 
-  // spaceInvaders();
+  spaceInvaders();
+  delay(1000);
+
+  plasma();
+  delay(1000);
 
    // int microsec = 2000000 / leds.numPixels(); 
   // int mic_val = analogRead(MIC_PIN);
