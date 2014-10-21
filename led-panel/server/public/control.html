@@ -3,12 +3,12 @@
 </head>
 <body>
 	<h3>Turn Off</h3>
-	<form action="http://localhost:3000/house/run/allOff" method="get">
+	<form action="/house/run/allOff" method="get">
 		<input type="submit" value="All Pixels Off"/>
 	</form>
 
 	<h3>Set All Single Color</h3>
-	<form action="http://localhost:3000/house/run/setAll" method="get">
+	<form action="/house/run/setAll" method="get">
 		Red: <br/>
 		<input type="range"  min="0" max="255" name="r"/>
 		<br/>
@@ -22,7 +22,7 @@
 	</form>
 	
 	<h3>Alernate colors</h3>
-	<form action="http://localhost:3000/house/run/alternate" method="get">
+	<form action="/house/run/alternate" method="get">
 		Red1: <br/>
 		<input type="range"  min="0" max="255" name="r1"/>
 		<br/>
@@ -47,7 +47,7 @@
 	</form>
 
 	<h3>Rainbow</h3>
-	<form action="http://localhost:3000/house/run/rainbow" method="get">
+	<form action="/house/run/rainbow" method="get">
 		<input type="submit" value="Go"/>
     </form>
 </body>
