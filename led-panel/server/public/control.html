@@ -17,10 +17,11 @@
     });
     </script>
 	<style>
-    button { color: red; }
     </style>
 </head>
 <body>
+	<h3>El Poder Casa 2000</h3>
+	<span> Choose Action</span>
 	<select id="action" name="action">
 		<option value="allOff">All Pixels Off</option>
 		<option value="stop">Stop Program</option>
@@ -146,10 +147,10 @@
 		    $.get("/house/run/action", 
 		    	{action:$('#action').val(), r1:$('#r1').val(), g1:$('#g1').val(), b1:$('#b1').val(), r2:$('#r2').val(), g2:$('#g2').val(), b2:$('#b2').val(), delay:$('#delay').val(), blockSize:$('#blockSize').val(), duration:$('#duration').val()}, 
 		    	function(data) {
-		      if(data.error) {
-		      	$('#status').html("<h3>Request Failed</h3>");
-		      } else {
+		      if(!data.return_value >= 1) {
 		      	$('#status').html("<h3>Request Succeeded</h3>");
+		      } else {
+		      	$('#status').html("<h3>Request Failed</h3>");
 		      }
 			  $('#result').html( data );
 			  $('#spinner').hide();
