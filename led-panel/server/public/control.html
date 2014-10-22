@@ -9,6 +9,7 @@
 		$('#delayDiv').hide();
 		$('#durationDiv').hide();
 		$('#blockSizeDiv').hide();
+		$('#spinner').hide();
     });
  
     $( window ).load(function() {
@@ -59,7 +60,10 @@
 	<div id="durationDiv">duration:<input id="duration" name="duration" value="5000"/></div>
 	<div id="blockSizeDiv">block size:<input id="blockSize" name="blockSize" value="5"/></div>
 	<button>Show Me The Money</button>
-	<div class="result"/>
+
+	<div id="status"></div>
+	<div id="result"></div>
+	<img id="spinner" width="100" src="spinner.gif"></div>
 
 	<script>
 		var button = document.querySelector("button");
@@ -136,10 +140,19 @@
 	 
 	    // If a user clicks on it, say hello!
 	    button.addEventListener("click", function(ev) {
+	    	$('#spinner').show();
+	    	$('#status').html("");
+	    	$('#result').html("");
 		    $.get("/house/run/action", 
 		    	{action:$('#action').val(), r1:$('#r1').val(), g1:$('#g1').val(), b1:$('#b1').val(), r2:$('#r2').val(), g2:$('#g2').val(), b2:$('#b2').val(), delay:$('#delay').val(), blockSize:$('#blockSize').val(), duration:$('#duration').val()}, 
 		    	function(data) {
-			  $(".result" ).html( data );
+		      if(data.error) {
+		      	$('#status').html("<h3>Request Failed</h3>");
+		      } else {
+		      	$('#status').html("<h3>Request Succeeded</h3>");
+		      }
+			  $('#result').html( data );
+			  $('#spinner').hide();
 			});
 	    }, false);
 	</script>

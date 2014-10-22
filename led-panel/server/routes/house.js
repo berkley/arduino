@@ -1,7 +1,7 @@
 var request = require('request');
 
 var sparkUrl = "https://api.spark.io/v1/devices";
-var access_token = "";
+var access_token = "1243b3c4a906da0dbe955fb00b79a113f7638369";
 var deviceId = "53ff70065067544818350687";
 
 exports.action = function(req, res) {
