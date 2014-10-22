@@ -1,135 +1,148 @@
 <html>
 <head>
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script>
+    $( document ).ready(function() {
+        // console.log( "document loaded" );
+        $('#colorSelector1').hide();
+		$('#colorSelector2').hide();
+		$('#delayDiv').hide();
+		$('#durationDiv').hide();
+		$('#blockSizeDiv').hide();
+    });
+ 
+    $( window ).load(function() {
+        // console.log( "window loaded" );
+    });
+    </script>
+	<style>
+    button { color: red; }
+    </style>
 </head>
 <body>
-	<h3>Turn Off</h3>
-	<form action="/house/run/allOff" method="get">
-		<input type="submit" value="All Pixels Off"/>
-	</form>
+	<select id="action" name="action">
+		<option value="allOff">All Pixels Off</option>
+		<option value="stop">Stop Program</option>
+		<option value="setAll">Single Color</option>
+		<option value="alternate">Alternate Colors</option>
+		<option value="animateAlternate">Animage Alternate Colors</option>
+		<option value="rainbow">Rainbow</option>
+		<option value="loopBlocks">Animate Blocks</option>
+		<option value="fadeColor">Fade Between 2 Colors</option>
+	</select><br/>
 
-	<form action="/house/run/stop" method="get">
-		<input type="submit" value="Stop Program"/>
-	</form>
-
-	<h3>Set All Single Color</h3>
-	<form action="/house/run/setAll" method="get">
-		Red: <br/>
-		<input type="range"  min="0" max="255" name="r"/>
-		<br/>
-		Green: <br/>
-		<input type="range"  min="0" max="255" name="g"/>
-		<br/>
-		Blue: <br/>
-		<input type="range"  min="0" max="255" name="b"/>
-		<br/>
-		<input type="submit" value="Go"/>
-	</form>
-	
-	<h3>Alernate colors</h3>
-	<form action="/house/run/alternate" method="get">
+	<span id="colorSelector1">
 		Red1: <br/>
-		<input type="range"  min="0" max="255" name="r1"/>
+		<input type="range"  min="0" max="255" name="r1" id="r1"/>
 		<br/>
 		Green1: <br/>
-		<input type="range"  min="0" max="255" name="g1"/>
+		<input type="range"  min="0" max="255" name="g1" id="g1"/>
 		<br/>
 		Blue1: <br/>
-		<input type="range"  min="0" max="255" name="b1"/>
+		<input type="range"  min="0" max="255" name="b1" id="b1"/>
 		<br/>
+	</span>
 
+	<span id="colorSelector2">
 		Red2: <br/>
-		<input type="range"  min="0" max="255" name="r2"/>
+		<input type="range"  min="0" max="255" name="r2" id="r2"/>
 		<br/>
 		Green2: <br/>
-		<input type="range"  min="0" max="255" name="g2"/>
+		<input type="range"  min="0" max="255" name="g2" id="g2"/>
 		<br/>
 		Blue2: <br/>
-		<input type="range"  min="0" max="255" name="b2"/>
+		<input type="range"  min="0" max="255" name="b2" id="b2"/>
 		<br/>
+	</span>
 
-		<input type="submit" value="Go"/>
-	</form>
+	<div id="delayDiv">delay:<input id="delay" name="delay" value="50"/></div>
+	<div id="durationDiv">duration:<input id="duration" name="duration" value="5000"/></div>
+	<div id="blockSizeDiv">block size:<input id="blockSize" name="blockSize" value="5"/></div>
+	<button>Show Me The Money</button>
+	<div class="result"/>
 
-	<h3>Rainbow</h3>
-	<form action="/house/run/rainbow" method="get">
-		<input type="submit" value="Go"/>
-    </form>
+	<script>
+		var button = document.querySelector("button");
+		var select = document.querySelector("select");
 
-	<h3>Animate Alternates</h3>
-	<form action="/house/run/animateAlternate" method="get">
-		Red1: <br/>
-		<input type="range"  min="0" max="255" name="r1"/>
-		<br/>
-		Green1: <br/>
-		<input type="range"  min="0" max="255" name="g1"/>
-		<br/>
-		Blue1: <br/>
-		<input type="range"  min="0" max="255" name="b1"/>
-		<br/>
+		select.addEventListener("change", function(ev) {
+			console.log("ev: ", ev.target.value);
+			if(ev.target.value == 'stop')
+			{
+				$('#colorSelector1').hide();
+				$('#colorSelector2').hide();
+				$('#delayDiv').hide();
+				$('#durationDiv').hide();
+				$('#blockSizeDiv').hide();
+			}
+			else if(ev.target.value == 'allOff')
+			{
+				$('#colorSelector1').hide();
+				$('#colorSelector2').hide();
+				$('#delayDiv').hide();
+				$('#durationDiv').hide();
+				$('#blockSizeDiv').hide();
+			}
+			else if(ev.target.value == 'setAll')
+			{
+				$('#colorSelector1').show();
+				$('#colorSelector2').hide();
+				$('#delayDiv').hide();
+				$('#durationDiv').hide();
+				$('#blockSizeDiv').hide();
+			}
+			else if(ev.target.value == 'alternate')
+			{
+				$('#colorSelector1').show();
+				$('#colorSelector2').show();
+				$('#delayDiv').hide();
+				$('#durationDiv').hide();
+				$('#blockSizeDiv').hide();
+			}
+			else if(ev.target.value == 'animateAlternate')
+			{
+				$('#colorSelector1').show();
+				$('#colorSelector2').show();
+				$('#delayDiv').show();
+				$('#durationDiv').hide();
+				$('#blockSizeDiv').hide();
+			}
+			else if(ev.target.value == 'rainbow')
+			{
+				$('#colorSelector1').hide();
+				$('#colorSelector2').hide();
+				$('#delayDiv').hide();
+				$('#durationDiv').hide();
+				$('#blockSizeDiv').hide();
+			}
+			else if(ev.target.value == 'loopBlocks')
+			{
+				$('#colorSelector1').show();
+				$('#colorSelector2').show();
+				$('#delayDiv').show();
+				$('#durationDiv').hide();
+				$('#blockSizeDiv').show();
+			}
+			else if(ev.target.value == 'fadeColor')
+			{
+				$('#colorSelector1').show();
+				$('#colorSelector2').show();
+				$('#delayDiv').show();
+				$('#durationDiv').show();
+				$('#blockSizeDiv').hide();
+			}
 
-		Red2: <br/>
-		<input type="range"  min="0" max="255" name="r2"/>
-		<br/>
-		Green2: <br/>
-		<input type="range"  min="0" max="255" name="g2"/>
-		<br/>
-		Blue2: <br/>
-		<input type="range"  min="0" max="255" name="b2"/>
-		<br/>
-		delay:<input name="delay" value="500"/><br/>
-		<input type="submit" value="Go"/>
-    </form>
+		});
+	 
+	    // If a user clicks on it, say hello!
+	    button.addEventListener("click", function(ev) {
+		    $.get("/house/run/action", 
+		    	{action:$('#action').val(), r1:$('#r1').val(), g1:$('#g1').val(), b1:$('#b1').val(), r2:$('#r2').val(), g2:$('#g2').val(), b2:$('#b2').val(), delay:$('#delay').val(), blockSize:$('#blockSize').val(), duration:$('#duration').val()}, 
+		    	function(data) {
+			  $(".result" ).html( data );
+			});
+	    }, false);
+	</script>
 
-    <h3>Animate Alternate Blocks</h3>
-	<form action="/house/run/loopBlocks" method="get">
-		Red1: <br/>
-		<input type="range"  min="0" max="255" name="r1"/>
-		<br/>
-		Green1: <br/>
-		<input type="range"  min="0" max="255" name="g1"/>
-		<br/>
-		Blue1: <br/>
-		<input type="range"  min="0" max="255" name="b1"/>
-		<br/>
-
-		Red2: <br/>
-		<input type="range"  min="0" max="255" name="r2"/>
-		<br/>
-		Green2: <br/>
-		<input type="range"  min="0" max="255" name="g2"/>
-		<br/>
-		Blue2: <br/>
-		<input type="range"  min="0" max="255" name="b2"/>
-		<br/>
-		delay:<input name="delay" value="500"/><br/>
-		block size:<input name="blockSize" value="5"/><br/>
-		<input type="submit" value="Go"/>
-    </form>
-
-    <h3>Fade Color</h3>
-	<form action="/house/run/fadeColor" method="get">
-		Red1: <br/>
-		<input type="range"  min="0" max="255" name="r1"/>
-		<br/>
-		Green1: <br/>
-		<input type="range"  min="0" max="255" name="g1"/>
-		<br/>
-		Blue1: <br/>
-		<input type="range"  min="0" max="255" name="b1"/>
-		<br/>
-
-		Red2: <br/>
-		<input type="range"  min="0" max="255" name="r2"/>
-		<br/>
-		Green2: <br/>
-		<input type="range"  min="0" max="255" name="g2"/>
-		<br/>
-		Blue2: <br/>
-		<input type="range"  min="0" max="255" name="b2"/>
-		<br/>
-		delay:<input name="delay" value="50"/><br/>
-		duration:<input name="duration" value="5000"/><br/>
-		<input type="submit" value="Go"/>
-    </form>
 </body>
 </html>
