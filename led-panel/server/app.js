@@ -115,6 +115,10 @@ app.get('/house/run/allOff', house.allOff);
 app.get('/house/run/setAll', house.setAll);
 app.get('/house/run/alternate', house.alternate);
 app.get('/house/run/rainbow', house.rainbow);
+app.get('/house/run/animateAlternate', house.animateAlternate);
+app.get('/house/run/loopBlocks', house.loopBlocks);
+app.get('/house/run/fadeColor', house.fadeColor);
+app.get('/house/run/stop', house.stop);
 
 app.get('/sample', visualizations.sample);
 app.get('/audio-sample', visualizations.audioSample);

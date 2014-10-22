@@ -7,6 +7,10 @@
 		<input type="submit" value="All Pixels Off"/>
 	</form>
 
+	<form action="/house/run/stop" method="get">
+		<input type="submit" value="Stop Program"/>
+	</form>
+
 	<h3>Set All Single Color</h3>
 	<form action="/house/run/setAll" method="get">
 		Red: <br/>
@@ -48,6 +52,83 @@
 
 	<h3>Rainbow</h3>
 	<form action="/house/run/rainbow" method="get">
+		<input type="submit" value="Go"/>
+    </form>
+
+	<h3>Animate Alternates</h3>
+	<form action="/house/run/animateAlternate" method="get">
+		Red1: <br/>
+		<input type="range"  min="0" max="255" name="r1"/>
+		<br/>
+		Green1: <br/>
+		<input type="range"  min="0" max="255" name="g1"/>
+		<br/>
+		Blue1: <br/>
+		<input type="range"  min="0" max="255" name="b1"/>
+		<br/>
+
+		Red2: <br/>
+		<input type="range"  min="0" max="255" name="r2"/>
+		<br/>
+		Green2: <br/>
+		<input type="range"  min="0" max="255" name="g2"/>
+		<br/>
+		Blue2: <br/>
+		<input type="range"  min="0" max="255" name="b2"/>
+		<br/>
+		delay:<input name="delay" value="500"/><br/>
+		<input type="submit" value="Go"/>
+    </form>
+
+    <h3>Animate Alternate Blocks</h3>
+	<form action="/house/run/loopBlocks" method="get">
+		Red1: <br/>
+		<input type="range"  min="0" max="255" name="r1"/>
+		<br/>
+		Green1: <br/>
+		<input type="range"  min="0" max="255" name="g1"/>
+		<br/>
+		Blue1: <br/>
+		<input type="range"  min="0" max="255" name="b1"/>
+		<br/>
+
+		Red2: <br/>
+		<input type="range"  min="0" max="255" name="r2"/>
+		<br/>
+		Green2: <br/>
+		<input type="range"  min="0" max="255" name="g2"/>
+		<br/>
+		Blue2: <br/>
+		<input type="range"  min="0" max="255" name="b2"/>
+		<br/>
+		delay:<input name="delay" value="500"/><br/>
+		block size:<input name="blockSize" value="5"/><br/>
+		<input type="submit" value="Go"/>
+    </form>
+
+    <h3>Fade Color</h3>
+	<form action="/house/run/fadeColor" method="get">
+		Red1: <br/>
+		<input type="range"  min="0" max="255" name="r1"/>
+		<br/>
+		Green1: <br/>
+		<input type="range"  min="0" max="255" name="g1"/>
+		<br/>
+		Blue1: <br/>
+		<input type="range"  min="0" max="255" name="b1"/>
+		<br/>
+
+		Red2: <br/>
+		<input type="range"  min="0" max="255" name="r2"/>
+		<br/>
+		Green2: <br/>
+		<input type="range"  min="0" max="255" name="g2"/>
+		<br/>
+		Blue2: <br/>
+		<input type="range"  min="0" max="255" name="b2"/>
+		<br/>
+		delay:<input name="delay" value="50"/><br/>
+		duration:<input name="duration" value="5000"/><br/>
 		<input type="submit" value="Go"/>
     </form>
 </body>
