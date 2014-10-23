@@ -71,6 +71,14 @@ exports.action = function(req, res) {
 			res.send(body);
 		}).form(buildFormData(data));
 	}
+	else if(action == "blocks")
+	{
+		var url = buildUrl("run");
+		var data = "blocks," + req.query.r1 + "," + req.query.g1 + "," + req.query.b1 + "," + req.query.r2 + "," + req.query.g2 + "," + req.query.b2 + "," + req.query.blockSize;
+		request.post(url, function(err, response, body) {
+			res.send(body);
+		}).form(buildFormData(data));
+	}
 };
 
 var buildFormData = function(params) {

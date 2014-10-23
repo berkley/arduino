@@ -29,6 +29,7 @@
 		<option value="alternate">Alternate Colors</option>
 		<option value="animateAlternate">Animage Alternate Colors</option>
 		<option value="rainbow">Rainbow</option>
+		<option value="blocks">Blocks</option>
 		<option value="loopBlocks">Animate Blocks</option>
 		<option value="fadeColor">Fade Between 2 Colors</option>
 	</select><br/>
@@ -125,6 +126,14 @@
 				$('#colorSelector1').show();
 				$('#colorSelector2').show();
 				$('#delayDiv').show();
+				$('#durationDiv').hide();
+				$('#blockSizeDiv').show();
+			}
+			else if(ev.target.value == 'blocks')
+			{
+				$('#colorSelector1').show();
+				$('#colorSelector2').show();
+				$('#delayDiv').hide();
 				$('#durationDiv').hide();
 				$('#blockSizeDiv').show();
 			}
