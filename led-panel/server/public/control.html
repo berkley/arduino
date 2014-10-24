@@ -3,6 +3,8 @@
 	<title>El Poder Casa 2000</title>
 	<link rel="shortcut icon" href="blue.ico" type="image/x-icon">
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="spectrum.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="spectrum.css" type="text/css"/>
 	<script>
     $( document ).ready(function() {
         // console.log( "document loaded" );
@@ -27,13 +29,12 @@
 </head>
 <body>
 	<h3>El Poder Casa 2000</h3>
-	<span> Choose Action</span>
 	<select id="action" name="action">
 		<option value="allOff">All Pixels Off</option>
 		<option value="stop">Stop Program</option>
 		<option value="setAll">Single Color</option>
 		<option value="alternate">Alternate Colors</option>
-		<option value="animateAlternate">Animage Alternate Colors</option>
+		<option value="animateAlternate">Animate Alternate Colors</option>
 		<option value="rainbow">Rainbow</option>
 		<option value="blocks">Blocks</option>
 		<option value="loopBlocks">Animate Blocks</option>
@@ -50,7 +51,9 @@
 		Blue1: <br/>
 		<input type="range"  min="0" max="255" name="b1" id="b1"/>
 		<br/>
+		<input id='colorpicker1' />
 	</span>
+
 
 	<span id="colorSelector2">
 		Red2: <br/>
@@ -62,23 +65,52 @@
 		Blue2: <br/>
 		<input type="range"  min="0" max="255" name="b2" id="b2"/>
 		<br/>
+		<input id='colorpicker2' />
 	</span>
 
 	<div id="delayDiv">delay:<input id="delay" name="delay" value="50"/></div>
 	<div id="durationDiv">duration:<input id="duration" name="duration" value="5000"/></div>
 	<div id="blockSizeDiv">block size:<input id="blockSize" name="blockSize" value="5"/></div>
-	<button>Show Me The Money</button>
+	<button id="goButton">Light It Up</button>
 
 	<div id="status"></div>
 	<div id="result"></div>
-	<img id="spinner" width="100" src="spinner.gif"></div>
+	<img style="width:30px;" id="spinner" width="100" src="spinner.gif"></div>
 
 	<script>
-		var button = document.querySelector("button");
+		$("#colorpicker1").spectrum({
+			color: "#f00",
+			preferredFormat: "rgb",
+		    move: function(tinycolor) { },
+		    show: function(tinycolor) { },
+		    hide: function(tinycolor) { },
+		    beforeShow: function(tinycolor) { },
+		    change: function(color) {
+		    	$('#r1').val(color.toRgb().r);
+		    	$('#g1').val(color.toRgb().g);
+		    	$('#b1').val(color.toRgb().b);
+		    }
+		});
+
+		$("#colorpicker2").spectrum({
+			color: "#f00",
+			preferredFormat: "rgb",
+		    move: function(tinycolor) { },
+		    show: function(tinycolor) { },
+		    hide: function(tinycolor) { },
+		    beforeShow: function(tinycolor) { },
+		    change: function(color) {
+		    	$('#r2').val(color.toRgb().r);
+		    	$('#g2').val(color.toRgb().g);
+		    	$('#b2').val(color.toRgb().b);
+		    }
+		});
+
+		var button = document.querySelector("#goButton");
 		var select = document.querySelector("select");
 
+
 		select.addEventListener("change", function(ev) {
-			console.log("ev: ", ev.target.value);
 			if(ev.target.value == 'stop')
 			{
 				$('#colorSelector1').hide();
@@ -154,7 +186,6 @@
 
 		});
 	 
-	    // If a user clicks on it, say hello!
 	    button.addEventListener("click", function(ev) {
 	    	$('#spinner').show();
 	    	$('#status').html("");
