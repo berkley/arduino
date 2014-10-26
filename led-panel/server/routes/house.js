@@ -2,8 +2,8 @@ var request = require('request');
 
 var sparkUrl = "https://api.spark.io/v1/devices";
 var access_token = "1243b3c4a906da0dbe955fb00b79a113f7638369";
-var deviceId = "53ff70065067544818350687";
-//var deviceId = "54ff6c066667515143491267";
+var deviceId = "53ff70065067544818350687"; //colossus
+//var deviceId = "54ff6c066667515143491267"; //giggle
 
 exports.index = function(req, res) {
 	res.redirect("control.html");

@@ -29,6 +29,11 @@
 </head>
 <body>
 	<h3>El Poder Casa 2000</h3>
+	<select id="coreId" name="core">
+		<option value="53ff70065067544818350687">Colussus - lower house</option>
+		<option value="54ff6c066667515143491267">Giggle - upper house (eventually)</option>
+		<option value="all">All</option>
+	</select>
 	<select id="action" name="action">
 		<option value="allOff">All Pixels Off</option>
 		<option value="stop">Stop Program</option>
@@ -191,7 +196,7 @@
 	    	$('#status').html("");
 	    	$('#result').html("");
 		    $.get("/house/run/action", 
-		    	{action:$('#action').val(), r1:$('#r1').val(), g1:$('#g1').val(), b1:$('#b1').val(), r2:$('#r2').val(), g2:$('#g2').val(), b2:$('#b2').val(), delay:$('#delay').val(), blockSize:$('#blockSize').val(), duration:$('#duration').val()}, 
+		    	{action:$('#action').val(), $('#coreId').val(), r1:$('#r1').val(), g1:$('#g1').val(), b1:$('#b1').val(), r2:$('#r2').val(), g2:$('#g2').val(), b2:$('#b2').val(), delay:$('#delay').val(), blockSize:$('#blockSize').val(), duration:$('#duration').val()}, 
 		    	function(data) {
 		      if(!data.return_value >= 1) {
 		      	$('#status').html("<h3>Request Succeeded</h3>");
