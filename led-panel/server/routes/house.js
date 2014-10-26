@@ -5,6 +5,10 @@ var access_token = "1243b3c4a906da0dbe955fb00b79a113f7638369";
 var deviceId = "53ff70065067544818350687";
 //var deviceId = "54ff6c066667515143491267";
 
+exports.index = function(req, res) {
+	res.redirect("control.html");
+};
+
 exports.action = function(req, res) {
 	var action = req.query.action;
 	console.log("action: " + action);
