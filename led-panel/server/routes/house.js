@@ -55,6 +55,14 @@ exports.action = function(req, res) {
 			res.send(body);
 		}).form(buildFormData(data));
 	}
+	else if(action == "particles")
+	{
+		var url = buildUrl("run");
+		var data = "particles,";
+		request.post(url, function(err, response, body) {
+			res.send(body);
+		}).form(buildFormData(data));
+	}
 	else if(action == "loopBlocks")
 	{
 		var url = buildUrl("run");

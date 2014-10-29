@@ -1,5 +1,6 @@
 <html>
 <head>
+	<title>El Casa Poder 2000</title>
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script>
     $( document ).ready(function() {
@@ -20,7 +21,7 @@
     </style>
 </head>
 <body>
-	<h3>El Poder Casa 2000</h3>
+	<h3>El Casa Poder 2000</h3>
 	<span> Choose Action</span>
 	<select id="action" name="action">
 		<option value="allOff">All Pixels Off</option>
@@ -32,6 +33,7 @@
 		<option value="blocks">Blocks</option>
 		<option value="loopBlocks">Animate Blocks</option>
 		<option value="fadeColor">Fade Between 2 Colors</option>
+		<option value="particles">Particles</option>
 	</select><br/>
 
 	<span id="colorSelector1">
@@ -114,6 +116,14 @@
 				$('#blockSizeDiv').hide();
 			}
 			else if(ev.target.value == 'rainbow')
+			{
+				$('#colorSelector1').hide();
+				$('#colorSelector2').hide();
+				$('#delayDiv').hide();
+				$('#durationDiv').hide();
+				$('#blockSizeDiv').hide();
+			}
+			else if(ev.target.value == 'particles')
 			{
 				$('#colorSelector1').hide();
 				$('#colorSelector2').hide();
