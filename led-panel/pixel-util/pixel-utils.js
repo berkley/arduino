@@ -4,6 +4,7 @@ module.exports = function(opcClient, WIDTH, HEIGHT)
 	function setPixel(addr, red, green, blue)
 	{
 		// opcClient.setPixel(tpix(addr), red, green, blue);
+		console.log("addr: " + addr);
 		opcClient.setPixel(addr, red, green, blue);
 	}
 
@@ -29,9 +30,7 @@ module.exports = function(opcClient, WIDTH, HEIGHT)
 	function getPixelAddress(row, col)
 	{
 		var rowWidth = parseInt(row) * WIDTH;
-		console.log("rowWidth: ", rowWidth);
 		var add = rowWidth + parseInt(col);
-		console.log("add: ", add);
 		return add;
 	}
 
@@ -188,9 +187,13 @@ module.exports = function(opcClient, WIDTH, HEIGHT)
 	};
 
 	function setBitmap(bitmap) {
-		for (var x=0; x < WIDTH; x++) {
-			for (var y=0; y < HEIGHT; y++) {
+		console.log("bitmap: ", bitmap);
+		for (var x=0; x < bitmap.length; x++) {
+			var bm = bitmap[x];
+			for (var y=0; y < bm.length; y++) {
 				var pixel = bitmap[x][y];
+				console.log("x: " + x + " y: " + y);
+				console.log("pixel: ", pixel);
 				setXYPixel(x, y, pixel.r, pixel.g, pixel.b);
 			}
 		}
@@ -202,6 +205,7 @@ module.exports = function(opcClient, WIDTH, HEIGHT)
 	}
 
 	return {
+		setBitmap: setBitmap,
 		setPixel: setPixel,
 		setXYPixel: setXYPixel,
 		setRow: setRow,
