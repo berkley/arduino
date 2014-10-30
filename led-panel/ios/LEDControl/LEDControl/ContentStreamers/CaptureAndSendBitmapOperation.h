@@ -9,16 +9,14 @@
 #import <Foundation/Foundation.h>
 
 @protocol CaptureAndSendBitmapOperationDelegate <NSObject>
-- (void)frameCaptureComplete:(NSString*)bitmap;
+- (void)frameCaptureComplete:(NSArray*)bitmap;
 @end
 
 @interface CaptureAndSendBitmapOperation : NSOperation
 
 @property (assign, nonatomic) id<CaptureAndSendBitmapOperationDelegate> delegate;
-@property (nonatomic, strong) UIView *view;
+@property (nonatomic, weak) UIView *view;
 @property (assign, nonatomic) CGFloat left;
 @property (assign, nonatomic) CGFloat top;
-
-- (void)go;
 
 @end

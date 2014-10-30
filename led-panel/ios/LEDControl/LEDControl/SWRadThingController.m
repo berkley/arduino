@@ -10,15 +10,6 @@
 
 @implementation SWRadThingController
 
-- (void)updateIp
-{
-    self.ip = [[NSUserDefaults standardUserDefaults] objectForKey:IP_ADDRESS];
-    if(self.ip == nil)
-    {
-        self.ip = @"10.0.1.17";
-    }
-}
-
 - (void)sendRESTCommand:(NSString*)command
 {
     NSString *url = [NSString stringWithFormat:@"http://%@%@", self.restAddress, command];

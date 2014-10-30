@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <SocketRocket/SRWebSocket.h>
 #import "SWLEDController.h"
-#import "SWFireController.h"
 
 @interface SWWaveFlickrViewController : UIViewController <UIGestureRecognizerDelegate, SRWebSocketDelegate>
 

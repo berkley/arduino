@@ -8,8 +8,8 @@
 
 #import "CaptureAndSendBitmapOperation.h"
 
-const short WIDTH = 48;
-const short HEIGHT = 24;
+const short WIDTH = 24;
+const short HEIGHT = 48;
 const short X_STEP = 10;
 const short Y_STEP = 10;
 
@@ -27,21 +27,22 @@ const short Y_STEP = 10;
 @implementation CaptureAndSendBitmapOperation
 
 - (void)main {
-    [self go];
-}
-
-- (void)go {
+    
     NSArray *bitmap = nil;
     @try {
         [self captureViewToFrameData];
         
+        CGFloat w = self.view.frame.size.width;
+//        CGFloat h = self.view.frame.size.height;
+        
         NSMutableArray *cols = [NSMutableArray arrayWithCapacity:WIDTH];
+        
         for (int col=0; col < WIDTH; col++) {
-
             NSMutableArray *colColors = [NSMutableArray arrayWithCapacity:HEIGHT];
+            
             for (int row=0; row < HEIGHT; row++) {
-                CGPoint point = CGPointMake(0 + (col * X_STEP),
-                                            0 + (row * Y_STEP));
+                CGPoint point = CGPointMake(w - (row * Y_STEP),
+                                            0 + (col * X_STEP));
                 
                 [colColors addObject:[self getPixelColorRGBNumberArrayAtLocation:point]];
             }
@@ -54,12 +55,11 @@ const short Y_STEP = 10;
     @catch (NSException *exception) {
         NSLog(@"Error: %@", exception);
     }
+    @finally {
+    }
     
     [self.delegate frameCaptureComplete:bitmap];
     self.delegate = nil;
-
-    if (_frameData) { free(_frameData); }
-
 }
 
 - (NSString*)jsonStringify:(id)object error:(NSError**)err
@@ -82,19 +82,10 @@ const short Y_STEP = 10;
 
 - (UIImage*) imageWithView:(UIView *)view
 {
-    UIImage *img = nil;
     UIGraphicsBeginImageContext(view.bounds.size);
-
-    CGContextRef ctxt = UIGraphicsGetCurrentContext();
-
-    if (ctxt != NULL) {
-
-        [view.layer renderInContext:ctxt];
-        img = UIGraphicsGetImageFromCurrentImageContext();
-    }
-    
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    
     return img;
 }
 
@@ -110,19 +101,9 @@ const short Y_STEP = 10;
     inImage = image.CGImage;
     
     // Create off screen bitmap context to draw the image into. Format ARGB is 4 bytes for each pixel: Alpa, Red, Green, Blue
-    
-    CGContextRef cgctx = NULL;
-    
-    if (inImage != NULL) {
-        cgctx = [self createARGBBitmapContextFromImage:inImage];
-    }
-    else {
-        NSLog(@"NULL inImage!");
-    }
-    
+    CGContextRef cgctx = [self createARGBBitmapContextFromImage:inImage];
     if (cgctx == NULL) {
         /* error */
-        NSLog(@"error!!");
         _frameData = NULL;
         return;
     }
@@ -169,28 +150,27 @@ const short Y_STEP = 10;
 
 - (NSArray*) getPixelColorRGBNumberArrayAtLocation:(CGPoint)point {
     NSArray* color = nil;
-
-    int red = 0;
-    int green = 0;
-    int blue = 0;
     
     if (_frameData != NULL) {
         //offset locates the pixel in the data from x,y.
         //4 for 4 bytes of data per pixel, w is width of one row of data.
         int offset = 4*((_wFrame*round(point.y))+round(point.x));
         //        alpha =  _frameData[offset];
-        red = _frameData[offset+1];
-        green = _frameData[offset+2];
-        blue = _frameData[offset+3];
+        int red = _frameData[offset+1];
+        int green = _frameData[offset+2];
+        int blue = _frameData[offset+3];
         
 //        NSLog(@"%.0f, %.0f: %i, %i, %i", point.x, point.y, red, green, blue);
+        color = [NSArray arrayWithObjects:
+                 [NSNumber numberWithInteger:red],
+                 [NSNumber numberWithInteger:green],
+                 [NSNumber numberWithInteger:blue],
+                 nil];
     }
     
-    color = [NSArray arrayWithObjects:
-             [NSNumber numberWithInteger:red],
-             [NSNumber numberWithInteger:green],
-             [NSNumber numberWithInteger:blue],
-             nil];
+    if (!color) {
+        color = @[];
+    }
     
     // When finished, release the context
     //CGContextRelease(cgctx);
@@ -202,7 +182,7 @@ const short Y_STEP = 10;
 {
     CGContextRef    context = NULL;
     CGColorSpaceRef colorSpace;
-//    void *          bitmapData;
+    void *          bitmapData;
     int             bitmapByteCount;
     int             bitmapBytesPerRow;
     
@@ -227,29 +207,28 @@ const short Y_STEP = 10;
     
     // Allocate memory for image data. This is the destination in memory
     // where any drawing to the bitmap context will be rendered.
-//    bitmapData = malloc( bitmapByteCount );
-//    if (bitmapData == NULL)
-//    {
-//        fprintf (stderr, "Memory not allocated!");
-//        CGColorSpaceRelease( colorSpace );
-//        return NULL;
-//    }
+    bitmapData = malloc( bitmapByteCount );
+    if (bitmapData == NULL)
+    {
+        fprintf (stderr, "Memory not allocated!");
+        CGColorSpaceRelease( colorSpace );
+        return NULL;
+    }
     
     // Create the bitmap context. We want pre-multiplied ARGB, 8-bits
     // per component. Regardless of what the source image format is
     // (CMYK, Grayscale, and so on) it will be converted over to the format
     // specified here by CGBitmapContextCreate.
-    context = CGBitmapContextCreate (NULL,
+    context = CGBitmapContextCreate (bitmapData,
                                      pixelsWide,
                                      pixelsHigh,
                                      8,      // bits per component
                                      bitmapBytesPerRow,
                                      colorSpace,
-                                     kCGImageAlphaNoneSkipFirst);
-    
+                                     kCGImageAlphaPremultipliedFirst);
     if (context == NULL)
     {
-//        free (bitmapData);
+        free (bitmapData);
         fprintf (stderr, "Context not created!");
     }
     
@@ -257,10 +236,6 @@ const short Y_STEP = 10;
     CGColorSpaceRelease( colorSpace );
     
     return context;
-}
-
-- (void)dealloc {
-    self.delegate = nil;
 }
 
 @end

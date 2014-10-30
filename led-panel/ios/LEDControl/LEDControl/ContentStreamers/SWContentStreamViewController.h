@@ -13,10 +13,6 @@
 @interface SWContentStreamViewController : SWWebSocketViewController <CaptureAndSendBitmapOperationDelegate>
 
 @property (strong, nonatomic) UIView *streamedContentArea;
-@property (strong, nonatomic) NSOperationQueue *opQueue;
-@property (assign, nonatomic) BOOL closing;
-
 - (void)addContentView:(UIView*)v;
-- (void)startCapturing;
 
 @end

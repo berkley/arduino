@@ -11,16 +11,9 @@
       "scale" : "2x"
     },
     {
-      "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "appicon.png",
+      "size" : "60x60",
       "scale" : "2x"
-    },
-    {
-      "size" : "60x60",
-      "idiom" : "iphone",
-      "filename" : "appicon2.png",
-      "scale" : "3x"
     }
   ],
   "info" : {

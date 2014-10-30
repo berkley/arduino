@@ -23,8 +23,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [application setStatusBarHidden:YES];
-    [application setIdleTimerDisabled:YES];
+    // Override point for customization after application launch.
     return YES;
 }
 							

@@ -25,18 +25,13 @@ SWFireController *instance;
 {
     if(!self)
         self = [super init];
-    
-    [self updateIp];
+    self.restAddress = @"10.0.1.17:4000";
+    self.wsAddress = @"10.0.1.17:4000";
+//    self.restAddress = @"10.250.220.224:4000";
+//    self.wsAddress = @"10.250.220.224:4001";
     _randomPuffs = false;
 
     return self;
-}
-
-- (void)updateIp
-{
-    [super updateIp];
-    self.restAddress = [NSString stringWithFormat:@"%@:4000", super.ip];
-    self.wsAddress = [NSString stringWithFormat:@"%@:4001", super.ip];
 }
 
 - (void)puff1

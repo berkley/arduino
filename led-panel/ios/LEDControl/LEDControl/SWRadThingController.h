@@ -12,10 +12,8 @@
 
 @property (nonatomic, strong) NSString *restAddress;
 @property (nonatomic, strong) NSString *wsAddress;
-@property (nonatomic, strong) NSString *ip;
 
 + (SWRadThingController*)instance;
 - (void)sendRESTCommand:(NSString*)command;
-- (void)updateIp;
 
 @end
