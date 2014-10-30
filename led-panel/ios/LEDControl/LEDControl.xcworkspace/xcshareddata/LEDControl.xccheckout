@@ -10,29 +10,29 @@
 	<string>LEDControl</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>4CEF5670-F911-4DA2-A093-F1A4EC6B8B5B</key>
+		<key>1B821B3539D61B04787E89BAB721028F991EF2A5</key>
 		<string>ssh://github.com/berkley/arduino.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>led-panel/ios/LEDControl/LEDControl.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>4CEF5670-F911-4DA2-A093-F1A4EC6B8B5B</key>
+		<key>1B821B3539D61B04787E89BAB721028F991EF2A5</key>
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>ssh://github.com/berkley/arduino.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>4CEF5670-F911-4DA2-A093-F1A4EC6B8B5B</string>
+	<string>1B821B3539D61B04787E89BAB721028F991EF2A5</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>4CEF5670-F911-4DA2-A093-F1A4EC6B8B5B</string>
+			<string>1B821B3539D61B04787E89BAB721028F991EF2A5</string>
 			<key>IDESourceControlWCCName</key>
 			<string>arduino</string>
 		</dict>
