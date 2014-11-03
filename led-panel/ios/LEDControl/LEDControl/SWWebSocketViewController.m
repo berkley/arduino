@@ -18,7 +18,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self connectWebSocket];
 }
 
 - (NSString*)jsonStringify:(id)object error:(NSError**)err
@@ -39,21 +38,24 @@
     return string;
 }
 
-- (void)sendBitmap:(NSArray*)bitmap {
+- (void)sendBitmap:(NSString*)bitmap {
     NSError *error = nil;
     
 #if 0
     NSString *cmd = [NSString stringWithFormat:@"{\"type\":\"bitmap\", \"bitmap\":\"%@\"}",
                      [self jsonStringify:bitmap error:&error]];
 #else
+//    NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"latchBitmap\", \"bitmap\":\"%@\"}",
+//                     [self jsonStringify:bitmap error:&error]];
     NSString *cmd = [NSString stringWithFormat:@"{\"command\":\"latchBitmap\", \"bitmap\":\"%@\"}",
-                     [self jsonStringify:bitmap error:&error]];
+                     bitmap];
 #endif
     
     if (error) {
         NSLog(@"Error stringifying bitmap: %@", error);
     }
     else {
+//        NSLog(@"cmd:  %@", cmd);
         [_webSocket send:cmd];
     }
 }
@@ -63,8 +65,14 @@
 - (void)connectWebSocket {
     _webSocket.delegate = nil;
     _webSocket = nil;
-    
-    NSString *urlString = @"ws://127.0.0.1:3001/";
+    NSString *ip = [[NSUserDefaults standardUserDefaults] objectForKey:IP_ADDRESS];
+    if([ip length] == 0)
+    {
+        ip = @"192.168.11.30";
+        [[NSUserDefaults standardUserDefaults] setObject:ip forKey:IP_ADDRESS];
+    }
+
+    NSString *urlString = [NSString stringWithFormat:@"ws://%@:3001/", ip];
     NSLog(@"ws connecting to %@", urlString);
     SRWebSocket *newWebSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:urlString]];
     newWebSocket.delegate = self;
@@ -82,13 +90,17 @@
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
     NSLog(@"socket fail: %@", error);
-    [self connectWebSocket];
+    if (self.webSocket) {
+        [self connectWebSocket];
+    }
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean
 {
     NSLog(@"socket close: %@", reason);
-    [self connectWebSocket];
+    if (self.webSocket) {
+        [self connectWebSocket];
+    }
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
@@ -100,5 +112,19 @@
 //    [webSocket send:self.messageTextField.text];
 //    self.messageTextField.text = nil;
 //}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self connectWebSocket];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.webSocket.delegate = nil;
+    [self.webSocket close];
+}
+
 
 @end

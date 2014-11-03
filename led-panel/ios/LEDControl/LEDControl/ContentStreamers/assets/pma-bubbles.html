@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  margin: 0;
+  background: #222;
+  min-width: 480px;
+  cursor:crosshair;
+}
+
+rect {
+  fill: none;
+  pointer-events: all;
+}
+
+circle {
+  fill: red;
+  stroke-width: 2.0px;
+}
+
+</style>
+<body>
+    <script src="d3.v3.min.js"></script>
+
+<script>
+
+var width = 480,
+height = 240;
+
+var i = 0;
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("rect")
+    .attr("width", width)
+    .attr("height", height);
+    // .on("ontouchstart" in document ? "touchmove" : "mousemove", mouseMoved);
+
+function newMaxDotRadius() {
+  return (Math.random() * 20 + 3) * (innerHeight / 600);
+}
+
+function newSpread() {
+  return Math.random() * innerWidth * 0.5;
+}
+
+var color = d3.scale.category20();
+var m = [];
+var angle = 0.0;
+var interval = 10;
+var angleDelta = Math.PI / 10.0;
+var angleDirection = 1.0;
+var endPointAngle = 0.0;
+var endPointAngleDelta = Math.PI / 10.0;
+var endPointAngleDirection = 1.0;
+var radius = innerHeight * 0.3;
+var endPointRadius = innerHeight / 10.0;
+var startPoint = [0, innerHeight/2];
+var endPoint = [0, innerHeight/2];
+var xDeltaDelta = innerWidth * 0.0125;
+var xDeltaDirection = 1;
+var xDeltaMin = innerWidth * 0.05;
+var xDelta = xDeltaMin;
+var xDirection = 1.0;
+var maxDotRadius = newMaxDotRadius();
+var spread = newSpread();
+var lastTouchTime = null;
+
+
+setInterval(function() {
+  // angleDirection = Math.random() < 0.5 ? 1 : -1;
+  // angleDelta = Math.PI / (15 * Math.random() + 1) * angleDirection;
+  radius = innerHeight * 0.5 * Math.random() + (innerHeight * 0.1);
+  maxDotRadius = newMaxDotRadius();
+  spread = newSpread();
+
+  xDelta += xDeltaDelta * xDeltaDirection;
+  if (xDelta >= innerWidth * 1 || xDelta <= xDeltaMin) {
+    xDeltaDirection *= -1;
+  }
+}, 400);
+
+function updateAngle() {
+
+  startPoint[0] += (xDelta * xDirection);
+  startPoint[0] = startPoint[0] % innerWidth
+
+  if (startPoint[0] >= innerWidth || startPoint[0] <= 0.0) {
+    xDirection *= -1;
+  }
+
+  var amp = Math.sin(angle) * radius/2; // + innerHeight*0.66;
+  startPoint[1] = amp + innerHeight/2;
+  endPoint[0] = startPoint[0];
+  startPoint[0] = spreadIt(startPoint[0], spread);
+  // endPoint[1] = spreadIt(startPoint[1], spread);
+  endPoint[1] = innerHeight/2 - amp*2;
+
+  particle();
+
+  angle += angleDelta;
+  
+  if (angle >= 2*Math.PI) {
+    angle = 0.0;
+  }
+}
+
+function time() {
+  return parseInt(new Date().getTime() / 1000);
+}
+
+function mouseMoved() {
+  lastTouchTime = time();
+  var mouse = d3.mouse(this);
+  endPoint[0] = spreadIt(mouse[0], spread*0.8);
+  endPoint[1] = spreadIt(mouse[1], spread*0.8);
+  d3.event.preventDefault();  
+}
+
+d3.timer(updateAngle);
+
+function spreadIt(it, by) {
+  return (it + Math.random() * by * (Math.random() < 0.5 ? -1 : 1));
+}
+
+function particle() {
+  svg.insert("circle", "rect")
+      .attr("cx", startPoint[0]) //spreadIt(m[0], spread))
+      .attr("cy", startPoint[1]) //spreadIt(m[1], spread))
+      .attr("r", Math.random() * maxDotRadius + 5)
+      // .style("stroke", "black") // d3.hsl((i = (i + 1) % 360), 1, .5))
+      .style("fill", d3.hsl((i = (i + 1) % 360), 1, .5))
+      .style("stroke", (Math.random()*10 <5 ? "black" : "white"))
+      .style("stroke-opacity", 1)
+      // .style("opacity", 0.66)
+    .transition()
+      .attr("cx", endPoint[0])
+      .attr("cy", endPoint[1])
+      .duration(5500)
+      .ease(Math.sqrt)
+      .attr("r", 1)
+      .style("stroke-width", maxDotRadius/2)
+      // .style("opacity", 1.0)
+      .style("stroke-opacity", 1e-6)
+      .remove();
+}
+
+</script>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+    background-color:#222;
+}
+
+.hexagon {
+  fill: none;
+  stroke: #000;
+  stroke-width: .5px;
+}
+
+</style>
+<body>
+<script src="d3.v3.min.js"></script>
+<script src="d3.hexbin.v0.min.js"></script>
+<script>
+
+var width = 720,
+    height = 480,
+    i = -1,
+    θ = 0,
+    δθ = .03,
+    r = 15,
+    n = 2000,
+    k = 20; // samples to replace per frame
+
+var randomX = d3.random.normal(width / 2, 80),
+    randomY = d3.random.normal(height / 2, 80),
+    points = d3.range(n).map(function() { return [randomX(), randomY()]; });
+
+var color = d3.scale.linear()
+    .domain([0, 20])
+    .range(["white", "black"])
+    .interpolate(d3.interpolateLab);
+
+var hexbin = d3.hexbin()
+    .size([width, height])
+    .radius(r);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var hexagon = svg.append("g")
+    .attr("class", "hexagons")
+  .selectAll("path")
+    .data(hexbin(points))
+  .enter().append("path")
+    .attr("d", hexbin.hexagon(r-0.5))
+    .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+    .style("fill", function(d) { return color(d.length); });
+
+d3.timer(function() {
+  θ += δθ;
+  randomX = d3.random.normal(width / 2 + 80 * Math.cos(θ), 80),
+  randomY = d3.random.normal(height / 2 + 80 * Math.sin(θ), 80);
+
+  for (var j = 0; j < k; ++j) {
+    i = (i + 1) % n;
+    points[i][0] = randomX();
+    points[i][1] = randomY();
+  }
+
+  hexagon = hexagon
+      .data(hexbin(points), function(d) { return d.i + "," + d.j; });
+
+  hexagon.exit().remove();
+
+  hexagon.enter().append("path")
+      .attr("d", hexbin.hexagon(r-0.5))
+      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+  hexagon
+      .style("fill", function(d) { return color(d.length); });
+         
+  if (θ > Math.PI * 2) {
+         d3.select('body').style('background-color', "hsl(" + Math.random() * 360 + ",100%,50%)");
+         θ -= (2*Math.PI);
+  }
+
+});
+
+</script>

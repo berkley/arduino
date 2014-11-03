@@ -13,6 +13,6 @@
 
 @property (strong, nonatomic) SRWebSocket *webSocket;
 
-- (void)sendBitmap:(NSArray*)bitmap;
+- (void)sendBitmap:(NSString*)bitmap;
 
 @end

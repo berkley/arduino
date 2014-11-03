@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  margin: 0;
+  background: #222;
+  min-width: 480px;
+  cursor:crosshair;
+}
+
+rect {
+  fill: none;
+  pointer-events: all;
+}
+
+circle {
+  fill: red;
+  stroke-width: 2.0px;
+}
+
+</style>
+<body>
+    <script src="d3.v3.min.js"></script>
+<script>
+
+var width = 480,
+height = 240;
+
+var i = 0;
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("circle")
+    .attr("cx", width/2)
+    .attr("cy", height/2)
+    .attr("r", 10)
+    .attr("id", "endpoint")
+    .style("fill", "black");
+
+svg.append("rect")
+    .attr("width", width)
+    .attr("height", height)
+    .on("ontouchstart" in document ? "touchmove" : "mousemove", mouseMoved);
+
+function newMaxDotRadius() {
+  return (Math.random() * 30 + 3) * (innerHeight / 600);
+}
+
+var color = d3.scale.category20();
+var m = [];
+var angle = 0.0;
+var interval = 10;
+var angleDelta = Math.PI / 10.0;
+var angleDirection = 1.0;
+var endpointAngle = 0.0;
+var endpointAngleDelta = Math.PI / 10.0;
+var endpointAngleDirection = 1.0;
+var radius = innerHeight / 2.0;
+var endpointRadius = innerHeight / 10.0;
+var center = [innerWidth/2, innerHeight/2];
+var endpoint = [innerWidth/2, innerHeight/2];
+var xDelta = 10.0;
+var xDirection = 1.0;
+var yDelta = 10.0;
+var yDirection = 1.0;
+var maxDotRadius = newMaxDotRadius();
+var spread = 1;
+var lastTouchTime = null;
+
+
+setInterval(function() {
+  angleDirection = Math.random() < 0.5 ? 1 : -1;
+  angleDelta = Math.PI / (15 * Math.random() + 1) * angleDirection;
+  radius = (innerHeight/2) + (innerHeight * Math.random());
+  maxDotRadius = newMaxDotRadius();
+  spread = Math.random() * maxDotRadius;
+
+  if (Math.random() > 0.7) {
+    endpointAngleDirection = Math.random() < 0.5 ? 1 : -1;
+    endpointAngleDelta = (Math.PI / 25) * Math.random() * endpointAngleDirection;
+    endpointRadius = 2 + (innerHeight * 1.5 * Math.random());    
+  }
+}, 1500);
+
+function updateAngle() {
+  m[0] = Math.cos(angle) * (radius/2) + center[0];
+  m[1] = Math.sin(angle) * (radius/2) + center[1];
+
+  particle();
+
+  angle += angleDelta;
+  
+  if (angle >= 2*Math.PI) {
+    angle = 0.0;
+  }
+
+  if ((time() - lastTouchTime) > 3) {
+    endpoint[0] = Math.cos(endpointAngle) * (endpointRadius/2) + innerWidth/2;
+    endpoint[1] = Math.sin(endpointAngle) * (endpointRadius/2) + innerHeight/2;
+    endpointAngle += endpointAngleDelta;
+    
+    if (endpointAngle >= 2*Math.PI) {
+      endpointAngle = 0.0;
+    }
+  }
+
+  center[0] += xDelta * xDirection;
+  if (center[0] >= innerWidth*0.98 || center[0] <= innerWidth*0.02) {
+    xDirection *= -1;
+  }
+
+  center[1] += yDelta * yDirection;
+  if (center[1] >= innerHeight*0.98 || center[1] <= innerHeight*0.02) {
+    yDirection *= -1;
+  }
+}
+
+function time() {
+  return parseInt(new Date().getTime() / 1000);
+}
+
+function mouseMoved() {
+  lastTouchTime = time();
+  var mouse = d3.mouse(this);
+  endpoint[0] = spreadIt(mouse[0], spread*0.8);
+  endpoint[1] = spreadIt(mouse[1], spread*0.8);
+  d3.event.preventDefault();  
+}
+
+d3.timer(updateAngle);
+
+function spreadIt(it, by) {
+  return (it + Math.random() * by * (Math.random() < 0.5 ? -1 : 1));
+}
+
+function particle() {
+  d3.select("#endpoint").attr("cx", endpoint[0]).attr("cy", endpoint[1]);
+
+  svg.insert("circle", "rect")
+      .attr("cx", spreadIt(m[0], spread))
+      .attr("cy", spreadIt(m[1], spread))
+      .attr("r", Math.random() * maxDotRadius + 5)
+      // .style("stroke", "black") // d3.hsl((i = (i + 1) % 360), 1, .5))
+      .style("fill", d3.hsl((i = (i + 1) % 360), 1, .5))
+      .style("stroke", (Math.random()*10 <5 ? "black" : "white"))
+      .style("stroke-opacity", 1)
+    .transition()
+      .attr("cx", endpoint[0])
+      .attr("cy", endpoint[1])
+      .duration(3500)
+      .ease(Math.sqrt)
+      .attr("r", 1)
+      .style("stroke-width", maxDotRadius/2)
+      // .style("opacity", 0.9)
+      .style("stroke-opacity", 1e-6)
+      .remove();
+}
+
+</script>
