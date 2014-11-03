@@ -1,27 +1,40 @@
 #include "particles/particles.h"
+
 #include "application.h"
 #include "neopixel/neopixel.h"
 
 #define PIXEL_PIN D2
-#define PIXEL_COUNT 600
+#define PIXEL_COUNT 150
 #define PIXEL_TYPE WS2812B
+#define MAX_COLOR 255
+#define NUM_PARTICLES 1
+#define FPS 210
+#define MILLIS_PER_FRAME (1000 / FPS)
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(PIXEL_COUNT, PIXEL_PIN, PIXEL_TYPE);
-ParticleEmitter emitter = ParticleEmitter(PIXEL_COUNT * 2);
+ParticleEmitter emitter = ParticleEmitter(PIXEL_COUNT * 2, MAX_COLOR);
 char action[64];
 char parameters[64];
 
+void setCoordColor(Coord3D coord, uint32_t color);
+
+String loopRun = "stop";
+String *loopArgs = new String[20];
+
 void setup() 
 {
+  Serial.begin(9600);
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
   Spark.function("run", run);
   Spark.variable("action", &action, STRING);
   Spark.variable("parameters", &parameters, STRING);
-}
 
-String loopRun = "stop";
-String *loopArgs = new String[20];
+  emitter.respawnOnOtherSide = true;
+  emitter.threed = false;
+  emitter.numParticles = NUM_PARTICLES;
+  emitter.maxVelocity = 0.015;
+}
 
 void loop() 
 {
@@ -84,18 +97,21 @@ void loop()
     {
         particles(); 
     }
+    else if(loopRun.equals("pumpkin"))
+    {
+        pumpkin();
+    }
 }
 
 int allOff()
 {
-    loopRun = "stop";
     setAll(0,0,0);
     return 1;
 }
 
 int run(String params)
 {
-    //params format is <command>,<param0>,...,<paramN>
+    //params format is <command>,<param0>,<paramN>
     String* args = stringSplit(params, ',');
     String command = args[0];
     strcpy(parameters, params.c_str());
@@ -209,7 +225,13 @@ int run(String params)
     }
     else if(command.equals("stop"))
     {
-        allOff();
+        loopRun = "stop";
+        return 1;
+    }
+    else if(command.equals("pumpkin"))
+    {
+        loopRun = "pumpkin";
+        return 1;
     }
     else 
     { //command not found
@@ -218,8 +240,8 @@ int run(String params)
 }
 
 int buildBlocks(uint8_t r1, uint8_t g1, uint8_t b1, 
-                uint8_t r2, uint8_t g2, uint8_t b2,
-                uint8_t blockSize)
+    uint8_t r2, uint8_t g2, uint8_t b2,
+    uint8_t blockSize)
 {               
     bool inBlock = true;
     
@@ -241,10 +263,57 @@ int buildBlocks(uint8_t r1, uint8_t g1, uint8_t b1,
     strip.show();
     return 1;
 }
-                    
+
+int pumpkin()
+{               
+    //set the purple block
+    for(int i=strip.numPixels() - 20; i<strip.numPixels(); i++) {
+        strip.setPixelColor(i, strip.Color(100, 0, 255));
+    }
+    strip.show();
+    
+    for(int i=0; i<strip.numPixels() - 20; i++) {
+        strip.setPixelColor(i, strip.Color(128, 128, 128));
+    }
+    strip.show();
+    delay(100);
+    
+    for(int i=0; i<strip.numPixels() - 20; i++) {
+        strip.setPixelColor(i, strip.Color(0, 0, 0));
+    }
+    strip.show();
+    delay(100);
+    
+    for(int i=0; i<strip.numPixels() - 20; i++) {
+        strip.setPixelColor(i, strip.Color(128, 128, 128));
+    }
+    strip.show();
+    delay(100);
+    
+    for(int i=0; i<strip.numPixels() - 20; i++) {
+        strip.setPixelColor(i, strip.Color(0, 0, 0));
+    }
+    strip.show();
+    delay(100);
+    
+    for(int i=0; i<strip.numPixels() - 20; i++) {
+        strip.setPixelColor(i, strip.Color(128, 128, 128));
+    }
+    strip.show();
+    delay(100);
+    
+    for(int i=0; i<strip.numPixels() - 20; i++) {
+        strip.setPixelColor(i, strip.Color(0, 0, 0));
+    }
+    strip.show();
+    delay(random(10000));
+    
+    
+    return 1;
+}
 
 int staticAlternate(uint8_t r1, uint8_t g1, uint8_t b1, 
-                    uint8_t r2, uint8_t g2, uint8_t b2)
+    uint8_t r2, uint8_t g2, uint8_t b2)
 {
     for(int i=0; i<strip.numPixels(); i++) {
         if(i % 2 == 0)
@@ -274,9 +343,9 @@ int setAll(uint8_t r, uint8_t g, uint8_t b)
 {
     for(int i=0; i<strip.numPixels(); i++) {
       strip.setPixelColor(i, strip.Color(r, g, b));
-    }
-    strip.show();
-    return 1;
+  }
+  strip.show();
+  return 1;
 }
 
 int rainbow(int d) {
@@ -284,27 +353,27 @@ int rainbow(int d) {
 
   for(j=0; j<256; j++) {
     for(i=0; i<strip.numPixels(); i++) {
-      strip.setPixelColor(i, Wheel((i+j) & 255));
-    }
-    strip.show();
-    delay(d);
+      strip.setPixelColor(i, Wheel((i+j) & MAX_COLOR));
   }
-  return 1;
+  strip.show();
+  delay(d);
+}
+return 1;
 }
 
-// Input a value 0 to 255 to get a color value.
+// Input a value 0 to MAX_COLOR to get a color value.
 // The colours are a transition r - g - b - back to r.
 uint32_t Wheel(byte WheelPos) {
-  int maxVal = 255;
+  int maxVal = MAX_COLOR;
   if(WheelPos < 85) {
-   return strip.Color(WheelPos * 3, maxVal - WheelPos * 3, 0);
-  } else if(WheelPos < 170) {
-   WheelPos -= 85;
-   return strip.Color(maxVal - WheelPos * 3, 0, WheelPos * 3);
-  } else {
-   WheelPos -= 170;
-   return strip.Color(0, WheelPos * 3, maxVal - WheelPos * 3);
-  }
+     return strip.Color(WheelPos * 3, maxVal - WheelPos * 3, 0);
+ } else if(WheelPos < 170) {
+     WheelPos -= 85;
+     return strip.Color(maxVal - WheelPos * 3, 0, WheelPos * 3);
+ } else {
+     WheelPos -= 170;
+     return strip.Color(0, WheelPos * 3, maxVal - WheelPos * 3);
+ }
 }
 
 int stringToInt(String s)
@@ -340,10 +409,10 @@ String* stringSplit(String s, char delim)
 }
 
 int fadeColor(uint8_t r1, uint8_t g1, uint8_t b1, 
-              uint8_t r2, uint8_t g2, uint8_t b2, 
-              int del, int duration)
+  uint8_t r2, uint8_t g2, uint8_t b2, 
+  int del, int duration)
 {
- 
+
     int16_t redDiff = r2 - r1;
     int16_t greenDiff = g2 - g1;
     int16_t blueDiff = b2 - b1;
@@ -368,34 +437,67 @@ int fadeColor(uint8_t r1, uint8_t g1, uint8_t b1,
 }
 
 void particles() {
-  emitter.stripPosition = random(100) / 100.0;
+    unsigned long frameStartMillis = millis();
+    emitter.stripPosition = random(100) / 100.0;
 
-  for (int j=0; j < emitter.numParticles * 10; j++) {  
+    // Draw each particle
     for (int i=0; i < emitter.numParticles; i++) {
-      
-      particle prt = emitter.updateParticle(i);
-      uint16_t pixel = strip.numPixels() * prt.currentStripPosition;
-  
-      // High velocity particles have longer tails
-      uint8_t tailLength = abs(prt.velocity * 5);
-      uint8_t slot = pixel;
-      
-      for (int z=0; z < tailLength; z++) { 
-        
-        float colorScale = ( (tailLength-z*0.999) / tailLength );
-        if (z == 0 && prt.dimmed) {
-          colorScale *= 0.25;
+
+        // Update this particle's position
+        Particle prt = emitter.updateParticle(i);
+
+        uint8_t tailLength =abs(prt.velocity.x * 8);
+        int16_t startSlot = emitter.numPixels * prt.coord.x;
+        int16_t currentSlot = startSlot;
+        int16_t oldSlot = currentSlot;
+
+        // Draw the particle and its tail
+        // High velocity particles have longer tails
+        for (int z=0; z < tailLength; z++) {
+
+            // Taper the tail fade  
+            float colorScale = ((tailLength - (z * 0.25)) / tailLength);
+
+            if (z == 0 && prt.dimmed) {
+            // Flicker the first particle
+                colorScale *= (random(50) / 100) + 0.05;
+            }      
+
+            if (colorScale < 0.05) {
+                colorScale = 0.05;
+            }
+
+            if (emitter.threed) {
+                colorScale = (1.0 - prt.coord.z);
+            }
+
+            // Draw particle
+            setCoordColor(prt.coord, 
+                strip.Color(prt.redColor * colorScale, 
+                    prt.greenColor * colorScale, 
+                    prt.blueColor * colorScale));
+
+            oldSlot = currentSlot;
+            currentSlot = startSlot + ((z+1) * (prt.velocity.x > 0 ? -1 : 1));
         }
 
-        strip.setPixelColor(slot, strip.Color(prt.redColor*colorScale, 
-                                              prt.blueColor*colorScale, 
-                                              prt.greenColor*colorScale));
-
-        slot = pixel + ((z+1) * (prt.velocity > 0 ? -1 : 1));
-      }
-      strip.setPixelColor(slot, strip.Color(0,0,0));
+        //Terminate the tail
+        strip.setPixelColor(oldSlot, strip.Color(0,0,0));
     }
+
+    uint16_t frameElapsedMillis = millis() - frameStartMillis;
+    uint16_t frameDelayMillis = 0;
+
+    if (MILLIS_PER_FRAME > frameElapsedMillis) {
+        frameDelayMillis = MILLIS_PER_FRAME - frameElapsedMillis;
+    }
+
+    Serial.println(frameDelayMillis);
+    delay(frameDelayMillis);
     strip.show();
-    delay(50);
-  }
 }
+
+void setCoordColor(Coord3D coord, uint32_t color) {
+    strip.setPixelColor(coord.x * emitter.numPixels, color); 
+}
+
