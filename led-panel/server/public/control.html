@@ -2,9 +2,11 @@
 <head>
 	<title>El Poder Casa 2000</title>
 	<link rel="shortcut icon" href="blue.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="./freddy.png" />
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="spectrum.js" type="text/javascript"></script>
 	<link rel="stylesheet" href="spectrum.css" type="text/css"/>
+	<meta name="viewport" content="width=250" />
 	<script>
     $( document ).ready(function() {
         // console.log( "document loaded" );
@@ -27,13 +29,16 @@
 		}
     </style>
 </head>
-<body>
+<body style="max-width: 200px; margin: 0 auto; float: none">
+	<br/>
 	<h3>El Poder Casa 2000</h3>
+	Core:
 	<select id="coreId" name="core">
 		<option value="53ff70065067544818350687">Colussus - lower house</option>
 		<option value="54ff6c066667515143491267">Giggle - upper house (eventually)</option>
 		<option value="all">All</option>
-	</select>
+	</select><br/>
+	Program:
 	<select id="action" name="action">
 		<option value="allOff">All Pixels Off</option>
 		<option value="stop">Stop Program</option>
@@ -196,7 +201,7 @@
 	    	$('#status').html("");
 	    	$('#result').html("");
 		    $.get("/house/run/action", 
-		    	{action:$('#action').val(), $('#coreId').val(), r1:$('#r1').val(), g1:$('#g1').val(), b1:$('#b1').val(), r2:$('#r2').val(), g2:$('#g2').val(), b2:$('#b2').val(), delay:$('#delay').val(), blockSize:$('#blockSize').val(), duration:$('#duration').val()}, 
+		    	{action:$('#action').val(), coreId:$('#coreId').val(), r1:$('#r1').val(), g1:$('#g1').val(), b1:$('#b1').val(), r2:$('#r2').val(), g2:$('#g2').val(), b2:$('#b2').val(), delay:$('#delay').val(), blockSize:$('#blockSize').val(), duration:$('#duration').val()}, 
 		    	function(data) {
 		      if(!data.return_value >= 1) {
 		      	$('#status').html("<h3>Request Succeeded</h3>");
