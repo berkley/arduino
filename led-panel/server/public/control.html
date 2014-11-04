@@ -54,27 +54,28 @@
 
 	<span id="colorSelector1">
 		Red1: <br/>
-		<input type="range"  min="0" max="255" name="r1" id="r1"/>
+		<input type="range"  min="0" max="255" name="r1" id="r1" value="255"/>
 		<br/>
 		Green1: <br/>
-		<input type="range"  min="0" max="255" name="g1" id="g1"/>
+		<input type="range"  min="0" max="255" name="g1" id="g1" value="0"/>
 		<br/>
 		Blue1: <br/>
-		<input type="range"  min="0" max="255" name="b1" id="b1"/>
+		<input type="range"  min="0" max="255" name="b1" id="b1" value="0"/>
 		<br/>
 		<input id='colorpicker1' />
+		<br/>
 	</span>
 
 
 	<span id="colorSelector2">
 		Red2: <br/>
-		<input type="range"  min="0" max="255" name="r2" id="r2"/>
+		<input type="range"  min="0" max="255" name="r2" id="r2" value="255"/>
 		<br/>
 		Green2: <br/>
-		<input type="range"  min="0" max="255" name="g2" id="g2"/>
+		<input type="range"  min="0" max="255" name="g2" id="g2" value="0"/>
 		<br/>
 		Blue2: <br/>
-		<input type="range"  min="0" max="255" name="b2" id="b2"/>
+		<input type="range"  min="0" max="255" name="b2" id="b2" value="0"/>
 		<br/>
 		<input id='colorpicker2' />
 	</span>
@@ -89,37 +90,87 @@
 	<img style="width:30px;" id="spinner" width="100" src="spinner.gif"></div>
 
 	<script>
-		$("#colorpicker1").spectrum({
-			color: "#f00",
+		var createColorPicker = function(id, color, rid, gid, bid) {
+			$(id).spectrum({
+			color: color,
 			preferredFormat: "rgb",
 		    move: function(tinycolor) { },
 		    show: function(tinycolor) { },
 		    hide: function(tinycolor) { },
 		    beforeShow: function(tinycolor) { },
 		    change: function(color) {
-		    	$('#r1').val(color.toRgb().r);
-		    	$('#g1').val(color.toRgb().g);
-		    	$('#b1').val(color.toRgb().b);
+		    	$(rid).val(color.toRgb().r);
+		    	$(gid).val(color.toRgb().g);
+		    	$(bid).val(color.toRgb().b);
 		    }
-		});
+			});
+		};
 
-		$("#colorpicker2").spectrum({
-			color: "#f00",
-			preferredFormat: "rgb",
-		    move: function(tinycolor) { },
-		    show: function(tinycolor) { },
-		    hide: function(tinycolor) { },
-		    beforeShow: function(tinycolor) { },
-		    change: function(color) {
-		    	$('#r2').val(color.toRgb().r);
-		    	$('#g2').val(color.toRgb().g);
-		    	$('#b2').val(color.toRgb().b);
-		    }
-		});
+		createColorPicker("#colorpicker1", "F00", "#r1", "#g1", "#b1");
+		createColorPicker("#colorpicker2", "F00", "#r2", "#g2", "#b2");
 
 		var button = document.querySelector("#goButton");
 		var select = document.querySelector("select");
 
+		var calcColor = function(r, g, b) {
+			var rstr = r.toString(16);
+			var gstr = g.toString(16);
+			var bstr = b.toString(16);
+			if(rstr == '0') {rstr = '00'}
+			if(gstr == '0') {gstr = '00'}
+			if(bstr == '0') {bstr = '00'}
+			var col = "#" + rstr + gstr + bstr;
+			// alert('col: ' + col);
+			return col;
+		};
+
+		document.getElementById("r1").addEventListener("change", function(ev){
+			var rint = parseInt($('#r1').val());
+			var gint = parseInt($('#g1').val());
+			var bint = parseInt($('#b1').val());
+			var col = calcColor(rint, gint, bint);
+			createColorPicker("#colorpicker1", col, "#r1", "#g1", "#b1");
+		});
+
+		document.getElementById("g1").addEventListener("change", function(ev){
+			var rint = parseInt($('#r1').val());
+			var gint = parseInt($('#g1').val());
+			var bint = parseInt($('#b1').val());
+			var col = calcColor(rint, gint, bint);
+			createColorPicker("#colorpicker1", col, "#r1", "#g1", "#b1");
+		});
+
+		document.getElementById("b1").addEventListener("change", function(ev){
+			var rint = parseInt($('#r1').val());
+			var gint = parseInt($('#g1').val());
+			var bint = parseInt($('#b1').val());
+			var col = calcColor(rint, gint, bint);
+			createColorPicker("#colorpicker1", col, "#r1", "#g1", "#b1");
+		});
+
+		document.getElementById("r2").addEventListener("change", function(ev){
+			var rint = parseInt($('#r2').val());
+			var gint = parseInt($('#g2').val());
+			var bint = parseInt($('#b2').val());
+			var col = calcColor(rint, gint, bint);
+			createColorPicker("#colorpicker2", col, "#r2", "#g2", "#b2");
+		});
+
+		document.getElementById("g2").addEventListener("change", function(ev){
+			var rint = parseInt($('#r2').val());
+			var gint = parseInt($('#g2').val());
+			var bint = parseInt($('#b2').val());
+			var col = calcColor(rint, gint, bint);
+			createColorPicker("#colorpicker2", col, "#r2", "#g2", "#b2");
+		});
+
+		document.getElementById("b2").addEventListener("change", function(ev){
+			var rint = parseInt($('#r2').val());
+			var gint = parseInt($('#g2').val());
+			var bint = parseInt($('#b2').val());
+			var col = calcColor(rint, gint, bint);
+			createColorPicker("#colorpicker2", col, "#r2", "#g2", "#b2");
+		});
 
 		document.getElementById("actionSelect").addEventListener("change", function(ev) {
 			if(ev.target.value == 'stop')
