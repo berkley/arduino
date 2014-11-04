@@ -33,13 +33,13 @@
 	<br/>
 	<h3>El Poder Casa 2000</h3>
 	Core:
-	<select id="coreId" name="core">
+	<select id="coreIdSelect" name="core">
 		<option value="53ff70065067544818350687">Colussus - lower house</option>
 		<option value="54ff6c066667515143491267">Giggle - upper house (eventually)</option>
 		<option value="all">All</option>
 	</select><br/>
 	Program:
-	<select id="action" name="action">
+	<select id="actionSelect" name="action">
 		<option value="allOff">All Pixels Off</option>
 		<option value="stop">Stop Program</option>
 		<option value="setAll">Single Color</option>
@@ -121,7 +121,7 @@
 		var select = document.querySelector("select");
 
 
-		select.addEventListener("change", function(ev) {
+		document.getElementById("actionSelect").addEventListener("change", function(ev) {
 			if(ev.target.value == 'stop')
 			{
 				$('#colorSelector1').hide();
@@ -210,7 +210,7 @@
 	    	$('#status').html("");
 	    	$('#result').html("");
 		    $.get("/house/run/action", 
-		    	{action:$('#action').val(), coreId:$('#coreId').val(), r1:$('#r1').val(), g1:$('#g1').val(), b1:$('#b1').val(), r2:$('#r2').val(), g2:$('#g2').val(), b2:$('#b2').val(), delay:$('#delay').val(), blockSize:$('#blockSize').val(), duration:$('#duration').val()}, 
+		    	{action:$('#actionSelect').val(), coreId:$('#coreIdSelect').val(), r1:$('#r1').val(), g1:$('#g1').val(), b1:$('#b1').val(), r2:$('#r2').val(), g2:$('#g2').val(), b2:$('#b2').val(), delay:$('#delay').val(), blockSize:$('#blockSize').val(), duration:$('#duration').val()}, 
 		    	function(data) {
 		      if(!data.return_value >= 1) {
 		      	$('#status').html("<h3>Request Succeeded</h3>");
